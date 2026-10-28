@@ -108,25 +108,6 @@
 </head>
 <body>
 
-    <!-- ==========================================================================
-         Client Review Switcher Toolbar: Easily toggle between Look 1 and Look 2
-         ========================================================================== -->
-    <aside class="comp-switcher-bar" aria-label="Design Comp Selection Bar">
-        <div class="container comp-switcher-inner">
-            <div style="display:flex; align-items:center; gap:10px;">
-                <span class="comp-badge">Client Review</span>
-                <span style="font-weight:600;">Certified Drug Test Centers — Compare 2 Design Concepts:</span>
-            </div>
-            <div class="comp-links">
-                <a href="{{ route('home.design1') }}" class="comp-btn {{ ($currentDesign ?? 1) == 1 ? 'active' : '' }}">
-                    ★ Look 1: Modern Patriotic Portal {{ ($currentDesign ?? 1) == 1 ? '(Current)' : '' }}
-                </a>
-                <a href="{{ route('home.design2') }}" class="comp-btn {{ ($currentDesign ?? 1) == 2 ? 'active' : '' }}">
-                    ★ Look 2: Corporate Clean & Fast {{ ($currentDesign ?? 1) == 2 ? '(Current)' : '' }}
-                </a>
-            </div>
-        </div>
-    </aside>
 
     <!-- Top Announcement Bar -->
     <div class="top-notice-bar">
@@ -152,7 +133,7 @@
     <!-- Main Header -->
     <header class="main-header" role="banner">
         <div class="container header-inner">
-            <a href="{{ route('home.design1') }}" class="brand-logo-link" title="Certified Drug Test Centers Home">
+            <a href="{{ url('/') }}" class="brand-logo-link" title="Certified Drug Test Centers Home">
                 <img src="{{ asset('images/logo.png') }}" alt="Certified Drug Test Centers - Local Convenient Confidential" class="brand-logo-img">
             </a>
 
@@ -165,9 +146,9 @@
                     <span class="header-phone-label">Toll Free Scheduling</span>
                     <a href="tel:18002214291" class="header-phone-number">(800) 221-4291</a>
                 </div>
-                <button type="button" class="btn btn-primary" onclick="openOrderModal('5-panel-non-dot', 'Schedule Drug Test', 89.99)">
+                <a href="{{ route('checkout.index') }}" class="btn btn-primary">
                     Schedule A Test
-                </button>
+                </a>
             </div>
         </div>
     </header>
@@ -180,62 +161,64 @@
             </button>
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item">
-                    <a href="#pricing-panels" class="nav-link">
+                    <a href="{{ url('/category/urine') }}" class="nav-link">
                         Urine Drug Tests
                         <svg width="10" height="10" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
                     </a>
                     <ul class="nav-dropdown">
-                        <li><a href="#pricing-panels" class="nav-dropdown-link" onclick="openOrderModal('5-panel-non-dot', '5 Panel NON-DOT Drug Test', 89.99)">5 Panel NON-DOT ($89.99)</a></li>
-                        <li><a href="#pricing-panels" class="nav-dropdown-link" onclick="openOrderModal('5-panel-exp-opiates', '5 Panel + Expanded Opiates', 99.99)">5 Panel + Exp Opiates ($99.99)</a></li>
-                        <li><a href="#pricing-panels" class="nav-dropdown-link" onclick="openOrderModal('10-panel', '10 Panel Drug Test', 109.99)">10 Panel Drug Test ($109.99)</a></li>
-                        <li><a href="#pricing-panels" class="nav-dropdown-link" onclick="openOrderModal('10-panel-exp-opiates', '10 Panel + Exp Opiates', 119.99)">10 Panel + Exp Opiates ($119.99)</a></li>
-                        <li><a href="#pricing-panels" class="nav-dropdown-link" onclick="openOrderModal('12-panel-comprehensive', '12 Panel Comprehensive', 139.99)">12 Panel Comprehensive ($139.99)</a></li>
+                        <li><a href="{{ url('/product/5-panel-nondot') }}" class="nav-dropdown-link">5 Panel NON-DOT ($89.99)</a></li>
+                        <li><a href="{{ url('/product/5-panel-exp-opiates') }}" class="nav-dropdown-link">5 Panel + Exp Opiates ($99.99)</a></li>
+                        <li><a href="{{ url('/product/10-panel') }}" class="nav-dropdown-link">10 Panel Drug Test ($109.99)</a></li>
+                        <li><a href="{{ url('/product/10-panel-exp-opiates') }}" class="nav-dropdown-link">10 Panel + Exp Opiates ($119.99)</a></li>
+                        <li><a href="{{ url('/product/12-panel-comprehensive') }}" class="nav-dropdown-link">12 Panel Comprehensive ($139.99)</a></li>
+                        <li><a href="{{ url('/category/urine') }}" class="nav-dropdown-link" style="color:#C1121F; font-weight:700;">View All Urine Tests &rarr;</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#pricing-panels" class="nav-link">
+                    <a href="{{ url('/category/dot') }}" class="nav-link">
                         DOT Testing
                         <svg width="10" height="10" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
                     </a>
                     <ul class="nav-dropdown">
-                        <li><a href="#pricing-panels" class="nav-dropdown-link" onclick="openOrderModal('5-panel-dot', '5 Panel DOT Drug Test', 99.99)">5 Panel DOT Drug Screen ($99.99)</a></li>
-                        <li><a href="#pricing-panels" class="nav-dropdown-link" onclick="openOrderModal('dot-breath-alcohol', 'DOT Breath Alcohol Test', 89.99)">DOT Breath Alcohol Test ($89.99)</a></li>
-                        <li><a href="#pricing-panels" class="nav-dropdown-link" onclick="openOrderModal('dot-physical', 'DOT Physical Examination', 159.99)">DOT Physical Exam ($159.99)</a></li>
-                        <li><a href="#pricing-panels" class="nav-dropdown-link" onclick="openOrderModal('dot-consortium-1-year', 'DOT Consortium Enrollment', 99.99)">DOT Random Consortium ($99.99)</a></li>
-                        <li><a href="#pricing-panels" class="nav-dropdown-link" onclick="openOrderModal('5-panel-dot', 'FMCSA Return to Duty (RTD)', 119.99)">FMCSA Return to Duty (RTD)</a></li>
+                        <li><a href="{{ url('/product/5-panel-dot') }}" class="nav-dropdown-link">5 Panel DOT Drug Screen ($99.99)</a></li>
+                        <li><a href="{{ url('/product/dot-breath-alcohol') }}" class="nav-dropdown-link">DOT Breath Alcohol Test ($89.99)</a></li>
+                        <li><a href="{{ url('/product/dot-physical') }}" class="nav-dropdown-link">DOT Physical Exam ($159.99)</a></li>
+                        <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}" class="nav-dropdown-link">DOT Random Consortium ($99.99)</a></li>
+                        <li><a href="{{ url('/product/5-panel-return-to-duty') }}" class="nav-dropdown-link">FMCSA Return to Duty (RTD)</a></li>
+                        <li><a href="{{ url('/category/dot') }}" class="nav-dropdown-link" style="color:#C1121F; font-weight:700;">View All DOT Services &rarr;</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="#pricing-panels" class="nav-link" onclick="openOrderModal('hair-follicle-5-panel', 'Hair Follicle 5 Panel', 169.99)">
+                    <a href="{{ url('/category/hair') }}" class="nav-link">
                         Hair Follicle Tests
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#pricing-panels" class="nav-link" onclick="openOrderModal('etg-alcohol-urine', 'EtG Alcohol 80-Hour Test', 89.99)">
+                    <a href="{{ url('/category/alcohol') }}" class="nav-link">
                         Alcohol & EtG
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#categories" class="nav-link">
+                    <a href="{{ url('/category/occupational-health') }}" class="nav-link">
                         Occupational Health
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#mobile-testing" class="nav-link" onclick="openMobileQuoteModal()">
+                    <a href="{{ url('/category/on-site-mobile') }}" class="nav-link">
                         Mobile Testing
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#locations" class="nav-link">
+                    <a href="{{ route('locations.index') }}" class="nav-link">
                         Testing Locations
                     </a>
                 </li>
             </ul>
 
-            <button type="button" class="nav-cta-btn" onclick="openOrderModal('5-panel-non-dot', 'Order Drug Test Online', 89.99)">
+            <a href="{{ route('checkout.index') }}" class="nav-cta-btn">
                 <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
                 Order Test Online
-            </button>
+            </a>
         </div>
     </nav>
 

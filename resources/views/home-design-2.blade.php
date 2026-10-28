@@ -311,7 +311,7 @@
 
         <div class="states-grid" id="statesGrid">
             @foreach($states as $st)
-            <a href="#locations" class="state-chip" data-state="{{ $st['name'] }}" onclick="document.getElementById('donorZip').value='{{ $st['abbr'] }}'; openOrderModal('5-panel-non-dot', 'Drug Test in {{ $st['name'] }}', 89.99)">
+            <a href="{{ url('/locations/' . \Illuminate\Support\Str::slug($st['name'])) }}" class="state-chip" data-state="{{ $st['name'] }}">
                 <span>{{ $st['name'] }}</span>
                 <span class="state-count">{{ $st['centers'] }}+ Centers</span>
             </a>

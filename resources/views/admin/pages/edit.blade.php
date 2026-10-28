@@ -1,0 +1,490 @@
+@extends('admin.layouts.app', ['title' => 'Page Editor & Builder', 'heading' => 'Editor: ' . $page->title])
+
+@section('topbar_actions')
+<a href="{{ url('/' . $page->slug) }}" target="_blank" class="btn btn-outline btn-sm">
+    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+    View Live on Site
+</a>
+<a href="{{ route('admin.pages.index') }}" class="btn btn-outline btn-sm">
+    &larr; Back to Pages
+</a>
+@endsection
+
+@section('content')
+<style>
+    /* Builder Tabs */
+    .tab-nav {
+        display: flex;
+        border-bottom: 2px solid var(--admin-slate-200);
+        margin-bottom: 24px;
+        gap: 8px;
+    }
+
+    .tab-btn {
+        padding: 12px 20px;
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--admin-slate-500);
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -2px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .tab-btn:hover { color: var(--admin-navy); }
+    .tab-btn.active {
+        color: var(--admin-navy);
+        border-bottom-color: var(--admin-crimson);
+        font-weight: 700;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* SERP Google Preview Box */
+    .google-serp-preview {
+        background: #fff;
+        border: 1px solid #DFE1E5;
+        border-radius: 8px;
+        padding: 18px 20px;
+        margin-top: 14px;
+        box-shadow: 0 1px 6px rgba(32,33,36,0.08);
+        font-family: Arial, sans-serif;
+    }
+
+    .serp-url {
+        font-size: 12px;
+        color: #202124;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 4px;
+    }
+
+    .serp-title {
+        font-size: 19px;
+        color: #1a0dab;
+        font-weight: 400;
+        text-decoration: none;
+        line-height: 1.3;
+        cursor: pointer;
+    }
+    .serp-title:hover { text-decoration: underline; }
+
+    .serp-desc {
+        font-size: 14px;
+        color: #4d5156;
+        line-height: 1.58;
+        margin-top: 4px;
+        word-wrap: break-word;
+    }
+
+    /* Block Builder Cards */
+    .block-card {
+        background: #fff;
+        border: 1px solid var(--admin-slate-200);
+        border-radius: 8px;
+        margin-bottom: 16px;
+        overflow: hidden;
+    }
+
+    .block-header {
+        background: var(--admin-slate-50);
+        padding: 12px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--admin-slate-200);
+        cursor: grab;
+    }
+
+    .block-body { padding: 18px; }
+</style>
+
+<form action="{{ route('admin.pages.update', $page) }}" method="POST" id="pageEditorForm">
+    @csrf
+    @method('PUT')
+
+    <div style="display:grid; grid-template-columns:2.5fr 1fr; gap:24px;">
+        <!-- Left Column: Tabs & Editors -->
+        <div>
+            <!-- Navigation Tabs -->
+            <div class="tab-nav">
+                <button type="button" class="tab-btn active" onclick="switchTab('tab-content')">
+                    📝 Rich Content &amp; Text
+                </button>
+                <button type="button" class="tab-btn" onclick="switchTab('tab-builder')">
+                    🧩 Visual Block Builder
+                </button>
+                <button type="button" class="tab-btn" onclick="switchTab('tab-seo')">
+                    🚀 100% SEO &amp; SERP Preview
+                </button>
+            </div>
+
+            <!-- TAB 1: Rich Content & Text (Direct HTML for all migrated pages) -->
+            <div id="tab-content" class="tab-content active">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Page Headings &amp; Body Content</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label" for="title">Page Title (Navigation &amp; System) *</label>
+                            <input type="text" id="title" name="title" value="{{ old('title', $page->title) }}" class="form-control" required oninput="updateSerpPreview()">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="page_heading">H1 Main Page Heading</label>
+                            <input type="text" id="page_heading" name="page_heading" value="{{ old('page_heading', $page->page_heading) }}" class="form-control" placeholder="Shown in the hero header">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="content">Page Content (WYSIWYG &amp; HTML Editor)</label>
+                            
+                            <!-- Formatting & Photo Toolbar -->
+                            <div style="background:#F1F5F9; border:1px solid #CBD5E1; border-bottom:none; border-radius:6px 6px 0 0; padding:8px 12px; display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+                                <button type="button" class="btn btn-outline btn-sm" onclick="insertTag('<h2>', '</h2>')" title="Heading 2"><strong>H2</strong></button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="insertTag('<h3>', '</h3>')" title="Heading 3"><strong>H3</strong></button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="insertTag('<strong>', '</strong>')" title="Bold"><strong>B</strong></button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="insertTag('<em>', '</em>')" title="Italic"><em>I</em></button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="insertTag('<p>', '</p>')" title="Paragraph">¶</button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="insertTag('<ul>\n  <li>', '</li>\n</ul>')" title="Bullet List">• List</button>
+                                <button type="button" class="btn btn-outline btn-sm" onclick="insertLink()" title="Insert Link">🔗 Link</button>
+                                <button type="button" class="btn btn-navy btn-sm" onclick="document.getElementById('photoUploadInput').click()" title="Upload Photo to Server">
+                                    📷 Upload &amp; Insert Photo
+                                </button>
+                                <input type="file" id="photoUploadInput" accept="image/*" style="display:none;" onchange="handlePhotoUpload(this)">
+                                <span id="uploadStatusText" style="font-size:12px; color:#0B2545; font-weight:600;"></span>
+                            </div>
+
+                            <textarea id="content" name="content" rows="18" class="form-control" style="border-radius:0 0 6px 6px; font-family:monospace; font-size:13px; line-height:1.5;">{{ old('content', $page->content) }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="featured_image">Featured Photo URL</label>
+                            <input type="text" id="featured_image" name="featured_image" value="{{ old('featured_image', $page->featured_image) }}" class="form-control" placeholder="e.g. /images/testing-lab.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: Visual Block Builder (Modular drag-and-drop sections) -->
+            <div id="tab-builder" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="card-title">Visual Modular Block Builder</h2>
+                            <p style="font-size:13px; color:var(--admin-slate-500); margin-top:2px;">
+                                Add structured marketing sections to this page (Hero, FAQ Accordion, Test Grid, Consultation CTA).
+                            </p>
+                        </div>
+                        <div style="display:flex; gap:8px;">
+                            <button type="button" class="btn btn-outline btn-sm" onclick="addHeroBlock()">+ Hero Block</button>
+                            <button type="button" class="btn btn-outline btn-sm" onclick="addFaqBlock()">+ FAQ Block</button>
+                            <button type="button" class="btn btn-outline btn-sm" onclick="addCtaBlock()">+ CTA Banner</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div id="blocksContainer">
+                            <!-- Block 1: Hero Block -->
+                            <div class="block-card">
+                                <div class="block-header">
+                                    <strong>⭐ Hero Section Block</strong>
+                                    <span class="badge badge-info">Top Section</span>
+                                </div>
+                                <div class="block-body">
+                                    <div class="form-group">
+                                        <label class="form-label">Hero Headline</label>
+                                        <input type="text" class="form-control" id="blockHeroHeadline" value="{{ $page->page_heading ?: $page->title }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Hero Subheadline / Assurance</label>
+                                        <input type="text" class="form-control" id="blockHeroSubheadline" value="Fast, confidential testing at over 20,000 certified collection sites nationwide.">
+                                    </div>
+                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                        <div class="form-group">
+                                            <label class="form-label">Primary Button Text</label>
+                                            <input type="text" class="form-control" id="blockHeroBtnText" value="Schedule A Test Now">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-label">Primary Button URL</label>
+                                            <input type="text" class="form-control" id="blockHeroBtnUrl" value="/checkout">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Block 2: FAQ Accordion -->
+                            <div class="block-card">
+                                <div class="block-header">
+                                    <strong>❓ FAQ Accordion Block (Automated FAQ Schema)</strong>
+                                    <span class="badge badge-success">SEO Schema Ready</span>
+                                </div>
+                                <div class="block-body">
+                                    <div class="form-group">
+                                        <label class="form-label">Question 1</label>
+                                        <input type="text" class="form-control" value="Do I need an appointment for this test?">
+                                        <textarea class="form-control" rows="2" style="margin-top:6px;">No appointment is necessary. Once you register online, walk into any of our 20,000+ certified Quest and Labcorp collection facilities with your electronic Donor Pass.</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Question 2</label>
+                                        <input type="text" class="form-control" value="How soon are results returned?">
+                                        <textarea class="form-control" rows="2" style="margin-top:6px;">Negative lab results are typically available within 24 to 48 hours of specimen collection, verified by a Medical Review Officer (MRO).</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Block 3: CTA Banner -->
+                            <div class="block-card">
+                                <div class="block-header">
+                                    <strong>📞 Consultation &amp; Toll-Free Callout Block</strong>
+                                    <span class="badge badge-neutral">Footer CTA</span>
+                                </div>
+                                <div class="block-body">
+                                    <div class="form-group">
+                                        <label class="form-label">Banner Title</label>
+                                        <input type="text" class="form-control" value="Need Immediate Testing Assistance or Custom Business Account?">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Phone Hotline</label>
+                                        <input type="text" class="form-control" value="(800) 221-4291">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="blocks_json" id="blocksJsonInput" value="{{ json_encode($page->blocks_json) }}">
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: 100% SEO Suite & Google SERP Simulator -->
+            <div id="tab-seo" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h2 class="card-title">100% Search Engine Optimization (SEO)</h2>
+                            <p style="font-size:13px; color:var(--admin-slate-500); margin-top:2px;">
+                                Control how this page appears on Google search results.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- Live Google Desktop SERP Simulator -->
+                        <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:var(--admin-slate-500); letter-spacing:0.5px;">
+                            Live Google SERP Snippet Preview
+                        </div>
+                        <div class="google-serp-preview">
+                            <div class="serp-url">
+                                <span>https://certifieddrugtesting.com</span>
+                                <span>›</span>
+                                <span id="serpSlugPreview">{{ $page->slug }}</span>
+                            </div>
+                            <div class="serp-title" id="serpTitlePreview">
+                                {{ $page->meta_title ?: ($page->title . ' | Certified Drug Test Center') }}
+                            </div>
+                            <div class="serp-desc" id="serpDescPreview">
+                                {{ $page->meta_description ?: 'Accredited nationwide drug and alcohol testing collection facilities. Order online in 2 minutes with instant donor pass.' }}
+                            </div>
+                        </div>
+
+                        <div style="margin-top:24px;">
+                            <div class="form-group">
+                                <div style="display:flex; justify-content:space-between;">
+                                    <label class="form-label" for="meta_title">Meta Title Tag *</label>
+                                    <small id="metaTitleCount" style="color:#64748B;">{{ strlen($page->meta_title ?? '') }}/60 chars</small>
+                                </div>
+                                <input type="text" id="meta_title" name="meta_title" value="{{ old('meta_title', $page->meta_title) }}" class="form-control" oninput="updateSerpPreview()">
+                                <div class="form-hint">Optimal length: 50 - 60 characters for maximum Google visibility.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <div style="display:flex; justify-content:space-between;">
+                                    <label class="form-label" for="meta_description">Meta Description Tag *</label>
+                                    <small id="metaDescCount" style="color:#64748B;">{{ strlen($page->meta_description ?? '') }}/160 chars</small>
+                                </div>
+                                <textarea id="meta_description" name="meta_description" rows="3" class="form-control" oninput="updateSerpPreview()">{{ old('meta_description', $page->meta_description) }}</textarea>
+                                <div class="form-hint">Optimal length: 140 - 160 characters. Compelling summary to drive click-through rate.</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="canonical_url">Canonical URL</label>
+                                <input type="text" id="canonical_url" name="canonical_url" value="{{ old('canonical_url', $page->canonical_url) }}" class="form-control" placeholder="{{ url('/' . $page->slug) }}">
+                                <div class="form-hint">Prevents duplicate content penalties by pointing search engines to the primary URL.</div>
+                            </div>
+
+                            <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                                <div class="form-group">
+                                    <label class="form-label">Robots Indexing</label>
+                                    <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer;">
+                                        <input type="checkbox" name="robots_index" value="1" {{ $page->robots_index ? 'checked' : '' }}>
+                                        <span>Allow search engines to index this page (index)</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Robots Link Following</label>
+                                    <label style="display:flex; align-items:center; gap:8px; font-size:13px; cursor:pointer;">
+                                        <input type="checkbox" name="robots_follow" value="1" {{ $page->robots_follow ? 'checked' : '' }}>
+                                        <span>Allow search engines to follow page links (follow)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Publishing Controls & URL Structure -->
+        <div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Publishing &amp; Status</h2>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="form-label" for="slug">URL Slug *</label>
+                        <input type="text" id="slug" name="slug" value="{{ old('slug', $page->slug) }}" class="form-control" required oninput="updateSerpPreview()">
+                        <div class="form-hint">Live URL: <code>/{{ $page->slug }}</code></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="template">Page Layout Template</label>
+                        <select id="template" name="template" class="form-control">
+                            <option value="default" {{ $page->template == 'default' ? 'selected' : '' }}>Standard Corporate (Option 2)</option>
+                            <option value="wide" {{ $page->template == 'wide' ? 'selected' : '' }}>Full-Width Clean</option>
+                            <option value="landing" {{ $page->template == 'landing' ? 'selected' : '' }}>Direct-to-Test Landing</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display:flex; align-items:center; gap:8px; font-weight:600; cursor:pointer;">
+                            <input type="checkbox" name="is_published" value="1" {{ $page->is_published ? 'checked' : '' }}>
+                            <span>Publish Live (Visible on Site)</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display:flex; align-items:center; gap:8px; font-weight:600; cursor:pointer;">
+                            <input type="checkbox" name="show_in_menu" value="1" {{ $page->show_in_menu ? 'checked' : '' }}>
+                            <span>Show in Header Navigation</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px; margin-top:12px;">
+                        Save Page Changes
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page Meta Info -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Page Metadata</h2>
+                </div>
+                <div class="card-body" style="font-size:13px; color:var(--admin-slate-700); line-height:1.7;">
+                    <div><strong>Page ID:</strong> #{{ $page->id }}</div>
+                    <div><strong>Created:</strong> {{ $page->created_at ? $page->created_at->format('M d, Y') : 'Migrated' }}</div>
+                    <div><strong>Last Updated:</strong> {{ $page->updated_at ? $page->updated_at->format('M d, Y H:i') : 'N/A' }}</div>
+                    <div><strong>Sitemap Priority:</strong> 0.70</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    function switchTab(tabId) {
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+        event.target.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
+
+    function updateSerpPreview() {
+        const titleInput = document.getElementById('meta_title');
+        const descInput = document.getElementById('meta_description');
+        const pageTitleInput = document.getElementById('title');
+        const slugInput = document.getElementById('slug');
+
+        const titleVal = titleInput.value.trim() || (pageTitleInput.value.trim() + ' | Certified Drug Test Center');
+        const descVal = descInput.value.trim() || 'Accredited nationwide drug and alcohol testing collection facilities. Order online in 2 minutes with instant donor pass.';
+        const slugVal = slugInput.value.trim() || 'page';
+
+        document.getElementById('serpTitlePreview').textContent = titleVal;
+        document.getElementById('serpDescPreview').textContent = descVal;
+        document.getElementById('serpSlugPreview').textContent = slugVal;
+
+        // Character counts
+        document.getElementById('metaTitleCount').textContent = titleInput.value.length + '/60 chars';
+        document.getElementById('metaDescCount').textContent = descInput.value.length + '/160 chars';
+    }
+
+    function insertTag(startTag, endTag) {
+        const textarea = document.getElementById('content');
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const selectedText = textarea.value.substring(start, end) || 'Sample text';
+        const replacement = startTag + selectedText + endTag;
+        
+        textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+        textarea.focus();
+        textarea.setSelectionRange(start + startTag.length, start + startTag.length + selectedText.length);
+    }
+
+    function insertLink() {
+        const url = prompt('Enter Destination URL:', 'https://');
+        if (!url) return;
+        const label = prompt('Enter Link Text:', 'Click Here') || url;
+        const html = `<a href="${url}">${label}</a>`;
+        
+        const textarea = document.getElementById('content');
+        const start = textarea.selectionStart;
+        textarea.value = textarea.value.substring(0, start) + html + textarea.value.substring(start);
+        textarea.focus();
+    }
+
+    function handlePhotoUpload(input) {
+        if (!input.files || !input.files[0]) return;
+        const file = input.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('_token', '{{ csrf_token() }}');
+
+        const statusText = document.getElementById('uploadStatusText');
+        statusText.textContent = '⏳ Uploading ' + file.name + '...';
+
+        fetch('{{ route("admin.media.upload") }}', {
+            method: 'POST',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success && data.url) {
+                statusText.textContent = '✅ Inserted!';
+                setTimeout(() => statusText.textContent = '', 3000);
+                
+                const imgHtml = `\n<div style="text-align:center; margin:20px 0;">\n  <img src="${data.url}" alt="${file.name}" style="max-width:100%; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.08);">\n</div>\n`;
+                const textarea = document.getElementById('content');
+                const start = textarea.selectionStart;
+                textarea.value = textarea.value.substring(0, start) + imgHtml + textarea.value.substring(start);
+                textarea.focus();
+            } else {
+                alert('Upload failed: ' + (data.message || 'Server error'));
+                statusText.textContent = '';
+            }
+        })
+        .catch(err => {
+            alert('Upload error: ' + err.message);
+            statusText.textContent = '';
+        });
+    }
+</script>
+@endsection

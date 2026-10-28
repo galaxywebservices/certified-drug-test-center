@@ -30,19 +30,53 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      feedback.innerHTML = `
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-          <div>
-            <strong>📍 Nearest Certified Collection Site to ${zipVal}:</strong><br>
-            <span style="font-size:12.5px; color:#475569;">Quest Diagnostics / Labcorp Certified Partner Center (2.3 miles away)</span><br>
-            <span style="font-size:12px; color:#16a34a; font-weight:600;">● Walk-Ins Accepted Today: 7:30 AM - 5:00 PM (No Appointment Needed)</span>
-          </div>
-          <button type="button" class="btn btn-primary btn-sm" onclick="openOrderModal('5-panel-non-dot', '5 Panel NON-DOT Drug Test', 89.99)">
-            Register at This Center →
-          </button>
-        </div>
-      `;
+      feedback.innerHTML = '<span style="color:#0B2545;">🔍 Searching 20,000+ Quest & Labcorp sites near ' + zipVal + '...</span>';
       feedback.classList.add('show');
+
+      fetch('/api/locations/search?zip=' + encodeURIComponent(zipVal))
+        .then(res => res.json())
+        .then(data => {
+          if (data.success && data.locations && data.locations.length > 0) {
+            const loc = data.locations[0];
+            feedback.innerHTML = `
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <div>
+                  <strong>📍 Nearest Certified Site: ${loc.name}</strong><br>
+                  <span style="font-size:12.5px; color:#475569;">${loc.address1}, ${loc.city}, ${loc.state} ${loc.zip}</span><br>
+                  <span style="font-size:12px; color:#16a34a; font-weight:600;">● Walk-Ins Accepted: ${loc.hours || 'Mon-Fri 8:00 AM - 5:00 PM'}</span>
+                </div>
+                <a href="/checkout?zip=${encodeURIComponent(loc.zip)}" class="btn btn-primary btn-sm">
+                  Register at This Center →
+                </a>
+              </div>
+            `;
+          } else {
+            feedback.innerHTML = `
+              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                <div>
+                  <strong>📍 Quest & Labcorp Certified Centers Serving ZIP ${zipVal}</strong><br>
+                  <span style="font-size:12px; color:#16a34a; font-weight:600;">● Same-Day Walk-Ins Accepted Nationwide</span>
+                </div>
+                <a href="/checkout?zip=${encodeURIComponent(zipVal)}" class="btn btn-primary btn-sm">
+                  Schedule Test Online →
+                </a>
+              </div>
+            `;
+          }
+        })
+        .catch(err => {
+          feedback.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+              <div>
+                <strong>📍 Quest Diagnostics & Labcorp Partner Facilities Serving ZIP ${zipVal}</strong><br>
+                <span style="font-size:12px; color:#16a34a; font-weight:600;">● No Appointment Needed</span>
+              </div>
+              <a href="/checkout?zip=${encodeURIComponent(zipVal)}" class="btn btn-primary btn-sm">
+                Schedule Test Online →
+              </a>
+            </div>
+          `;
+        });
     });
   });
 

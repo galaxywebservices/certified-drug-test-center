@@ -106,48 +106,7 @@ button, input, select, textarea {
   gap: 12px;
 }
 
-.comp-badge {
-  background: var(--color-accent-red);
-  color: #fff;
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
-  font-weight: 700;
-  font-size: 11px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.comp-links {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.comp-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 5px 14px;
-  border-radius: var(--radius-full);
-  font-size: 12px;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.12);
-  color: #E2E8F0;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  transition: var(--transition);
-}
-
-.comp-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  color: #FFFFFF;
-}
-
-.comp-btn.active {
-  background: var(--color-accent-red);
-  color: #FFFFFF;
-  border-color: var(--color-accent-red);
-  box-shadow: 0 0 10px rgba(193, 18, 31, 0.6);
-}
+/* Obsolete switcher styles removed */
 
 /* ==========================================================================
    Header & Navigation
@@ -1662,4 +1621,32 @@ dialog::backdrop {
   .top-notice-right {
     display: none;
   }
+  .header-inner {
+    gap: 12px;
+  }
+  .brand-logo-link {
+    max-width: 170px;
+  }
+  .brand-logo-img {
+    max-height: 48px;
+  }
+  .header-hours {
+    display: none;
+  }
+  .header-contact-callout {
+    gap: 10px;
+  }
+  .header-phone-label {
+    font-size: 9.5px;
+  }
+  .header-phone-number {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  .header-contact-callout .btn {
+    padding: 8px 12px;
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
 }
+

@@ -428,7 +428,15 @@ class HomeController extends Controller
     }
 
     /**
-     * Design Look 1: Modern Patriotic Healthcare & Direct Portal
+     * Default Home Page: Set to Client's Chosen Look 2 (Corporate Clean Trust & Speed)
+     */
+    public function index()
+    {
+        return $this->design2();
+    }
+
+    /**
+     * Design Look 1: Modern Patriotic Healthcare & Direct Portal (Archived)
      */
     public function design1()
     {
@@ -440,7 +448,7 @@ class HomeController extends Controller
     }
 
     /**
-     * Design Look 2: Corporate Clean Trust & Speed (Streamlined Direct-to-Test Focus)
+     * Design Look 2: Corporate Clean Trust & Speed (Primary Client Approved Look)
      */
     public function design2()
     {
