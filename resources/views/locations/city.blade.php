@@ -94,8 +94,20 @@
             </div>
             @endforelse
 
+            @if(!empty($city?->content))
+            <!-- Localized City Guide Content -->
+            <div style="background:#fff; border:1px solid #E2E8F0; border-radius:10px; padding:28px; margin-top:24px; line-height:1.7; color:#334155;">
+                <h3 style="font-size:18px; font-weight:800; color:#0B2545; margin-bottom:14px; border-bottom:1px solid #F1F5F9; padding-bottom:8px;">
+                    Local Testing Guide for {{ $cityName }}, {{ $state->abbr }}
+                </h3>
+                <div class="city-content-body" style="font-size:14px;">
+                    {!! $city->content !!}
+                </div>
+            </div>
+            @endif
+
             <!-- Easy 3-Step Walkthrough -->
-            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:28px; margin-top:30px;">
+            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:28px; margin-top:24px;">
                 <h3 style="font-size:18px; font-weight:800; color:#0B2545; margin-bottom:14px;">
                     How Walk-In Drug Testing Works in {{ $cityName }}
                 </h3>
@@ -151,4 +163,38 @@
         </div>
     </div>
 </div>
+@if($locations->isNotEmpty())
+@php
+$itemListSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'ItemList',
+    'name' => "{$cityName}, {$state->abbr} Certified Drug Testing Centers",
+    'itemListElement' => $locations->values()->map(function($loc, $index) {
+        return [
+            '@type' => 'ListItem',
+            'position' => $index + 1,
+            'item' => [
+                '@type' => 'MedicalBusiness',
+                'name' => $loc->name,
+                'medicalSpecialty' => 'SubstanceAbuseScreening',
+                'address' => [
+                    '@type' => 'PostalAddress',
+                    'streetAddress' => $loc->address1,
+                    'addressLocality' => $loc->city,
+                    'addressRegion' => $loc->state,
+                    'postalCode' => $loc->zip,
+                    'addressCountry' => 'US',
+                ],
+                'telephone' => '+1-800-221-4291',
+                'openingHours' => 'Mo-Fr 08:00-17:00',
+                'url' => url()->current(),
+            ],
+        ];
+    })->all(),
+];
+@endphp
+<script type="application/ld+json">
+{!! json_encode($itemListSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
+</script>
+@endif
 @endsection

@@ -116,4 +116,24 @@ class LocationController extends Controller
             'locations' => $locations,
         ]);
     }
+
+    /**
+     * Programmatic SEO Chain Handler (e.g. /drug-testing-orlando-fl, /drug-testing-locations-memphis-tn)
+     */
+    public function resolveChainCity(string $slug)
+    {
+        $clean = preg_replace('/^(local-drug-testing-locations-|drug-testing-locations-|drug-testing-)/', '', $slug);
+
+        if (preg_match('/^(.*?)-([a-z]{2})$/i', $clean, $matches)) {
+            $citySlug = $matches[1];
+            $stateAbbr = strtoupper($matches[2]);
+
+            $state = State::where('abbr', $stateAbbr)->where('is_active', true)->first();
+            if ($state) {
+                return $this->city($state->slug, $citySlug);
+            }
+        }
+
+        abort(404);
+    }
 }

@@ -20,6 +20,7 @@ class City extends Model
         'is_active',
         'meta_title',
         'meta_description',
+        'content',
     ];
 
     protected $casts = [

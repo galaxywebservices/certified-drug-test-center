@@ -44,6 +44,15 @@ Route::get('/locations/{state_slug}', [\App\Http\Controllers\LocationController:
 Route::get('/locations/{state_slug}/{city_slug}', [\App\Http\Controllers\LocationController::class, 'city'])->name('locations.city');
 Route::get('/api/locations/search', [\App\Http\Controllers\LocationController::class, 'searchZip'])->name('api.locations.search');
 
+// Programmatic SEO Chain URLs & Aliases (e.g. /drug-testing-locations/{state}/{city}, /drug-testing-{city}-{state})
+Route::get('/drug-testing-locations', [\App\Http\Controllers\LocationController::class, 'index']);
+Route::get('/drug-testing-locations/{state_slug}', [\App\Http\Controllers\LocationController::class, 'state']);
+Route::get('/drug-testing-locations/{state_slug}/{city_slug}', [\App\Http\Controllers\LocationController::class, 'city']);
+Route::get('/drug-testing-{chain_city}', [\App\Http\Controllers\LocationController::class, 'resolveChainCity'])
+    ->where('chain_city', '[a-zA-Z0-9\-]+');
+Route::get('/local-drug-testing-locations-{chain_city}', [\App\Http\Controllers\LocationController::class, 'resolveChainCity'])
+    ->where('chain_city', '[a-zA-Z0-9\-]+');
+
 /*
 |--------------------------------------------------------------------------
 | Super Admin Panel Routes (/admin)
@@ -82,6 +91,14 @@ Route::prefix('admin')->group(function () {
 
         // Media & Photo Uploader
         Route::post('/media/upload', [\App\Http\Controllers\Admin\AdminMediaController::class, 'upload'])->name('admin.media.upload');
+
+        // Collection Locations & PSEO Cities
+        Route::get('/locations', [\App\Http\Controllers\Admin\AdminLocationController::class, 'index'])->name('admin.locations.index');
+        Route::get('/locations/{location}/edit', [\App\Http\Controllers\Admin\AdminLocationController::class, 'edit'])->name('admin.locations.edit');
+        Route::put('/locations/{location}', [\App\Http\Controllers\Admin\AdminLocationController::class, 'update'])->name('admin.locations.update');
+        Route::get('/cities', [\App\Http\Controllers\Admin\AdminLocationController::class, 'cities'])->name('admin.cities.index');
+        Route::get('/cities/{city}/edit', [\App\Http\Controllers\Admin\AdminLocationController::class, 'editCity'])->name('admin.cities.edit');
+        Route::put('/cities/{city}', [\App\Http\Controllers\Admin\AdminLocationController::class, 'updateCity'])->name('admin.cities.update');
     });
 });
 
