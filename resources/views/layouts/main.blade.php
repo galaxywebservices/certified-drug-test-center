@@ -213,6 +213,11 @@
                         Testing Locations
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ url('/contact-us') }}" class="nav-link">
+                        Contact Us
+                    </a>
+                </li>
             </ul>
 
             <a href="{{ route('checkout.index') }}" class="nav-cta-btn">
@@ -312,10 +317,11 @@
                 <div>
                     © {{ date('Y') }} Certified Drug Test Centers. All Rights Reserved. Local, Convenient & Confidential.
                 </div>
-                <div style="display:flex; gap:16px;">
+                <div style="display:flex; gap:16px; flex-wrap:wrap;">
                     <a href="{{ url('/privacy-policy') }}" style="color:#94A3B8;">Privacy Policy</a>
                     <a href="{{ url('/terms-and-conditions') }}" style="color:#94A3B8;">Terms of Service</a>
                     <a href="{{ route('locations.index') }}" style="color:#94A3B8;">Location Directory</a>
+                    <a href="{{ url('/contact-us') }}" style="color:#94A3B8;">Contact Us</a>
                 </div>
             </div>
         </div>

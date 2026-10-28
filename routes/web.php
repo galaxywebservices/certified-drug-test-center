@@ -14,6 +14,8 @@ use App\Http\Controllers\Admin\AdminPageController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\Admin\AdminLeadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +52,11 @@ Route::get('/robots.txt', function () {
 Route::redirect('/terms-of-service', '/terms-and-conditions');
 Route::redirect('/terms', '/terms-and-conditions');
 Route::redirect('/privacy', '/privacy-policy');
+Route::redirect('/contact', '/contact-us');
+
+// Contact Us & Corporate Consultation
+Route::get('/contact-us', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contact-us', [ContactController::class, 'submit'])->name('contact.submit');
 
 // Dynamic Categories & Products
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');
@@ -120,6 +127,11 @@ Route::prefix('admin')->group(function () {
         Route::get('/orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
         Route::post('/orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update-status');
         Route::post('/orders/{order}/resend-pass', [AdminOrderController::class, 'resendPass'])->name('admin.orders.resend-pass');
+
+        // Customer & Corporate Inquiries (Leads)
+        Route::get('/leads', [AdminLeadController::class, 'index'])->name('admin.leads.index');
+        Route::post('/leads/{lead}/status', [AdminLeadController::class, 'updateStatus'])->name('admin.leads.update-status');
+        Route::delete('/leads/{lead}', [AdminLeadController::class, 'destroy'])->name('admin.leads.destroy');
 
         // Media & Photo Uploader
         Route::post('/media/upload', [\App\Http\Controllers\Admin\AdminMediaController::class, 'upload'])->name('admin.media.upload');
