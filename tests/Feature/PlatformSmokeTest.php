@@ -136,5 +136,56 @@ class PlatformSmokeTest extends TestCase
         $response->assertSee('Amphetamines & Methamphetamine', false);
         $response->assertSee('12-Panel Maximum');
     }
+
+    public function test_order_tracking_page_loads_and_redirects_aliases()
+    {
+        $this->get('/donor-pass')->assertRedirect('/track-order');
+        $this->get('/order-status')->assertRedirect('/track-order');
+
+        $response = $this->get('/track-order');
+        $response->assertStatus(200);
+        $response->assertSee('Track Order');
+        $response->assertSee('Lookup Test Registration');
+    }
+
+    public function test_order_tracking_lookup_validation_and_lookup()
+    {
+        $this->post('/track-order', [])
+            ->assertSessionHasErrors(['order_number', 'email']);
+
+        $order = \App\Models\Order::firstOrCreate(
+            ['order_number' => 'CDTC-TEST1234'],
+            [
+                'donor_first_name' => 'John',
+                'donor_last_name' => 'Doe',
+                'donor_email' => 'donor@example.com',
+                'donor_phone' => '800-221-4291',
+                'test_reason' => 'Pre-employment',
+                'subtotal' => 89.99,
+                'total' => 89.99,
+                'payment_status' => 'paid',
+                'donor_pass_token' => 'test-token-tracking-12345',
+                'status' => 'registered',
+            ]
+        );
+
+        $lookup = $this->post('/track-order', [
+            'order_number' => 'CDTC-TEST1234',
+            'email' => 'donor@example.com',
+        ]);
+        $lookup->assertStatus(200);
+        $lookup->assertSee('CDTC-TEST1234');
+        $lookup->assertSee('John Doe');
+        $lookup->assertSee('Official Electronic Donor Pass');
+    }
+
+    public function test_product_page_displays_clinical_testing_protocols()
+    {
+        $response = $this->get('/product/5-panel-nondot');
+        $response->assertStatus(200);
+        $response->assertSee('Clinical Testing Protocols', false);
+        $response->assertSee('SAMHSA-Certified Laboratories');
+    }
 }
+
 

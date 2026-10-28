@@ -235,6 +235,50 @@
                 </div>
             </div>
             @endif
+
+            <!-- Clinical Protocol & Laboratory Standards -->
+            <div class="prod-section">
+                <h2 class="prod-section-title">Clinical Testing Protocols &amp; Chain of Custody</h2>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:18px;">
+                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:16px;">
+                        <h3 style="font-size:14.5px; font-weight:800; color:#0B2545; margin:0 0 6px;">
+                            🔬 SAMHSA-Certified Laboratories
+                        </h3>
+                        <p style="font-size:13px; color:#475569; margin:0; line-height:1.5;">
+                            All samples are analyzed at CAP-accredited, SAMHSA-certified Quest Diagnostics and Labcorp reference laboratories utilizing state-of-the-art immunoassay analyzers and GC/MS / LC-MS/MS confirmatory instrumentation.
+                        </p>
+                    </div>
+                    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:16px;">
+                        <h3 style="font-size:14.5px; font-weight:800; color:#0B2545; margin:0 0 6px;">
+                            👨‍⚕️ Medical Review Officer (MRO)
+                        </h3>
+                        <p style="font-size:13px; color:#475569; margin:0; line-height:1.5;">
+                            Every drug screen is supervised by a licensed Medical Review Officer. If a non-negative result occurs, the MRO contacts the donor to verify legitimate prescribed medications prior to reporting results.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="border-top:1px solid #F1F5F9; padding-top:16px;">
+                    <h3 style="font-size:15px; font-weight:800; color:#0B2545; margin-bottom:12px;">3-Step Express Testing Process</h3>
+                    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;">
+                        <div style="text-align:center; padding:14px; background:#F8FAFC; border-radius:8px; border:1px solid #E2E8F0;">
+                            <div style="font-size:22px; font-weight:900; color:#C1121F; margin-bottom:4px;">1</div>
+                            <div style="font-size:13px; font-weight:700; color:#0B2545; margin-bottom:4px;">Register Online</div>
+                            <div style="font-size:11.5px; color:#64748B;">Select your panel and get an instant electronic Donor Pass with barcode.</div>
+                        </div>
+                        <div style="text-align:center; padding:14px; background:#F8FAFC; border-radius:8px; border:1px solid #E2E8F0;">
+                            <div style="font-size:22px; font-weight:900; color:#0B2545; margin-bottom:4px;">2</div>
+                            <div style="font-size:13px; font-weight:700; color:#0B2545; margin-bottom:4px;">Walk In Today</div>
+                            <div style="font-size:11.5px; color:#64748B;">Visit any of 20,000+ Quest or Labcorp partner sites. No appointment needed.</div>
+                        </div>
+                        <div style="text-align:center; padding:14px; background:#F8FAFC; border-radius:8px; border:1px solid #E2E8F0;">
+                            <div style="font-size:22px; font-weight:900; color:#10B981; margin-bottom:4px;">3</div>
+                            <div style="font-size:13px; font-weight:700; color:#0B2545; margin-bottom:4px;">Get Verified Results</div>
+                            <div style="font-size:11.5px; color:#64748B;">Fast turnaround (1-2 business days) securely sent to your confidential email.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Sticky Express Checkout Sidebar -->

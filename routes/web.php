@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminLeadController;
+use App\Http\Controllers\OrderTrackingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +68,14 @@ Route::get('/api/products/search', [ProductController::class, 'search'])->name('
 Route::get('/checkout/{slug?}', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 Route::get('/checkout/confirmation/{token}', [CheckoutController::class, 'confirmation'])->name('checkout.confirmation');
+
+// Order Tracking & Electronic Donor Pass Recovery
+Route::get('/track-order', [OrderTrackingController::class, 'index'])->name('order.track');
+Route::post('/track-order', [OrderTrackingController::class, 'lookup'])->name('order.track.lookup');
+Route::post('/track-order/resend', [OrderTrackingController::class, 'resend'])->name('order.track.resend');
+Route::redirect('/donor-pass', '/track-order');
+Route::redirect('/order-status', '/track-order');
+Route::redirect('/order-tracking', '/track-order');
 
 // Geographic PSEO Location Pages & ZIP Lookup API
 Route::get('/locations', [\App\Http\Controllers\LocationController::class, 'index'])->name('locations.index');

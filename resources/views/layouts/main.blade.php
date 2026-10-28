@@ -120,6 +120,11 @@
                 <span>Over 20,000 Certified Quest & Labcorp Collection Sites Nationwide</span>
             </div>
             <div class="top-notice-right">
+                <a href="{{ route('order.track') }}" style="color:#0B2545; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:12.5px;">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
+                    Track Order / Donor Pass
+                </a>
+                <span>•</span>
                 <span style="color:#C1121F; font-weight:700;">¡Hablamos Español!</span>
                 <span>•</span>
                 <a href="tel:18002214291" class="top-phone-link">
@@ -330,6 +335,7 @@
                     © {{ date('Y') }} Certified Drug Test Centers. All Rights Reserved. Local, Convenient & Confidential.
                 </div>
                 <div style="display:flex; gap:16px; flex-wrap:wrap;">
+                    <a href="{{ route('order.track') }}" style="color:#CBD5E1; font-weight:700;">Track Order &amp; Donor Pass</a>
                     <a href="{{ url('/privacy-policy') }}" style="color:#94A3B8;">Privacy Policy</a>
                     <a href="{{ url('/terms-and-conditions') }}" style="color:#94A3B8;">Terms of Service</a>
                     <a href="{{ route('locations.index') }}" style="color:#94A3B8;">Location Directory</a>
