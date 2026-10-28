@@ -61,6 +61,7 @@ Route::post('/contact-us', [ContactController::class, 'submit'])->name('contact.
 // Dynamic Categories & Products
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
+Route::get('/api/products/search', [ProductController::class, 'search'])->name('api.products.search');
 
 // Checkout & PayTrace Payment Gateway
 Route::get('/checkout/{slug?}', [CheckoutController::class, 'index'])->name('checkout.index');

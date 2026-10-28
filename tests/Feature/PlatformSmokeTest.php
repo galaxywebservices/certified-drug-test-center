@@ -108,4 +108,33 @@ class PlatformSmokeTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Super Admin');
     }
+
+    public function test_product_search_api_returns_results()
+    {
+        $response = $this->getJson('/api/products/search?q=10');
+        $response->assertStatus(200);
+        $response->assertJsonStructure(['results']);
+
+        $fentanylSearch = $this->getJson('/api/products/search?q=fentanyl');
+        $fentanylSearch->assertStatus(200);
+        $fentanylSearch->assertJsonStructure(['results']);
+    }
+
+    public function test_locations_search_api_returns_locations()
+    {
+        $response = $this->getJson('/api/locations/search?zip=85296');
+        $response->assertStatus(200);
+        $response->assertJson(['success' => true]);
+        $response->assertJsonStructure(['success', 'locations']);
+    }
+
+    public function test_category_page_displays_substance_detection_matrix()
+    {
+        $response = $this->get('/category/urine');
+        $response->assertStatus(200);
+        $response->assertSee('Substance Detection Comparison Matrix');
+        $response->assertSee('Amphetamines & Methamphetamine', false);
+        $response->assertSee('12-Panel Maximum');
+    }
 }
+

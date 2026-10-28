@@ -285,3 +285,195 @@ function scrollToPanels() {
   const el = document.getElementById('pricing-panels') || document.getElementById('products-section');
   if (el) el.scrollIntoView({ behavior: 'smooth' });
 }
+
+// ==========================================================================
+// Global Interactive Search Modal & Cmd+K Shortcut
+// ==========================================================================
+let searchDebounceTimer = null;
+
+function openGlobalSearch() {
+  const modal = document.getElementById('globalSearchModal');
+  if (!modal) return;
+  if (typeof modal.showModal === 'function') {
+    modal.showModal();
+  } else {
+    modal.style.display = 'block';
+  }
+  const input = document.getElementById('globalSearchInput');
+  if (input) {
+    setTimeout(() => input.focus(), 50);
+    if (!input.value.trim()) {
+      executeProductSearch('panel'); // Preload popular panels
+    }
+  }
+}
+
+function closeGlobalSearch() {
+  const modal = document.getElementById('globalSearchModal');
+  if (!modal) return;
+  if (typeof modal.close === 'function') {
+    modal.close();
+  } else {
+    modal.style.display = 'none';
+  }
+}
+
+function searchTag(term) {
+  const input = document.getElementById('globalSearchInput');
+  if (input) {
+    input.value = term;
+    executeProductSearch(term);
+  }
+}
+
+function executeProductSearch(query) {
+  const resultsContainer = document.getElementById('globalSearchResults');
+  if (!resultsContainer) return;
+
+  resultsContainer.innerHTML = '<div class="search-empty-state">Searching certified drug tests & panels...</div>';
+
+  fetch('/api/products/search?q=' + encodeURIComponent(query))
+    .then(res => res.json())
+    .then(data => {
+      if (!data.results || data.results.length === 0) {
+        resultsContainer.innerHTML = `
+          <div class="search-empty-state">
+            No exact tests found matching <strong>"${query}"</strong>.<br>
+            <span style="font-size:12px; margin-top:6px; display:inline-block;">Call our toxicologists at <a href="tel:18002214291" style="color:#C1121F; font-weight:700;">(800) 221-4291</a> to customize a custom substance panel.</span>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      data.results.forEach(item => {
+        const panelsHtml = item.included_panels && item.included_panels.length > 0
+          ? item.included_panels.map(p => `<span style="background:#F1F5F9; color:#475569; padding:2px 6px; border-radius:4px; font-size:11px;">${p}</span>`).join(' ')
+          : '';
+
+        html += `
+          <div class="search-result-row">
+            <div class="search-result-info">
+              <a href="${item.url}" class="search-result-title" style="display:block; text-decoration:none;">${item.name}</a>
+              <div class="search-result-meta">
+                <span style="background:#E0F2FE; color:#0369A1; font-weight:700; padding:2px 6px; border-radius:4px;">${item.specimen_type}</span>
+                ${item.dot_required ? '<span style="background:#FEE2E2; color:#B91C1C; font-weight:700; padding:2px 6px; border-radius:4px;">DOT</span>' : ''}
+                <span>Turnaround: ${item.turnaround_time}</span>
+              </div>
+              ${panelsHtml ? `<div style="display:flex; gap:4px; flex-wrap:wrap; margin-top:6px;">${panelsHtml}</div>` : ''}
+            </div>
+            <div class="search-result-action">
+              <div class="search-result-price">$${item.price}</div>
+              <a href="${item.checkout_url}" class="btn btn-primary btn-sm" style="margin-top:4px; font-size:12px; padding:5px 12px;">Order Now &rarr;</a>
+            </div>
+          </div>
+        `;
+      });
+      resultsContainer.innerHTML = html;
+    })
+    .catch(err => {
+      resultsContainer.innerHTML = '<div class="search-empty-state" style="color:#C1121F;">Error searching tests. Please try again or call (800) 221-4291.</div>';
+    });
+}
+
+// Global Keyboard Shortcut: Cmd+K / Ctrl+K
+document.addEventListener('keydown', function (e) {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    openGlobalSearch();
+  }
+});
+
+// Setup Live Search Input Listener
+document.addEventListener('DOMContentLoaded', function () {
+  const searchInput = document.getElementById('globalSearchInput');
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      const q = this.value.trim();
+      clearTimeout(searchDebounceTimer);
+      if (!q) {
+        executeProductSearch('panel');
+        return;
+      }
+      searchDebounceTimer = setTimeout(() => {
+        executeProductSearch(q);
+      }, 200);
+    });
+  }
+});
+
+// ==========================================================================
+// Global Fast ZIP Collection Center Locator Modal
+// ==========================================================================
+function openZipModal() {
+  const modal = document.getElementById('globalZipModal');
+  if (!modal) return;
+  if (typeof modal.showModal === 'function') {
+    modal.showModal();
+  } else {
+    modal.style.display = 'block';
+  }
+  const input = document.getElementById('modalZipInput');
+  if (input) setTimeout(() => input.focus(), 50);
+}
+
+function closeZipModal() {
+  const modal = document.getElementById('globalZipModal');
+  if (!modal) return;
+  if (typeof modal.close === 'function') {
+    modal.close();
+  } else {
+    modal.style.display = 'none';
+  }
+}
+
+function lookupZipModal() {
+  const input = document.getElementById('modalZipInput');
+  const resultsContainer = document.getElementById('modalZipResultsList');
+  if (!input || !resultsContainer) return;
+
+  const zip = input.value.trim();
+  if (!zip || zip.length < 5) return;
+
+  resultsContainer.innerHTML = '<div style="text-align:center; padding:16px; color:#0B2545;">Searching 20,000+ Quest & Labcorp sites near ' + zip + '...</div>';
+
+  fetch('/api/locations/search?zip=' + encodeURIComponent(zip))
+    .then(res => res.json())
+    .then(data => {
+      if (data.success && data.locations && data.locations.length > 0) {
+        let html = '';
+        data.locations.slice(0, 5).forEach((loc, idx) => {
+          html += `
+            <div class="global-zip-item">
+              <div>
+                <div class="global-zip-item-title">${idx + 1}. ${loc.name}</div>
+                <div class="global-zip-item-address">${loc.address1}, ${loc.city}, ${loc.state} ${loc.zip}</div>
+                <div class="global-zip-item-hours">● Walk-Ins Accepted: ${loc.hours || 'Mon-Fri 8:00 AM - 5:00 PM'}</div>
+              </div>
+              <a href="/checkout?zip=${encodeURIComponent(loc.zip)}" class="btn btn-primary btn-sm" style="white-space:nowrap;">
+                Register Here &rarr;
+              </a>
+            </div>
+          `;
+        });
+        resultsContainer.innerHTML = html;
+      } else {
+        resultsContainer.innerHTML = `
+          <div class="global-zip-item">
+            <div>
+              <div class="global-zip-item-title">Quest Diagnostics & Labcorp Partner Facilities Serving ZIP ${zip}</div>
+              <div class="global-zip-item-address">Certified collection network covering all 50 states</div>
+              <div class="global-zip-item-hours">● Walk-in registration available immediately upon online checkout</div>
+            </div>
+            <a href="/checkout?zip=${encodeURIComponent(zip)}" class="btn btn-primary btn-sm" style="white-space:nowrap;">
+              Schedule Test Online &rarr;
+            </a>
+          </div>
+        `;
+      }
+    })
+    .catch(err => {
+      resultsContainer.innerHTML = '<div style="text-align:center; padding:16px; color:#C1121F;">Unable to lookup locations. Please call (800) 221-4291 for immediate dispatch.</div>';
+    });
+}
+

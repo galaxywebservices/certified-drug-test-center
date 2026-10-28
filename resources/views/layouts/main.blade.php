@@ -138,6 +138,11 @@
             </a>
 
             <div class="header-contact-callout">
+                <button type="button" class="header-search-btn" onclick="openGlobalSearch()" aria-label="Search tests, drugs, or panels">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    <span>Search Tests & Substances</span>
+                    <kbd class="search-kbd">⌘K</kbd>
+                </button>
                 <div class="header-hours">
                     <strong>Online Scheduling: 24/7</strong>
                     Phone Assistance: Mon-Fri 7AM - 8PM EST
@@ -220,10 +225,17 @@
                 </li>
             </ul>
 
-            <a href="{{ route('checkout.index') }}" class="nav-cta-btn">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
-                Order Test Online
-            </a>
+            <div style="display:flex; align-items:center; gap:8px;">
+                <button type="button" class="nav-loc-btn" onclick="openZipModal()" aria-label="Find collection centers near you">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <span>Find Lab by ZIP</span>
+                </button>
+
+                <a href="{{ route('checkout.index') }}" class="nav-cta-btn">
+                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
+                    Order Test Online
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -458,6 +470,76 @@
                     <button type="submit" class="btn btn-primary">Submit Request</button>
                 </div>
             </form>
+        </div>
+    </dialog>
+
+    <!-- ==========================================================================
+         Accessible Native HTML5 Dialog: Global Test & Substance Search Modal (Cmd+K)
+         ========================================================================== -->
+    <dialog id="globalSearchModal" class="search-dialog" aria-labelledby="globalSearchTitle">
+        <div class="search-modal-header">
+            <div class="search-input-wrap">
+                <svg class="search-input-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <input type="text" id="globalSearchInput" placeholder="Search test name, substance (e.g., THC, Fentanyl, 10-Panel), or specimen..." aria-label="Search drug tests and substances" autocomplete="off">
+                <kbd class="search-kbd" style="font-size:11px;">ESC</kbd>
+                <button type="button" class="modal-close-btn" onclick="closeGlobalSearch()" aria-label="Close search">×</button>
+            </div>
+        </div>
+        <div class="search-modal-body">
+            <div class="search-quick-tags">
+                <span class="search-quick-label">Popular Searches:</span>
+                <button type="button" class="search-pill" onclick="searchTag('5-Panel')">5-Panel</button>
+                <button type="button" class="search-pill" onclick="searchTag('10-Panel')">10-Panel</button>
+                <button type="button" class="search-pill" onclick="searchTag('12-Panel')">12-Panel</button>
+                <button type="button" class="search-pill" onclick="searchTag('DOT')">DOT Compliant</button>
+                <button type="button" class="search-pill" onclick="searchTag('Hair Follicle')">Hair Follicle</button>
+                <button type="button" class="search-pill" onclick="searchTag('Fentanyl')">Fentanyl</button>
+                <button type="button" class="search-pill" onclick="searchTag('Alcohol')">Alcohol / EtG</button>
+            </div>
+
+            <div id="globalSearchResults" class="search-results-list">
+                <!-- Dynamically populated via site.js -->
+                <div class="search-empty-state">
+                    Type a drug panel, substance, or test type above to see instant results.
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- ==========================================================================
+         Accessible Native HTML5 Dialog: Fast ZIP Collection Site Finder Modal
+         ========================================================================== -->
+    <dialog id="globalZipModal" class="zip-dialog" aria-labelledby="globalZipTitle">
+        <div class="modal-header">
+            <div>
+                <h2 class="modal-title" id="globalZipTitle" style="font-size:18px;">Find Certified Collection Centers Near You</h2>
+                <div style="font-size:12.5px; color:#64748B; margin-top:2px;">Over 20,000 Quest & Labcorp sites nationwide • Same-day walk-ins welcome</div>
+            </div>
+            <button type="button" class="modal-close-btn" onclick="closeZipModal()" aria-label="Close dialog">×</button>
+        </div>
+        <div class="modal-body" style="padding:20px;">
+            <form onsubmit="event.preventDefault(); lookupZipModal();">
+                <div style="display:flex; gap:8px;">
+                    <input type="text" id="modalZipInput" pattern="[0-9]{5}" maxlength="5" placeholder="Enter 5-digit ZIP (e.g. 85296, 75001, 30301)" required style="flex-grow:1; padding:10px 14px; border:1px solid #CBD5E1; border-radius:6px; font-size:15px; font-weight:600; outline:none;">
+                    <button type="submit" class="btn btn-primary" style="padding:10px 18px; font-weight:700;">Find Labs</button>
+                </div>
+            </form>
+
+            <div id="modalZipResultsList" class="global-zip-results">
+                <!-- Initial suggestions / results -->
+                <div style="text-align:center; padding:20px; color:#64748B; font-size:13.5px;">
+                    Enter your ZIP code to view certified collection sites with hours of operation and instant registration.
+                </div>
+            </div>
+
+            <div style="margin-top:16px; padding-top:14px; border-top:1px solid #E2E8F0; display:flex; justify-content:space-between; align-items:center;">
+                <a href="{{ route('locations.index') }}" style="font-size:13px; color:#0B2545; font-weight:700; text-decoration:none;">
+                    &larr; Browse All States & Cities Directory
+                </a>
+                <a href="tel:18002214291" style="font-size:13px; color:#C1121F; font-weight:700; text-decoration:none;">
+                    Need Help? Call (800) 221-4291
+                </a>
+            </div>
         </div>
     </dialog>
 

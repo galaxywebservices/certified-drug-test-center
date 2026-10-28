@@ -1650,3 +1650,320 @@ dialog::backdrop {
   }
 }
 
+/* ==========================================================================
+   Global Interactive Test Search & Panel Finder Modal
+   ========================================================================== */
+.header-search-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #F8FAFC;
+  border: 1px solid #CBD5E1;
+  color: #64748B;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.header-search-btn:hover {
+  background: #F1F5F9;
+  border-color: #0B2545;
+  color: #0B2545;
+}
+
+.search-kbd {
+  background: #E2E8F0;
+  color: #475569;
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.nav-loc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #FFFFFF;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-right: 8px;
+}
+
+.nav-loc-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: #FFFFFF;
+}
+
+.search-dialog {
+  max-width: 680px;
+  width: 90%;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 45px rgba(11, 37, 69, 0.25);
+  padding: 0;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.search-dialog::backdrop,
+.zip-dialog::backdrop {
+  background: rgba(11, 37, 69, 0.65);
+  backdrop-filter: blur(4px);
+}
+
+.search-modal-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid #E2E8F0;
+  background: #F8FAFC;
+}
+
+.search-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.search-input-icon {
+  color: #64748B;
+  flex-shrink: 0;
+}
+
+#globalSearchInput {
+  flex-grow: 1;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+  font-weight: 600;
+  color: #0B2545;
+  outline: none;
+  padding: 6px 0;
+}
+
+#globalSearchInput::placeholder {
+  color: #94A3B8;
+  font-weight: 400;
+}
+
+.search-modal-body {
+  padding: 16px 20px 24px;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.search-quick-tags {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.search-quick-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748B;
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+
+.search-pill {
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  color: #334155;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.search-pill:hover {
+  background: #0B2545;
+  color: #FFFFFF;
+  border-color: #0B2545;
+}
+
+.search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.search-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  gap: 14px;
+}
+
+.search-result-row:hover {
+  border-color: #0B2545;
+  background: #F8FAFC;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(11, 37, 69, 0.05);
+}
+
+.search-result-info {
+  flex: 1;
+}
+
+.search-result-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0B2545;
+  margin-bottom: 4px;
+}
+
+.search-result-meta {
+  font-size: 12px;
+  color: #64748B;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.search-result-action {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.search-result-price {
+  font-size: 18px;
+  font-weight: 800;
+  color: #C1121F;
+}
+
+.search-empty-state {
+  text-align: center;
+  padding: 32px 16px;
+  color: #64748B;
+  font-size: 14px;
+}
+
+/* ZIP Locator Modal */
+.zip-dialog {
+  max-width: 580px;
+  width: 90%;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 20px 45px rgba(11, 37, 69, 0.25);
+  padding: 0;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.global-zip-results {
+  margin-top: 16px;
+  max-height: 340px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.global-zip-item {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.global-zip-item-title {
+  font-weight: 700;
+  color: #0B2545;
+  font-size: 14px;
+}
+
+.global-zip-item-address {
+  font-size: 12.5px;
+  color: #475569;
+  margin: 2px 0;
+}
+
+.global-zip-item-hours {
+  font-size: 11.5px;
+  color: #16A34A;
+  font-weight: 600;
+}
+
+/* Substance Detection Matrix */
+.substance-matrix-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 28px 24px;
+  margin-top: 36px;
+  box-shadow: 0 2px 8px rgba(11, 37, 69, 0.04);
+}
+
+.substance-matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 13.5px;
+}
+
+.substance-matrix-table th {
+  background: #0B2545;
+  color: #FFFFFF;
+  padding: 10px 14px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.substance-matrix-table th:first-child {
+  text-align: left;
+  border-top-left-radius: 6px;
+}
+
+.substance-matrix-table th:last-child {
+  border-top-right-radius: 6px;
+}
+
+.substance-matrix-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #E2E8F0;
+  text-align: center;
+  color: #334155;
+  display: table-cell !important;
+  vertical-align: middle;
+}
+
+.substance-matrix-table td:first-child {
+  text-align: left;
+  font-weight: 600;
+  color: #0B2545;
+}
+
+.substance-matrix-table tr:hover td {
+  background: #F8FAFC;
+}
+
+

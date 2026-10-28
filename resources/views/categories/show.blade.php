@@ -121,6 +121,132 @@
                 </div>
                 @endforelse
             </div>
+
+            <!-- Substance Detection Comparison Matrix -->
+            <div class="substance-matrix-card">
+                <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+                    <div>
+                        <span class="badge" style="background:#E0F2FE; color:#0369A1; font-size:11.5px; font-weight:700; text-transform:uppercase;">Panel Breakdown Guide</span>
+                        <h3 style="font-size:20px; font-weight:800; color:#0B2545; margin-top:6px; margin-bottom:4px;">Substance Detection Comparison Matrix</h3>
+                        <p style="font-size:13.5px; color:#64748B; margin:0;">Compare which illicit drugs, prescription opioids, and stimulants are screened across panel tiers.</p>
+                    </div>
+                    <a href="tel:18002214291" style="font-size:13px; font-weight:700; color:#C1121F; text-decoration:none;">Custom Panels Available: (800) 221-4291 &rarr;</a>
+                </div>
+
+                <div style="overflow-x:auto;">
+                    <table class="substance-matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Drug / Substance Class</th>
+                                <th>5-Panel Standard</th>
+                                <th>10-Panel Comprehensive</th>
+                                <th>12-Panel Maximum</th>
+                                <th>Estimated Detection Window</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Amphetamines & Methamphetamine (AMP / mAMP)</td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>1 - 3 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Cocaine Metabolite (COC)</td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>2 - 4 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Marijuana / Cannabinoids (THC)</td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>1 - 30+ Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Basic Opiates (Codeine, Morphine, Heroin)</td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>1 - 3 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Phencyclidine (PCP)</td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>7 - 14 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Barbiturates (BAR)</td>
+                                <td><span class="check-no">—</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>1 - 7 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Benzodiazepines (Xanax, Valium - BZO)</td>
+                                <td><span class="check-no">—</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>1 - 7 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Methadone (MTD)</td>
+                                <td><span class="check-no">—</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>2 - 4 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Propoxyphene (PPX)</td>
+                                <td><span class="check-no">—</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>1 - 3 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Methaqualone (Quaaludes)</td>
+                                <td><span class="check-no">—</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>2 - 4 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Expanded Prescription Opioids (Oxycodone, Oxymorphone)</td>
+                                <td><span class="check-no">—</span></td>
+                                <td><span class="check-yes">✓ (Exp Opiates)</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>1 - 4 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Ecstasy / MDMA / Molly</td>
+                                <td><span class="check-no">—</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>1 - 3 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                            <tr>
+                                <td>Buprenorphine (Suboxone) / Fentanyl</td>
+                                <td><span class="check-no">—</span></td>
+                                <td><span class="check-no">—</span></td>
+                                <td><span class="check-yes">✓ Included</span></td>
+                                <td>2 - 4 Days (Urine) / 90 Days (Hair)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="margin-top:16px; padding:14px; background:#F8FAFC; border-radius:6px; font-size:12.5px; color:#64748B; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+                    <div>
+                        <strong>Need Court-Admissible or DOT Lab Testing?</strong> All specimens are analyzed at SAMHSA-certified Quest Diagnostics & Labcorp reference laboratories under strict chain-of-custody.
+                    </div>
+                    <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-sm">Order Online Now &rarr;</a>
+                </div>
+            </div>
         </div>
 
         <!-- Sidebar Navigation -->
