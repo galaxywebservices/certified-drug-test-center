@@ -43,4 +43,12 @@ class Page extends Model
     {
         return $query->where('is_published', true);
     }
+
+    public function getContentAttribute($value)
+    {
+        if (is_string($value) && str_contains($value, '\"')) {
+            return stripslashes($value);
+        }
+        return $value;
+    }
 }
