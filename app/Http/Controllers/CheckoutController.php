@@ -121,6 +121,13 @@ class CheckoutController extends Controller
             'quantity' => 1,
         ]);
 
+        // Send Electronic Donor Pass Email
+        try {
+            \Illuminate\Support\Facades\Mail::to($order->donor_email)->send(new \App\Mail\DonorPassMail($order));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::info('Donor pass email log: ' . $e->getMessage());
+        }
+
         return redirect()->route('checkout.confirmation', ['token' => $token])
             ->with('success', 'Your test has been successfully ordered and scheduled!');
     }

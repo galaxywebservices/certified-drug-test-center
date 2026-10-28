@@ -1,6 +1,12 @@
 @extends('admin.layouts.app', ['title' => 'Order Details', 'heading' => 'Order #' . $order->order_number])
 
 @section('topbar_actions')
+<form action="{{ route('admin.orders.resend-pass', $order) }}" method="POST" style="display:inline;">
+    @csrf
+    <button type="submit" class="btn btn-outline btn-sm" onclick="return confirm('Resend Electronic Donor Pass email to {{ $order->donor_email }}?');">
+        Resend Donor Pass Email
+    </button>
+</form>
 <a href="{{ route('checkout.confirmation', $order->donor_pass_token) }}" target="_blank" class="btn btn-primary btn-sm">
     Print Electronic Donor Pass
 </a>

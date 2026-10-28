@@ -74,9 +74,11 @@ Route::prefix('admin')->group(function () {
         Route::post('/settings', [AdminSettingController::class, 'update'])->name('admin.settings.update');
 
         // Orders & Registrations
+        Route::get('/orders/export', [AdminOrderController::class, 'export'])->name('admin.orders.export');
         Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
         Route::get('/orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
         Route::post('/orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update-status');
+        Route::post('/orders/{order}/resend-pass', [AdminOrderController::class, 'resendPass'])->name('admin.orders.resend-pass');
 
         // Media & Photo Uploader
         Route::post('/media/upload', [\App\Http\Controllers\Admin\AdminMediaController::class, 'upload'])->name('admin.media.upload');
