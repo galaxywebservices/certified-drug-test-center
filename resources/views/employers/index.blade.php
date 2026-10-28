@@ -909,31 +909,80 @@
     color: #0B2545;
     margin-bottom: 18px;
 }
-.form-row-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    margin-bottom: 16px;
+.form-group {
+    margin-bottom: 18px;
+}
+.form-group label,
+.form-label,
+.required-lbl {
+    display: block !important;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #0B2545;
+    margin-bottom: 7px;
+    line-height: 1.3;
 }
 .required-lbl::after {
     content: " *";
     color: #C1121F;
+    font-weight: 800;
+}
+.form-control {
+    display: block !important;
+    width: 100% !important;
+    height: 46px;
+    padding: 10px 14px;
+    border: 1px solid #CBD5E1;
+    border-radius: 8px;
+    font-size: 14.5px;
+    color: #1E293B;
+    background-color: #FFFFFF;
+    box-sizing: border-box !important;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+.form-control:focus {
+    border-color: #0B2545;
+    box-shadow: 0 0 0 3px rgba(11, 37, 69, 0.1);
+    background-color: #fff;
+}
+.form-control::placeholder {
+    color: #94A3B8;
+}
+select.form-control {
+    appearance: auto;
+    -webkit-appearance: auto;
+    cursor: pointer;
+    background-color: #fff;
+}
+.form-control-sm {
+    height: 38px !important;
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+    border-radius: 6px !important;
+}
+.form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 6px;
 }
 .programs-checkbox-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 12px;
 }
 .checkbox-pill {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     background: #F8FAFC;
     border: 1px solid #E2E8F0;
-    padding: 10px 14px;
+    padding: 12px 14px;
     border-radius: 8px;
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 600;
+    color: #1E293B;
     cursor: pointer;
     transition: background 0.15s, border-color 0.15s;
 }
@@ -943,17 +992,19 @@
 }
 .checkbox-pill input {
     accent-color: #0B2545;
+    width: 16px;
+    height: 16px;
 }
 
 /* Candidate Table */
 .candidate-roster-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 8px;
+    margin-top: 10px;
 }
 .candidate-roster-table th {
     background: #F1F5F9;
-    padding: 10px 12px;
+    padding: 11px 12px;
     font-size: 12px;
     font-weight: 800;
     color: #475569;
@@ -965,6 +1016,11 @@
     padding: 8px 10px;
     border: 1px solid #E2E8F0;
     vertical-align: middle;
+    background: #fff;
+}
+.candidate-roster-table td .form-control {
+    width: 100% !important;
+    box-sizing: border-box !important;
 }
 .remove-row-btn {
     background: #FEE2E2;

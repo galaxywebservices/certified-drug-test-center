@@ -1428,6 +1428,54 @@ dialog::backdrop {
   overflow-y: auto;
 }
 
+/* Standard Form Controls & Groups */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label,
+.form-label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: 46px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 14.5px;
+  color: var(--color-text-main);
+  background-color: #FFFFFF;
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(11, 37, 69, 0.1);
+  background-color: #FFFFFF;
+}
+
+select.form-control {
+  appearance: auto;
+  -webkit-appearance: auto;
+  cursor: pointer;
+}
+
+.form-control-sm {
+  height: 38px !important;
+  padding: 6px 10px !important;
+  font-size: 13px !important;
+}
+
 .modal-form-group {
   margin-bottom: 16px;
 }
