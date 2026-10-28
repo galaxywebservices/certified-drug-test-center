@@ -124,6 +124,30 @@
             @endif
 
             {!! $page->content !!}
+
+            @if(!empty($page->blocks_json) && is_array($page->blocks_json))
+                @foreach($page->blocks_json as $block)
+                    @if(($block['type'] ?? '') === 'faq' && !empty($block['items']))
+                        <div class="cms-faq-section" style="margin-top:36px; padding-top:28px; border-top:2px solid #F1F5F9;">
+                            <h3 style="font-size:22px; font-weight:800; color:#0B2545; margin-bottom:18px;">Frequently Asked Questions</h3>
+                            @foreach($block['items'] as $item)
+                                <div style="margin-bottom:16px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:18px 20px;">
+                                    <strong style="color:#0B2545; font-size:16px; display:block; margin-bottom:6px;">Q: {{ $item['question'] }}</strong>
+                                    <p style="color:#475569; font-size:14.5px; margin:0; line-height:1.6;">{{ $item['answer'] }}</p>
+                                </div>
+                            @endforeach
+                        </div>
+                    @elseif(($block['type'] ?? '') === 'cta')
+                        <div class="cms-cta-callout" style="background:linear-gradient(135deg, #0B2545, #133E6E); color:#fff; border-radius:10px; padding:32px 24px; margin-top:36px; text-align:center;">
+                            <h3 style="font-size:22px; font-weight:800; color:#fff; margin-bottom:8px;">{{ $block['title'] ?? 'Need Testing Assistance?' }}</h3>
+                            <p style="color:#CBD5E1; font-size:14px; max-width:600px; margin:0 auto 18px;">{{ $block['subtitle'] ?? 'Our nationwide drug testing specialists are available 24/7 to assist with walk-in registrations.' }}</p>
+                            <a href="{{ $block['btn_url'] ?? 'tel:18002214291' }}" class="btn btn-primary" style="display:inline-flex; font-size:15px; padding:12px 24px;">
+                                {{ $block['btn_text'] ?? 'Call Toll-Free: (800) 221-4291' }}
+                            </a>
+                        </div>
+                    @endif
+                @endforeach
+            @endif
         </article>
 
         <!-- Right Side: Popular Tests & Immediate Assistance -->

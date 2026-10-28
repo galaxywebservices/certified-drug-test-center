@@ -3,7 +3,7 @@
 @section('topbar_actions')
 <a href="{{ url('/' . $page->slug) }}" target="_blank" class="btn btn-outline btn-sm">
     <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-    View Live on Site
+    View This Page Live
 </a>
 <a href="{{ route('admin.pages.index') }}" class="btn btn-outline btn-sm">
     &larr; Back to Pages
@@ -103,25 +103,36 @@
         cursor: grab;
     }
 
-    .block-body { padding: 18px; }
+    /* Editor Layout Grid */
+    .editor-grid {
+        display: grid;
+        grid-template-columns: 2.5fr 1fr;
+        gap: 24px;
+        align-items: start;
+    }
+    @media (max-width: 1024px) {
+        .editor-grid {
+            grid-template-columns: 1fr;
+        }
+    }
 </style>
 
-<form action="{{ route('admin.pages.update', $page) }}" method="POST" id="pageEditorForm">
+<form action="{{ route('admin.pages.update', $page) }}" method="POST" id="pageEditorForm" novalidate>
     @csrf
     @method('PUT')
 
-    <div style="display:grid; grid-template-columns:2.5fr 1fr; gap:24px;">
+    <div class="editor-grid">
         <!-- Left Column: Tabs & Editors -->
         <div>
             <!-- Navigation Tabs -->
             <div class="tab-nav">
-                <button type="button" class="tab-btn active" onclick="switchTab('tab-content')">
+                <button type="button" class="tab-btn active" onclick="switchTab('tab-content', this)">
                     📝 Rich Content &amp; Text
                 </button>
-                <button type="button" class="tab-btn" onclick="switchTab('tab-builder')">
+                <button type="button" class="tab-btn" onclick="switchTab('tab-builder', this)">
                     🧩 Visual Block Builder
                 </button>
-                <button type="button" class="tab-btn" onclick="switchTab('tab-seo')">
+                <button type="button" class="tab-btn" onclick="switchTab('tab-seo', this)">
                     🚀 100% SEO &amp; SERP Preview
                 </button>
             </div>
@@ -228,13 +239,13 @@
                                 <div class="block-body">
                                     <div class="form-group">
                                         <label class="form-label">Question 1</label>
-                                        <input type="text" class="form-control" value="Do I need an appointment for this test?">
-                                        <textarea class="form-control" rows="2" style="margin-top:6px;">No appointment is necessary. Once you register online, walk into any of our 20,000+ certified Quest and Labcorp collection facilities with your electronic Donor Pass.</textarea>
+                                        <input type="text" class="form-control faq-question-input" value="Do I need an appointment for this test?">
+                                        <textarea class="form-control faq-answer-input" rows="2" style="margin-top:6px;">No appointment is necessary. Once you register online, walk into any of our 20,000+ certified Quest and Labcorp collection facilities with your electronic Donor Pass.</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Question 2</label>
-                                        <input type="text" class="form-control" value="How soon are results returned?">
-                                        <textarea class="form-control" rows="2" style="margin-top:6px;">Negative lab results are typically available within 24 to 48 hours of specimen collection, verified by a Medical Review Officer (MRO).</textarea>
+                                        <input type="text" class="form-control faq-question-input" value="How soon are results returned?">
+                                        <textarea class="form-control faq-answer-input" rows="2" style="margin-top:6px;">Negative lab results are typically available within 24 to 48 hours of specimen collection, verified by a Medical Review Officer (MRO).</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -248,11 +259,11 @@
                                 <div class="block-body">
                                     <div class="form-group">
                                         <label class="form-label">Banner Title</label>
-                                        <input type="text" class="form-control" value="Need Immediate Testing Assistance or Custom Business Account?">
+                                        <input type="text" class="form-control" id="blockCtaTitle" value="Need Immediate Testing Assistance or Custom Business Account?">
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Phone Hotline</label>
-                                        <input type="text" class="form-control" value="(800) 221-4291">
+                                        <input type="text" class="form-control" id="blockCtaPhone" value="(800) 221-4291">
                                     </div>
                                 </div>
                             </div>
@@ -400,13 +411,78 @@
 </form>
 
 <script>
-    function switchTab(tabId) {
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
-        event.target.classList.add('active');
-        document.getElementById(tabId).classList.add('active');
+        if (btn) {
+            btn.classList.add('active');
+        }
+        const target = document.getElementById(tabId);
+        if (target) {
+            target.classList.add('active');
+        }
     }
+
+    // Auto-serialize block builder on save
+    document.getElementById('pageEditorForm').addEventListener('submit', function (e) {
+        const titleInput = document.getElementById('title');
+        if (!titleInput.value.trim()) {
+            e.preventDefault();
+            switchTab('tab-content', document.querySelector('.tab-btn'));
+            titleInput.focus();
+            alert('Please enter a Page Title.');
+            return false;
+        }
+
+        const heroHeadline = document.getElementById('blockHeroHeadline')?.value;
+        const heroSub = document.getElementById('blockHeroSubheadline')?.value;
+        const heroBtn = document.getElementById('blockHeroBtnText')?.value;
+        const heroUrl = document.getElementById('blockHeroBtnUrl')?.value;
+
+        const blocks = [];
+        if (heroHeadline) {
+            blocks.push({
+                type: 'hero',
+                headline: heroHeadline,
+                subheadline: heroSub,
+                btn_text: heroBtn,
+                btn_url: heroUrl
+            });
+        }
+
+        const faqItems = [];
+        const faqQuestions = document.querySelectorAll('.faq-question-input');
+        const faqAnswers = document.querySelectorAll('.faq-answer-input');
+        faqQuestions.forEach((qInput, i) => {
+            const q = qInput.value.trim();
+            const a = faqAnswers[i]?.value.trim();
+            if (q && a) {
+                faqItems.push({ question: q, answer: a });
+            }
+        });
+        if (faqItems.length > 0) {
+            blocks.push({
+                type: 'faq',
+                items: faqItems
+            });
+        }
+
+        const ctaTitle = document.getElementById('blockCtaTitle')?.value;
+        const ctaPhone = document.getElementById('blockCtaPhone')?.value;
+        if (ctaTitle) {
+            blocks.push({
+                type: 'cta',
+                title: ctaTitle,
+                btn_text: 'Call ' + (ctaPhone || '(800) 221-4291'),
+                btn_url: 'tel:' + (ctaPhone || '18002214291').replace(/\D/g, '')
+            });
+        }
+
+        if (blocks.length > 0) {
+            document.getElementById('blocksJsonInput').value = JSON.stringify(blocks);
+        }
+    });
 
     function updateSerpPreview() {
         const titleInput = document.getElementById('meta_title');
