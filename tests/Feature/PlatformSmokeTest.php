@@ -186,6 +186,62 @@ class PlatformSmokeTest extends TestCase
         $response->assertSee('Clinical Testing Protocols', false);
         $response->assertSee('SAMHSA-Certified Laboratories');
     }
+
+    public function test_employers_page_loads_and_redirects_aliases()
+    {
+        $response = $this->get('/employers');
+        $response->assertStatus(200);
+        $response->assertSee('Corporate Drug Testing', false);
+        $response->assertSee('Corporate Rate & Savings Calculator', false);
+
+        $this->get('/corporate-accounts')->assertRedirect('/employers');
+        $this->get('/business-solutions')->assertRedirect('/employers');
+        $this->get('/corporate')->assertRedirect('/employers');
+    }
+
+    public function test_corporate_account_intake_validation_and_submission()
+    {
+        // Validation check
+        $this->post('/employers', [])
+            ->assertSessionHasErrors(['company_name', 'contact_name', 'email', 'phone']);
+
+        // Successful submission with candidates roster
+        $response = $this->post('/employers', [
+            'company_name' => 'Swift Freight Logistics',
+            'industry' => 'Transportation & Logistics',
+            'contact_name' => 'Michael Scott',
+            'job_title' => 'Director of Safety',
+            'email' => 'mscott@swiftfreight.com',
+            'phone' => '800-555-0199',
+            'monthly_volume' => '21-50 tests/mo',
+            'billing_preference' => 'Net-30 Monthly Invoicing',
+            'dot_regulated' => 'yes',
+            'programs' => ['Pre-Employment Screening', 'DOT Random Consortium'],
+            'notes' => 'Need immediate setup for 2 new commercial drivers.',
+            'candidates' => [
+                [
+                    'name' => 'Jim Halpert',
+                    'email' => 'jim@swiftfreight.com',
+                    'phone' => '555-111-2222',
+                    'test_panel' => '5-Panel DOT',
+                    'zip' => '30301',
+                ],
+            ],
+        ]);
+
+        $response->assertRedirect('/employers');
+        $response->assertSessionHas('corporate_success', true);
+        $response->assertSessionHas('company_name', 'Swift Freight Logistics');
+
+        // Verify Lead in database
+        $this->assertDatabaseHas('leads', [
+            'company' => 'Swift Freight Logistics',
+            'name' => 'Michael Scott',
+            'email' => 'mscott@swiftfreight.com',
+            'service_type' => 'corporate-account',
+        ]);
+    }
 }
+
 
 

@@ -62,9 +62,19 @@
                         {{ $lead->company ?: '—' }}
                     </td>
                     <td>
-                        <span class="badge" style="background:#EFF6FF; color:#1E40AF; border:1px solid #BFDBFE;">
-                            {{ $serviceTypes[$lead->service_type] ?? ucfirst($lead->service_type) }}
-                        </span>
+                        @if($lead->service_type === 'corporate-account')
+                            <span class="badge" style="background:#F3E8FF; color:#6B21A8; border:1px solid #D8B4FE; font-weight:700;">
+                                🏢 Corporate Account
+                            </span>
+                        @elseif($lead->service_type === 'dot-compliance')
+                            <span class="badge" style="background:#FEF3C7; color:#92400E; border:1px solid #FCD34D; font-weight:700;">
+                                🚛 DOT Compliance
+                            </span>
+                        @else
+                            <span class="badge" style="background:#EFF6FF; color:#1E40AF; border:1px solid #BFDBFE;">
+                                {{ $serviceTypes[$lead->service_type] ?? ucfirst($lead->service_type) }}
+                            </span>
+                        @endif
                     </td>
                     <td>
                         <div style="font-size:13px; color:#334155; max-height:80px; overflow-y:auto; line-height:1.5;">

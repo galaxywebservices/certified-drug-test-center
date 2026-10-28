@@ -23,11 +23,12 @@ class Lead extends Model
     public static function serviceTypes(): array
     {
         return [
+            'corporate-account' => 'Corporate Account & Employer Solutions',
             'drug-testing' => 'Drug & Alcohol Testing',
             'background-checks' => 'Background Screening & MVR',
             'dot-compliance' => 'DOT Consortium & FMCSA Compliance',
             'mobile-testing' => 'On-Site / Mobile Collection',
-            'general' => 'General Inquiry / Corporate Account',
+            'general' => 'General Inquiry',
         ];
     }
 }

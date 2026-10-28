@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\OrderTrackingController;
+use App\Http\Controllers\EmployerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,14 @@ Route::post('/track-order/resend', [OrderTrackingController::class, 'resend'])->
 Route::redirect('/donor-pass', '/track-order');
 Route::redirect('/order-status', '/track-order');
 Route::redirect('/order-tracking', '/track-order');
+
+// Employer & Corporate Solutions Suite
+Route::get('/employers', [EmployerController::class, 'index'])->name('employers.index');
+Route::post('/employers', [EmployerController::class, 'submit'])->name('employers.submit');
+Route::redirect('/corporate-accounts', '/employers');
+Route::redirect('/business-solutions', '/employers');
+Route::redirect('/employer-accounts', '/employers');
+Route::redirect('/corporate', '/employers');
 
 // Geographic PSEO Location Pages & ZIP Lookup API
 Route::get('/locations', [\App\Http\Controllers\LocationController::class, 'index'])->name('locations.index');

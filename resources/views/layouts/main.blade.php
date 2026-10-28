@@ -224,6 +224,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('employers.index') }}" class="nav-link" style="color:#C1121F; font-weight:700;">
+                        Employers & Corporate
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ url('/contact-us') }}" class="nav-link">
                         Contact Us
                     </a>
@@ -305,6 +310,7 @@
                 <div class="footer-col">
                     <h4>DOT & Corporate</h4>
                     <ul class="footer-links">
+                        <li><a href="{{ route('employers.index') }}" style="color:#F59E0B; font-weight:700;">Corporate Accounts &amp; Pricing</a></li>
                         <li><a href="{{ url('/category/dot') }}">FMCSA Drug & Alcohol Testing</a></li>
                         <li><a href="{{ url('/product/dot-physical') }}">DOT Physical Examination (NRCME)</a></li>
                         <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}">DOT Random Consortium Pool</a></li>
@@ -335,6 +341,7 @@
                     © {{ date('Y') }} Certified Drug Test Centers. All Rights Reserved. Local, Convenient & Confidential.
                 </div>
                 <div style="display:flex; gap:16px; flex-wrap:wrap;">
+                    <a href="{{ route('employers.index') }}" style="color:#CBD5E1; font-weight:700;">Employers &amp; Corporate</a>
                     <a href="{{ route('order.track') }}" style="color:#CBD5E1; font-weight:700;">Track Order &amp; Donor Pass</a>
                     <a href="{{ url('/privacy-policy') }}" style="color:#94A3B8;">Privacy Policy</a>
                     <a href="{{ url('/terms-and-conditions') }}" style="color:#94A3B8;">Terms of Service</a>
