@@ -43,12 +43,27 @@ class AdminOrderController extends Controller
         $validated = $request->validate([
             'status' => 'required|string',
             'payment_status' => 'required|string',
+            'result_outcome' => 'nullable|string',
+            'ccf_number' => 'nullable|string|max:50',
+            'specimen_collected_at' => 'nullable|date',
+            'mro_verified_at' => 'nullable|date',
+            'mro_notes' => 'nullable|string',
             'notes' => 'nullable|string',
         ]);
 
+        // Auto timestamp specimen collection if status changed to specimen_collected and date not set
+        if ($validated['status'] === 'specimen_collected' && empty($validated['specimen_collected_at']) && empty($order->specimen_collected_at)) {
+            $validated['specimen_collected_at'] = now();
+        }
+
+        // Auto timestamp MRO verification if completed and date not set
+        if ($validated['status'] === 'completed' && empty($validated['mro_verified_at']) && empty($order->mro_verified_at)) {
+            $validated['mro_verified_at'] = now();
+        }
+
         $order->update($validated);
 
-        return redirect()->route('admin.orders.show', $order)->with('success', 'Order status updated.');
+        return redirect()->route('admin.orders.show', $order)->with('success', 'Order status, Chain of Custody & laboratory review updated successfully.');
     }
 
     public function resendPass(Order $order)

@@ -241,15 +241,24 @@
                             </span>
                             <span style="font-size:12px; color:#16A34A; font-weight:700;">Walk-Ins Welcome</span>
                         </div>
-                        <h3 style="font-size:16px; font-weight:700; color:#0B2545; margin-bottom:4px;">{{ $loc->name }}</h3>
+                        <h3 style="font-size:16px; font-weight:700; color:#0B2545; margin-bottom:4px;">
+                            <a href="{{ route('locations.show', $loc->id) }}" style="color:#0B2545; text-decoration:none;">
+                                {{ $loc->name }}
+                            </a>
+                        </h3>
                         <div style="font-size:13px; color:#475569; line-height:1.6; margin-bottom:12px;">
                             {{ $loc->address1 }}<br>
                             {{ $loc->city }}, {{ $loc->state }} {{ $loc->zip }}<br>
                             <small style="color:#64748B;">Hours: {{ $loc->hours ?: 'Mon-Fri 8:00 AM - 5:00 PM' }}</small>
                         </div>
-                        <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-sm" style="width:100%; justify-content:center;">
-                            Schedule Test at this Site &rarr;
-                        </a>
+                        <div style="display:flex; gap:8px;">
+                            <a href="{{ route('checkout.index', ['location_id' => $loc->id]) }}" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">
+                                Schedule Test &rarr;
+                            </a>
+                            <a href="{{ route('locations.show', $loc->id) }}" class="btn btn-outline btn-sm" style="font-size:12px;">
+                                View Details
+                            </a>
+                        </div>
                     </div>
                     @endforeach
                 </div>

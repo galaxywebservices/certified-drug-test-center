@@ -29,12 +29,19 @@ class Order extends Model
         'paytrace_transaction_id',
         'paytrace_approval_code',
         'donor_pass_token',
+        'ccf_number',
         'status',
+        'result_outcome',
+        'specimen_collected_at',
+        'mro_verified_at',
+        'mro_notes',
         'notes',
     ];
 
     protected $casts = [
         'donor_dob' => 'date',
+        'specimen_collected_at' => 'datetime',
+        'mro_verified_at' => 'datetime',
         'subtotal' => 'decimal:2',
         'discount' => 'decimal:2',
         'total' => 'decimal:2',

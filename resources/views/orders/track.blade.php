@@ -418,17 +418,33 @@
                     <div class="pass-info-card">
                         <div class="pass-info-label">Assigned Collection Site</div>
                         @if($order->location)
-                            <div class="pass-info-value" style="font-size:15px; color:#0B2545;">{{ $order->location->name }}</div>
+                            <div class="pass-info-value" style="font-size:15px; color:#0B2545;">
+                                <a href="{{ route('locations.show', $order->location->id) }}" target="_blank" style="color:#0B2545; text-decoration:none;">
+                                    {{ $order->location->name }} &rarr;
+                                </a>
+                            </div>
                             <div style="font-size:13px; color:#475569; margin-top:6px; line-height:1.6;">
                                 {{ $order->location->address1 }}<br>
                                 {{ $order->location->city }}, {{ $order->location->state }} {{ $order->location->zip }}<br>
                                 <span style="color:#16A34A; font-weight:700;">● Hours: {{ $order->location->hours ?: 'Mon-Fri 8:00 AM - 5:00 PM' }}</span>
+                            </div>
+                            <div style="margin-top:8px;">
+                                <a href="{{ route('locations.show', $order->location->id) }}" target="_blank" style="font-size:12px; color:#0B2545; font-weight:700; text-decoration:underline;">
+                                    View Full Center Profile &amp; Directions &rarr;
+                                </a>
                             </div>
                         @else
                             <div class="pass-info-value">Any Quest Diagnostics or Labcorp Certified Site</div>
                             <div style="font-size:13px; color:#475569; margin-top:6px;">
                                 Over 20,000 certified collection facilities nationwide accept this barcode.
                             </div>
+                        @endif
+
+                        @if(!empty($order->ccf_number))
+                        <div style="margin-top:12px; padding-top:10px; border-top:1px solid #E2E8F0; font-size:12.5px;">
+                            <span style="color:#64748B; font-weight:600;">Chain of Custody (CCF):</span>
+                            <code style="background:#F1F5F9; padding:2px 6px; border-radius:4px; font-weight:800; color:#0B2545;">{{ $order->ccf_number }}</code>
+                        </div>
                         @endif
                     </div>
                 </div>

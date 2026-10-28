@@ -443,15 +443,26 @@ function lookupZipModal() {
       if (data.success && data.locations && data.locations.length > 0) {
         let html = '';
         data.locations.slice(0, 5).forEach((loc, idx) => {
+          const profileLink = loc.profile_url || `/location/${loc.id}`;
+          const checkoutLink = loc.checkout_url || `/checkout?location_id=${loc.id}`;
+          const directionsLink = loc.directions_url || `https://maps.google.com/?q=${encodeURIComponent(loc.address || loc.address1 + ', ' + loc.city + ', ' + loc.state)}`;
+          const addressText = loc.address || `${loc.address1 || ''}, ${loc.city}, ${loc.state} ${loc.zip}`;
+
           html += `
-            <div class="global-zip-item">
+            <div class="global-zip-item" style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; padding:14px; border-bottom:1px solid #E2E8F0;">
               <div>
-                <div class="global-zip-item-title">${idx + 1}. ${loc.name}</div>
-                <div class="global-zip-item-address">${loc.address1}, ${loc.city}, ${loc.state} ${loc.zip}</div>
-                <div class="global-zip-item-hours">● Walk-Ins Accepted: ${loc.hours || 'Mon-Fri 8:00 AM - 5:00 PM'}</div>
+                <div class="global-zip-item-title" style="font-size:14.5px; font-weight:700; color:#0B2545;">
+                  <a href="${profileLink}" style="color:#0B2545; text-decoration:none;">${idx + 1}. ${loc.name}</a>
+                </div>
+                <div class="global-zip-item-address" style="font-size:13px; color:#475569; margin:2px 0;">${addressText}</div>
+                <div class="global-zip-item-hours" style="font-size:12px; color:#64748B;">● ${loc.hours || 'Mon-Fri 8:00 AM - 5:00 PM'}</div>
+                <div style="margin-top:6px; display:flex; gap:10px; font-size:12px;">
+                  <a href="${profileLink}" style="color:#0B2545; font-weight:700; text-decoration:underline;">View Facility Profile &rarr;</a>
+                  <a href="${directionsLink}" target="_blank" rel="noopener" style="color:#64748B; font-weight:600; text-decoration:none;">📍 Directions</a>
+                </div>
               </div>
-              <a href="/checkout?zip=${encodeURIComponent(loc.zip)}" class="btn btn-primary btn-sm" style="white-space:nowrap;">
-                Register Here &rarr;
+              <a href="${checkoutLink}" class="btn btn-primary btn-sm" style="white-space:nowrap; align-self:center;">
+                Schedule Here &rarr;
               </a>
             </div>
           `;

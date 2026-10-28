@@ -40,10 +40,17 @@ class CheckoutController extends Controller
 
         $allProducts = Product::where('is_active', true)->orderBy('position')->get();
 
+        $selectedLocation = null;
+        if ($request->filled('location_id')) {
+            $selectedLocation = Location::where('id', $request->input('location_id'))
+                ->where('is_active', true)
+                ->first();
+        }
+
         $pageTitle = "Secure Checkout & Test Registration | Certified Drug Test Center";
         $metaDescription = "Register online for your drug or alcohol test in 2 minutes. Walk in today at over 20,000 certified collection centers.";
 
-        return view('checkout.index', compact('product', 'allProducts', 'pageTitle', 'metaDescription'));
+        return view('checkout.index', compact('product', 'allProducts', 'selectedLocation', 'pageTitle', 'metaDescription'));
     }
 
     public function process(Request $request)
@@ -56,6 +63,7 @@ class CheckoutController extends Controller
             'phone' => 'required|string|max:50',
             'dob' => 'nullable|date',
             'test_reason' => 'required|string|max:100',
+            'location_id' => 'nullable|exists:locations,id',
             'zip' => 'required|string|max:10',
             'card_number' => 'required|string',
             'exp' => 'required|string',
@@ -85,9 +93,15 @@ class CheckoutController extends Controller
             return back()->withInput()->with('error', $paymentResult['message'] ?? 'Payment was declined.');
         }
 
-        // Find nearest location if zip provided
-        $location = Location::where('zip', 'LIKE', substr($validated['zip'], 0, 3) . '%')->first()
-            ?? Location::first();
+        // Assign explicit location if passed, or find nearest location by zip
+        $location = null;
+        if (!empty($validated['location_id'])) {
+            $location = Location::find($validated['location_id']);
+        }
+        if (!$location) {
+            $location = Location::where('zip', 'LIKE', substr($validated['zip'], 0, 3) . '%')->first()
+                ?? Location::first();
+        }
 
         // Create Order
         $orderNumber = 'CDTC-' . strtoupper(Str::random(8));

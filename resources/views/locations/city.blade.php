@@ -396,7 +396,9 @@
                 </div>
 
                 <h3 style="font-size:18px; font-weight:800; color:#0B2545; margin-bottom:6px;">
-                    {{ $loc->name }}
+                    <a href="{{ route('locations.show', $loc->id) }}" style="color:#0B2545; text-decoration:none;">
+                        {{ $loc->name }}
+                    </a>
                 </h3>
 
                 <div style="font-size:14px; color:#334155; line-height:1.6; margin-bottom:16px;">
@@ -405,12 +407,18 @@
                     <strong>Operating Hours:</strong> {{ $loc->hours ?: 'Monday - Friday 8:00 AM - 5:00 PM' }}
                 </div>
 
-                <div style="display:flex; gap:12px; flex-wrap:wrap;">
-                    <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-sm">
+                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                    <a href="{{ route('checkout.index', ['location_id' => $loc->id]) }}" class="btn btn-primary btn-sm">
                         Schedule Test at This Center &rarr;
                     </a>
-                    <a href="https://maps.google.com/?q={{ urlencode($loc->address1 . ', ' . $loc->city . ', ' . $loc->state . ' ' . $loc->zip) }}" target="_blank" class="btn btn-outline btn-sm">
-                        📍 Get Driving Directions
+                    <a href="{{ route('locations.show', $loc->id) }}" class="btn btn-outline btn-sm">
+                        Facility Profile &amp; Hours
+                    </a>
+                    @php
+                        $coordDest = (!empty($loc->lat) && !empty($loc->lng)) ? "{$loc->lat},{$loc->lng}" : urlencode("{$loc->address1}, {$loc->city}, {$loc->state} {$loc->zip}");
+                    @endphp
+                    <a href="https://www.google.com/maps/dir/?api=1&destination={{ $coordDest }}" target="_blank" rel="noopener" class="btn btn-outline btn-sm" style="color:#64748B;">
+                        📍 GPS Directions
                     </a>
                 </div>
             </div>

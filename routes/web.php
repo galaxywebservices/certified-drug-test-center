@@ -102,8 +102,11 @@ Route::redirect('/customer-reviews', '/reviews');
 
 // Geographic PSEO Location Pages & ZIP Lookup API
 Route::get('/locations', [\App\Http\Controllers\LocationController::class, 'index'])->name('locations.index');
+Route::get('/location/{id}', [\App\Http\Controllers\LocationController::class, 'show'])->name('locations.show')->whereNumber('id');
+Route::get('/locations/site/{id}', [\App\Http\Controllers\LocationController::class, 'show'])->whereNumber('id');
 Route::get('/locations/{state_slug}', [\App\Http\Controllers\LocationController::class, 'state'])->name('locations.state');
 Route::get('/locations/{state_slug}/{city_slug}', [\App\Http\Controllers\LocationController::class, 'city'])->name('locations.city');
+Route::get('/locations/{state_slug}/{city_slug}/site-{id}', [\App\Http\Controllers\LocationController::class, 'show'])->whereNumber('id');
 Route::get('/api/locations/search', [\App\Http\Controllers\LocationController::class, 'searchZip'])->name('api.locations.search');
 
 // Programmatic SEO Chain URLs & Aliases (e.g. /drug-testing-locations/{state}/{city}, /drug-testing-{city}-{state})

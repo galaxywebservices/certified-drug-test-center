@@ -160,7 +160,7 @@ class ImportAdtDataCommand extends Command
                 'is_popular' => in_array($prod->id, [1, 2, 3, 7, 8, 20]),
                 'is_active' => true,
                 'position' => (int) $prod->id,
-                'meta_title' => $prod->name . " | Accredited Drug Testing",
+                'meta_title' => $prod->name . " | Certified Drug Test Centers",
                 'meta_description' => "Order {$prod->name} online. Walk in today at over 20,000 certified collection sites nationwide. Fast, confidential, and legally defensible.",
                 'canonical_url' => url('/product/' . $slug),
                 'created_at' => now(),
@@ -330,7 +330,7 @@ class ImportAdtDataCommand extends Command
                 INSERT INTO cdtc.locations (id, name, provider, address1, address2, city, state, zip, phone, hours, lat, lng, is_active, created_at, updated_at)
                 SELECT 
                     id,
-                    CONCAT(IFNULL(provider, 'Accredited'), ' Collection Site'),
+                    CONCAT(IFNULL(provider, 'Certified'), ' Collection Site'),
                     IF(LOWER(IFNULL(provider, 'quest')) LIKE '%labcorp%', 'labcorp', 'quest'),
                     IFNULL(address1, 'Collection Site'),
                     address2,
@@ -407,7 +407,7 @@ class ImportAdtDataCommand extends Command
         Setting::set('site_name', 'Certified Drug Test Center', 'general');
         Setting::set('site_phone', '(800) 221-4291', 'general');
         Setting::set('site_email', 'support@certifieddrugtesting.com', 'general');
-        Setting::set('site_tagline', 'Accredited Drug Testing Made Fast, Simple & Confidential', 'general');
+        Setting::set('site_tagline', 'Certified Drug Testing Made Fast, Simple & Confidential', 'general');
 
         // PayTrace configuration
         Setting::set('paytrace_username', 'demo123', 'payment');

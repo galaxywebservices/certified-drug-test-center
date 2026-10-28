@@ -608,6 +608,28 @@
                             </div>
                         </div>
 
+                        @if(!empty($selectedLocation))
+                        <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:14px 16px; margin-bottom:18px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                            <div style="display:flex; align-items:center; gap:12px;">
+                                <div style="width:36px; height:36px; border-radius:50%; background:#DCFCE7; color:#15803D; display:flex; align-items:center; justify-content:center; font-size:18px;">
+                                    📍
+                                </div>
+                                <div>
+                                    <div style="display:flex; align-items:center; gap:8px;">
+                                        <span class="badge" style="background:#16A34A; color:#fff; font-size:10px; font-weight:800; text-transform:uppercase;">Selected Testing Facility</span>
+                                        <span style="font-size:12px; color:#15803D; font-weight:700;">{{ ucfirst($selectedLocation->provider) }} Certified</span>
+                                    </div>
+                                    <strong style="color:#0B2545; font-size:14px; display:block; margin-top:2px;">{{ $selectedLocation->name }}</strong>
+                                    <div style="font-size:12px; color:#475569;">{{ $selectedLocation->address1 }}, {{ $selectedLocation->city }}, {{ $selectedLocation->state }} {{ $selectedLocation->zip }}</div>
+                                </div>
+                            </div>
+                            <a href="{{ route('locations.show', $selectedLocation->id) }}" target="_blank" style="font-size:12px; color:#0B2545; font-weight:700; text-decoration:underline;">
+                                View Facility Profile &rarr;
+                            </a>
+                            <input type="hidden" name="location_id" value="{{ $selectedLocation->id }}">
+                        </div>
+                        @endif
+
                         <div class="checkout-form-row">
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="first_name">Donor First Name <span class="checkout-label-req">*</span></label>
@@ -670,7 +692,7 @@
                                     <span class="checkout-input-icon">
                                         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                     </span>
-                                    <input type="text" id="zip" name="zip" value="{{ old('zip', request('zip', '')) }}" class="checkout-input with-icon" placeholder="e.g. 90210" maxlength="5" pattern="[0-9]{5}" required>
+                                    <input type="text" id="zip" name="zip" value="{{ old('zip', $selectedLocation ? $selectedLocation->zip : request('zip', '')) }}" class="checkout-input with-icon" placeholder="e.g. 90210" maxlength="5" pattern="[0-9]{5}" required>
                                 </div>
                                 <div class="checkout-hint">We will assign the nearest certified Quest or Labcorp center.</div>
                             </div>

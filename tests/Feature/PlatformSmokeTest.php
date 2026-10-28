@@ -278,6 +278,77 @@ class PlatformSmokeTest extends TestCase
         $response->assertSee('Certified Drug Test Centers', false);
         $response->assertDontSee('Accredited Drug Testing');
     }
+
+    public function test_facility_profile_loads_successfully_with_gps_directions_and_hours()
+    {
+        $response = $this->get('/location/1');
+        $response->assertStatus(200);
+        $response->assertSee('Certified Collection Site');
+        $response->assertSee('Google Maps');
+        $response->assertSee('Apple Maps');
+        $response->assertSee('Waze');
+        $response->assertSee('Urine Drug Screening');
+        $response->assertSee('Order Test &amp; Walk-In Here', false);
+        $response->assertSee('"@type": "MedicalBusiness"', false);
+
+        // Verify alias route /locations/site/1
+        $aliasResponse = $this->get('/locations/site/1');
+        $aliasResponse->assertStatus(200);
+    }
+
+    public function test_api_locations_search_returns_profile_and_directions_urls()
+    {
+        $response = $this->getJson('/api/locations/search?zip=32801');
+        $response->assertStatus(200);
+        $response->assertJson([
+            'success' => true,
+        ]);
+        $data = $response->json();
+        $this->assertNotEmpty($data['locations']);
+        $first = $data['locations'][0];
+        $this->assertArrayHasKey('profile_url', $first);
+        $this->assertArrayHasKey('directions_url', $first);
+        $this->assertArrayHasKey('checkout_url', $first);
+        $this->assertStringContainsString('/location/', $first['profile_url']);
+    }
+
+    public function test_checkout_preselects_assigned_facility_when_location_id_provided()
+    {
+        $response = $this->get('/checkout?location_id=1');
+        $response->assertStatus(200);
+        $response->assertSee('Selected Testing Facility');
+        $response->assertSee('name="location_id" value="1"', false);
+    }
+
+    public function test_admin_order_shows_and_updates_ccf_and_mro_tracking()
+    {
+        $admin = \App\Models\User::where('is_super_admin', true)->first();
+        $order = \App\Models\Order::first();
+
+        if ($admin && $order) {
+            $response = $this->actingAs($admin)->get("/admin/orders/{$order->id}");
+            $response->assertStatus(200);
+            $response->assertSee('Laboratory Specimen Tracking &amp; MRO Review', false);
+            $response->assertSee('Custody &amp; Control Form (CCF) #', false);
+
+            $updateResponse = $this->actingAs($admin)->post("/admin/orders/{$order->id}/status", [
+                'status' => 'completed',
+                'payment_status' => 'paid',
+                'result_outcome' => 'negative',
+                'ccf_number' => 'CCF-994821',
+                'mro_notes' => 'Donor specimen verified negative by MRO physician.',
+                'notes' => 'Test admin status update.',
+            ]);
+
+            $updateResponse->assertRedirect("/admin/orders/{$order->id}");
+            $this->assertDatabaseHas('orders', [
+                'id' => $order->id,
+                'status' => 'completed',
+                'result_outcome' => 'negative',
+                'ccf_number' => 'CCF-994821',
+            ]);
+        }
+    }
 }
 
 
