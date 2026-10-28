@@ -18,6 +18,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\OrderTrackingController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\TestFinderController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +87,18 @@ Route::redirect('/corporate-accounts', '/employers');
 Route::redirect('/business-solutions', '/employers');
 Route::redirect('/employer-accounts', '/employers');
 Route::redirect('/corporate', '/employers');
+
+// Guided Drug Test Finder & Medical Recommender Tool
+Route::get('/find-my-test', [TestFinderController::class, 'index'])->name('test-finder.index');
+Route::redirect('/test-selector', '/find-my-test');
+Route::redirect('/test-recommender', '/find-my-test');
+Route::redirect('/which-test', '/find-my-test');
+
+// Verified Patient & Client Reviews
+Route::get('/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+Route::redirect('/testimonials', '/reviews');
+Route::redirect('/customer-reviews', '/reviews');
+
 
 // Geographic PSEO Location Pages & ZIP Lookup API
 Route::get('/locations', [\App\Http\Controllers\LocationController::class, 'index'])->name('locations.index');

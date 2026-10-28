@@ -125,6 +125,10 @@
                     Track Order / Donor Pass
                 </a>
                 <span>•</span>
+                <a href="{{ route('reviews.index') }}" style="color:#0B2545; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:3px; font-size:12.5px;">
+                    <span style="color:#F59E0B;">★</span> 4.9 Reviews (4.8k+)
+                </a>
+                <span>•</span>
                 <span style="color:#C1121F; font-weight:700;">¡Hablamos Español!</span>
                 <span>•</span>
                 <a href="tel:18002214291" class="top-phone-link">
@@ -224,6 +228,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('test-finder.index') }}" class="nav-link" style="color:#0284C7; font-weight:700;">
+                        ✨ Find My Test
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('employers.index') }}" class="nav-link" style="color:#C1121F; font-weight:700;">
                         Employers & Corporate
                     </a>
@@ -298,6 +307,7 @@
                 <div class="footer-col">
                     <h4>Drug Testing Panels</h4>
                     <ul class="footer-links">
+                        <li><a href="{{ route('test-finder.index') }}" style="color:#38BDF8; font-weight:700;">Guided Test Selector (Quiz)</a></li>
                         <li><a href="{{ url('/product/5-panel-nondot') }}">5 Panel NON-DOT Test</a></li>
                         <li><a href="{{ url('/product/5-panel-dot') }}">5 Panel DOT Mandated</a></li>
                         <li><a href="{{ url('/product/10-panel') }}">10 Panel Drug Screening</a></li>
@@ -311,6 +321,7 @@
                     <h4>DOT & Corporate</h4>
                     <ul class="footer-links">
                         <li><a href="{{ route('employers.index') }}" style="color:#F59E0B; font-weight:700;">Corporate Accounts &amp; Pricing</a></li>
+                        <li><a href="{{ route('reviews.index') }}" style="color:#34D399; font-weight:700;">Verified Customer Reviews (4.9★)</a></li>
                         <li><a href="{{ url('/category/dot') }}">FMCSA Drug & Alcohol Testing</a></li>
                         <li><a href="{{ url('/product/dot-physical') }}">DOT Physical Examination (NRCME)</a></li>
                         <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}">DOT Random Consortium Pool</a></li>
@@ -341,6 +352,8 @@
                     © {{ date('Y') }} Certified Drug Test Centers. All Rights Reserved. Local, Convenient & Confidential.
                 </div>
                 <div style="display:flex; gap:16px; flex-wrap:wrap;">
+                    <a href="{{ route('test-finder.index') }}" style="color:#CBD5E1; font-weight:700;">Find My Test</a>
+                    <a href="{{ route('reviews.index') }}" style="color:#CBD5E1; font-weight:700;">Reviews</a>
                     <a href="{{ route('employers.index') }}" style="color:#CBD5E1; font-weight:700;">Employers &amp; Corporate</a>
                     <a href="{{ route('order.track') }}" style="color:#CBD5E1; font-weight:700;">Track Order &amp; Donor Pass</a>
                     <a href="{{ url('/privacy-policy') }}" style="color:#94A3B8;">Privacy Policy</a>

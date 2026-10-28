@@ -241,6 +241,43 @@ class PlatformSmokeTest extends TestCase
             'service_type' => 'corporate-account',
         ]);
     }
+
+    public function test_find_my_test_recommender_page_loads_and_redirects_aliases()
+    {
+        $response = $this->get('/find-my-test');
+        $response->assertStatus(200);
+        $response->assertSee('Guided Drug Test Recommendation Wizard', false);
+        $response->assertSee('Question 1 of 3');
+
+        $this->get('/test-selector')->assertRedirect('/find-my-test');
+        $this->get('/test-recommender')->assertRedirect('/find-my-test');
+        $this->get('/which-test')->assertRedirect('/find-my-test');
+    }
+
+    public function test_verified_reviews_page_loads_and_filters()
+    {
+        $response = $this->get('/reviews');
+        $response->assertStatus(200);
+        $response->assertSee('Verified Customer &amp; Employer Reviews', false);
+        $response->assertSee('4.9');
+        $response->assertSee('Pinnacle Logistics Corp');
+
+        $dotFilter = $this->get('/reviews?category=dot');
+        $dotFilter->assertStatus(200);
+        $dotFilter->assertSee('Lone Star Freight LLC');
+
+        $this->get('/testimonials')->assertRedirect('/reviews');
+        $this->get('/customer-reviews')->assertRedirect('/reviews');
+    }
+
+    public function test_product_page_displays_test_finder_and_clean_meta_title()
+    {
+        $response = $this->get('/product/5-panel-nondot');
+        $response->assertStatus(200);
+        $response->assertSee('Launch Guided Test Finder', false);
+        $response->assertSee('Certified Drug Test Centers', false);
+        $response->assertDontSee('Accredited Drug Testing');
+    }
 }
 
 

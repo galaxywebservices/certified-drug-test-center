@@ -325,6 +325,31 @@
                     </a>
                 </div>
             </div>
+
+            <!-- Guided Test Finder Card -->
+            <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:10px; padding:18px; margin-top:16px;">
+                <div style="display:flex; align-items:flex-start; gap:10px;">
+                    <span style="font-size:20px;">✨</span>
+                    <div>
+                        <strong style="display:block; color:#0B2545; font-size:13.5px; margin-bottom:4px;">Not sure if this is the right test?</strong>
+                        <p style="font-size:12px; color:#475569; margin:0 0 10px; line-height:1.4;">
+                            Take our 30-second guided quiz to find the exact panel for your court, DOT, or job criteria.
+                        </p>
+                        <a href="{{ route('test-finder.index') }}" style="display:inline-block; font-size:12px; font-weight:700; color:#0284C7; text-decoration:none;">
+                            Launch Guided Test Finder &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Proof Rating Card -->
+            <div style="background:#fff; border:1px solid #E2E8F0; border-radius:10px; padding:16px; margin-top:14px; text-align:center;">
+                <div style="color:#F59E0B; font-size:15px; letter-spacing:1px; margin-bottom:4px;">★★★★★</div>
+                <div style="font-size:13px; font-weight:800; color:#0B2545;">Rated 4.9 / 5.0 by 4,850+ Donors</div>
+                <a href="{{ route('reviews.index') }}" style="font-size:12px; color:#64748B; text-decoration:underline; display:block; margin-top:4px;">
+                    Read Verified Patient &amp; Employer Reviews &rarr;
+                </a>
+            </div>
         </div>
     </div>
 </div>
