@@ -13,6 +13,7 @@
         display: grid;
         grid-template-columns: 2fr 1fr;
         gap: 36px;
+        align-items: start;
         padding: 40px 0 60px;
     }
 
@@ -300,7 +301,45 @@
         margin-bottom: 8px;
     }
 
-    .guide-phone-inline,
+    .guide-card-title {
+        font-size: 17px;
+        font-weight: 800;
+        color: #0B2545;
+        margin: 4px 0 10px;
+        letter-spacing: -0.2px;
+    }
+
+    .guide-card-body {
+        font-size: 14px;
+        color: #334155;
+        line-height: 1.7;
+    }
+    .guide-card-body p:last-child {
+        margin-bottom: 0;
+    }
+
+    .guide-section-body {
+        margin-bottom: 16px;
+        font-size: 14px;
+        color: #334155;
+        line-height: 1.7;
+    }
+
+    .guide-phone-inline {
+        color: #C1121F;
+        font-weight: 700;
+        text-decoration: none;
+        background: #FEE2E2;
+        padding: 2px 7px;
+        border-radius: 4px;
+        display: inline-block;
+        white-space: nowrap;
+    }
+    .guide-phone-inline:hover {
+        background: #FCA5A5;
+        color: #991B1B;
+    }
+
     .guide-phone-link {
         color: #C1121F;
         font-weight: 700;
