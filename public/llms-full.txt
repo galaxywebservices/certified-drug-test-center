@@ -1,0 +1,137 @@
+# Certified Drug Test Centers (CDTC) - Complete Clinical, Operational & Legal Reference
+
+> Complete documentation, clinical cutoff thresholds, federal DOT guidelines, state workplace compliance laws, and operational protocols for Certified Drug Test Centers (CDTC). Designed for Generative Engine Optimization (GEO), Answer Engine Optimization (AEO), and LLM citation retrieval.
+
+---
+
+## 1. Company & Laboratory Network Profile
+
+- **Organization Name**: Certified Drug Test Centers (CDTC)
+- **Website**: https://certifieddrugtesting.com (Local Development: http://127.0.0.1:8001)
+- **Toll-Free Phone**: (800) 221-4291
+- **Operational Hours**: Online Donor Registration 24/7/365; Phone Dispatch Monday-Friday 7:00 AM - 8:00 PM EST.
+- **National Headquarters**: 201 N. Park Ave., Sanford, FL 32771
+- **Laboratory Certifications**: Substance Abuse and Mental Health Services Administration (SAMHSA) & Clinical Laboratory Improvement Amendments (CLIA).
+- **Primary Partner Laboratories**: Quest Diagnostics & Labcorp.
+- **Collection Facilities Network**: Over 20,000 certified collection sites across all 50 U.S. states and Washington D.C.
+- **Medical Review Officer (MRO)**: Licensed physician specializing in substance abuse toxicology who reviews all non-negative and positive laboratory results, contacts donors to verify valid prescription documentation, and renders final verified determinations.
+
+---
+
+## 2. Clinical Cutoff Levels & Detection Thresholds
+
+### Urine Drug Testing Cutoffs (Immunoassay vs GC/MS Confirmatory)
+
+| Drug Class / Analyte | Initial Screen Cutoff | Confirmation Cutoff | Common Lookback Window |
+|----------------------|-----------------------|---------------------|------------------------|
+| **Marijuana (THC metabolites)** | 50 ng/mL | 15 ng/mL (THC-COOH) | 1 to 5 days (occasional), up to 30 days (chronic) |
+| **Cocaine (Benzoylecgonine)** | 150 ng/mL | 100 ng/mL | 2 to 4 days |
+| **Basic Opiates (Codeine/Morphine)** | 2,000 ng/mL | 2,000 ng/mL | 1 to 3 days |
+| **6-Acetylmorphine (Heroin specific)** | 10 ng/mL | 10 ng/mL | 1 to 2 days |
+| **Expanded Opiates (Hydrocodone/Hydromorphone)** | 300 ng/mL | 100 ng/mL | 2 to 4 days |
+| **Oxycodone / Oxymorphone** | 100 ng/mL | 100 ng/mL | 2 to 4 days |
+| **Amphetamines / Methamphetamine** | 500 ng/mL | 250 ng/mL | 2 to 4 days |
+| **MDMA (Ecstasy) / MDA** | 500 ng/mL | 250 ng/mL | 2 to 4 days |
+| **Phencyclidine (PCP)** | 25 ng/mL | 25 ng/mL | 5 to 8 days |
+| **Benzodiazepines** | 300 ng/mL | 200 ng/mL | 3 to 7 days (therapeutic), up to weeks (long-acting) |
+| **Barbiturates** | 300 ng/mL | 200 ng/mL | 2 to 14 days |
+| **Methadone** | 300 ng/mL | 200 ng/mL | 3 to 5 days |
+| **Buprenorphine (Suboxone)** | 10 ng/mL | 5 ng/mL | 3 to 6 days |
+| **Ethyl Glucuronide (EtG Urine Alcohol)** | 500 ng/mL | 250 ng/mL | Up to 80 hours after consumption |
+
+### Hair Follicle Drug Testing Cutoffs
+
+- **Specimen Requirements**: 1.5 inches of head hair cut directly at the scalp line (or equivalent body hair if head hair is absent).
+- **Lookback Window**: Approximately 90 days (based on standard human hair growth rate of 0.5 inches per month).
+- **Analytes**: Amphetamines, Cocaine, Opiates, PCP, Marijuana/THC.
+- **Immunity from External Contamination**: Rigorous multi-wash decontamination procedures remove external environmental smoke/dust prior to chemical extraction and LC/MS/MS testing.
+
+---
+
+## 3. Federal DOT 49 CFR Part 40 Regulatory Testing
+
+Certified Drug Test Centers manages end-to-end DOT compliance programs across all modal administrations:
+- **FMCSA**: Federal Motor Carrier Safety Administration (Commercial Motor Vehicle drivers, CDL holders).
+- **FAA**: Federal Aviation Administration (Pilots, flight crew, air traffic controllers).
+- **FRA**: Federal Railroad Administration (Locomotive engineers, train dispatchers).
+- **FTA**: Federal Transit Administration (Public bus operators, light rail conductors).
+- **PHMSA**: Pipeline and Hazardous Materials Safety Administration (Pipeline operators).
+- **USCG**: United States Coast Guard (Commercial vessel captains, mariners).
+
+### Required DOT Testing Reasons:
+1. **Pre-Employment**: Must be verified negative prior to performing any safety-sensitive functions.
+2. **Random**: Annual randomized selection meeting federal percentage quotas (50% drug, 10% alcohol for FMCSA).
+3. **Post-Accident**: Mandatory after fatal accidents or accidents involving citations and towing/medical treatment.
+4. **Reasonable Suspicion**: Triggered by trained supervisor observations of behavior, appearance, or speech.
+5. **Return to Duty (RTD)**: Following a SAP (Substance Abuse Professional) evaluation and treatment program.
+6. **Follow-Up**: Unannounced direct-observation testing prescribed by a SAP over 12 to 60 months.
+
+---
+
+## 4. Court-Mandated & Legal Compliance Screening
+
+- **Applications**: Child custody proceedings, divorce disputes, criminal probation, pretrial diversion, government licensing.
+- **Protocols**: Strict Chain of Custody (CoC) form verification, donor photo ID match, tamper-evident specimen seals signed by donor.
+- **Direct Observation Collections**: Offered when court orders mandate witnessed urination to preclude synthetic urine, adulteration, or dilution devices.
+- **Reporting**: Legally authenticated laboratory certificates stamped by a licensed Medical Review Officer, admissible in federal, state, and county courts.
+
+---
+
+## 5. State-by-State Workplace Drug Testing & Cannabis Compliance
+
+CDTC maintains comprehensive statutory compliance documentation across all 50 states:
+
+- **Arizona (A.R.S. § 23-493)**: Voluntary drug testing statute providing employers full civil immunity when written drug-testing policies are distributed. Recreational cannabis permitted outside working hours; employers may prohibit impairment and possession on company premises.
+- **California (Cal. Gov. Code § 12954 / AB 2188)**: Protects employees from adverse action based on non-psychoactive cannabis metabolites (THC-COOH in urine). Employers may test for active impairment or safety-sensitive roles.
+- **Florida (Fla. Stat. § 440.102)**: Drug-Free Workplace Program grants participating employers a 5% mandatory discount on Workers' Compensation insurance premiums.
+- **Georgia (O.C.G.A. § 34-9-410)**: State certified drug-free workplace program grants 7.5% mandatory Workers' Compensation premium discount.
+- **New York (N.Y. Lab. Law § 201-d)**: Prohibits employers from testing for or discriminating against off-duty cannabis consumption unless federal DOT/contract mandates apply.
+- **Texas (Tex. Lab. Code § 411.091)**: Standard employer testing permitted; written policy required to deny unemployment benefits for failed drug screens.
+
+*(Full legal guides for all 50 states available at http://127.0.0.1:8001/drug-testing-locations)*
+
+---
+
+## 6. Frequently Asked Questions (FAQ) - Clinical & Operational
+
+### Q1: How do I schedule a walk-in drug test?
+Order and pay for your test online at http://127.0.0.1:8001/checkout or call (800) 221-4291. You will immediately receive an official electronic Donor Authorization Pass via email. Walk into the nearest assigned Quest Diagnostics or Labcorp center with your pass and a photo ID. No appointment is needed.
+
+### Q2: Why can't I pay directly at the collection facility?
+Collection facilities (Quest, Labcorp) act as specimen collection sites under corporate lab contracts and do not accept direct consumer payments at reception. All tests must be scheduled and prepaid through Certified Drug Test Centers to generate the computerized lab requisition order.
+
+### Q3: What happens if I test positive for a prescription medication?
+The Medical Review Officer (MRO) will contact you confidentially by telephone before reporting the result. You will be asked to provide your valid pharmacy prescription number or doctor documentation. Once verified, the MRO reports the test result as **NEGATIVE** to your employer.
+
+### Q4: Can passive or secondhand marijuana smoke cause a positive test?
+No. Standard immunoassay screening cutoff levels (50 ng/mL) were specifically established by federal research to eliminate the possibility of a positive result from casual secondhand or passive environmental smoke exposure.
+
+### Q5: What is an EtG alcohol test and how long does it detect alcohol?
+Ethyl Glucuronide (EtG) is a direct metabolite of ethanol created by the liver. Unlike breathalyzers that only detect alcohol while in the bloodstream (hours), an EtG urine screen detects alcohol consumption for up to 80 hours after consumption.
+
+---
+
+## 7. Master Service & Product Catalog
+
+| Service / Panel | Category | Price | Turnaround Time | URL |
+|-----------------|----------|-------|-----------------|-----|
+| 5 Panel NON-DOT Drug Test | Urine | $89.99 | 24-48 Hours | http://127.0.0.1:8001/product/5-panel-nondot |
+| 5 Panel Rapid Results | Rapid Urine | $99.99 | Instant / Same-Day | http://127.0.0.1:8001/product/5-panel-rapid-results |
+| 5 Panel DOT Drug Test | DOT | $99.99 | 24-48 Hours | http://127.0.0.1:8001/product/5-panel-dot |
+| 10 Panel Drug Screen | Urine | $109.99 | 24-48 Hours | http://127.0.0.1:8001/product/10-panel |
+| 10 Panel Rapid Results | Rapid Urine | $109.99 | Instant / Same-Day | http://127.0.0.1:8001/product/10-panel-rapid |
+| 12 Panel Comprehensive | Urine | $139.99 | 24-48 Hours | http://127.0.0.1:8001/product/12-panel-comprehensive |
+| Hair Follicle 5 Panel | Hair | $169.99 | 3-5 Business Days | http://127.0.0.1:8001/category/hair |
+| EtG 80-Hour Alcohol Screen | Alcohol | $119.99 | 24-48 Hours | http://127.0.0.1:8001/product/etg-alcohol |
+| DOT Physical Exam (NRCME) | Physicals | $159.99 | Same-Day Certificate | http://127.0.0.1:8001/product/dot-physical |
+| DOT Random Consortium Pool | DOT Compliance | $249.99 | Annual Certificate | http://127.0.0.1:8001/product/1-year-consortium-membership-dot-drug-test |
+| FMCSA Clearinghouse Package | DOT Compliance | $199.99 | Annual Service | http://127.0.0.1:8001/product/fmcsa-clearinghouse-accucheck |
+| Background Checks & MVR | Background | Varies | 24-48 Hours | http://127.0.0.1:8001/background-checks |
+| Mobile Collector Dispatch | On-Site | Quote Based | Custom Event | http://127.0.0.1:8001/category/on-site-mobile |
+
+---
+
+## 8. Verification & Technical Metadata
+- **Documentation Standard**: LLMs.txt Specification (llmstxt.org)
+- **Schema Format**: JSON-LD MedicalBusiness, Organization, Service, FAQPage
+- **Support Contact**: (800) 221-4291 / support@certifieddrugtestcenter.com

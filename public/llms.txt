@@ -1,0 +1,45 @@
+# Certified Drug Test Centers (CDTC)
+
+> Certified Drug Test Centers (CDTC) is a premier nationwide diagnostic screening network providing CLIA & SAMHSA certified drug, alcohol, DNA, DOT transportation compliance, and occupational health testing. Partnering with SAMHSA-certified laboratories (Quest Diagnostics and Labcorp) across over 20,000 collection sites in all 50 U.S. states and Washington D.C., CDTC delivers secure, same-day electronic donor authorization passes with no appointment needed.
+
+## Core Capabilities & Trust Standards
+- **Accreditation**: All specimen analysis is performed exclusively by SAMHSA and CLIA-certified clinical laboratories.
+- **Medical Review Officer (MRO)**: Every laboratory screen is independently reviewed and verified by a licensed MRO to safeguard accuracy and eliminate legitimate medical false positives.
+- **Speed**: Electronic Donor Passes with barcodes are issued instantly via email upon registration. Negative screening results are typically returned within 24 to 48 business hours.
+- **Walk-in Convenience**: No appointment necessary. Walk-ins welcome during standard business hours (Monday - Friday 8:00 AM - 5:00 PM local time).
+- **Compliance & Legal Admissibility**: Strict Chain of Custody (CoC) protocols suitable for federal DOT, court-mandated (probation, custody, litigation), and employer drug-free workplace standards.
+
+## Primary Diagnostic Services & Panels
+
+### Urine Drug Testing Panels
+- [5 Panel NON-DOT Drug Test](http://127.0.0.1:8001/product/5-panel-nondot): Screens for Marijuana (THC), Cocaine, Basic Opiates, Amphetamines, and Phencyclidine (PCP). ($89.99, 24-48 hrs).
+- [5 Panel Rapid Drug Test](http://127.0.0.1:8001/product/5-panel-rapid-results): Instant results on-site for rapid employment screening. ($99.99, Instant).
+- [10 Panel Drug Screening](http://127.0.0.1:8001/product/10-panel): Comprehensive test adding Benzodiazepines, Barbiturates, Methadone, and Propoxyphene. ($109.99, 24-48 hrs).
+- [12 Panel Comprehensive Screen](http://127.0.0.1:8001/product/12-panel-comprehensive): Extended workplace screen including Meperidine/Demerol and Oxycodone/Percocet. ($139.99, 24-48 hrs).
+
+### DOT & Transportation Compliance
+- [5 Panel DOT Drug Test](http://127.0.0.1:8001/product/5-panel-dot): Mandatory 49 CFR Part 40 federal testing for FMCSA, FAA, FRA, FTA, PHMSA, and USCG safety-sensitive employees. ($99.99).
+- [DOT Physical Examination (NRCME)](http://127.0.0.1:8001/product/dot-physical): Performed by certified NRCME medical examiners; includes medical certificate. ($159.99).
+- [DOT Random Consortium Pool](http://127.0.0.1:8001/product/1-year-consortium-membership-dot-drug-test): 1-Year random testing pool enrollment & compliance certificate. ($249.99).
+- [FMCSA Clearinghouse Support](http://127.0.0.1:8001/product/fmcsa-clearinghouse-accucheck): Driver query processing, registration, and violation reporting. ($199.99).
+
+### Specialized & Extended Screening
+- [Hair Follicle Drug Testing](http://127.0.0.1:8001/category/hair): Extended 90-day lookback window for long-term pattern detection (1.5 inch specimen).
+- [EtG Alcohol Testing (Urine & Hair)](http://127.0.0.1:8001/product/etg-alcohol): Ethyl Glucuronide metabolite detection covering up to 80 hours after consumption ($119.99).
+- [Background Checks & MVR Reports](http://127.0.0.1:8001/background-checks): Pre-employment criminal background checks and Motor Vehicle Records.
+- [Mobile & On-Site Testing](http://127.0.0.1:8001/category/on-site-mobile): Mobile collector dispatch for groups of 10+ employees.
+
+## How Walk-In Testing Works (3-Step Protocol)
+1. **Order & Register Online or via Phone**: Choose your required test and register donor details. Collection facilities do NOT take payments on-site.
+2. **Instant Electronic Pass Issued**: Receive your electronic donor pass via email containing the testing center address, hours, and barcode.
+3. **Walk In & Provide Specimen**: Visit the assigned collection site during collection hours with your pass and a government-issued photo ID. No appointment needed.
+
+## Nationwide Coverage & Legal Statutes
+- **Locations Directory**: Browse centers by state and city at [http://127.0.0.1:8001/drug-testing-locations](http://127.0.0.1:8001/drug-testing-locations).
+- **State Workplace Compliance Guides**: 50 state guides detailing employer drug-testing statutes, mandatory notice periods, worker's compensation discounts, and cannabis employment rules.
+
+## Official Contact & Scheduling
+- **National Scheduling & Toll-Free Phone**: (800) 221-4291
+- **Online Scheduling**: 24/7/365 at [http://127.0.0.1:8001/checkout](http://127.0.0.1:8001/checkout)
+- **National Operations Headquarters**: 201 N. Park Ave., Sanford, FL 32771
+- **Full LLM Reference & Clinical Specifications**: [http://127.0.0.1:8001/llms-full.txt](http://127.0.0.1:8001/llms-full.txt)

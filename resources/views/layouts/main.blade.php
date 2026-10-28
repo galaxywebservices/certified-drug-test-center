@@ -271,24 +271,24 @@
                 <div class="footer-col">
                     <h4>Drug Testing Panels</h4>
                     <ul class="footer-links">
-                        <li><a href="#pricing-panels" onclick="openOrderModal('5-panel-non-dot', '5 Panel NON-DOT Drug Test', 89.99)">5 Panel NON-DOT Test</a></li>
-                        <li><a href="#pricing-panels" onclick="openOrderModal('5-panel-dot', '5 Panel DOT Drug Test', 99.99)">5 Panel DOT Mandated</a></li>
-                        <li><a href="#pricing-panels" onclick="openOrderModal('10-panel', '10 Panel Comprehensive', 109.99)">10 Panel Drug Screening</a></li>
-                        <li><a href="#pricing-panels" onclick="openOrderModal('12-panel-comprehensive', '12 Panel Comprehensive', 139.99)">12 Panel Comprehensive</a></li>
-                        <li><a href="#pricing-panels" onclick="openOrderModal('hair-follicle-5-panel', 'Hair Follicle 5 Panel', 169.99)">Hair Follicle Drug Test</a></li>
-                        <li><a href="#pricing-panels" onclick="openOrderModal('etg-alcohol-urine', 'EtG Alcohol Urine Test', 89.99)">EtG 80-Hour Alcohol Screen</a></li>
+                        <li><a href="{{ url('/product/5-panel-nondot') }}">5 Panel NON-DOT Test</a></li>
+                        <li><a href="{{ url('/product/5-panel-dot') }}">5 Panel DOT Mandated</a></li>
+                        <li><a href="{{ url('/product/10-panel') }}">10 Panel Drug Screening</a></li>
+                        <li><a href="{{ url('/product/12-panel-comprehensive') }}">12 Panel Comprehensive</a></li>
+                        <li><a href="{{ url('/category/hair') }}">Hair Follicle Drug Test</a></li>
+                        <li><a href="{{ url('/product/etg-alcohol') }}">EtG 80-Hour Alcohol Screen</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4>DOT & Corporate</h4>
                     <ul class="footer-links">
-                        <li><a href="#pricing-panels">FMCSA Drug & Alcohol Testing</a></li>
-                        <li><a href="#pricing-panels">DOT Physical Examination (NRCME)</a></li>
-                        <li><a href="#pricing-panels">DOT Random Consortium Pool</a></li>
-                        <li><a href="#pricing-panels">FMCSA Clearinghouse Support</a></li>
-                        <li><a href="#mobile-testing" onclick="openMobileQuoteModal()">Mobile On-Site Testing</a></li>
-                        <li><a href="#pricing-panels">Background Checks & MVR</a></li>
+                        <li><a href="{{ url('/category/dot') }}">FMCSA Drug & Alcohol Testing</a></li>
+                        <li><a href="{{ url('/product/dot-physical') }}">DOT Physical Examination (NRCME)</a></li>
+                        <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}">DOT Random Consortium Pool</a></li>
+                        <li><a href="{{ url('/product/fmcsa-clearinghouse-accucheck') }}">FMCSA Clearinghouse Support</a></li>
+                        <li><a href="{{ url('/category/on-site-mobile') }}">Mobile On-Site Testing</a></li>
+                        <li><a href="{{ url('/background-checks') }}">Background Checks & MVR</a></li>
                     </ul>
                 </div>
 
@@ -302,9 +302,9 @@
                     <p style="color:#C1121F; font-weight:700; margin-bottom:16px;">
                         Over 20,000 Certified Testing Locations in All 50 States
                     </p>
-                    <button type="button" class="btn btn-primary btn-sm" onclick="openOrderModal('5-panel-non-dot', 'Schedule Drug Test', 89.99)">
+                    <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-sm">
                         Schedule Test Today
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -313,9 +313,9 @@
                     © {{ date('Y') }} Certified Drug Test Centers. All Rights Reserved. Local, Convenient & Confidential.
                 </div>
                 <div style="display:flex; gap:16px;">
-                    <a href="#terms" style="color:#94A3B8;">Privacy Policy</a>
-                    <a href="#terms" style="color:#94A3B8;">Terms of Service</a>
-                    <a href="#locations" style="color:#94A3B8;">Location Directory</a>
+                    <a href="{{ url('/privacy-policy') }}" style="color:#94A3B8;">Privacy Policy</a>
+                    <a href="{{ url('/terms-and-conditions') }}" style="color:#94A3B8;">Terms of Service</a>
+                    <a href="{{ route('locations.index') }}" style="color:#94A3B8;">Location Directory</a>
                 </div>
             </div>
         </div>

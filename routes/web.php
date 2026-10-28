@@ -29,6 +29,28 @@ Route::get('/design-1', [HomeController::class, 'design1'])->name('home.design1'
 // XML Dynamic Sitemap for SEO
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
 
+// AEO & GEO Standards: llms.txt, llms-full.txt, robots.txt
+Route::get('/llms.txt', function () {
+    return response()->file(public_path('llms.txt'), [
+        'Content-Type' => 'text/markdown; charset=UTF-8',
+    ]);
+});
+Route::get('/llms-full.txt', function () {
+    return response()->file(public_path('llms-full.txt'), [
+        'Content-Type' => 'text/markdown; charset=UTF-8',
+    ]);
+});
+Route::get('/robots.txt', function () {
+    return response()->file(public_path('robots.txt'), [
+        'Content-Type' => 'text/plain; charset=UTF-8',
+    ]);
+});
+
+// Canonical Legal Aliases
+Route::redirect('/terms-of-service', '/terms-and-conditions');
+Route::redirect('/terms', '/terms-and-conditions');
+Route::redirect('/privacy', '/privacy-policy');
+
 // Dynamic Categories & Products
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
