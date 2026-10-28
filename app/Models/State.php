@@ -16,12 +16,19 @@ class State extends Model
         'slug',
         'is_active',
         'content',
+        'statute_code',
+        'medical_marijuana_status',
+        'recreational_marijuana_status',
+        'employer_rights_summary',
+        'worker_comp_rules',
+        'faqs_json',
         'meta_title',
         'meta_description',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
+        'faqs_json' => 'array',
     ];
 
     public function cities(): HasMany

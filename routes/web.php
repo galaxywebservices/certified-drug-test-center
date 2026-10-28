@@ -52,6 +52,16 @@ Route::get('/drug-testing-{chain_city}', [\App\Http\Controllers\LocationControll
     ->where('chain_city', '[a-zA-Z0-9\-]+');
 Route::get('/local-drug-testing-locations-{chain_city}', [\App\Http\Controllers\LocationController::class, 'resolveChainCity'])
     ->where('chain_city', '[a-zA-Z0-9\-]+');
+Route::get('/{state_name}-drug-testing', function(string $stateName) {
+    $slug = strtolower($stateName);
+    $state = \App\Models\State::where('slug', $slug)
+        ->orWhere('name', str_replace('-', ' ', $stateName))
+        ->first();
+    if ($state) {
+        return app(\App\Http\Controllers\LocationController::class)->state($state->slug);
+    }
+    abort(404);
+})->where('state_name', '[a-zA-Z\-]+');
 
 /*
 |--------------------------------------------------------------------------

@@ -1,0 +1,1430 @@
+[
+    {
+        "abbr": "AL",
+        "name": "Alabama",
+        "slug": "alabama",
+        "statute_code": "Ala. Code § 25-5-330 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Alabama employers may institute voluntary drug-free workplace policies under Code § 25-5-330, offering workers compensation discount incentives for compliant testing programs.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Alabama have mandatory state drug testing rules?",
+                "answer": "In Alabama, workplace drug testing is governed by statutory guidelines under Ala. Code § 25-5-330 et seq.. Private employers generally operate under a voluntary drug testing framework (§ 25-5-335 discount), permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Alabama employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Alabama who implement a certified Drug-Free Workplace Program in compliance with Ala. Code § 25-5-330 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Alabama state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Alabama state law compliance standards, state statutes does not require employers to accommodate medical marijuana. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "AK",
+        "name": "Alaska",
+        "slug": "alaska",
+        "statute_code": "AS 23.10.600 - 23.10.699",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "While Alaska legalizes adult cannabis use under state law, employers maintain the explicit legal right to maintain zero-tolerance drug-free workplace policies under AS 23.10.600.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Alaska have mandatory state drug testing rules?",
+                "answer": "In Alaska, workplace drug testing is governed by statutory guidelines under AS 23.10.600 - 23.10.699. Private employers generally operate under a employer rights under AS 23.10.600, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Alaska employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Alaska who implement a certified Drug-Free Workplace Program in compliance with AS 23.10.600 - 23.10.699 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Alaska state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Alaska state law compliance standards, state statutes allows employers to enforce zero-tolerance drug policies. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "AZ",
+        "name": "Arizona",
+        "slug": "arizona",
+        "statute_code": "A.R.S. § 23-493 et seq.",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Arizona law protects employers operating under A.R.S. § 23-493, allowing safety-sensitive position restrictions, pre-employment screening, and reasonable suspicion testing.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Arizona have mandatory state drug testing rules?",
+                "answer": "In Arizona, workplace drug testing is governed by statutory guidelines under A.R.S. § 23-493 et seq.. Private employers generally operate under a Drug Testing of Employees Act (A.R.S. § 23-493), permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Arizona employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Arizona who implement a certified Drug-Free Workplace Program in compliance with A.R.S. § 23-493 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Arizona state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Arizona state law compliance standards, state statutes protects medical marijuana cardholders unless safety-sensitive. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "AR",
+        "name": "Arkansas",
+        "slug": "arkansas",
+        "statute_code": "Ark. Code Ann. § 11-14-101 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Arkansas permits employers to establish drug-free workplace policies under Voluntary Drug-Free Workplace laws to reduce workplace liabilities and maintain safety compliance.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Arkansas have mandatory state drug testing rules?",
+                "answer": "In Arkansas, workplace drug testing is governed by statutory guidelines under Ark. Code Ann. § 11-14-101 et seq.. Private employers generally operate under a Voluntary Drug-Free Workplace Program, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Arkansas employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Arkansas who implement a certified Drug-Free Workplace Program in compliance with Ark. Code Ann. § 11-14-101 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Arkansas state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Arkansas state law compliance standards, state statutes allows zero-tolerance policies for safety-sensitive roles. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "CA",
+        "name": "California",
+        "slug": "california",
+        "statute_code": "Cal. Lab. Code § 1025 et seq.",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "California AB 2188 requires non-psychoactive cannabis metabolite protections while retaining full employer rights for pre-employment, post-accident, and safety-sensitive testing.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in California have mandatory state drug testing rules?",
+                "answer": "In California, workplace drug testing is governed by statutory guidelines under Cal. Lab. Code § 1025 et seq.. Private employers generally operate under a Labor Code § 1025 and AB 2188 guidelines, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can California employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in California who implement a certified Drug-Free Workplace Program in compliance with Cal. Lab. Code § 1025 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does California state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under California state law compliance standards, state statutes prohibits adverse action for off-duty non-psychoactive cannabis use. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "CO",
+        "name": "Colorado",
+        "slug": "colorado",
+        "statute_code": "C.R.S. § 8-73-108",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Colorado Supreme Court precedent (Coats v. Dish Network) upholds employer rights to enforce zero-tolerance drug testing policies regardless of off-duty state-legal cannabis use.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Colorado have mandatory state drug testing rules?",
+                "answer": "In Colorado, workplace drug testing is governed by statutory guidelines under C.R.S. § 8-73-108. Private employers generally operate under a C.R.S. § 8-73-108 and Coats v. Dish Network precedent, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Colorado employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Colorado who implement a certified Drug-Free Workplace Program in compliance with C.R.S. § 8-73-108 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Colorado state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Colorado state law compliance standards, state statutes allows zero-tolerance policies regardless of medical status. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "CT",
+        "name": "Connecticut",
+        "slug": "connecticut",
+        "statute_code": "Conn. Gen. Stat. § 31-51t et seq.",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Connecticut regulates employee testing under § 31-51t, permitting pre-employment screening, reasonable suspicion, post-accident, and safety-sensitive random testing.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Connecticut have mandatory state drug testing rules?",
+                "answer": "In Connecticut, workplace drug testing is governed by statutory guidelines under Conn. Gen. Stat. § 31-51t et seq.. Private employers generally operate under a mandatory testing regulations under § 31-51t, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Connecticut employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Connecticut who implement a certified Drug-Free Workplace Program in compliance with Conn. Gen. Stat. § 31-51t et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Connecticut state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Connecticut state law compliance standards, state statutes prohibits employment discrimination against medical cardholders. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "DE",
+        "name": "Delaware",
+        "slug": "delaware",
+        "statute_code": "19 Del. C. § 710 et seq.",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Delaware employers retain authority to enforce workplace drug safety standards and zero-tolerance policies for safety-sensitive roles under state labor laws.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Delaware have mandatory state drug testing rules?",
+                "answer": "In Delaware, workplace drug testing is governed by statutory guidelines under 19 Del. C. § 710 et seq.. Private employers generally operate under a Delaware Code Title 19 guidelines, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Delaware employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Delaware who implement a certified Drug-Free Workplace Program in compliance with 19 Del. C. § 710 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Delaware state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Delaware state law compliance standards, state statutes protects registered medical marijuana patients. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "FL",
+        "name": "Florida",
+        "slug": "florida",
+        "statute_code": "Fla. Stat. § 440.102",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Florida Statute 440.102 establishes Drug-Free Workplace Program standards, providing premium discounts on worker compensation insurance for verified testing procedures.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Florida have mandatory state drug testing rules?",
+                "answer": "In Florida, workplace drug testing is governed by statutory guidelines under Fla. Stat. § 440.102. Private employers generally operate under a Drug-Free Workplace Program under Fla. Stat. § 440.102, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Florida employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Florida who implement a certified Drug-Free Workplace Program in compliance with Fla. Stat. § 440.102 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Florida state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Florida state law compliance standards, state statutes does not require accommodation of medical marijuana in workplace. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "GA",
+        "name": "Georgia",
+        "slug": "georgia",
+        "statute_code": "O.C.G.A. § 34-9-410 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Georgia Code § 34-9-410 allows certified Drug-Free Workplace employers to perform job applicant, post-accident, and reasonable suspicion screenings with legal protections.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Georgia have mandatory state drug testing rules?",
+                "answer": "In Georgia, workplace drug testing is governed by statutory guidelines under O.C.G.A. § 34-9-410 et seq.. Private employers generally operate under a Georgia Drug-Free Workplace Act, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Georgia employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Georgia who implement a certified Drug-Free Workplace Program in compliance with O.C.G.A. § 34-9-410 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Georgia state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Georgia state law compliance standards, state statutes allows zero-tolerance workplace drug and alcohol policies. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "HI",
+        "name": "Hawaii",
+        "slug": "hawaii",
+        "statute_code": "H.R.S. § 329B-1 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Hawaii HRS § 329B requires state-certified laboratory testing procedures and medical review officer (MRO) verification for all employment-related specimen collections.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Hawaii have mandatory state drug testing rules?",
+                "answer": "In Hawaii, workplace drug testing is governed by statutory guidelines under H.R.S. § 329B-1 et seq.. Private employers generally operate under a H.R.S. § 329B laboratory testing standards, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Hawaii employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Hawaii who implement a certified Drug-Free Workplace Program in compliance with H.R.S. § 329B-1 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Hawaii state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Hawaii state law compliance standards, state statutes does not compel workplace medical marijuana accommodation. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "ID",
+        "name": "Idaho",
+        "slug": "idaho",
+        "statute_code": "Idaho Code § 72-1701 et seq.",
+        "medical_marijuana_status": "Prohibited",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Idaho Employer Alcohol and Drug-Free Workplace Act provides statutory protection for employers conducting applicant, post-accident, and random drug screening.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Idaho have mandatory state drug testing rules?",
+                "answer": "In Idaho, workplace drug testing is governed by statutory guidelines under Idaho Code § 72-1701 et seq.. Private employers generally operate under a Idaho Employer Alcohol and Drug-Free Workplace Act, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Idaho employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Idaho who implement a certified Drug-Free Workplace Program in compliance with Idaho Code § 72-1701 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Idaho state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Idaho state law compliance standards, state statutes prohibits marijuana use and supports strict employer testing. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "IL",
+        "name": "Illinois",
+        "slug": "illinois",
+        "statute_code": "820 ILCS 55\/1 et seq.",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Illinois Cannabis Regulation and Tax Act upholds employer authority to enforce reasonable drug-free workplace policies, zero-tolerance rules, and safety testing.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Illinois have mandatory state drug testing rules?",
+                "answer": "In Illinois, workplace drug testing is governed by statutory guidelines under 820 ILCS 55\/1 et seq.. Private employers generally operate under a Right to Privacy in the Workplace Act & Cannabis Regulation Act, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Illinois employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Illinois who implement a certified Drug-Free Workplace Program in compliance with 820 ILCS 55\/1 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Illinois state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Illinois state law compliance standards, state statutes protects registered patients while preserving workplace safety testing. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "IN",
+        "name": "Indiana",
+        "slug": "indiana",
+        "statute_code": "Ind. Code § 22-9-5 et seq.",
+        "medical_marijuana_status": "Prohibited",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Indiana employers have broad legal authority to mandate pre-employment, random, post-accident, and reasonable suspicion drug testing under state employment laws.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Indiana have mandatory state drug testing rules?",
+                "answer": "In Indiana, workplace drug testing is governed by statutory guidelines under Ind. Code § 22-9-5 et seq.. Private employers generally operate under a Indiana Code Title 22 labor rules, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Indiana employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Indiana who implement a certified Drug-Free Workplace Program in compliance with Ind. Code § 22-9-5 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Indiana state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Indiana state law compliance standards, state statutes permits zero-tolerance drug policies for private employers. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "IA",
+        "name": "Iowa",
+        "slug": "iowa",
+        "statute_code": "Iowa Code § 730.5",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Iowa Code § 730.5 governs private sector employee drug testing, requiring written company policy distribution and certified laboratory screening protocols.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Iowa have mandatory state drug testing rules?",
+                "answer": "In Iowa, workplace drug testing is governed by statutory guidelines under Iowa Code § 730.5. Private employers generally operate under a private sector testing framework under Iowa Code § 730.5, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Iowa employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Iowa who implement a certified Drug-Free Workplace Program in compliance with Iowa Code § 730.5 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Iowa state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Iowa state law compliance standards, state statutes does not protect medical marijuana use during working hours. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "KS",
+        "name": "Kansas",
+        "slug": "kansas",
+        "statute_code": "K.S.A. § 44-501 et seq.",
+        "medical_marijuana_status": "Prohibited",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Kansas statutory framework supports workplace drug testing, disqualifying workers compensation and unemployment benefits following verified positive post-accident tests.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Kansas have mandatory state drug testing rules?",
+                "answer": "In Kansas, workplace drug testing is governed by statutory guidelines under K.S.A. § 44-501 et seq.. Private employers generally operate under a Kansas Workers Compensation Act guidelines, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Kansas employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Kansas who implement a certified Drug-Free Workplace Program in compliance with K.S.A. § 44-501 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Kansas state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Kansas state law compliance standards, state statutes prohibits marijuana use and permits full employer testing. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "KY",
+        "name": "Kentucky",
+        "slug": "kentucky",
+        "statute_code": "KRS § 336.010 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Kentucky law permits employers to maintain zero-tolerance drug policies, offering voluntary drug-free workplace program certification and worker compensation safety benefits.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Kentucky have mandatory state drug testing rules?",
+                "answer": "In Kentucky, workplace drug testing is governed by statutory guidelines under KRS § 336.010 et seq.. Private employers generally operate under a Kentucky voluntary drug-free workplace standards, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Kentucky employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Kentucky who implement a certified Drug-Free Workplace Program in compliance with KRS § 336.010 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Kentucky state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Kentucky state law compliance standards, state statutes allows employers to enforce strict zero-tolerance policies. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "LA",
+        "name": "Louisiana",
+        "slug": "louisiana",
+        "statute_code": "La. R.S. 49:1001 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Louisiana R.S. 49:1001 details mandatory specimen collection and laboratory chain-of-custody standards for both public and private sector workplace testing.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Louisiana have mandatory state drug testing rules?",
+                "answer": "In Louisiana, workplace drug testing is governed by statutory guidelines under La. R.S. 49:1001 et seq.. Private employers generally operate under a La. R.S. 49:1001 drug testing procedures, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Louisiana employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Louisiana who implement a certified Drug-Free Workplace Program in compliance with La. R.S. 49:1001 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Louisiana state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Louisiana state law compliance standards, state statutes permits employer drug testing without mandating accommodation. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "ME",
+        "name": "Maine",
+        "slug": "maine",
+        "statute_code": "26 M.R.S.A. § 681 et seq.",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Maine regulates workplace drug screening under 26 M.R.S.A. § 681, requiring state-approved employer substance testing policies and rehabilitation referral options.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Maine have mandatory state drug testing rules?",
+                "answer": "In Maine, workplace drug testing is governed by statutory guidelines under 26 M.R.S.A. § 681 et seq.. Private employers generally operate under a Maine Substance Use Testing Law (26 M.R.S.A. § 681), permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Maine employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Maine who implement a certified Drug-Free Workplace Program in compliance with 26 M.R.S.A. § 681 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Maine state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Maine state law compliance standards, state statutes protects off-duty medical marijuana use for non-safety roles. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "MD",
+        "name": "Maryland",
+        "slug": "maryland",
+        "statute_code": "Md. Code Ann., Health-Gen. § 17-214",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Maryland Health-General § 17-214 mandates certified laboratory procedures and applicant notification rules while protecting employer drug-free policies.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Maryland have mandatory state drug testing rules?",
+                "answer": "In Maryland, workplace drug testing is governed by statutory guidelines under Md. Code Ann., Health-Gen. § 17-214. Private employers generally operate under a Maryland Health-General § 17-214 guidelines, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Maryland employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Maryland who implement a certified Drug-Free Workplace Program in compliance with Md. Code Ann., Health-Gen. § 17-214 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Maryland state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Maryland state law compliance standards, state statutes permits employers to maintain zero-tolerance drug-free workplaces. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "MA",
+        "name": "Massachusetts",
+        "slug": "massachusetts",
+        "statute_code": "M.G.L. c. 151B",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Massachusetts case law permits job applicant and safety-sensitive employee drug screening while requiring interactive dialogue for medical condition accommodations.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Massachusetts have mandatory state drug testing rules?",
+                "answer": "In Massachusetts, workplace drug testing is governed by statutory guidelines under M.G.L. c. 151B. Private employers generally operate under a M.G.L. c. 151B disability accommodation precedent, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Massachusetts employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Massachusetts who implement a certified Drug-Free Workplace Program in compliance with M.G.L. c. 151B can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Massachusetts state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Massachusetts state law compliance standards, state statutes requires interactive dialogue for medical marijuana accommodations. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "MI",
+        "name": "Michigan",
+        "slug": "michigan",
+        "statute_code": "M.C.L. § 421.29",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Michigan law supports employer rights to test applicants and active workforce members, denying unemployment benefits for policy violations under MCL 421.29.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Michigan have mandatory state drug testing rules?",
+                "answer": "In Michigan, workplace drug testing is governed by statutory guidelines under M.C.L. § 421.29. Private employers generally operate under a Michigan Employment Security Act (M.C.L. § 421.29), permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Michigan employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Michigan who implement a certified Drug-Free Workplace Program in compliance with M.C.L. § 421.29 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Michigan state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Michigan state law compliance standards, state statutes allows employers to enforce zero-tolerance cannabis rules. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "MN",
+        "name": "Minnesota",
+        "slug": "minnesota",
+        "statute_code": "Minn. Stat. § 181.950 et seq.",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Minnesota Drug and Alcohol Testing in the Workplace Act (DATWA) outlines specific written notice, confirmatory testing, and employee rights standards.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Minnesota have mandatory state drug testing rules?",
+                "answer": "In Minnesota, workplace drug testing is governed by statutory guidelines under Minn. Stat. § 181.950 et seq.. Private employers generally operate under a Minnesota DATWA (Minn. Stat. § 181.950), permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Minnesota employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Minnesota who implement a certified Drug-Free Workplace Program in compliance with Minn. Stat. § 181.950 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Minnesota state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Minnesota state law compliance standards, state statutes protects medical cannabis registry patients for non-safety roles. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "MS",
+        "name": "Mississippi",
+        "slug": "mississippi",
+        "statute_code": "Miss. Code Ann. § 71-7-1 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Mississippi Code § 71-7-1 provides legal protection for employers implementing voluntary drug-free workplace programs under state-certified testing guidelines.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Mississippi have mandatory state drug testing rules?",
+                "answer": "In Mississippi, workplace drug testing is governed by statutory guidelines under Miss. Code Ann. § 71-7-1 et seq.. Private employers generally operate under a Mississippi Drug-Free Workplace Act, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Mississippi employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Mississippi who implement a certified Drug-Free Workplace Program in compliance with Miss. Code Ann. § 71-7-1 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Mississippi state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Mississippi state law compliance standards, state statutes does not require employers to accommodate medical cannabis. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "MO",
+        "name": "Missouri",
+        "slug": "missouri",
+        "statute_code": "Mo. Rev. Stat. § 287.120",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Missouri workers compensation law permits benefit reductions or forfeitures when workplace accidents result from unauthorized drug or alcohol impairment.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Missouri have mandatory state drug testing rules?",
+                "answer": "In Missouri, workplace drug testing is governed by statutory guidelines under Mo. Rev. Stat. § 287.120. Private employers generally operate under a Missouri Article XIV and labor statutes, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Missouri employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Missouri who implement a certified Drug-Free Workplace Program in compliance with Mo. Rev. Stat. § 287.120 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Missouri state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Missouri state law compliance standards, state statutes protects off-duty medical cardholders for non-safety positions. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "MT",
+        "name": "Montana",
+        "slug": "montana",
+        "statute_code": "MCA § 39-2-205 et seq.",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Montana Workforce Drug and Alcohol Testing Act establishes procedural requirements for pre-employment, post-accident, and safety-sensitive workforce testing.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Montana have mandatory state drug testing rules?",
+                "answer": "In Montana, workplace drug testing is governed by statutory guidelines under MCA § 39-2-205 et seq.. Private employers generally operate under a Workforce Drug and Alcohol Testing Act (MCA § 39-2-205), permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Montana employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Montana who implement a certified Drug-Free Workplace Program in compliance with MCA § 39-2-205 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Montana state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Montana state law compliance standards, state statutes permits zero-tolerance drug policies for safety-sensitive roles. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "NC",
+        "name": "North Carolina",
+        "slug": "north-carolina",
+        "statute_code": "N.C.G.S. § 95-230 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "North Carolina Controlled Substance Examination Regulation Act details approved sample collection, screening, and re-testing rights for job applicants and employees.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in North Carolina have mandatory state drug testing rules?",
+                "answer": "In North Carolina, workplace drug testing is governed by statutory guidelines under N.C.G.S. § 95-230 et seq.. Private employers generally operate under a Controlled Substance Examination Regulation Act, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can North Carolina employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in North Carolina who implement a certified Drug-Free Workplace Program in compliance with N.C.G.S. § 95-230 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does North Carolina state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under North Carolina state law compliance standards, state statutes allows voluntary drug-free workplace policies and testing. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "NE",
+        "name": "Nebraska",
+        "slug": "nebraska",
+        "statute_code": "Neb. Rev. Stat. § 48-1901 et seq.",
+        "medical_marijuana_status": "Prohibited",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Nebraska law governs mandatory drug and alcohol testing procedures, specifying confirmation requirements via accredited laboratories prior to adverse employment actions.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Nebraska have mandatory state drug testing rules?",
+                "answer": "In Nebraska, workplace drug testing is governed by statutory guidelines under Neb. Rev. Stat. § 48-1901 et seq.. Private employers generally operate under a Nebraska Drug and Alcohol Testing Act, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Nebraska employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Nebraska who implement a certified Drug-Free Workplace Program in compliance with Neb. Rev. Stat. § 48-1901 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Nebraska state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Nebraska state law compliance standards, state statutes allows strict employer substance screening rules. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "NV",
+        "name": "Nevada",
+        "slug": "nevada",
+        "statute_code": "NRS § 613.132",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Nevada NRS 613.132 restricts pre-employment cannabis screening for generic positions while fully permitting safety-sensitive, DOT, and post-accident testing.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Nevada have mandatory state drug testing rules?",
+                "answer": "In Nevada, workplace drug testing is governed by statutory guidelines under NRS § 613.132. Private employers generally operate under a NRS § 613.132 job applicant screening laws, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Nevada employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Nevada who implement a certified Drug-Free Workplace Program in compliance with NRS § 613.132 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Nevada state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Nevada state law compliance standards, state statutes restricts pre-employment cannabis screening for non-safety roles. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "NJ",
+        "name": "New Jersey",
+        "slug": "new-jersey",
+        "statute_code": "N.J.S.A. 24:6I-52 (CREAMMA)",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "New Jersey CREAMMA regulations permit workplace drug screening including physical workplace impairment evaluations by certified Workplace Impairment Recognition Experts (WIRE).",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in New Jersey have mandatory state drug testing rules?",
+                "answer": "In New Jersey, workplace drug testing is governed by statutory guidelines under N.J.S.A. 24:6I-52 (CREAMMA). Private employers generally operate under a NJ CREAMMA regulations and Jake Honig Act, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can New Jersey employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in New Jersey who implement a certified Drug-Free Workplace Program in compliance with N.J.S.A. 24:6I-52 (CREAMMA) can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does New Jersey state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under New Jersey state law compliance standards, state statutes requires physical impairment evaluation (WIRE) before adverse action. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "NM",
+        "name": "New Mexico",
+        "slug": "new-mexico",
+        "statute_code": "NMSA 1978, § 50-11-3",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "New Mexico statutes allow employers to maintain drug-free workplace rules and safety-sensitive position testing while complying with state off-duty conduct protections.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in New Mexico have mandatory state drug testing rules?",
+                "answer": "In New Mexico, workplace drug testing is governed by statutory guidelines under NMSA 1978, § 50-11-3. Private employers generally operate under a Lynn and Erin Compassionate Use Act & NMSA § 50-11-3, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can New Mexico employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in New Mexico who implement a certified Drug-Free Workplace Program in compliance with NMSA 1978, § 50-11-3 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does New Mexico state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under New Mexico state law compliance standards, state statutes protects medical cannabis patients for non-safety sensitive roles. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "NY",
+        "name": "New York",
+        "slug": "new-york",
+        "statute_code": "N.Y. Lab. Law § 201-D",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "New York Labor Law § 201-D limits routine cannabis screening while preserving employer authority to test for reasonable suspicion, DOT compliance, and federal mandates.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in New York have mandatory state drug testing rules?",
+                "answer": "In New York, workplace drug testing is governed by statutory guidelines under N.Y. Lab. Law § 201-D. Private employers generally operate under a New York Labor Law § 201-D regulations, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can New York employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in New York who implement a certified Drug-Free Workplace Program in compliance with N.Y. Lab. Law § 201-D can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does New York state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under New York state law compliance standards, state statutes prohibits testing for non-psychoactive cannabis unless safety-sensitive. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "NH",
+        "name": "New Hampshire",
+        "slug": "new-hampshire",
+        "statute_code": "N.H. RSA § 281-A:14",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "New Hampshire employers retain legal authority to implement workplace drug testing policies to maintain safety and reduce occupational hazard liabilities.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in New Hampshire have mandatory state drug testing rules?",
+                "answer": "In New Hampshire, workplace drug testing is governed by statutory guidelines under N.H. RSA § 281-A:14. Private employers generally operate under a New Hampshire RSA 281-A workplace rules, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can New Hampshire employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in New Hampshire who implement a certified Drug-Free Workplace Program in compliance with N.H. RSA § 281-A:14 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does New Hampshire state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under New Hampshire state law compliance standards, state statutes does not compel medical marijuana accommodation in workplace. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "ND",
+        "name": "North Dakota",
+        "slug": "north-dakota",
+        "statute_code": "N.D.C.C. § 65-01-11",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "North Dakota statutory framework allows employer drug testing programs and reduces worker compensation eligibility following positive post-incident substance screens.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in North Dakota have mandatory state drug testing rules?",
+                "answer": "In North Dakota, workplace drug testing is governed by statutory guidelines under N.D.C.C. § 65-01-11. Private employers generally operate under a North Dakota Century Code § 65-01-11, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can North Dakota employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in North Dakota who implement a certified Drug-Free Workplace Program in compliance with N.D.C.C. § 65-01-11 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does North Dakota state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under North Dakota state law compliance standards, state statutes permits zero-tolerance workplace drug testing. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "OH",
+        "name": "Ohio",
+        "slug": "ohio",
+        "statute_code": "O.R.C. § 4123.54",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Ohio Drug-Free Safety Program (DFSP) provides state worker compensation rating discounts for employers conducting pre-employment, post-accident, and random tests.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Ohio have mandatory state drug testing rules?",
+                "answer": "In Ohio, workplace drug testing is governed by statutory guidelines under O.R.C. § 4123.54. Private employers generally operate under a Ohio Drug-Free Safety Program (O.R.C. § 4123.54), permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Ohio employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Ohio who implement a certified Drug-Free Workplace Program in compliance with O.R.C. § 4123.54 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Ohio state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Ohio state law compliance standards, state statutes allows employers to enforce zero-tolerance medical marijuana rules. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "OK",
+        "name": "Oklahoma",
+        "slug": "oklahoma",
+        "statute_code": "40 O.S. § 551 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Oklahoma Standards for Workplace Drug and Alcohol Testing Act provides structured legal guidance for employer testing policies and applicant screening rules.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Oklahoma have mandatory state drug testing rules?",
+                "answer": "In Oklahoma, workplace drug testing is governed by statutory guidelines under 40 O.S. § 551 et seq.. Private employers generally operate under a Standards for Workplace Drug and Alcohol Testing Act, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Oklahoma employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Oklahoma who implement a certified Drug-Free Workplace Program in compliance with 40 O.S. § 551 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Oklahoma state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Oklahoma state law compliance standards, state statutes protects medical marijuana license holders for non-safety positions. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "OR",
+        "name": "Oregon",
+        "slug": "oregon",
+        "statute_code": "ORS § 659A.300",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Oregon employment statutes permit workplace drug testing, allowing employers to enforce zero-tolerance substance policies for current and incoming staff.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Oregon have mandatory state drug testing rules?",
+                "answer": "In Oregon, workplace drug testing is governed by statutory guidelines under ORS § 659A.300. Private employers generally operate under a Oregon Revised Statutes Chapter 659A, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Oregon employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Oregon who implement a certified Drug-Free Workplace Program in compliance with ORS § 659A.300 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Oregon state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Oregon state law compliance standards, state statutes allows employers to enforce zero-tolerance off-duty cannabis policies. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "PA",
+        "name": "Pennsylvania",
+        "slug": "pennsylvania",
+        "statute_code": "43 P.S. § 951 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Pennsylvania law supports employer zero-tolerance workplace drug policies, allowing pre-employment, safety-sensitive, and reasonable suspicion testing programs.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Pennsylvania have mandatory state drug testing rules?",
+                "answer": "In Pennsylvania, workplace drug testing is governed by statutory guidelines under 43 P.S. § 951 et seq.. Private employers generally operate under a Pennsylvania Medical Marijuana Act (35 P.S. § 10231.2103), permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Pennsylvania employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Pennsylvania who implement a certified Drug-Free Workplace Program in compliance with 43 P.S. § 951 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Pennsylvania state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Pennsylvania state law compliance standards, state statutes prohibits discrimination against certified medical marijuana cardholders. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "RI",
+        "name": "Rhode Island",
+        "slug": "rhode-island",
+        "statute_code": "R.I. Gen. Laws § 28-6.5-1",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Rhode Island § 28-6.5-1 mandates specific reasonable suspicion standards and certified lab confirmatory testing protocols for employment-related screenings.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Rhode Island have mandatory state drug testing rules?",
+                "answer": "In Rhode Island, workplace drug testing is governed by statutory guidelines under R.I. Gen. Laws § 28-6.5-1. Private employers generally operate under a Rhode Island Gen. Laws § 28-6.5-1, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Rhode Island employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Rhode Island who implement a certified Drug-Free Workplace Program in compliance with R.I. Gen. Laws § 28-6.5-1 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Rhode Island state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Rhode Island state law compliance standards, state statutes protects registered medical marijuana patients for non-safety roles. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "SC",
+        "name": "South Carolina",
+        "slug": "south-carolina",
+        "statute_code": "S.C. Code Ann. § 41-1-15",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "South Carolina voluntary drug-free workplace laws provide worker compensation premium discounts and legal protections for verified testing procedures.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in South Carolina have mandatory state drug testing rules?",
+                "answer": "In South Carolina, workplace drug testing is governed by statutory guidelines under S.C. Code Ann. § 41-1-15. Private employers generally operate under a South Carolina Code § 41-1-15, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can South Carolina employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in South Carolina who implement a certified Drug-Free Workplace Program in compliance with S.C. Code Ann. § 41-1-15 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does South Carolina state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under South Carolina state law compliance standards, state statutes allows certified Drug-Free Workplace testing programs. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "SD",
+        "name": "South Dakota",
+        "slug": "south-dakota",
+        "statute_code": "S.D.C.L. § 62-4-37",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "South Dakota law allows employer workplace drug testing and denies workers compensation coverage when workplace injuries stem from willful drug\/alcohol misuse.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in South Dakota have mandatory state drug testing rules?",
+                "answer": "In South Dakota, workplace drug testing is governed by statutory guidelines under S.D.C.L. § 62-4-37. Private employers generally operate under a South Dakota Codified Laws Title 62, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can South Dakota employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in South Dakota who implement a certified Drug-Free Workplace Program in compliance with S.D.C.L. § 62-4-37 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does South Dakota state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under South Dakota state law compliance standards, state statutes permits zero-tolerance workplace drug testing rules. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "TN",
+        "name": "Tennessee",
+        "slug": "tennessee",
+        "statute_code": "T.C.A. § 50-9-101 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Tennessee Drug-Free Workplace Program provides comprehensive employer defense protections and worker compensation premium discounts for certified testing.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Tennessee have mandatory state drug testing rules?",
+                "answer": "In Tennessee, workplace drug testing is governed by statutory guidelines under T.C.A. § 50-9-101 et seq.. Private employers generally operate under a Tennessee Drug-Free Workplace Program, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Tennessee employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Tennessee who implement a certified Drug-Free Workplace Program in compliance with T.C.A. § 50-9-101 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Tennessee state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Tennessee state law compliance standards, state statutes allows voluntary testing with workers compensation premium discounts. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "TX",
+        "name": "Texas",
+        "slug": "texas",
+        "statute_code": "Tex. Lab. Code § 411.091",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Texas Labor Code § 411.091 mandates written policy distribution for employer drug testing programs while supporting broad pre-employment and random testing rights.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Texas have mandatory state drug testing rules?",
+                "answer": "In Texas, workplace drug testing is governed by statutory guidelines under Tex. Lab. Code § 411.091. Private employers generally operate under a Texas Labor Code § 411.091 guidelines, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Texas employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Texas who implement a certified Drug-Free Workplace Program in compliance with Tex. Lab. Code § 411.091 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Texas state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Texas state law compliance standards, state statutes allows broad pre-employment, random, and post-accident testing. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "UT",
+        "name": "Utah",
+        "slug": "utah",
+        "statute_code": "Utah Code § 34-38-1 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Utah Drug and Alcohol Testing Act provides employer immunity from liability when workplace drug testing programs follow statutory procedural rules.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Utah have mandatory state drug testing rules?",
+                "answer": "In Utah, workplace drug testing is governed by statutory guidelines under Utah Code § 34-38-1 et seq.. Private employers generally operate under a Utah Drug and Alcohol Testing Act (Utah Code § 34-38-1), permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Utah employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Utah who implement a certified Drug-Free Workplace Program in compliance with Utah Code § 34-38-1 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Utah state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Utah state law compliance standards, state statutes protects private employers implementing compliant testing policies. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "VT",
+        "name": "Vermont",
+        "slug": "vermont",
+        "statute_code": "21 V.S.A. § 511 et seq.",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Vermont regulates employee substance screening under 21 V.S.A. § 511, requiring bona fide job offers prior to testing and state-approved laboratory procedures.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Vermont have mandatory state drug testing rules?",
+                "answer": "In Vermont, workplace drug testing is governed by statutory guidelines under 21 V.S.A. § 511 et seq.. Private employers generally operate under a Vermont 21 V.S.A. § 511 testing regulations, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Vermont employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Vermont who implement a certified Drug-Free Workplace Program in compliance with 21 V.S.A. § 511 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Vermont state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Vermont state law compliance standards, state statutes requires conditional job offer prior to applicant drug screening. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "VA",
+        "name": "Virginia",
+        "slug": "virginia",
+        "statute_code": "Va. Code § 65.2-306",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Virginia Code § 65.2-306 supports workplace drug safety, denying workers compensation claims when post-accident testing confirms illegal drug or alcohol influence.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Virginia have mandatory state drug testing rules?",
+                "answer": "In Virginia, workplace drug testing is governed by statutory guidelines under Va. Code § 65.2-306. Private employers generally operate under a Virginia Code § 65.2-306 and labor rules, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Virginia employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Virginia who implement a certified Drug-Free Workplace Program in compliance with Va. Code § 65.2-306 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Virginia state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Virginia state law compliance standards, state statutes protects medical cannabis oil cardholders for non-safety roles. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "WA",
+        "name": "Washington",
+        "slug": "washington",
+        "statute_code": "RCW § 49.44.240",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "Washington RCW 49.44.240 protects job applicants from off-duty cannabis screening restrictions while preserving post-accident, reasonable suspicion, and safety position testing.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Washington have mandatory state drug testing rules?",
+                "answer": "In Washington, workplace drug testing is governed by statutory guidelines under RCW § 49.44.240. Private employers generally operate under a Washington RCW 49.44.240 applicant protection law, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Washington employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Washington who implement a certified Drug-Free Workplace Program in compliance with RCW § 49.44.240 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Washington state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Washington state law compliance standards, state statutes restricts pre-employment off-duty cannabis testing for non-safety positions. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "WV",
+        "name": "West Virginia",
+        "slug": "west-virginia",
+        "statute_code": "W. Va. Code § 21-3E-1 et seq.",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "West Virginia Safer Workplaces Act grants employers comprehensive authority to test job applicants and current employees for alcohol and illegal substances.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in West Virginia have mandatory state drug testing rules?",
+                "answer": "In West Virginia, workplace drug testing is governed by statutory guidelines under W. Va. Code § 21-3E-1 et seq.. Private employers generally operate under a West Virginia Safer Workplaces Act, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can West Virginia employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in West Virginia who implement a certified Drug-Free Workplace Program in compliance with W. Va. Code § 21-3E-1 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does West Virginia state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under West Virginia state law compliance standards, state statutes provides broad employer authority for workplace drug testing. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "WI",
+        "name": "Wisconsin",
+        "slug": "wisconsin",
+        "statute_code": "Wis. Stat. § 108.04(5r)",
+        "medical_marijuana_status": "Legal (Medical)",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Wisconsin law allows employers to test job candidates and current staff, disqualifying individuals from unemployment benefits following verified positive tests.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Wisconsin have mandatory state drug testing rules?",
+                "answer": "In Wisconsin, workplace drug testing is governed by statutory guidelines under Wis. Stat. § 108.04(5r). Private employers generally operate under a Wisconsin Statute § 108.04 guidelines, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Wisconsin employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Wisconsin who implement a certified Drug-Free Workplace Program in compliance with Wis. Stat. § 108.04(5r) can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Wisconsin state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Wisconsin state law compliance standards, state statutes permits zero-tolerance workplace drug testing policies. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "WY",
+        "name": "Wyoming",
+        "slug": "wyoming",
+        "statute_code": "Wyo. Stat. § 27-14-102",
+        "medical_marijuana_status": "Prohibited",
+        "recreational_marijuana_status": "Prohibited",
+        "employer_rights_summary": "Wyoming statutory framework permits voluntary drug-free workplace programs, offering worker compensation discount incentives for compliant employer testing policies.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in Wyoming have mandatory state drug testing rules?",
+                "answer": "In Wyoming, workplace drug testing is governed by statutory guidelines under Wyo. Stat. § 27-14-102. Private employers generally operate under a Wyoming Drug-Free Workplace guidelines, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can Wyoming employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in Wyoming who implement a certified Drug-Free Workplace Program in compliance with Wyo. Stat. § 27-14-102 can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does Wyoming state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under Wyoming state law compliance standards, state statutes supports voluntary employer drug testing programs. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    },
+    {
+        "abbr": "DC",
+        "name": "District of Columbia",
+        "slug": "district-of-columbia",
+        "statute_code": "D.C. Code § 32-931 et seq.",
+        "medical_marijuana_status": "Legal",
+        "recreational_marijuana_status": "Legal",
+        "employer_rights_summary": "District of Columbia law restricts pre-employment cannabis testing for general roles while maintaining employer authority to enforce safety-sensitive and DOT testing policies.",
+        "worker_comp_rules": "",
+        "faqs_json": [
+            {
+                "question": "Do employers in District of Columbia have mandatory state drug testing rules?",
+                "answer": "In District of Columbia, workplace drug testing is governed by statutory guidelines under D.C. Code § 32-931 et seq.. Private employers generally operate under a D.C. Cannabis Employment Protections Amendment Act, permitting pre-employment, random, post-accident, and reasonable suspicion testing."
+            },
+            {
+                "question": "Can District of Columbia employers qualify for Workers' Compensation premium discounts?",
+                "answer": "Yes. Employers in District of Columbia who implement a certified Drug-Free Workplace Program in compliance with D.C. Code § 32-931 et seq. can qualify for insurance premium discounts and enhanced legal protections during workers' compensation claims."
+            },
+            {
+                "question": "Does District of Columbia state law protect employees or job applicants who use medical marijuana?",
+                "answer": "Under District of Columbia state law compliance standards, state statutes restricts pre-employment cannabis testing for non-safety-sensitive roles. Safety-sensitive positions, DOT-regulated roles, and federal contract compliance remain strictly zero-tolerance across all jurisdictions."
+            },
+            {
+                "question": "How many certified drug testing collection sites does Accredited Drug Testing offer in {{City_Name}}, {{State_Abbr}}?",
+                "answer": "Certified Drug Test Center provides access to {{Active_Lab_Count}} certified collection sites in the {{City_Name}} area, offering urine, hair follicle, breath alcohol, and DOT testing."
+            }
+        ]
+    }
+]

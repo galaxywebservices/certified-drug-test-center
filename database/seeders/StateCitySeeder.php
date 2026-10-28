@@ -11,14 +11,17 @@ class StateCitySeeder extends Seeder
 {
     public function run(): void
     {
-        $file = database_path('seeders/data/states.json');
-        if (!File::exists($file)) {
-            return;
-        }
-
-        $states = json_decode(File::get($file), true);
-        foreach ($states as $st) {
-            State::updateOrCreate(['abbr' => $st['abbr']], $st);
+        $complianceFile = database_path('seeders/data/states_compliance.json');
+        if (File::exists($complianceFile)) {
+            $states = json_decode(File::get($complianceFile), true);
+            foreach ($states as $st) {
+                State::updateOrCreate(['abbr' => $st['abbr']], $st);
+            }
+        } elseif (File::exists($file)) {
+            $states = json_decode(File::get($file), true);
+            foreach ($states as $st) {
+                State::updateOrCreate(['abbr' => $st['abbr']], $st);
+            }
         }
 
         // Seed 1,000 city unique chain pages

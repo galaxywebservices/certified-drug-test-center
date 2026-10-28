@@ -28,6 +28,40 @@
     </url>
     @endforeach
 
+    <!-- Locations Directory -->
+    <url>
+        <loc>{{ url('/locations') }}</loc>
+        <lastmod>{{ now()->toAtomString() }}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- States & State Compliance Guides -->
+    @foreach($states as $state)
+    <url>
+        <loc>{{ url('/locations/' . $state->slug) }}</loc>
+        <lastmod>{{ $state->updated_at ? $state->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>{{ url('/' . $state->slug . '-drug-testing') }}</loc>
+        <lastmod>{{ $state->updated_at ? $state->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+    @endforeach
+
+    <!-- 1,000 Programmatic City SEO Guides -->
+    @foreach($cities as $city)
+    <url>
+        <loc>{{ url('/drug-testing-' . $city->slug . '-' . strtolower($city->state->abbr)) }}</loc>
+        <lastmod>{{ $city->updated_at ? $city->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    @endforeach
+
     <!-- CMS Pages -->
     @foreach($pages as $page)
     <url>
