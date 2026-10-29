@@ -266,14 +266,15 @@
     <!-- Accreditation & Partner Bar -->
     <section class="partner-logo-bar" aria-label="Accreditation & Certified Laboratory Network">
         <div class="container" style="text-align:center;">
-            <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#64748B; margin-bottom:18px;">
+            <p class="partner-logo-heading">
                 Certified National Specimen Collection &amp; SAMHSA Accredited Laboratory Network
             </p>
-            <div class="partner-credbar-wrap" style="display:flex; justify-content:center; align-items:center;">
+            <div class="partner-credbar-wrap">
                 <img src="{{ asset('images/credbar.jpg') }}" 
                      alt="Accredited Laboratory & Network Partners: Quest Diagnostics, LabCorp, NDASA, DATIA, Alere, SAPAA, i3screen" 
                      class="partner-credbar-img" 
-                     style="max-width:100%; height:auto; max-height:60px; object-fit:contain;" 
+                     width="1413"
+                     height="162"
                      loading="lazy">
             </div>
         </div>
