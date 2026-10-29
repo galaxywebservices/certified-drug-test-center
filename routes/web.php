@@ -62,7 +62,7 @@ Route::redirect('/login', '/admin/login')->name('login');
 
 // Contact Us & Corporate Consultation
 Route::get('/contact-us', [ContactController::class, 'show'])->name('contact.show');
-Route::post('/contact-us', [ContactController::class, 'submit'])->name('contact.submit');
+Route::post('/contact-us', [ContactController::class, 'submit'])->middleware('throttle:15,1')->name('contact.submit');
 
 // Dynamic Categories & Products
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');
@@ -71,12 +71,12 @@ Route::get('/api/products/search', [ProductController::class, 'search'])->name('
 
 // Checkout & PayTrace Payment Gateway
 Route::get('/checkout/{slug?}', [CheckoutController::class, 'index'])->name('checkout.index');
-Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
+Route::post('/checkout/process', [CheckoutController::class, 'process'])->middleware('throttle:20,1')->name('checkout.process');
 Route::get('/checkout/confirmation/{token}', [CheckoutController::class, 'confirmation'])->name('checkout.confirmation');
 
 // Order Tracking, Electronic Donor Pass & MRO Certificates
 Route::get('/track-order', [OrderTrackingController::class, 'index'])->name('order.track');
-Route::post('/track-order', [OrderTrackingController::class, 'lookup'])->name('order.track.lookup');
+Route::post('/track-order', [OrderTrackingController::class, 'lookup'])->middleware('throttle:30,1')->name('order.track.lookup');
 Route::post('/track-order/resend', [OrderTrackingController::class, 'resend'])->name('order.track.resend');
 Route::get('/orders/certificate/{token}', [\App\Http\Controllers\OrderCertificateController::class, 'show'])->name('orders.certificate');
 Route::redirect('/donor-pass', '/track-order');
@@ -85,7 +85,7 @@ Route::redirect('/order-tracking', '/track-order');
 
 // Employer & Corporate Solutions Suite
 Route::get('/employers', [EmployerController::class, 'index'])->name('employers.index');
-Route::post('/employers', [EmployerController::class, 'submit'])->name('employers.submit');
+Route::post('/employers', [EmployerController::class, 'submit'])->middleware('throttle:15,1')->name('employers.submit');
 Route::redirect('/corporate-accounts', '/employers');
 Route::redirect('/business-solutions', '/employers');
 Route::redirect('/employer-accounts', '/employers');
@@ -93,10 +93,10 @@ Route::redirect('/corporate', '/employers');
 
 // Employer Self-Service Portal & Candidate Pipeline Suite
 Route::get('/employers/portal', [EmployerPortalController::class, 'index'])->name('employers.portal');
-Route::post('/employers/portal/login', [EmployerPortalController::class, 'login'])->name('employers.portal.login');
+Route::post('/employers/portal/login', [EmployerPortalController::class, 'login'])->middleware('throttle:10,1')->name('employers.portal.login');
 Route::post('/employers/portal/demo', [EmployerPortalController::class, 'demoLogin'])->name('employers.portal.demo');
 Route::post('/employers/portal/logout', [EmployerPortalController::class, 'logout'])->name('employers.portal.logout');
-Route::post('/employers/portal/dispatch', [EmployerPortalController::class, 'dispatchCandidatePass'])->name('employers.portal.dispatch');
+Route::post('/employers/portal/dispatch', [EmployerPortalController::class, 'dispatchCandidatePass'])->middleware('throttle:20,1')->name('employers.portal.dispatch');
 Route::post('/employers/portal/orders/{order}/resend-pass', [EmployerPortalController::class, 'resendPass'])->name('employers.portal.resend-pass');
 Route::get('/employers/portal/export', [EmployerPortalController::class, 'exportCsv'])->name('employers.portal.export');
 Route::post('/employers/portal/random-draw', [EmployerPortalController::class, 'randomDraw'])->name('employers.portal.random-draw');

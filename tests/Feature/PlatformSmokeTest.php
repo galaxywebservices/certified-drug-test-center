@@ -468,6 +468,19 @@ class PlatformSmokeTest extends TestCase
         $response->assertRedirect('/employers/portal');
         $response->assertSessionHas('portal_notice');
     }
+
+    public function test_security_headers_and_health_check_endpoint(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+        $response->assertHeader('X-Frame-Options', 'SAMEORIGIN');
+        $response->assertHeader('X-Content-Type-Options', 'nosniff');
+        $response->assertHeader('X-XSS-Protection', '1; mode=block');
+        $response->assertHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+        $healthResponse = $this->get('/up');
+        $healthResponse->assertStatus(200);
+    }
 }
 
 
