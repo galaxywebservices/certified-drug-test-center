@@ -70,9 +70,13 @@
                         @endif
                     </td>
                     <td style="text-align:right;">
-                        <div style="display:inline-flex; gap:6px;">
-                            <a href="{{ route('admin.locations.edit', $loc) }}" class="btn btn-navy btn-sm">Edit</a>
-                            <a href="https://maps.google.com/?q={{ urlencode($loc->address1 . ', ' . $loc->city . ', ' . $loc->state . ' ' . $loc->zip) }}" target="_blank" class="btn btn-outline btn-sm" title="Google Maps">📍 Map</a>
+                        <div class="action-btn-group">
+                            <a href="https://maps.google.com/?q={{ urlencode($loc->address1 . ', ' . $loc->city . ', ' . $loc->state . ' ' . $loc->zip) }}" target="_blank" class="action-btn action-btn-view" title="Open in Google Maps" aria-label="Map">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            </a>
+                            <a href="{{ route('admin.locations.edit', $loc) }}" class="action-btn action-btn-edit" title="Edit Facility" aria-label="Edit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                            </a>
                         </div>
                     </td>
                 </tr>

@@ -63,9 +63,13 @@
                         @endif
                     </td>
                     <td style="text-align:right;">
-                        <div style="display:inline-flex; gap:6px;">
-                            <a href="{{ route('admin.cities.edit', $city) }}" class="btn btn-navy btn-sm">Edit SEO Guide</a>
-                            <a href="{{ url('/drug-testing-' . $city->slug . '-' . strtolower($city->state->abbr)) }}" target="_blank" class="btn btn-outline btn-sm" title="View Live">Live &rarr;</a>
+                        <div class="action-btn-group">
+                            <a href="{{ url('/drug-testing-' . $city->slug . '-' . strtolower($city->state->abbr)) }}" target="_blank" class="action-btn action-btn-view" title="View Live City SEO Guide" aria-label="View">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </a>
+                            <a href="{{ route('admin.cities.edit', $city) }}" class="action-btn action-btn-edit" title="Edit City SEO Guide" aria-label="Edit">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                            </a>
                         </div>
                     </td>
                 </tr>

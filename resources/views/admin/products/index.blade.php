@@ -91,13 +91,19 @@
                             @endif
                         </td>
                         <td style="text-align:right;">
-                            <div style="display:inline-flex; gap:6px;">
-                                <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-navy btn-sm">Edit</a>
-                                <a href="{{ url('/product/' . $product->slug) }}" target="_blank" class="btn btn-outline btn-sm">View</a>
-                                <form action="{{ route('admin.products.destroy', $product) }}" method="POST" onsubmit="return confirm('Delete this product?');" style="display:inline;">
+                            <div class="action-btn-group">
+                                <a href="{{ url('/product/' . $product->slug) }}" target="_blank" class="action-btn action-btn-view" title="View Live Product" aria-label="View">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </a>
+                                <a href="{{ route('admin.products.edit', $product) }}" class="action-btn action-btn-edit" title="Edit Product" aria-label="Edit">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                </a>
+                                <form action="{{ route('admin.products.destroy', $product) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this product?');" style="display:inline; margin:0;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline btn-sm" style="color:#C1121F; border-color:#FECACA;">Delete</button>
+                                    <button type="submit" class="action-btn action-btn-delete" title="Delete Product" aria-label="Delete">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                    </button>
                                 </form>
                             </div>
                         </td>

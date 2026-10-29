@@ -19,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        \Illuminate\Pagination\Paginator::defaultView('admin.partials.pagination');
+        \Illuminate\Pagination\Paginator::defaultSimpleView('admin.partials.pagination');
     }
 }

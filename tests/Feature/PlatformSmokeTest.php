@@ -481,6 +481,143 @@ class PlatformSmokeTest extends TestCase
         $healthResponse = $this->get('/up');
         $healthResponse->assertStatus(200);
     }
+
+    public function test_admin_login_page_renders_logo_and_forgot_password_link(): void
+    {
+        $response = $this->get('/admin/login');
+        $response->assertStatus(200);
+        $response->assertSee('images/logo.png');
+        $response->assertSee('Forgot password?');
+        $response->assertSee(route('admin.password.request'));
+    }
+
+    public function test_admin_forgot_password_and_reset_workflow(): void
+    {
+        $admin = \App\Models\User::firstOrCreate(
+            ['email' => 'admin@certifieddrugtesting.com'],
+            [
+                'name' => 'Super Administrator',
+                'password' => \Illuminate\Support\Facades\Hash::make('password123'),
+                'is_super_admin' => true,
+            ]
+        );
+
+        // 1. Visit forgot password page
+        $this->get(route('admin.password.request'))
+            ->assertStatus(200)
+            ->assertSee('Reset Administrator Password')
+            ->assertSee('images/logo.png');
+
+        // 2. Request reset link
+        $postResponse = $this->post(route('admin.password.email'), [
+            'email' => $admin->email,
+        ]);
+        $postResponse->assertSessionHas('status');
+
+        $record = \Illuminate\Support\Facades\DB::table('password_reset_tokens')
+            ->where('email', $admin->email)
+            ->first();
+        $this->assertNotNull($record);
+
+        // 3. View reset form with token
+        $this->get(route('admin.password.reset', ['token' => $record->token, 'email' => $admin->email]))
+            ->assertStatus(200)
+            ->assertSee('Set New Password');
+
+        // 4. Update password
+        $resetResponse = $this->post(route('admin.password.update'), [
+            'token' => $record->token,
+            'email' => $admin->email,
+            'password' => 'NewSecurePassword!2026',
+            'password_confirmation' => 'NewSecurePassword!2026',
+        ]);
+        $resetResponse->assertRedirect(route('admin.login'));
+        $resetResponse->assertSessionHas('status');
+
+        $admin->refresh();
+        $this->assertTrue(\Illuminate\Support\Facades\Hash::check('NewSecurePassword!2026', $admin->password));
+    }
+
+    public function test_admin_profile_and_password_update_flow(): void
+    {
+        $admin = \App\Models\User::where('is_super_admin', true)->first();
+        if (!$admin) {
+            $admin = \App\Models\User::create([
+                'name' => 'Test Super Admin',
+                'email' => 'superadmin@test.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('currentpassword123'),
+                'is_super_admin' => true,
+            ]);
+        } else {
+            $admin->password = \Illuminate\Support\Facades\Hash::make('currentpassword123');
+            $admin->save();
+        }
+
+        // 1. Access profile page
+        $profileResponse = $this->actingAs($admin)->get(route('admin.profile'));
+        $profileResponse->assertStatus(200);
+        $profileResponse->assertSee('Admin Profile & Security');
+        $profileResponse->assertSee('Administrator Account Details');
+        $profileResponse->assertSee('Change Account Password');
+
+        // 2. Update profile information
+        $updateResponse = $this->actingAs($admin)->put(route('admin.profile.update'), [
+            'name' => 'Lead Super Admin',
+            'email' => $admin->email,
+            'phone' => '(800) 221-4291',
+        ]);
+        $updateResponse->assertRedirect(route('admin.profile'));
+        $updateResponse->assertSessionHas('success');
+
+        $admin->refresh();
+        $this->assertEquals('Lead Super Admin', $admin->name);
+
+        // 3. Update password with incorrect current password (fails)
+        $failResponse = $this->actingAs($admin)->put(route('admin.profile.password'), [
+            'current_password' => 'wrongpassword',
+            'password' => 'UpdatedSecret999!',
+            'password_confirmation' => 'UpdatedSecret999!',
+        ]);
+        $failResponse->assertSessionHasErrors(['current_password']);
+
+        // 4. Update password with correct current password (succeeds)
+        $passSuccess = $this->actingAs($admin)->put(route('admin.profile.password'), [
+            'current_password' => 'currentpassword123',
+            'password' => 'UpdatedSecret999!',
+            'password_confirmation' => 'UpdatedSecret999!',
+        ]);
+        $passSuccess->assertRedirect(route('admin.profile'));
+        $passSuccess->assertSessionHas('success');
+
+        $admin->refresh();
+        $this->assertTrue(\Illuminate\Support\Facades\Hash::check('UpdatedSecret999!', $admin->password));
+    }
+
+    public function test_admin_products_renders_action_buttons_and_pagination(): void
+    {
+        $admin = \App\Models\User::where('is_super_admin', true)->first();
+        if (!$admin) {
+            $admin = \App\Models\User::create([
+                'name' => 'Test Super Admin',
+                'email' => 'superadmin2@test.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('secret'),
+                'is_super_admin' => true,
+            ]);
+        }
+
+        $response = $this->actingAs($admin)->get('/admin/products');
+        $response->assertStatus(200);
+        $response->assertSee('action-btn-group');
+        $response->assertSee('action-btn-view');
+        $response->assertSee('action-btn-edit');
+        $response->assertSee('action-btn-delete');
+        $response->assertSee('admin-pagination-nav');
+        $response->assertSee('admin-pagination-list');
+        $response->assertSee('page-link');
+        $response->assertSee('sidebar-logo-card');
+        $response->assertSee('sidebar-footer');
+        $response->assertSee('sidebar-btn-logout');
+    }
 }
 
 

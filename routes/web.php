@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AdminPageController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminOrderController;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\OrderTrackingController;
@@ -152,14 +153,23 @@ Route::get('/{state_name}-drug-testing', function(string $stateName) {
 */
 
 Route::prefix('admin')->group(function () {
-    // Guest Admin Auth
+    // Guest Admin Auth & Recovery
     Route::get('/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+    Route::get('/forgot-password', [AdminAuthController::class, 'showForgotPassword'])->name('admin.password.request');
+    Route::post('/forgot-password', [AdminAuthController::class, 'sendResetLink'])->middleware('throttle:5,1')->name('admin.password.email');
+    Route::get('/reset-password/{token}', [AdminAuthController::class, 'showResetPassword'])->name('admin.password.reset');
+    Route::post('/reset-password', [AdminAuthController::class, 'resetPassword'])->middleware('throttle:10,1')->name('admin.password.update');
 
     // Authenticated Super Admin Protected Routes
     Route::middleware(['auth', 'super_admin'])->group(function () {
         Route::get('/', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+
+        // Super Admin Profile & Password Management
+        Route::get('/profile', [AdminProfileController::class, 'edit'])->name('admin.profile');
+        Route::put('/profile', [AdminProfileController::class, 'updateProfile'])->name('admin.profile.update');
+        Route::put('/profile/password', [AdminProfileController::class, 'updatePassword'])->name('admin.profile.password');
 
         // Products Management
         Route::resource('products', AdminProductController::class, ['as' => 'admin']);

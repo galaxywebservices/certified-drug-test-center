@@ -43,20 +43,43 @@
             z-index: 100;
         }
 
-        .sidebar-brand {
-            padding: 24px 20px;
+        .sidebar-brand-box {
+            padding: 16px 18px;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sidebar-logo-card {
+            background: #FFFFFF;
+            border-radius: 8px;
+            padding: 8px 12px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
             text-decoration: none;
-            color: #fff;
+        }
+
+        .sidebar-logo-img {
+            max-height: 38px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        .sidebar-badge-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         .sidebar-brand-badge {
             background: var(--admin-crimson);
             color: #fff;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 800;
             padding: 3px 7px;
             border-radius: 4px;
@@ -64,15 +87,9 @@
             letter-spacing: 0.5px;
         }
 
-        .sidebar-brand-text {
-            font-size: 15px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-        }
-
         .sidebar-nav {
             list-style: none;
-            padding: 20px 12px;
+            padding: 16px 12px;
             flex-grow: 1;
             overflow-y: auto;
         }
@@ -112,15 +129,206 @@
         }
 
         .sidebar-footer {
-            padding: 16px;
+            padding: 14px 16px;
             border-top: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-user-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #E2E8F0;
+            padding: 6px 8px;
+            border-radius: 6px;
+            transition: background 0.15s;
+        }
+        .sidebar-user-card:hover { background: rgba(255, 255, 255, 0.08); }
+
+        .sidebar-user-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--admin-crimson);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-user-info { flex-grow: 1; min-width: 0; }
+        .sidebar-user-name { font-size: 13px; font-weight: 700; color: #F8FAFC; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .sidebar-user-email { font-size: 11px; color: #94A3B8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        .sidebar-actions-row { display: flex; gap: 8px; }
+        .sidebar-btn-profile {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            color: #E2E8F0;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+        .sidebar-btn-profile:hover { background: rgba(255, 255, 255, 0.16); color: #fff; }
+
+        .sidebar-btn-logout {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: rgba(193, 18, 31, 0.15);
+            color: #FCA5A5;
+            border: 1px solid rgba(193, 18, 31, 0.35);
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .sidebar-btn-logout:hover { background: #C1121F; color: #fff; border-color: #C1121F; }
+
+        /* Modern Action Icon Buttons */
+        .action-btn-group {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            background: transparent;
+            padding: 0;
+        }
+        .action-btn svg {
+            width: 15px;
+            height: 15px;
+            display: block;
+        }
+        .action-btn-view {
+            background: #F0F9FF;
+            color: #0284C7;
+            border-color: #BAE6FD;
+        }
+        .action-btn-view:hover {
+            background: #0284C7;
+            color: #FFFFFF;
+            border-color: #0284C7;
+            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.25);
+        }
+        .action-btn-edit {
+            background: #F1F5F9;
+            color: #0B2545;
+            border-color: #CBD5E1;
+        }
+        .action-btn-edit:hover {
+            background: #0B2545;
+            color: #FFFFFF;
+            border-color: #0B2545;
+            box-shadow: 0 2px 4px rgba(11, 37, 69, 0.25);
+        }
+        .action-btn-delete {
+            background: #FEF2F2;
+            color: #DC2626;
+            border-color: #FECACA;
+        }
+        .action-btn-delete:hover {
+            background: #DC2626;
+            color: #FFFFFF;
+            border-color: #DC2626;
+            box-shadow: 0 2px 4px rgba(220, 38, 38, 0.25);
+        }
+
+        /* Modern Admin Pagination */
+        .admin-pagination-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+            width: 100%;
         }
-
-        .sidebar-user { font-size: 13px; color: #E2E8F0; }
-        .sidebar-user small { display: block; color: var(--admin-slate-500); font-size: 11px; }
+        .admin-pagination-info {
+            font-size: 13px;
+            color: #64748B;
+        }
+        .admin-pagination-info .font-bold {
+            font-weight: 700;
+            color: #1E293B;
+        }
+        .admin-pagination-list {
+            display: inline-flex;
+            align-items: center;
+            list-style: none;
+            gap: 4px;
+            margin: 0;
+            padding: 0;
+        }
+        .page-item .page-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 34px;
+            height: 34px;
+            padding: 0 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #334155;
+            background: #FFFFFF;
+            border: 1px solid #CBD5E1;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+        .page-item .page-link:hover {
+            background: #F1F5F9;
+            border-color: #94A3B8;
+            color: #0B2545;
+        }
+        .page-item.active .page-link {
+            background: #0B2545;
+            color: #FFFFFF;
+            border-color: #0B2545;
+            box-shadow: 0 2px 4px rgba(11, 37, 69, 0.2);
+        }
+        .page-item.disabled .page-link {
+            background: #F8FAFC;
+            color: #94A3B8;
+            border-color: #E2E8F0;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        .page-item .page-link.dots {
+            border: none;
+            background: transparent;
+            color: #94A3B8;
+            min-width: 24px;
+        }
 
         /* Main Workspace */
         .admin-main { flex-grow: 1; display: flex; flex-direction: column; min-width: 0; }
@@ -258,10 +466,15 @@
 
     <!-- Sidebar Navigation -->
     <aside class="admin-sidebar">
-        <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
-            <span class="sidebar-brand-badge">Super Admin</span>
-            <span class="sidebar-brand-text">Certified Drug Test</span>
-        </a>
+        <div class="sidebar-brand-box">
+            <a href="{{ route('admin.dashboard') }}" class="sidebar-logo-card" title="Certified Drug Test Centers Control Panel">
+                <img src="{{ asset('images/logo.png') }}" alt="Certified Drug Test Centers" class="sidebar-logo-img">
+            </a>
+            <div class="sidebar-badge-row">
+                <span class="sidebar-brand-badge">Super Admin</span>
+                <span style="font-size:11px; color:#94A3B8; font-weight:600;">Control Center</span>
+            </div>
+        </div>
 
         <ul class="sidebar-nav">
             <li class="sidebar-section-title">Core Management</li>
@@ -269,6 +482,12 @@
                 <a href="{{ route('admin.dashboard') }}" class="sidebar-nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
                     <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     Dashboard
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="{{ route('admin.profile') }}" class="sidebar-nav-link {{ request()->routeIs('admin.profile*') ? 'active' : '' }}">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    Admin Profile &amp; Password
                 </a>
             </li>
             <li class="sidebar-nav-item">
@@ -332,16 +551,28 @@
         </ul>
 
         <div class="sidebar-footer">
-            <div class="sidebar-user">
-                {{ auth()->user()->name ?? 'Administrator' }}
-                <small>{{ auth()->user()->email ?? 'admin' }}</small>
+            <a href="{{ route('admin.profile') }}" class="sidebar-user-card" title="Administrator Profile & Security">
+                <div class="sidebar-user-avatar">
+                    {{ strtoupper(substr(auth()->user()->name ?? 'SA', 0, 2)) }}
+                </div>
+                <div class="sidebar-user-info">
+                    <div class="sidebar-user-name">{{ auth()->user()->name ?? 'Administrator' }}</div>
+                    <div class="sidebar-user-email">{{ auth()->user()->email ?? 'admin' }}</div>
+                </div>
+            </a>
+            <div class="sidebar-actions-row">
+                <a href="{{ route('admin.profile') }}" class="sidebar-btn-profile" title="Admin Profile & Security">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <span>Profile</span>
+                </a>
+                <form action="{{ route('admin.logout') }}" method="POST" style="flex:1; margin:0;">
+                    @csrf
+                    <button type="submit" class="sidebar-btn-logout" title="Sign Out of Admin Portal" style="width:100%;">
+                        <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        <span>Logout</span>
+                    </button>
+                </form>
             </div>
-            <form action="{{ route('admin.logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="btn btn-outline btn-sm" title="Log Out" style="background:transparent; color:#CBD5E1; border-color:rgba(255,255,255,0.2);">
-                    Log Out
-                </button>
-            </form>
         </div>
     </aside>
 

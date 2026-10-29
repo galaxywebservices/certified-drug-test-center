@@ -73,13 +73,19 @@
                             <small style="color:#64748B;">{{ $page->updated_at ? $page->updated_at->diffForHumans() : 'N/A' }}</small>
                         </td>
                         <td style="text-align:right;">
-                            <div style="display:inline-flex; gap:6px;">
-                                <a href="{{ route('admin.pages.edit', $page) }}" class="btn btn-navy btn-sm">Edit / PageBuilder</a>
-                                <a href="{{ url('/' . $page->slug) }}" target="_blank" class="btn btn-outline btn-sm">View Live</a>
-                                <form action="{{ route('admin.pages.destroy', $page) }}" method="POST" onsubmit="return confirm('Delete page: {{ $page->title }}?');" style="display:inline;">
+                            <div class="action-btn-group">
+                                <a href="{{ url('/' . $page->slug) }}" target="_blank" class="action-btn action-btn-view" title="View Live Page" aria-label="View">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </a>
+                                <a href="{{ route('admin.pages.edit', $page) }}" class="action-btn action-btn-edit" title="Edit Page & PageBuilder" aria-label="Edit">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                                </a>
+                                <form action="{{ route('admin.pages.destroy', $page) }}" method="POST" onsubmit="return confirm('Delete page: {{ $page->title }}?');" style="display:inline; margin:0;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-outline btn-sm" style="color:#C1121F; border-color:#FECACA;">Delete</button>
+                                    <button type="submit" class="action-btn action-btn-delete" title="Delete Page" aria-label="Delete">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                    </button>
                                 </form>
                             </div>
                         </td>
