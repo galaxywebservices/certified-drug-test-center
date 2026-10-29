@@ -384,6 +384,90 @@ class PlatformSmokeTest extends TestCase
             }
         }
     }
+
+    public function test_employer_portal_login_page_loads_and_redirects_aliases(): void
+    {
+        $response = $this->get('/employers/portal');
+        $response->assertStatus(200);
+        $response->assertSee('Corporate Employer');
+        $response->assertSee('Authorized Account Sign In');
+        $response->assertSee('Instant 1-Click Demo Login');
+
+        $this->get('/employer-portal')->assertRedirect('/employers/portal');
+        $this->get('/portal')->assertRedirect('/employers/portal');
+        $this->get('/corporate/portal')->assertRedirect('/employers/portal');
+    }
+
+    public function test_employer_portal_demo_login_authenticates_and_shows_dashboard(): void
+    {
+        $response = $this->post('/employers/portal/demo');
+        $response->assertRedirect('/employers/portal');
+
+        $dashboardResponse = $this->get('/employers/portal');
+        $dashboardResponse->assertStatus(200);
+        $dashboardResponse->assertSee('Apex Logistics &amp; Fleet Services Inc.', false);
+        $dashboardResponse->assertSee('CDTC-CORP-DEMO');
+        $dashboardResponse->assertSee('Active Candidate Testing Pipeline');
+        $dashboardResponse->assertSee('Dispatch New Candidate Pass');
+        $dashboardResponse->assertSee('Export Compliance CSV');
+    }
+
+    public function test_employer_portal_dispatches_new_candidate_pass(): void
+    {
+        // First ensure demo account is logged in
+        $this->post('/employers/portal/demo');
+
+        $product = \App\Models\Product::where('is_active', true)->first();
+        $location = \App\Models\Location::where('is_active', true)->first();
+
+        $dispatchData = [
+            'first_name' => 'Harrison',
+            'last_name' => 'Wells',
+            'email' => 'hwells@apexlogistics-demo.com',
+            'phone' => '(407) 555-9876',
+            'candidate_department' => 'Heavy Fleet Logistics',
+            'candidate_job_title' => 'Hazmat Transport Driver',
+            'test_reason' => 'Pre-Employment',
+            'product_id' => $product ? $product->id : 1,
+            'location_id' => $location ? $location->id : 1,
+            'notes' => 'Priority dispatch for new terminal hire',
+        ];
+
+        $response = $this->post('/employers/portal/dispatch', $dispatchData);
+        $response->assertRedirect('/employers/portal');
+        $response->assertSessionHas('portal_success');
+
+        $this->assertDatabaseHas('orders', [
+            'donor_first_name' => 'Harrison',
+            'donor_last_name' => 'Wells',
+            'donor_email' => 'hwells@apexlogistics-demo.com',
+            'candidate_department' => 'Heavy Fleet Logistics',
+            'status' => 'registered',
+        ]);
+    }
+
+    public function test_employer_portal_compliance_csv_export(): void
+    {
+        $this->post('/employers/portal/demo');
+
+        $response = $this->get('/employers/portal/export');
+        $response->assertStatus(200);
+        $response->assertHeader('Content-Type', 'text/csv; charset=UTF-8');
+        
+        $content = $response->streamedContent();
+        $this->assertStringContainsString('Account Code', $content);
+        $this->assertStringContainsString('CCF Accession #', $content);
+        $this->assertStringContainsString('Apex Logistics', $content);
+    }
+
+    public function test_employer_portal_random_compliance_draw(): void
+    {
+        $this->post('/employers/portal/demo');
+
+        $response = $this->post('/employers/portal/random-draw', ['draw_rate' => 25]);
+        $response->assertRedirect('/employers/portal');
+        $response->assertSessionHas('portal_notice');
+    }
 }
 
 

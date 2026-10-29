@@ -43,6 +43,9 @@
                         <a href="#corporate-register" class="btn btn-primary" style="padding:14px 28px; font-size:16px;">
                             Setup Corporate Account &rarr;
                         </a>
+                        <a href="{{ route('employers.portal') }}" class="btn btn-outline" style="background:#0B2545; color:#fff; border-color:#0B2545; padding:14px 24px; font-size:15px; font-weight:700;">
+                            🏢 Corporate Portal Login
+                        </a>
                         <a href="#volume-calculator" class="btn btn-outline" style="background:#fff; color:#0B2545; border-color:#CBD5E1; padding:14px 24px; font-size:15px; font-weight:700;">
                             Calculate Volume Savings
                         </a>

@@ -18,6 +18,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\OrderTrackingController;
 use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\EmployerPortalController;
 use App\Http\Controllers\TestFinderController;
 use App\Http\Controllers\ReviewController;
 
@@ -89,6 +90,20 @@ Route::redirect('/corporate-accounts', '/employers');
 Route::redirect('/business-solutions', '/employers');
 Route::redirect('/employer-accounts', '/employers');
 Route::redirect('/corporate', '/employers');
+
+// Employer Self-Service Portal & Candidate Pipeline Suite
+Route::get('/employers/portal', [EmployerPortalController::class, 'index'])->name('employers.portal');
+Route::post('/employers/portal/login', [EmployerPortalController::class, 'login'])->name('employers.portal.login');
+Route::post('/employers/portal/demo', [EmployerPortalController::class, 'demoLogin'])->name('employers.portal.demo');
+Route::post('/employers/portal/logout', [EmployerPortalController::class, 'logout'])->name('employers.portal.logout');
+Route::post('/employers/portal/dispatch', [EmployerPortalController::class, 'dispatchCandidatePass'])->name('employers.portal.dispatch');
+Route::post('/employers/portal/orders/{order}/resend-pass', [EmployerPortalController::class, 'resendPass'])->name('employers.portal.resend-pass');
+Route::get('/employers/portal/export', [EmployerPortalController::class, 'exportCsv'])->name('employers.portal.export');
+Route::post('/employers/portal/random-draw', [EmployerPortalController::class, 'randomDraw'])->name('employers.portal.random-draw');
+
+Route::redirect('/employer-portal', '/employers/portal');
+Route::redirect('/corporate/portal', '/employers/portal');
+Route::redirect('/portal', '/employers/portal');
 
 // Guided Drug Test Finder & Medical Recommender Tool
 Route::get('/find-my-test', [TestFinderController::class, 'index'])->name('test-finder.index');

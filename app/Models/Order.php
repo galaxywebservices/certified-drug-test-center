@@ -36,6 +36,9 @@ class Order extends Model
         'mro_verified_at',
         'mro_notes',
         'notes',
+        'corporate_account_id',
+        'candidate_department',
+        'candidate_job_title',
     ];
 
     protected $casts = [
@@ -55,6 +58,11 @@ class Order extends Model
     public function location(): BelongsTo
     {
         return $this->belongsTo(Location::class);
+    }
+
+    public function corporateAccount(): BelongsTo
+    {
+        return $this->belongsTo(CorporateAccount::class);
     }
 
     public function getDonorFullNameAttribute(): string

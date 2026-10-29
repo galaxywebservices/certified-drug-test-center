@@ -321,6 +321,7 @@
                     <h4>DOT & Corporate</h4>
                     <ul class="footer-links">
                         <li><a href="{{ route('employers.index') }}" style="color:#F59E0B; font-weight:700;">Corporate Accounts &amp; Pricing</a></li>
+                        <li><a href="{{ route('employers.portal') }}" style="color:#38BDF8; font-weight:700;">🏢 Employer Portal Login</a></li>
                         <li><a href="{{ route('reviews.index') }}" style="color:#34D399; font-weight:700;">Verified Customer Reviews (4.9★)</a></li>
                         <li><a href="{{ url('/category/dot') }}">FMCSA Drug & Alcohol Testing</a></li>
                         <li><a href="{{ url('/product/dot-physical') }}">DOT Physical Examination (NRCME)</a></li>
