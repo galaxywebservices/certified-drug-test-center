@@ -265,22 +265,16 @@
 
     <!-- Accreditation & Partner Bar -->
     <section class="partner-logo-bar" aria-label="Accreditation & Certified Laboratory Network">
-        <div class="container">
-            <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#64748B; margin-bottom:14px;">
-                Certified National Specimen Collection & SAMHSA Accredited Laboratory Network
+        <div class="container" style="text-align:center;">
+            <p style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#64748B; margin-bottom:18px;">
+                Certified National Specimen Collection &amp; SAMHSA Accredited Laboratory Network
             </p>
-            <div class="partner-logos-wrap">
-                <span class="partner-logo-item">Quest Diagnostics™</span>
-                <span style="color:#CBD5E1">•</span>
-                <span class="partner-logo-item">Labcorp®</span>
-                <span style="color:#CBD5E1">•</span>
-                <span class="partner-logo-item">SAMHSA Certified</span>
-                <span style="color:#CBD5E1">•</span>
-                <span class="partner-logo-item">DATIA Accredited</span>
-                <span style="color:#CBD5E1">•</span>
-                <span class="partner-logo-item">NDASA Member</span>
-                <span style="color:#CBD5E1">•</span>
-                <span class="partner-logo-item">SAPAA Compliant</span>
+            <div class="partner-credbar-wrap" style="display:flex; justify-content:center; align-items:center;">
+                <img src="{{ asset('images/credbar.jpg') }}" 
+                     alt="Accredited Laboratory & Network Partners: Quest Diagnostics, LabCorp, NDASA, DATIA, Alere, SAPAA, i3screen" 
+                     class="partner-credbar-img" 
+                     style="max-width:100%; height:auto; max-height:60px; object-fit:contain;" 
+                     loading="lazy">
             </div>
         </div>
     </section>
