@@ -57,6 +57,7 @@ Route::redirect('/terms-of-service', '/terms-and-conditions');
 Route::redirect('/terms', '/terms-and-conditions');
 Route::redirect('/privacy', '/privacy-policy');
 Route::redirect('/contact', '/contact-us');
+Route::redirect('/login', '/admin/login')->name('login');
 
 // Contact Us & Corporate Consultation
 Route::get('/contact-us', [ContactController::class, 'show'])->name('contact.show');
@@ -72,10 +73,11 @@ Route::get('/checkout/{slug?}', [CheckoutController::class, 'index'])->name('che
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 Route::get('/checkout/confirmation/{token}', [CheckoutController::class, 'confirmation'])->name('checkout.confirmation');
 
-// Order Tracking & Electronic Donor Pass Recovery
+// Order Tracking, Electronic Donor Pass & MRO Certificates
 Route::get('/track-order', [OrderTrackingController::class, 'index'])->name('order.track');
 Route::post('/track-order', [OrderTrackingController::class, 'lookup'])->name('order.track.lookup');
 Route::post('/track-order/resend', [OrderTrackingController::class, 'resend'])->name('order.track.resend');
+Route::get('/orders/certificate/{token}', [\App\Http\Controllers\OrderCertificateController::class, 'show'])->name('orders.certificate');
 Route::redirect('/donor-pass', '/track-order');
 Route::redirect('/order-status', '/track-order');
 Route::redirect('/order-tracking', '/track-order');
@@ -161,6 +163,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/orders/export', [AdminOrderController::class, 'export'])->name('admin.orders.export');
         Route::get('/orders', [AdminOrderController::class, 'index'])->name('admin.orders.index');
         Route::get('/orders/{order}', [AdminOrderController::class, 'show'])->name('admin.orders.show');
+        Route::get('/orders/{order}/certificate', [\App\Http\Controllers\OrderCertificateController::class, 'adminShow'])->name('admin.orders.certificate');
         Route::post('/orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.orders.update-status');
         Route::post('/orders/{order}/resend-pass', [AdminOrderController::class, 'resendPass'])->name('admin.orders.resend-pass');
 

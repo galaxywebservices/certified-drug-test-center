@@ -349,6 +349,41 @@ class PlatformSmokeTest extends TestCase
             ]);
         }
     }
+
+    public function test_donor_mro_certificate_loads_with_panel_breakdown_and_signatures()
+    {
+        $order = \App\Models\Order::first();
+        if ($order) {
+            $response = $this->get("/orders/certificate/{$order->donor_pass_token}");
+            $response->assertStatus(200);
+            $response->assertSee('Certified Drug Test Centers');
+            $response->assertSee('National Medical Review Office');
+            $response->assertSee('10D0953841'); // CLIA number
+            $response->assertSee('Substance / Drug Class Analyzed');
+            $response->assertSee('Dr. Robert S. Vance, M.D.');
+            $response->assertSee('AAMRO / MROCC');
+            $response->assertSee('Print / Save Official PDF');
+        }
+    }
+
+    public function test_admin_mro_certificate_access_control()
+    {
+        $order = \App\Models\Order::first();
+        if ($order) {
+            // Guest should be redirected to login
+            $guestResponse = $this->get("/admin/orders/{$order->id}/certificate");
+            $guestResponse->assertRedirect('/admin/login');
+
+            // Authenticated Super Admin should see the certificate
+            $admin = \App\Models\User::where('is_super_admin', true)->first();
+            if ($admin) {
+                $adminResponse = $this->actingAs($admin)->get("/admin/orders/{$order->id}/certificate");
+                $adminResponse->assertStatus(200);
+                $adminResponse->assertSee('Official MRO Laboratory Report');
+                $adminResponse->assertSee($order->order_number);
+            }
+        }
+    }
 }
 
 

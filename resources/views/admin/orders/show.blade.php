@@ -7,6 +7,9 @@
         Resend Donor Pass Email
     </button>
 </form>
+<a href="{{ route('admin.orders.certificate', $order) }}" target="_blank" class="btn btn-navy btn-sm">
+    📄 View Official MRO Certificate
+</a>
 <a href="{{ route('checkout.confirmation', $order->donor_pass_token) }}" target="_blank" class="btn btn-primary btn-sm">
     Print Electronic Donor Pass
 </a>

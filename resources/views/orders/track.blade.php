@@ -349,12 +349,41 @@
             </div>
         </div>
 
+        @if($order->status === 'completed' || !empty($order->result_outcome))
+        <!-- Official MRO Lab Result Certificate Available Banner -->
+        <div class="no-print" style="background:#F0FDF4; border:2px solid #16A34A; border-radius:10px; padding:20px 24px; margin-bottom:24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; box-shadow:0 4px 12px rgba(22, 163, 74, 0.08);">
+            <div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="badge badge-success" style="font-size:11px; font-weight:800; text-transform:uppercase;">Official MRO Determination Ready</span>
+                    @if($order->result_outcome === 'negative')
+                        <span style="font-size:12px; font-weight:800; color:#15803D;">● Verified Negative (Passed)</span>
+                    @elseif($order->result_outcome === 'positive')
+                        <span style="font-size:12px; font-weight:800; color:#B91C1C;">● Verified Positive (Non-Negative)</span>
+                    @endif
+                </div>
+                <h3 style="font-size:18px; font-weight:800; color:#0B2545; margin:6px 0 2px;">
+                    Official Laboratory Drug Test Result Certificate
+                </h3>
+                <p style="font-size:13px; color:#475569; margin:0;">
+                    Your official Medical Review Officer (MRO) certified toxicology report with CLIA laboratory credentials is ready to view and download.
+                </p>
+            </div>
+            <a href="{{ route('orders.certificate', $order->donor_pass_token) }}" target="_blank" class="btn btn-primary" style="white-space:nowrap; display:inline-flex; align-items:center; gap:8px;">
+                <span>📄</span> View / Print Official Certificate &rarr;
+            </a>
+        </div>
+        @endif
+
         <!-- Action Toolbar -->
         <div class="no-print" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
             <div style="font-size:14px; font-weight:700; color:#0B2545;">
                 Electronic Donor Pass • Order #{{ $order->order_number }}
             </div>
             <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <a href="{{ route('orders.certificate', $order->donor_pass_token) }}" target="_blank" class="btn btn-outline-navy btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
+                    <span>📄</span> MRO Certificate
+                </a>
+
                 <button type="button" onclick="window.print()" class="btn btn-navy btn-sm" style="display:inline-flex; align-items:center; gap:6px;">
                     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
                     Print Donor Pass
