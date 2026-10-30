@@ -493,10 +493,10 @@ class PlatformSmokeTest extends TestCase
 
     public function test_admin_forgot_password_and_reset_workflow(): void
     {
-        $admin = \App\Models\User::firstOrCreate(
-            ['email' => 'admin@certifieddrugtesting.com'],
+        $admin = \App\Models\User::updateOrCreate(
+            ['email' => 'test-forgot-pw@certifieddrugtesting.com'],
             [
-                'name' => 'Super Administrator',
+                'name' => 'Test Reset Admin',
                 'password' => \Illuminate\Support\Facades\Hash::make('password123'),
                 'is_super_admin' => true,
             ]
@@ -540,18 +540,14 @@ class PlatformSmokeTest extends TestCase
 
     public function test_admin_profile_and_password_update_flow(): void
     {
-        $admin = \App\Models\User::where('is_super_admin', true)->first();
-        if (!$admin) {
-            $admin = \App\Models\User::create([
+        $admin = \App\Models\User::updateOrCreate(
+            ['email' => 'test-profile-pw@certifieddrugtesting.com'],
+            [
                 'name' => 'Test Super Admin',
-                'email' => 'superadmin@test.com',
                 'password' => \Illuminate\Support\Facades\Hash::make('currentpassword123'),
                 'is_super_admin' => true,
-            ]);
-        } else {
-            $admin->password = \Illuminate\Support\Facades\Hash::make('currentpassword123');
-            $admin->save();
-        }
+            ]
+        );
 
         // 1. Access profile page
         $profileResponse = $this->actingAs($admin)->get(route('admin.profile'));
