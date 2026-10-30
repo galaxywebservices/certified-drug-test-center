@@ -52,9 +52,9 @@
             <button type="button" class="btn btn-primary btn-lg" onclick="openOrderModal('5-panel-non-dot', 'Schedule Drug Test', 89.99)">
                 Schedule Drug / Alcohol Test Online
             </button>
-            <a href="tel:18002214291" class="btn btn-outline-white btn-lg">
+            <a href="tel:18009854339" class="btn btn-outline-white btn-lg">
                 <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
-                Call to Schedule: (800) 221-4291
+                Call to Schedule: (800)-985-4339
             </a>
         </div>
     </div>
@@ -119,7 +119,7 @@
                 <div class="process-stars">★</div>
                 <h3>Schedule Your Test</h3>
                 <p>
-                    Select and purchase your drug or alcohol test online in under 2 minutes, or call our scheduling team at <strong>(800) 221-4291</strong>. Same-day walk-in service is readily available.
+                    Select and purchase your drug or alcohol test online in under 2 minutes, or call our scheduling team at <strong>(800)-985-4339</strong>. Same-day walk-in service is readily available.
                 </p>
             </div>
 
@@ -304,8 +304,8 @@
             <p style="font-size:14px; color:var(--color-text-muted); margin-bottom:14px;">
                 Need custom corporate panel configurations, steroid testing, or specialized synthetics (K2/Spice)?
             </p>
-            <a href="tel:18002214291" class="btn btn-outline-navy">
-                Consult With A Testing Specialist at (800) 221-4291
+            <a href="tel:18009854339" class="btn btn-outline-navy">
+                Consult With A Testing Specialist at (800)-985-4339
             </a>
         </div>
     </div>
@@ -323,7 +323,7 @@
             <button type="button" class="btn btn-primary btn-lg" onclick="openMobileQuoteModal()">
                 Request Mobile Testing Quote
             </button>
-            <a href="tel:18002214291" class="btn btn-outline-white btn-lg">
+            <a href="tel:18009854339" class="btn btn-outline-white btn-lg">
                 Speak With Mobile Dispatch
             </a>
         </div>
@@ -395,9 +395,9 @@
             <button type="button" class="btn btn-primary btn-lg" onclick="openOrderModal('5-panel-non-dot', 'Schedule Drug Test', 89.99)">
                 Schedule Drug Test Now
             </button>
-            <a href="tel:18002214291" class="btn btn-navy btn-lg">
+            <a href="tel:18009854339" class="btn btn-navy btn-lg">
                 <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
-                Call (800) 221-4291
+                Call (800)-985-4339
             </a>
         </div>
     </div>

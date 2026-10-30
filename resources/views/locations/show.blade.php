@@ -420,7 +420,7 @@
                     📍 <strong>{{ $location->address1 }} {{ $location->address2 }}</strong>, {{ $location->city }}, {{ $location->state }} {{ $location->zip }}
                 </p>
                 <div style="font-size:13px; color:#94A3B8; margin-top:8px;">
-                    Facility Phone: <a href="tel:{{ preg_replace('/[^0-9]/', '', $location->phone ?: '8002214291') }}" style="color:#CBD5E1; text-decoration:underline;">{{ $location->phone ?: '(800) 221-4291' }}</a> &nbsp;|&nbsp; National Dispatch: <a href="tel:8002214291" style="color:#CBD5E1; text-decoration:underline;">(800) 221-4291</a>
+                    Facility Phone: <a href="tel:{{ preg_replace('/[^0-9]/', '', $location->phone ?: '8009854339') }}" style="color:#CBD5E1; text-decoration:underline;">{{ $location->phone ?: '(800)-985-4339' }}</a> &nbsp;|&nbsp; National Dispatch: <a href="tel:8009854339" style="color:#CBD5E1; text-decoration:underline;">(800)-985-4339</a>
                 </div>
             </div>
 
@@ -698,8 +698,8 @@
                 <p style="font-size:13px; color:#CBD5E1; line-height:1.5; margin:0 0 14px;">
                     Our certified toxicologists and corporate testing advisors are available to assist you.
                 </p>
-                <a href="tel:8002214291" style="display:inline-block; background:#C1121F; color:#fff; font-weight:800; padding:10px 18px; border-radius:6px; text-decoration:none; font-size:14px;">
-                    📞 Call National Dispatch: (800) 221-4291
+                <a href="tel:8009854339" style="display:inline-block; background:#C1121F; color:#fff; font-weight:800; padding:10px 18px; border-radius:6px; text-decoration:none; font-size:14px;">
+                    📞 Call National Dispatch: (800)-985-4339
                 </a>
             </div>
         </div>
@@ -727,7 +727,7 @@ function copyAddressText() {
     "name": "{{ $location->name }} - Certified Drug Test Center",
     "image": "{{ asset('img/cdtc-logo-option2.svg') }}",
     "url": "{{ route('locations.show', $location->id) }}",
-    "telephone": "{{ $location->phone ?: '(800) 221-4291' }}",
+    "telephone": "{{ $location->phone ?: '(800)-985-4339' }}",
     "priceRange": "$$",
     "address": {
         "@type": "PostalAddress",

@@ -270,7 +270,7 @@
                                 </a>
                                 <div style="display:flex; align-items:center; gap:8px; font-size:13.5px; color:#64748B;">
                                     <span>Or call to register:</span>
-                                    <a href="tel:18002214291" style="color:#C1121F; font-weight:800; text-decoration:none;">(800) 221-4291</a>
+                                    <a href="tel:18009854339" style="color:#C1121F; font-weight:800; text-decoration:none;">(800)-985-4339</a>
                                 </div>
                             </div>
                         </div>

@@ -11,7 +11,7 @@ class ContactController extends Controller
     public function show()
     {
         $pageTitle = "Contact Certified Drug Test Centers | Nationwide Scheduling & Inquiries";
-        $metaDescription = "Get in touch with Certified Drug Test Centers for employer drug testing accounts, background screening quotes, or test scheduling questions. Toll-Free: (800) 221-4291.";
+        $metaDescription = "Get in touch with Certified Drug Test Centers for employer drug testing accounts, background screening quotes, or test scheduling questions. Toll-Free: (800)-985-4339.";
         $canonicalUrl = url('/contact-us');
 
         return view('pages.contact', compact('pageTitle', 'metaDescription', 'canonicalUrl'));

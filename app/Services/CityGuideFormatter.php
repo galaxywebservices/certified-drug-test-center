@@ -42,8 +42,8 @@ class CityGuideFormatter
 
             // Clean any trailing telephone numbers in body into clickable links (safely avoiding existing tags)
             $body = preg_replace(
-                '/(?<!tel:|tel:1|">)(\(?800\)?[-.\s]?221[-.\s]?4291)/',
-                '<a href="tel:18002214291" class="guide-phone-inline">$1</a>',
+                '/(?<!tel:|tel:1|">)(\(?800\)?[-.\s]?(?:985|221)[-.\s]?(?:4339|4291))/',
+                '<a href="tel:18009854339" class="guide-phone-inline">(800)-985-4339</a>',
                 $body
             );
 
@@ -75,7 +75,7 @@ class CityGuideFormatter
                             <span class="guide-step-badge">Fast &amp; Online</span>
                         </div>
                         <h4 class="guide-step-title">Order Test Online or By Phone</h4>
-                        <p class="guide-step-text">Choose and pay for your test online or dial <a href="tel:18002214291" class="guide-phone-inline">(800) 221-4291</a> to reach our scheduling center. Upfront payment is required as collection sites do not accept direct payments.</p>
+                        <p class="guide-step-text">Choose and pay for your test online or dial <a href="tel:18009854339" class="guide-phone-inline">(800)-985-4339</a> to reach our scheduling center. Upfront payment is required as collection sites do not accept direct payments.</p>
                     </div>
                     <div class="guide-step-card">
                         <div class="guide-step-header">

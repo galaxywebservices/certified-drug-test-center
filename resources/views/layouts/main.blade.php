@@ -61,7 +61,7 @@
                     'url' => url('/'),
                     'logo' => asset('images/logo.png'),
                     'image' => asset('images/logo.png'),
-                    'telephone' => '+1-800-221-4291',
+                    'telephone' => '+1-800-985-4339',
                     'priceRange' => '$$',
                     'currenciesAccepted' => 'USD',
                     'paymentAccepted' => 'Credit Card, Paytrace, Debit Card',
@@ -131,9 +131,9 @@
                 <span>•</span>
                 <span style="color:#C1121F; font-weight:700;">¡Hablamos Español!</span>
                 <span>•</span>
-                <a href="tel:18002214291" class="top-phone-link">
+                <a href="tel:18009854339" class="top-phone-link">
                     <svg width="15" height="15" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
-                    Call: (800) 221-4291
+                    Call: (800)-985-4339
                 </a>
             </div>
         </div>
@@ -158,7 +158,7 @@
                 </div>
                 <div class="header-phone-box">
                     <span class="header-phone-label">Toll Free Scheduling</span>
-                    <a href="tel:18002214291" class="header-phone-number">(800) 221-4291</a>
+                    <a href="tel:18009854339" class="header-phone-number">(800)-985-4339</a>
                 </div>
                 <a href="{{ route('checkout.index') }}" class="btn btn-primary">
                     Schedule A Test
@@ -291,7 +291,7 @@
                     </p>
                     <div class="footer-contact-item">
                         <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
-                        <span><strong>Phone:</strong> (800) 221-4291 (Toll Free)</span>
+                        <span><strong>Phone:</strong> (800)-985-4339 (Toll Free)</span>
                     </div>
                     <div class="footer-contact-item">
                         <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path></svg>
@@ -461,7 +461,7 @@
                     </div>
                     <div class="modal-form-group">
                         <label for="mobPhone">Phone Number *</label>
-                        <input type="tel" id="mobPhone" required placeholder="(800) 221-4291">
+                        <input type="tel" id="mobPhone" required placeholder="(800)-985-4339">
                     </div>
                 </div>
                 <div class="modal-form-group">
@@ -558,8 +558,8 @@
                 <a href="{{ route('locations.index') }}" style="font-size:13px; color:#0B2545; font-weight:700; text-decoration:none;">
                     &larr; Browse All States & Cities Directory
                 </a>
-                <a href="tel:18002214291" style="font-size:13px; color:#C1121F; font-weight:700; text-decoration:none;">
-                    Need Help? Call (800) 221-4291
+                <a href="tel:18009854339" style="font-size:13px; color:#C1121F; font-weight:700; text-decoration:none;">
+                    Need Help? Call (800)-985-4339
                 </a>
             </div>
         </div>

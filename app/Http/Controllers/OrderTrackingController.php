@@ -55,7 +55,7 @@ class OrderTrackingController extends Controller
             ->first();
 
         if (!$order) {
-            return back()->withInput()->with('error', 'No registration found matching Order #' . $orderNumber . ' and email ' . $email . '. Please check your receipt or contact national dispatch at (800) 221-4291.');
+            return back()->withInput()->with('error', 'No registration found matching Order #' . $orderNumber . ' and email ' . $email . '. Please check your receipt or contact national dispatch at (800)-985-4339.');
         }
 
         $pageTitle = "Order #{$order->order_number} Status & Donor Pass | Certified Drug Test Centers";
@@ -93,7 +93,7 @@ class OrderTrackingController extends Controller
             return back()->with('success', "Electronic Donor Pass has been re-sent to {$order->donor_email}. Please check your inbox and spam folder.");
         } catch (\Throwable $e) {
             Log::error('OrderTrackingController::resend error: ' . $e->getMessage());
-            return back()->with('error', 'Unable to send email right now. Please print your Donor Pass directly below or call dispatch at (800) 221-4291.');
+            return back()->with('error', 'Unable to send email right now. Please print your Donor Pass directly below or call dispatch at (800)-985-4339.');
         }
     }
 }

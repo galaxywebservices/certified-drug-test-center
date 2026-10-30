@@ -16,7 +16,7 @@ class SuperAdminSeeder extends Seeder
                 'name' => 'Super Administrator',
                 'password' => Hash::make('Admin@CDTC2026!'),
                 'is_super_admin' => true,
-                'phone' => '(800) 221-4291',
+                'phone' => '(800)-985-4339',
             ]
         );
     }

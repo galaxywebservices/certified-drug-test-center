@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
           Checking for "${query}"? Most prescription medications and pain relievers require a <strong>10 Panel + Exp Opiates</strong> or <strong>12 Panel Comprehensive</strong>.
         </div>
         <div style="margin-top:8px;">
-          <a href="tel:18002214291" style="color:#c1121f; font-weight:700; text-decoration:underline;">Call (800) 221-4291</a> to confirm exact laboratory coverage.
+          <a href="tel:18009854339" style="color:#c1121f; font-weight:700; text-decoration:underline;">Call (800)-985-4339</a> to confirm exact laboratory coverage.
         </div>
       `;
       substanceResult.classList.add('active');
@@ -339,7 +339,7 @@ function executeProductSearch(query) {
         resultsContainer.innerHTML = `
           <div class="search-empty-state">
             No exact tests found matching <strong>"${query}"</strong>.<br>
-            <span style="font-size:12px; margin-top:6px; display:inline-block;">Call our toxicologists at <a href="tel:18002214291" style="color:#C1121F; font-weight:700;">(800) 221-4291</a> to customize a custom substance panel.</span>
+            <span style="font-size:12px; margin-top:6px; display:inline-block;">Call our toxicologists at <a href="tel:18009854339" style="color:#C1121F; font-weight:700;">(800)-985-4339</a> to customize a custom substance panel.</span>
           </div>
         `;
         return;
@@ -372,7 +372,7 @@ function executeProductSearch(query) {
       resultsContainer.innerHTML = html;
     })
     .catch(err => {
-      resultsContainer.innerHTML = '<div class="search-empty-state" style="color:#C1121F;">Error searching tests. Please try again or call (800) 221-4291.</div>';
+      resultsContainer.innerHTML = '<div class="search-empty-state" style="color:#C1121F;">Error searching tests. Please try again or call (800)-985-4339.</div>';
     });
 }
 
@@ -484,7 +484,7 @@ function lookupZipModal() {
       }
     })
     .catch(err => {
-      resultsContainer.innerHTML = '<div style="text-align:center; padding:16px; color:#C1121F;">Unable to lookup locations. Please call (800) 221-4291 for immediate dispatch.</div>';
+      resultsContainer.innerHTML = '<div style="text-align:center; padding:16px; color:#C1121F;">Unable to lookup locations. Please call (800)-985-4339 for immediate dispatch.</div>';
     });
 }
 

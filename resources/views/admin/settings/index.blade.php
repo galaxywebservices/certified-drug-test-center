@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label class="form-label" for="site_phone">Toll-Free Phone Hotline *</label>
                     <input type="text" id="site_phone" name="site_phone" value="{{ old('site_phone', $settings['site_phone']) }}" class="form-control" required>
-                    <div class="form-hint">Displayed prominently in Option 2 header: (800) 221-4291</div>
+                    <div class="form-hint">Displayed prominently in Option 2 header: (800)-985-4339</div>
                 </div>
 
                 <div class="form-group">

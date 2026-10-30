@@ -134,7 +134,7 @@
                 </div>
                 <div style="text-align:right;">
                     <div style="font-size:13px; font-weight:700; color:#0B2545;">Certified Drug Test Center</div>
-                    <div style="font-size:12px; color:#64748B;">National Scheduling Hotline: (800) 221-4291</div>
+                    <div style="font-size:12px; color:#64748B;">National Scheduling Hotline: (800)-985-4339</div>
                 </div>
             </div>
         </div>

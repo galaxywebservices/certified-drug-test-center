@@ -202,7 +202,7 @@ class OrderCertificateController extends Controller
             'cert_body' => 'AAMRO / MROCC Registry # MRO-849204',
             'clia_number' => '10D0953841',
             'office' => 'National Medical Review Office - Certified Drug Test Centers',
-            'phone' => '(800) 221-4291',
+            'phone' => '(800)-985-4339',
         ];
 
         $pageTitle = "Official Drug Test Result Certificate - Order #{$order->order_number} | Certified Drug Test Centers";

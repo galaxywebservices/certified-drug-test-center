@@ -130,7 +130,7 @@
                         <h3 style="font-size:20px; font-weight:800; color:#0B2545; margin-top:6px; margin-bottom:4px;">Substance Detection Comparison Matrix</h3>
                         <p style="font-size:13.5px; color:#64748B; margin:0;">Compare which illicit drugs, prescription opioids, and stimulants are screened across panel tiers.</p>
                     </div>
-                    <a href="tel:18002214291" style="font-size:13px; font-weight:700; color:#C1121F; text-decoration:none;">Custom Panels Available: (800) 221-4291 &rarr;</a>
+                    <a href="tel:18009854339" style="font-size:13px; font-weight:700; color:#C1121F; text-decoration:none;">Custom Panels Available: (800)-985-4339 &rarr;</a>
                 </div>
 
                 <div style="overflow-x:auto;">
@@ -269,8 +269,8 @@
             <div style="background:#0B2545; color:#fff; border-radius:10px; padding:24px; margin-top:20px; text-align:center;">
                 <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:#94A3B8;">Immediate Assistance</div>
                 <h4 style="font-size:18px; font-weight:800; margin:6px 0 12px;">Need Help Ordering?</h4>
-                <a href="tel:18002214291" style="display:inline-block; background:#C1121F; color:#fff; padding:10px 18px; border-radius:6px; font-weight:700; text-decoration:none; font-size:15px;">
-                    (800) 221-4291
+                <a href="tel:18009854339" style="display:inline-block; background:#C1121F; color:#fff; padding:10px 18px; border-radius:6px; font-weight:700; text-decoration:none; font-size:15px;">
+                    (800)-985-4339
                 </a>
             </div>
         </div>

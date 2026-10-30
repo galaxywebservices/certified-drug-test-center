@@ -47,7 +47,7 @@
 
                 <div class="form-group">
                     <label class="form-label" for="phone">Direct Phone Number</label>
-                    <input type="text" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" class="form-control" placeholder="(800) 221-4291">
+                    <input type="text" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" class="form-control" placeholder="(800)-985-4339">
                 </div>
 
                 <div style="margin-top:24px; padding-top:16px; border-top:1px solid var(--admin-slate-200); display:flex; justify-content:flex-end;">

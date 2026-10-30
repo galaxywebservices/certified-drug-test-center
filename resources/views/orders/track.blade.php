@@ -238,8 +238,8 @@
                 <h2 style="font-size:20px; font-weight:800; color:#0B2545; margin-top:6px; margin-bottom:2px;">Lookup Test Registration</h2>
                 <p style="font-size:13.5px; color:#64748B; margin:0;">Enter the CDTC Order Number from your confirmation email and donor email address.</p>
             </div>
-            <a href="tel:18002214291" style="font-size:13px; font-weight:700; color:#C1121F; text-decoration:none;">
-                Lost Your Receipt? Call: (800) 221-4291
+            <a href="tel:18009854339" style="font-size:13px; font-weight:700; color:#C1121F; text-decoration:none;">
+                Lost Your Receipt? Call: (800)-985-4339
             </a>
         </div>
 
@@ -505,7 +505,7 @@
                         <li>You must bring a valid, unexpired government-issued photo ID (Driver's License, State ID, or Passport).</li>
                         <li>No appointment is needed. Walk-ins are accepted during collection hours.</li>
                         <li>For urine drug screens: Avoid drinking excessive fluids (more than 40 oz) within 2-4 hours prior to collection to prevent diluted specimen samples.</li>
-                        <li>If you require assistance or collection site directions, call National Dispatch toll-free at <strong>(800) 221-4291</strong>.</li>
+                        <li>If you require assistance or collection site directions, call National Dispatch toll-free at <strong>(800)-985-4339</strong>.</li>
                     </ul>
                 </div>
             </div>
@@ -532,7 +532,7 @@
             </div>
             <div>
                 <h4 style="font-size:14px; font-weight:700; color:#0B2545; margin-bottom:4px;">What if I made a mistake in my registration?</h4>
-                <p style="font-size:13px; color:#64748B; margin:0; line-height:1.5;">Call our national scheduling department at <a href="tel:18002214291" style="color:#C1121F; font-weight:700;">(800) 221-4291</a> immediately. Our coordinators can update donor information, change testing panels, or reassign facilities.</p>
+                <p style="font-size:13px; color:#64748B; margin:0; line-height:1.5;">Call our national scheduling department at <a href="tel:18009854339" style="color:#C1121F; font-weight:700;">(800)-985-4339</a> immediately. Our coordinators can update donor information, change testing panels, or reassign facilities.</p>
             </div>
         </div>
     </div>

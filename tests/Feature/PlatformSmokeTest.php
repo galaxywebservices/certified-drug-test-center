@@ -58,7 +58,7 @@ class PlatformSmokeTest extends TestCase
         $response = $this->get('/contact-us');
         $response->assertStatus(200);
         $response->assertSee('Send Us an Inquiry');
-        $response->assertSee('(800) 221-4291');
+        $response->assertSee('(800)-985-4339');
     }
 
     public function test_contact_form_submission_stores_lead()
@@ -66,7 +66,7 @@ class PlatformSmokeTest extends TestCase
         $payload = [
             'name' => 'Automated Test User',
             'email' => 'test@example.com',
-            'phone' => '800-221-4291',
+            'phone' => '800-985-4339',
             'company' => 'QA Testing Corp',
             'service_type' => 'drug-testing',
             'message' => 'Automated verification test of lead intake submission.',
@@ -159,7 +159,7 @@ class PlatformSmokeTest extends TestCase
                 'donor_first_name' => 'John',
                 'donor_last_name' => 'Doe',
                 'donor_email' => 'donor@example.com',
-                'donor_phone' => '800-221-4291',
+                'donor_phone' => '800-985-4339',
                 'test_reason' => 'Pre-employment',
                 'subtotal' => 89.99,
                 'total' => 89.99,
@@ -560,7 +560,7 @@ class PlatformSmokeTest extends TestCase
         $updateResponse = $this->actingAs($admin)->put(route('admin.profile.update'), [
             'name' => 'Lead Super Admin',
             'email' => $admin->email,
-            'phone' => '(800) 221-4291',
+            'phone' => '(800)-985-4339',
         ]);
         $updateResponse->assertRedirect(route('admin.profile'));
         $updateResponse->assertSessionHas('success');

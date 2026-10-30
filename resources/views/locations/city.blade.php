@@ -497,8 +497,8 @@
                 <div style="margin-top:20px; background:#0B2545; color:#fff; border-radius:8px; padding:18px; text-align:center;">
                     <div style="font-size:11px; text-transform:uppercase; color:#94A3B8; font-weight:700;">Need Help Ordering?</div>
                     <div style="font-size:15px; font-weight:800; margin:4px 0 10px;">Phone Scheduling Available</div>
-                    <a href="tel:18002214291" style="display:inline-block; background:#C1121F; color:#fff; padding:8px 16px; border-radius:4px; font-weight:700; text-decoration:none; font-size:14px;">
-                        Call (800) 221-4291
+                    <a href="tel:18009854339" style="display:inline-block; background:#C1121F; color:#fff; padding:8px 16px; border-radius:4px; font-weight:700; text-decoration:none; font-size:14px;">
+                        Call (800)-985-4339
                     </a>
                 </div>
             </div>
@@ -528,7 +528,7 @@ $itemListSchema = [
                     'postalCode' => $loc->zip,
                     'addressCountry' => 'US',
                 ],
-                'telephone' => '+1-800-221-4291',
+                'telephone' => '+1-800-985-4339',
                 'openingHours' => 'Mo-Fr 08:00-17:00',
                 'url' => url()->current(),
             ],

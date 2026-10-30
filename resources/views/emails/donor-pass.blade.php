@@ -103,7 +103,7 @@
                     <tr>
                         <td style="background:#F8FAFC; padding:20px 32px; border-top:1px solid #E2E8F0; text-align:center; font-size:12px; color:#64748B;">
                             <div>Certified National Specimen Collection &amp; SAMHSA Accredited Laboratory Network</div>
-                            <div style="margin-top:6px;">Questions or Need Assistance? Call Toll-Free <strong>(800) 221-4291</strong> (Mon-Fri 7AM - 8PM EST)</div>
+                            <div style="margin-top:6px;">Questions or Need Assistance? Call Toll-Free <strong>(800)-985-4339</strong> (Mon-Fri 7AM - 8PM EST)</div>
                             <div style="margin-top:6px; color:#94A3B8;">&copy; {{ date('Y') }} Certified Drug Test Centers. All Rights Reserved.</div>
                         </td>
                     </tr>

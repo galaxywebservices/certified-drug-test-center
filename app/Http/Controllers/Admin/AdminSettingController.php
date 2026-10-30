@@ -12,7 +12,7 @@ class AdminSettingController extends Controller
     {
         $settings = [
             'site_name' => Setting::get('site_name', 'Certified Drug Test Center'),
-            'site_phone' => Setting::get('site_phone', '(800) 221-4291'),
+            'site_phone' => Setting::get('site_phone', '(800)-985-4339'),
             'site_email' => Setting::get('site_email', 'support@certifieddrugtesting.com'),
             'site_tagline' => Setting::get('site_tagline', 'Accredited Drug Testing Made Fast, Simple & Confidential'),
             'paytrace_username' => Setting::get('paytrace_username', 'demo123'),

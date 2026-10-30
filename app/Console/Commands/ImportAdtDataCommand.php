@@ -228,7 +228,7 @@ class ImportAdtDataCommand extends Command
             }
 
             $title = !empty($p->pagetitle) ? str_replace(' - Accredited Drug Testing', '', $p->pagetitle) : Str::headline($url);
-            $title = str_replace('| (800) 221- 4291', '', $title);
+            $title = str_replace('| (800)-985-4339', '', $title);
             $title = trim($title);
 
             $record = [
@@ -337,7 +337,7 @@ class ImportAdtDataCommand extends Command
                     IFNULL(city, ''),
                     IFNULL(state, ''),
                     IFNULL(zip, ''),
-                    IFNULL(phone, '(800) 221-4291'),
+                    IFNULL(phone, '(800)-985-4339'),
                     IFNULL(hours, 'Mon-Fri 8:00 AM - 5:00 PM'),
                     IF(lat REGEXP '^-?[0-9]+(\\.[0-9]+)?$', CAST(lat AS DECIMAL(10,8)), NULL),
                     IF(lng REGEXP '^-?[0-9]+(\\.[0-9]+)?$', CAST(lng AS DECIMAL(11,8)), NULL),
@@ -394,7 +394,7 @@ class ImportAdtDataCommand extends Command
                 'name' => 'Super Administrator',
                 'password' => bcrypt('Admin@CDTC2026!'),
                 'is_super_admin' => true,
-                'phone' => '(800) 221-4291',
+                'phone' => '(800)-985-4339',
             ]
         );
         $this->info("   Super Admin created: admin@certifieddrugtesting.com / Admin@CDTC2026!");
@@ -405,7 +405,7 @@ class ImportAdtDataCommand extends Command
         $this->line("-> Seeding Default PayTrace & Site Settings...");
 
         Setting::set('site_name', 'Certified Drug Test Center', 'general');
-        Setting::set('site_phone', '(800) 221-4291', 'general');
+        Setting::set('site_phone', '(800)-985-4339', 'general');
         Setting::set('site_email', 'support@certifieddrugtesting.com', 'general');
         Setting::set('site_tagline', 'Certified Drug Testing Made Fast, Simple & Confidential', 'general');
 

@@ -263,7 +263,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="form-label">Phone Hotline</label>
-                                        <input type="text" class="form-control" id="blockCtaPhone" value="(800) 221-4291">
+                                        <input type="text" class="form-control" id="blockCtaPhone" value="(800)-985-4339">
                                     </div>
                                 </div>
                             </div>
@@ -474,8 +474,8 @@
             blocks.push({
                 type: 'cta',
                 title: ctaTitle,
-                btn_text: 'Call ' + (ctaPhone || '(800) 221-4291'),
-                btn_url: 'tel:' + (ctaPhone || '18002214291').replace(/\D/g, '')
+                btn_text: 'Call ' + (ctaPhone || '(800)-985-4339'),
+                btn_url: 'tel:' + (ctaPhone || '18009854339').replace(/\D/g, '')
             });
         }
 

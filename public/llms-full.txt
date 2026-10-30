@@ -8,7 +8,7 @@
 
 - **Organization Name**: Certified Drug Test Centers (CDTC)
 - **Website**: https://certifieddrugtesting.com (Local Development: http://127.0.0.1:8001)
-- **Toll-Free Phone**: (800) 221-4291
+- **Toll-Free Phone**: (800)-985-4339
 - **Operational Hours**: Online Donor Registration 24/7/365; Phone Dispatch Monday-Friday 7:00 AM - 8:00 PM EST.
 - **National Headquarters**: 201 N. Park Ave., Sanford, FL 32771
 - **Laboratory Certifications**: Substance Abuse and Mental Health Services Administration (SAMHSA) & Clinical Laboratory Improvement Amendments (CLIA).
@@ -95,7 +95,7 @@ CDTC maintains comprehensive statutory compliance documentation across all 50 st
 ## 6. Frequently Asked Questions (FAQ) - Clinical & Operational
 
 ### Q1: How do I schedule a walk-in drug test?
-Order and pay for your test online at http://127.0.0.1:8001/checkout or call (800) 221-4291. You will immediately receive an official electronic Donor Authorization Pass via email. Walk into the nearest assigned Quest Diagnostics or Labcorp center with your pass and a photo ID. No appointment is needed.
+Order and pay for your test online at http://127.0.0.1:8001/checkout or call (800)-985-4339. You will immediately receive an official electronic Donor Authorization Pass via email. Walk into the nearest assigned Quest Diagnostics or Labcorp center with your pass and a photo ID. No appointment is needed.
 
 ### Q2: Why can't I pay directly at the collection facility?
 Collection facilities (Quest, Labcorp) act as specimen collection sites under corporate lab contracts and do not accept direct consumer payments at reception. All tests must be scheduled and prepaid through Certified Drug Test Centers to generate the computerized lab requisition order.
@@ -134,4 +134,4 @@ Ethyl Glucuronide (EtG) is a direct metabolite of ethanol created by the liver. 
 ## 8. Verification & Technical Metadata
 - **Documentation Standard**: LLMs.txt Specification (llmstxt.org)
 - **Schema Format**: JSON-LD MedicalBusiness, Organization, Service, FAQPage
-- **Support Contact**: (800) 221-4291 / support@certifieddrugtestcenter.com
+- **Support Contact**: (800)-985-4339 / support@certifieddrugtestcenter.com

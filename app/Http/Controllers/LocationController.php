@@ -193,7 +193,7 @@ class LocationController extends Controller
                 'city' => $loc->city,
                 'state' => $loc->state,
                 'zip' => $loc->zip,
-                'phone' => $loc->phone ?: '(800) 221-4291',
+                'phone' => $loc->phone ?: '(800)-985-4339',
                 'hours' => $loc->hours ?: 'Monday - Friday 8:00 AM - 5:00 PM',
                 'profile_url' => route('locations.show', $loc->id),
                 'checkout_url' => route('checkout.index', ['location_id' => $loc->id]),

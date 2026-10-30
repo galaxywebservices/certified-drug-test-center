@@ -400,7 +400,7 @@ class HomeController extends Controller
         $faqs = [
             [
                 'question' => 'How does the test scheduling process work?',
-                'answer' => 'Scheduling is simple and takes less than 2 minutes. First, select and purchase your test online or over the phone at (800) 221-4291. Second, enter the donor zip code to locate the nearest testing center. You will instantly receive an electronic Donor Registration Pass by email with the testing center address, operating hours, and instructions. Third, walk into the facility with your pass and a photo ID—no appointment is necessary!',
+                'answer' => 'Scheduling is simple and takes less than 2 minutes. First, select and purchase your test online or over the phone at (800)-985-4339. Second, enter the donor zip code to locate the nearest testing center. You will instantly receive an electronic Donor Registration Pass by email with the testing center address, operating hours, and instructions. Third, walk into the facility with your pass and a photo ID—no appointment is necessary!',
             ],
             [
                 'question' => 'How fast do I get drug test results?',
