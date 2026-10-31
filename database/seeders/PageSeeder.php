@@ -10,6 +10,10 @@ class PageSeeder extends Seeder
 {
     public function run(): void
     {
+        ini_set('memory_limit', '-1');
+        set_time_limit(0);
+        \Illuminate\Support\Facades\DB::disableQueryLog();
+
         $file = database_path('seeders/data/pages.json');
         if (!File::exists($file)) {
             return;

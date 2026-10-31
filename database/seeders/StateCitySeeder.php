@@ -11,14 +11,19 @@ class StateCitySeeder extends Seeder
 {
     public function run(): void
     {
+        ini_set('memory_limit', '-1');
+        set_time_limit(0);
+        \Illuminate\Support\Facades\DB::disableQueryLog();
+
         $complianceFile = database_path('seeders/data/states_compliance.json');
+        $defaultFile = database_path('seeders/data/states.json');
         if (File::exists($complianceFile)) {
             $states = json_decode(File::get($complianceFile), true);
             foreach ($states as $st) {
                 State::updateOrCreate(['abbr' => $st['abbr']], $st);
             }
-        } elseif (File::exists($file)) {
-            $states = json_decode(File::get($file), true);
+        } elseif (File::exists($defaultFile)) {
+            $states = json_decode(File::get($defaultFile), true);
             foreach ($states as $st) {
                 State::updateOrCreate(['abbr' => $st['abbr']], $st);
             }
