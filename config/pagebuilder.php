@@ -10,7 +10,9 @@ return [
      |
      */
     'general' => [
-        'base_url' => env('APP_URL'),
+        'base_url' => (isset($_SERVER['HTTP_HOST'])
+            ? ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'])
+            : env('APP_URL', 'http://127.0.0.1:8001')),
         'language' => 'en',
         'assets_url' => '/assets',
         'uploads_url' => '/uploads'
@@ -135,7 +137,7 @@ return [
         'class' => PHPageBuilder\Theme::class,
         'folder' => base_path('themes'),
         'folder_url' => '/themes',
-        'active_theme' => 'ata'
+        'active_theme' => 'cdtc'
     ],
 
     /*

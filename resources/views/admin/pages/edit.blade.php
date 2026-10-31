@@ -134,7 +134,7 @@
                     📝 Rich Content &amp; Text
                 </button>
                 <button type="button" class="tab-btn" onclick="switchTab('tab-builder', this)">
-                    🎨 Visual PageBuilder (ATA / GrapesJS)
+                    🎨 Visual PageBuilder (CDTC Theme / GrapesJS)
                 </button>
                 <button type="button" class="tab-btn" onclick="switchTab('tab-seo', this)">
                     🚀 100% SEO &amp; SERP Preview
@@ -196,12 +196,12 @@
                             <div style="display:flex; align-items:center; gap:10px;">
                                 <h2 class="card-title" style="color:#fff; margin:0; font-size:17px; display:flex; align-items:center; gap:8px;">
                                     <svg width="20" height="20" fill="none" stroke="#e85b24" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
-                                    ATA LMS Drag &amp; Drop Visual PageBuilder
+                                    CDTC Theme Drag &amp; Drop Visual PageBuilder
                                 </h2>
                                 <span class="badge" style="background:#e85b24; color:#fff; font-weight:700; font-size:11px; padding:3px 9px;">GrapesJS Engine</span>
                             </div>
                             <p style="font-size:13px; color:#cbd5e1; margin-top:4px; margin-bottom:0;">
-                                Build high-converting landing pages with 14 modular drag-and-drop blocks across 4 categories.
+                                Build high-converting landing pages following the CDTC website theme with 14 modular blocks.
                             </p>
                         </div>
                         <div style="display:flex; gap:10px; align-items:center;">
@@ -216,10 +216,10 @@
                     </div>
                     
                     <div class="card-body" style="padding:20px;">
-                        <!-- Block Catalog Quick Reference identical to ATA LMS -->
+                        <!-- Block Catalog Quick Reference (CDTC Theme) -->
                         <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:16px; margin-bottom:18px;">
                             <div style="font-size:12px; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
-                                <span>📦 Available Modular Blocks (14 Components)</span>
+                                <span>📦 CDTC Modular Blocks (14 Components)</span>
                                 <span style="font-size:11px; color:#64748b; font-weight:500;">Directly selectable inside the left sidebar drawer</span>
                             </div>
                             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; font-size:12px;">
