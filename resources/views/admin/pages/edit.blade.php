@@ -1,9 +1,13 @@
 @extends('admin.layouts.app', ['title' => 'Page Editor & Builder', 'heading' => 'Editor: ' . $page->title])
 
 @section('topbar_actions')
+<a href="{{ url('/admin/pagebuilder?action=edit&page=' . ($pbPageId ?? 1)) }}" target="_blank" class="btn btn-sm" style="background:#e85b24; border-color:#d44d18; color:#fff; display:inline-flex; align-items:center; gap:6px; font-weight:700; box-shadow:0 2px 4px rgba(232,91,36,0.25);">
+    <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
+    Launch Visual PageBuilder
+</a>
 <a href="{{ url('/' . $page->slug) }}" target="_blank" class="btn btn-outline btn-sm">
     <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-    View This Page Live
+    View Live Page
 </a>
 <a href="{{ route('admin.pages.index') }}" class="btn btn-outline btn-sm">
     &larr; Back to Pages
@@ -130,7 +134,7 @@
                     📝 Rich Content &amp; Text
                 </button>
                 <button type="button" class="tab-btn" onclick="switchTab('tab-builder', this)">
-                    🧩 Visual Block Builder
+                    🎨 Visual PageBuilder (ATA / GrapesJS)
                 </button>
                 <button type="button" class="tab-btn" onclick="switchTab('tab-seo', this)">
                     🚀 100% SEO &amp; SERP Preview
@@ -184,89 +188,86 @@
                 </div>
             </div>
 
-            <!-- TAB 2: Visual Block Builder (Modular drag-and-drop sections) -->
+            <!-- TAB 2: Visual Drag & Drop Page Builder (Identical to ATA LMS) -->
             <div id="tab-builder" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
+                <div class="card" style="border: 2px solid #e85b24; overflow:hidden;">
+                    <div class="card-header" style="background: linear-gradient(135deg, #0B2545 0%, #133E68 100%); color:#fff; padding:18px 24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
                         <div>
-                            <h2 class="card-title">Visual Modular Block Builder</h2>
-                            <p style="font-size:13px; color:var(--admin-slate-500); margin-top:2px;">
-                                Add structured marketing sections to this page (Hero, FAQ Accordion, Test Grid, Consultation CTA).
+                            <div style="display:flex; align-items:center; gap:10px;">
+                                <h2 class="card-title" style="color:#fff; margin:0; font-size:17px; display:flex; align-items:center; gap:8px;">
+                                    <svg width="20" height="20" fill="none" stroke="#e85b24" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
+                                    ATA LMS Drag &amp; Drop Visual PageBuilder
+                                </h2>
+                                <span class="badge" style="background:#e85b24; color:#fff; font-weight:700; font-size:11px; padding:3px 9px;">GrapesJS Engine</span>
+                            </div>
+                            <p style="font-size:13px; color:#cbd5e1; margin-top:4px; margin-bottom:0;">
+                                Build high-converting landing pages with 14 modular drag-and-drop blocks across 4 categories.
                             </p>
                         </div>
-                        <div style="display:flex; gap:8px;">
-                            <button type="button" class="btn btn-outline btn-sm" onclick="addHeroBlock()">+ Hero Block</button>
-                            <button type="button" class="btn btn-outline btn-sm" onclick="addFaqBlock()">+ FAQ Block</button>
-                            <button type="button" class="btn btn-outline btn-sm" onclick="addCtaBlock()">+ CTA Banner</button>
+                        <div style="display:flex; gap:10px; align-items:center;">
+                            <span style="font-size:12px; color:#94a3b8; font-weight:600;">
+                                Page ID: #{{ $page->id }} &bull; PB: #{{ $pbPageId ?? 1 }}
+                            </span>
+                            <a href="{{ url('/admin/pagebuilder?action=edit&page=' . ($pbPageId ?? 1)) }}" target="_blank" class="btn btn-sm" style="background:#e85b24; border-color:#d44d18; color:#fff; font-weight:700; display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:6px; box-shadow:0 4px 12px rgba(232,91,36,0.35);">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                                Launch Fullscreen PageBuilder
+                            </a>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div id="blocksContainer">
-                            <!-- Block 1: Hero Block -->
-                            <div class="block-card">
-                                <div class="block-header">
-                                    <strong>⭐ Hero Section Block</strong>
-                                    <span class="badge badge-info">Top Section</span>
+                    
+                    <div class="card-body" style="padding:20px;">
+                        <!-- Block Catalog Quick Reference identical to ATA LMS -->
+                        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:16px; margin-bottom:18px;">
+                            <div style="font-size:12px; font-weight:700; color:#475569; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+                                <span>📦 Available Modular Blocks (14 Components)</span>
+                                <span style="font-size:11px; color:#64748b; font-weight:500;">Directly selectable inside the left sidebar drawer</span>
+                            </div>
+                            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; font-size:12px;">
+                                <div style="background:#fff; border:1px solid #cbd5e1; border-radius:6px; padding:10px;">
+                                    <strong style="color:#0B2545; display:block; margin-bottom:4px;">Content (7 Blocks)</strong>
+                                    <span style="color:#64748b; line-height:1.4; display:block;">CTA Band, How It Works, Content Area, Testimonials, Features Grid, Stats Ribbon, Custom HTML</span>
                                 </div>
-                                <div class="block-body">
-                                    <div class="form-group">
-                                        <label class="form-label">Hero Headline</label>
-                                        <input type="text" class="form-control" id="blockHeroHeadline" value="{{ $page->page_heading ?: $page->title }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Hero Subheadline / Assurance</label>
-                                        <input type="text" class="form-control" id="blockHeroSubheadline" value="Fast, confidential testing at over 20,000 certified collection sites nationwide.">
-                                    </div>
-                                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-                                        <div class="form-group">
-                                            <label class="form-label">Primary Button Text</label>
-                                            <input type="text" class="form-control" id="blockHeroBtnText" value="Schedule A Test Now">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="form-label">Primary Button URL</label>
-                                            <input type="text" class="form-control" id="blockHeroBtnUrl" value="/checkout">
-                                        </div>
-                                    </div>
+                                <div style="background:#fff; border:1px solid #cbd5e1; border-radius:6px; padding:10px;">
+                                    <strong style="color:#0B2545; display:block; margin-bottom:4px;">Header (4 Blocks)</strong>
+                                    <span style="color:#64748b; line-height:1.4; display:block;">Hero Video Banner, Conference Banner, Lab Screening Hero Banner, Top Banner</span>
+                                </div>
+                                <div style="background:#fff; border:1px solid #cbd5e1; border-radius:6px; padding:10px;">
+                                    <strong style="color:#0B2545; display:block; margin-bottom:4px;">Dynamic Content (2 Blocks)</strong>
+                                    <span style="color:#64748b; line-height:1.4; display:block;">Dynamic Blogs (live posts), Dynamic Courses/Products (drug testing services)</span>
+                                </div>
+                                <div style="background:#fff; border:1px solid #cbd5e1; border-radius:6px; padding:10px;">
+                                    <strong style="color:#0B2545; display:block; margin-bottom:4px;">Media (1 Block)</strong>
+                                    <span style="color:#64748b; line-height:1.4; display:block;">Image Banner (full-width image with responsive scaling)</span>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Block 2: FAQ Accordion -->
-                            <div class="block-card">
-                                <div class="block-header">
-                                    <strong>❓ FAQ Accordion Block (Automated FAQ Schema)</strong>
-                                    <span class="badge badge-success">SEO Schema Ready</span>
+                        <!-- Live Interactive PageBuilder Container -->
+                        <div style="position:relative; background:#2B303A; border-radius:8px; overflow:hidden; box-shadow:0 8px 24px rgba(0,0,0,0.12);">
+                            <div style="background:#1E2229; padding:8px 16px; display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #3d4451;">
+                                <div style="display:flex; align-items:center; gap:8px;">
+                                    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#ef4444;"></span>
+                                    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#f59e0b;"></span>
+                                    <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:#10b981;"></span>
+                                    <span style="color:#94a3b8; font-size:12px; margin-left:8px; font-family:monospace;">
+                                        /admin/pagebuilder?action=edit&amp;page={{ $pbPageId ?? 1 }}
+                                    </span>
                                 </div>
-                                <div class="block-body">
-                                    <div class="form-group">
-                                        <label class="form-label">Question 1</label>
-                                        <input type="text" class="form-control faq-question-input" value="Do I need an appointment for this test?">
-                                        <textarea class="form-control faq-answer-input" rows="2" style="margin-top:6px;">No appointment is necessary. Once you register online, walk into any of our 20,000+ certified Quest and Labcorp collection facilities with your electronic Donor Pass.</textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Question 2</label>
-                                        <input type="text" class="form-control faq-question-input" value="How soon are results returned?">
-                                        <textarea class="form-control faq-answer-input" rows="2" style="margin-top:6px;">Negative lab results are typically available within 24 to 48 hours of specimen collection, verified by a Medical Review Officer (MRO).</textarea>
-                                    </div>
+                                <div style="display:flex; gap:8px;">
+                                    <button type="button" class="btn btn-sm btn-outline" onclick="document.getElementById('pbIframe').src = document.getElementById('pbIframe').src" style="color:#fff; border-color:#475569; font-size:11px; padding:3px 8px;">
+                                        🔄 Reload Builder
+                                    </button>
+                                    <a href="{{ url('/admin/pagebuilder?action=edit&page=' . ($pbPageId ?? 1)) }}" target="_blank" class="btn btn-sm" style="background:#e85b24; color:#fff; font-size:11px; padding:3px 10px; font-weight:600;">
+                                        ↗ Open in Full Screen
+                                    </a>
                                 </div>
                             </div>
+                            <iframe id="pbIframe" src="{{ url('/admin/pagebuilder?action=edit&page=' . ($pbPageId ?? 1)) }}" style="width:100%; height:760px; border:none; display:block; background:#fff;" loading="lazy"></iframe>
+                        </div>
 
-                            <!-- Block 3: CTA Banner -->
-                            <div class="block-card">
-                                <div class="block-header">
-                                    <strong>📞 Consultation &amp; Toll-Free Callout Block</strong>
-                                    <span class="badge badge-neutral">Footer CTA</span>
-                                </div>
-                                <div class="block-body">
-                                    <div class="form-group">
-                                        <label class="form-label">Banner Title</label>
-                                        <input type="text" class="form-control" id="blockCtaTitle" value="Need Immediate Testing Assistance or Custom Business Account?">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Phone Hotline</label>
-                                        <input type="text" class="form-control" id="blockCtaPhone" value="(800)-985-4339">
-                                    </div>
-                                </div>
-                            </div>
+                        <div style="margin-top:14px; font-size:12px; color:#64748b; display:flex; align-items:center; gap:6px;">
+                            <svg width="16" height="16" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                            <span><strong>Instant Auto-Sync:</strong> Changes saved via the Visual PageBuilder ("Save" button at bottom-left) are automatically compiled and synchronized to this page's live HTML.</span>
                         </div>
 
                         <input type="hidden" name="blocks_json" id="blocksJsonInput" value="{{ json_encode($page->blocks_json) }}">

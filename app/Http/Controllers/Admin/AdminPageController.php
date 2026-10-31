@@ -30,6 +30,17 @@ class AdminPageController extends Controller
 
         $pages = $query->orderBy('updated_at', 'desc')->paginate(25)->withQueryString();
 
+        // Attach corresponding PageBuilder IDs for quick visual builder access
+        $routes = $pages->pluck('slug')->map(fn($s) => '/' . ltrim($s, '/'))->toArray();
+        $translations = \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')
+            ->whereIn('route', $routes)
+            ->pluck('page_id', 'route');
+
+        foreach ($pages as $p) {
+            $r = '/' . ltrim($p->slug, '/');
+            $p->pb_page_id = $translations[$r] ?? null;
+        }
+
         return view('admin.pages.index', compact('pages'));
     }
 
@@ -66,7 +77,7 @@ class AdminPageController extends Controller
             $blocks = json_decode($validated['blocks_json'], true);
         }
 
-        Page::create([
+        $page = Page::create([
             'title' => $validated['title'],
             'slug' => $slug,
             'page_heading' => $validated['page_heading'] ?? $validated['title'],
@@ -84,13 +95,76 @@ class AdminPageController extends Controller
             'robots_follow' => $request->boolean('robots_follow', true),
         ]);
 
+        // Auto-create PageBuilder entry
+        $pbRoute = '/' . ltrim($page->slug, '/');
+        $pbPageId = \Illuminate\Support\Facades\DB::table('pagebuilder__pages')->insertGetId([
+            'name' => $page->title,
+            'layout' => 'master',
+            'data' => json_encode([
+                'html' => [$page->content ?: ''],
+                'css' => '',
+                'components' => [],
+                'assets' => [],
+                'styles' => [],
+            ]),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')->insert([
+            'page_id' => $pbPageId,
+            'locale' => 'en',
+            'title' => \Illuminate\Support\Str::limit($page->title, 250, ''),
+            'route' => $pbRoute,
+            'meta_title' => \Illuminate\Support\Str::limit($page->meta_title ?: $page->title, 250, ''),
+            'meta_description' => $page->meta_description ?: '',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
         return redirect()->route('admin.pages.index')->with('success', 'Page created successfully.');
     }
 
     public function edit(Page $page)
     {
         $products = Product::where('is_active', true)->orderBy('name')->get();
-        return view('admin.pages.edit', compact('page', 'products'));
+
+        // Retrieve or initialize corresponding PHPageBuilder page
+        $pbRoute = '/' . ltrim($page->slug, '/');
+        $pbTranslation = \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')
+            ->where('route', $pbRoute)
+            ->first();
+
+        if (!$pbTranslation) {
+            $pbPageId = \Illuminate\Support\Facades\DB::table('pagebuilder__pages')->insertGetId([
+                'name' => $page->title,
+                'layout' => 'master',
+                'data' => json_encode([
+                    'html' => [$page->content ?: ''],
+                    'css' => '',
+                    'components' => [],
+                    'assets' => [],
+                    'styles' => [],
+                ]),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')->insert([
+                'page_id' => $pbPageId,
+                'locale' => 'en',
+                'title' => \Illuminate\Support\Str::limit($page->title, 250, ''),
+                'route' => $pbRoute,
+                'meta_title' => \Illuminate\Support\Str::limit($page->meta_title ?: $page->title, 250, ''),
+                'meta_description' => $page->meta_description ?: '',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        } else {
+            $pbPageId = $pbTranslation->page_id;
+        }
+
+        return view('admin.pages.edit', compact('page', 'products', 'pbPageId'));
     }
 
     public function update(Request $request, Page $page)
@@ -118,9 +192,12 @@ class AdminPageController extends Controller
             $blocks = json_decode($validated['blocks_json'], true);
         }
 
+        $oldSlug = $page->slug;
+        $newSlug = trim(Str::slug($validated['slug']), '/');
+
         $page->update([
             'title' => $validated['title'],
-            'slug' => trim(Str::slug($validated['slug']), '/'),
+            'slug' => $newSlug,
             'page_heading' => $validated['page_heading'] ?? $validated['title'],
             'template' => $validated['template'] ?? 'default',
             'content' => $validated['content'] ?? '',
@@ -135,6 +212,41 @@ class AdminPageController extends Controller
             'robots_index' => $request->boolean('robots_index', true),
             'robots_follow' => $request->boolean('robots_follow', true),
         ]);
+
+        // Sync with PageBuilder translations & content
+        $oldPbRoute = '/' . ltrim($oldSlug, '/');
+        $newPbRoute = '/' . ltrim($newSlug, '/');
+        $pbTranslation = \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')
+            ->where('route', $oldPbRoute)
+            ->first();
+
+        if ($pbTranslation) {
+            \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')
+                ->where('id', $pbTranslation->id)
+                ->update([
+                    'route' => $newPbRoute,
+                    'title' => \Illuminate\Support\Str::limit($page->title, 250, ''),
+                    'meta_title' => \Illuminate\Support\Str::limit($page->meta_title ?: $page->title, 250, ''),
+                    'meta_description' => $page->meta_description ?: '',
+                    'updated_at' => now(),
+                ]);
+
+            if ($request->filled('content')) {
+                $current = \Illuminate\Support\Facades\DB::table('pagebuilder__pages')
+                    ->where('id', $pbTranslation->page_id)
+                    ->value('data');
+                if ($current) {
+                    $data = json_decode($current, true) ?: [];
+                    $data['html'] = [$request->content];
+                    \Illuminate\Support\Facades\DB::table('pagebuilder__pages')
+                        ->where('id', $pbTranslation->page_id)
+                        ->update([
+                            'data' => json_encode($data),
+                            'updated_at' => now(),
+                        ]);
+                }
+            }
+        }
 
         return redirect()->route('admin.pages.index')->with('success', 'Page updated successfully.');
     }

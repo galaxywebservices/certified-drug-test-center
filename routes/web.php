@@ -177,6 +177,30 @@ Route::prefix('admin')->group(function () {
         // CMS Pages & Visual Builder
         Route::resource('pages', AdminPageController::class, ['as' => 'admin']);
 
+        // Drag & Drop Visual Page Builder (PHPageBuilder / GrapesJS like ATA LMS)
+        Route::any('/pagebuilder/{any?}', function (\Illuminate\Http\Request $request) {
+            $config = config('pagebuilder');
+            $builder = new \HansSchouten\LaravelPageBuilder\LaravelPageBuilder($config);
+            $builder->handleAuthenticatedRequest();
+        })->where('any', '.*')->name('admin.pagebuilder');
+
+        Route::post('/pagebuilder-upload', function (\Illuminate\Http\Request $request) {
+            if (!$request->hasFile('files')) {
+                return response()->json(['data' => [], 'error' => 'no_files']);
+            }
+            $file = $request->file('files');
+            $id = sha1(uniqid(true));
+            $safeName = str_replace(' ', '-', $file->getClientOriginalName());
+            $relativeDir = "uploads/pagebuilder/{$id}";
+            $targetDir = public_path($relativeDir);
+            if (!is_dir($targetDir)) {
+                mkdir($targetDir, 0755, true);
+            }
+            $file->move($targetDir, $safeName);
+            $url = url("/{$relativeDir}/{$safeName}");
+            return response()->json(['data' => [$url]]);
+        })->name('admin.pagebuilder.upload');
+
         // Categories Management
         Route::resource('categories', AdminCategoryController::class, ['as' => 'admin']);
 

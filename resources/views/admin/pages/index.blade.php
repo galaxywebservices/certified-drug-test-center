@@ -77,6 +77,11 @@
                                 <a href="{{ url('/' . $page->slug) }}" target="_blank" class="action-btn action-btn-view" title="View Live Page" aria-label="View">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
                                 </a>
+                                @if(isset($page->pb_page_id) && $page->pb_page_id)
+                                <a href="{{ url('/admin/pagebuilder?action=edit&page=' . $page->pb_page_id) }}" target="_blank" class="action-btn" title="Launch Visual PageBuilder" aria-label="Visual Builder" style="background:rgba(232, 91, 36, 0.1); color:#e85b24; border-color:rgba(232, 91, 36, 0.3);">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
+                                </a>
+                                @endif
                                 <a href="{{ route('admin.pages.edit', $page) }}" class="action-btn action-btn-edit" title="Edit Page & PageBuilder" aria-label="Edit">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                                 </a>
