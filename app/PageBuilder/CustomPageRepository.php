@@ -31,7 +31,11 @@ class CustomPageRepository extends PageRepository
 
             if ($cdtcPage) {
                 // Render the body HTML from the saved pagebuilder data
-                $renderer = new PageRenderer(phpb_instance('theme'), $page);
+                $theme = phpb_instance('theme', [
+                    phpb_config('theme'),
+                    phpb_config('theme.active_theme')
+                ]);
+                $renderer = new PageRenderer($theme, $page);
                 $renderedContent = $renderer->renderBody();
 
                 $cdtcPage->content = $renderedContent;
