@@ -47,13 +47,29 @@ class ImportStateComplianceCommand extends Command
         foreach ($states as $state) {
             $abbr = strtoupper(trim($state->abbr));
             $law = $lawsMap[$abbr] ?? null;
-            $stateFaqs = $faqsMap[$abbr] ?? [];
+            $stateName = $state->name ?? $abbr;
+            $labCount = \App\Models\Location::where('state', $abbr)->where('is_active', true)->count();
+            $countFormatted = $labCount > 0 ? (string)$labCount : 'multiple';
 
-            $statuteCode = $law ? $law->statute_code : null;
-            $medMarijuana = $law ? $law->medical_marijuana_status : 'Subject to State Law';
-            $recMarijuana = $law ? $law->recreational_marijuana_status : 'Subject to State Law';
-            $employerRights = $law ? str_replace(['Accredited Drug Testing', 'ADT'], ['Certified Drug Test Center', 'CDTC'], $law->employer_rights_summary) : null;
-            $workerComp = $law ? str_replace(['Accredited Drug Testing', 'ADT'], ['Certified Drug Test Center', 'CDTC'], $law->worker_comp_rules) : null;
+            $cleanedFaqs = [];
+            foreach ($stateFaqs as $faq) {
+                $q = str_replace(
+                    ['Accredited Drug Testing', 'accrediteddrugtesting.com', 'ADT', '{{City_Name}}, {{State_Abbr}}', '{{City_Name}}', '{{State_Abbr}}', '{{State_Name}}', '{{Active_Lab_Count}}'],
+                    ['Certified Drug Test Centers', 'certifieddrugtestcenter.com', 'CDTC', "{$stateName} ({$abbr})", $stateName, $abbr, $stateName, $countFormatted],
+                    $faq['question'] ?? ''
+                );
+                $a = str_replace(
+                    ['Accredited Drug Testing', 'accrediteddrugtesting.com', 'ADT', '{{City_Name}}, {{State_Abbr}}', '{{City_Name}}', '{{State_Abbr}}', '{{State_Name}}', '{{Active_Lab_Count}}'],
+                    ['Certified Drug Test Center', 'certifieddrugtestcenter.com', 'CDTC', "{$stateName} ({$abbr})", $stateName, $abbr, $stateName, $countFormatted],
+                    $faq['answer'] ?? ''
+                );
+                $a = str_replace("in the {$stateName} area", "across {$stateName}", $a);
+
+                $cleanedFaqs[] = [
+                    'question' => $q,
+                    'answer' => $a,
+                ];
+            }
 
             $state->update([
                 'statute_code' => $statuteCode,
@@ -61,7 +77,7 @@ class ImportStateComplianceCommand extends Command
                 'recreational_marijuana_status' => $recMarijuana,
                 'employer_rights_summary' => $employerRights,
                 'worker_comp_rules' => $workerComp,
-                'faqs_json' => !empty($stateFaqs) ? $stateFaqs : null,
+                'faqs_json' => !empty($cleanedFaqs) ? $cleanedFaqs : null,
             ]);
 
             $updatedCount++;
@@ -75,7 +91,7 @@ class ImportStateComplianceCommand extends Command
                 'recreational_marijuana_status' => $recMarijuana,
                 'employer_rights_summary' => $employerRights,
                 'worker_comp_rules' => $workerComp,
-                'faqs_json' => $stateFaqs,
+                'faqs_json' => $cleanedFaqs,
             ];
         }
 

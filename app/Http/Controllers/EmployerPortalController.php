@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CorporatePassDispatchedMail;
+use App\Mail\DonorPassMail;
 use App\Models\CorporateAccount;
 use App\Models\Location;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -95,8 +98,13 @@ class EmployerPortalController extends Controller
             $availableProducts = Product::where('is_active', true)->take(6)->get();
         }
 
-        // Available Quest/Labcorp locations for pre-selection
-        $locations = Location::where('is_active', true)->take(20)->get();
+        // Available Quest/Labcorp locations for pre-selection with realistic diverse network
+        $locations = Location::where('is_active', true)
+            ->whereNotNull('city')
+            ->whereNotNull('address1')
+            ->orderByRaw("CASE WHEN state = 'FL' THEN 0 ELSE 1 END, state ASC, city ASC")
+            ->take(80)
+            ->get();
 
         return view('employers.portal.index', compact(
             'account',
@@ -232,6 +240,22 @@ class EmployerPortalController extends Controller
         // Increment active balance
         $account->increment('active_balance', $price);
 
+        // Send official Electronic Candidate Pass Email to the Candidate
+        try {
+            Mail::to($validated['email'])->send(new DonorPassMail($order));
+        } catch (\Throwable $e) {
+            \Log::warning('Failed sending candidate donor pass email: ' . $e->getMessage());
+        }
+
+        // Send Dispatched Confirmation Email to Employer
+        try {
+            if (!empty($account->email)) {
+                Mail::to($account->email)->send(new CorporatePassDispatchedMail($account, $order, $product));
+            }
+        } catch (\Throwable $e) {
+            \Log::warning('Failed sending corporate pass dispatched notification email: ' . $e->getMessage());
+        }
+
         return redirect()->route('employers.portal')
             ->with('portal_success', "Electronic Donor Pass [{$orderNumber}] dispatched successfully to {$validated['first_name']} {$validated['last_name']} via SMS and Email.");
     }
@@ -246,6 +270,13 @@ class EmployerPortalController extends Controller
 
         if ($order->corporate_account_id !== $account->id) {
             abort(403, 'Unauthorized access to candidate record.');
+        }
+
+        // Re-send official Electronic Candidate Pass Email
+        try {
+            Mail::to($order->donor_email)->send(new DonorPassMail($order));
+        } catch (\Throwable $e) {
+            \Log::warning('Failed re-sending candidate donor pass email: ' . $e->getMessage());
         }
 
         return redirect()->route('employers.portal')

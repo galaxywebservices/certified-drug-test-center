@@ -61,6 +61,14 @@ class CustomPageBuilder extends BasePageBuilder
             }
 
             if (!empty($html)) {
+                if (str_contains($html, '[block slug=')) {
+                    $theme = phpb_instance('theme', [
+                        phpb_config('theme'),
+                        phpb_config('theme.active_theme')
+                    ]);
+                    $renderer = new \PHPageBuilder\Modules\GrapesJS\PageRenderer($theme, $page, true);
+                    $html = $renderer->parseShortcodes($html);
+                }
                 return [0 => $html];
             }
         }

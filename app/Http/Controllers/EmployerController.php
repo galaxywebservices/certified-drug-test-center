@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CorporateWelcomeMail;
+use App\Models\CorporateAccount;
 use App\Models\Lead;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class EmployerController extends Controller
@@ -150,6 +153,45 @@ class EmployerController extends Controller
             'status' => 'new',
             'ip_address' => $request->ip(),
         ]);
+
+        // Auto-provision Corporate Account so employer can immediately access portal
+        $pin = (string)rand(100000, 999999);
+        $account = CorporateAccount::where('email', $validated['email'])->first();
+        if (!$account) {
+            $account = CorporateAccount::create([
+                'company_name' => $validated['company_name'],
+                'account_code' => $referenceCode,
+                'contact_name' => $validated['contact_name'],
+                'email' => $validated['email'],
+                'phone' => $validated['phone'],
+                'industry' => $validated['industry'] ?? 'Corporate Workforce',
+                'billing_type' => $validated['billing_preference'] ?? 'net30',
+                'credit_limit' => 25000.00,
+                'active_balance' => 0.00,
+                'is_dot_regulated' => in_array($validated['dot_regulated'] ?? 'no', ['yes', 'both']),
+                'dot_agency' => ($validated['dot_regulated'] ?? 'no') === 'yes' ? 'FMCSA' : null,
+                'access_pin' => $pin,
+                'access_token' => Str::random(32),
+                'status' => 'active',
+                'settings' => [
+                    'auto_email_results' => true,
+                    'sms_donor_reminder' => true,
+                    'random_pool_enrolled' => in_array('Random Compliance Pool Management', $validated['programs'] ?? []),
+                    'random_rate_drug' => 50,
+                    'random_rate_alcohol' => 10,
+                ],
+            ]);
+        } else {
+            $pin = $account->access_pin ?? $pin;
+            $referenceCode = $account->account_code;
+        }
+
+        // Send official branded Corporate Welcome & Portal Credentials Email
+        try {
+            Mail::to($validated['email'])->send(new CorporateWelcomeMail($account, $referenceCode, $pin));
+        } catch (\Throwable $e) {
+            \Log::warning('Failed sending corporate welcome email: ' . $e->getMessage());
+        }
 
         return redirect()->route('employers.index')
             ->with('corporate_success', true)

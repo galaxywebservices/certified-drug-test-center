@@ -60,11 +60,36 @@
                                 </tr>
                                 <tr>
                                     <td style="color:#64748B; font-weight:600;">Reason for Test:</td>
-                                    <td style="color:#0B2545;">{{ ucfirst($order->test_reason) }}</td>
+                                    <td style="color:#0B2545; font-weight:700;">{{ ucfirst($order->test_reason) }}</td>
+                                </tr>
+                                @if($order->corporate_account_id && $order->corporateAccount)
+                                <tr>
+                                    <td style="color:#64748B; font-weight:600;">Sponsoring Employer:</td>
+                                    <td style="color:#0B2545; font-weight:700;">{{ $order->corporateAccount->company_name }}</td>
+                                </tr>
+                                @endif
+                                @if($order->candidate_department)
+                                <tr>
+                                    <td style="color:#64748B; font-weight:600;">Dept / Position:</td>
+                                    <td style="color:#0B2545;">{{ $order->candidate_department }} {{ $order->candidate_job_title ? '(' . $order->candidate_job_title . ')' : '' }}</td>
+                                </tr>
+                                @endif
+                                <tr>
+                                    <td style="color:#64748B; font-weight:600;">Chain of Custody (CCF):</td>
+                                    <td style="color:#0B2545; font-family:'Courier New', monospace; font-weight:800;">{{ $order->ccf_number }}</td>
                                 </tr>
                                 <tr>
-                                    <td style="color:#64748B; font-weight:600;">Preferred ZIP:</td>
-                                    <td style="color:#0B2545; font-weight:700;">{{ $order->zip }}</td>
+                                    <td style="color:#64748B; font-weight:600;">Collection Facility:</td>
+                                    <td style="color:#0B2545; font-weight:700;">
+                                        @if($order->location)
+                                            {{ $order->location->name }} ({{ strtoupper($order->location->provider) }})<br>
+                                            <span style="font-size:12.5px; font-weight:normal; color:#475569;">
+                                                {{ $order->location->address1 }}, {{ $order->location->city }}, {{ $order->location->state }} {{ $order->location->zip }}
+                                            </span>
+                                        @else
+                                            Quest Diagnostics &amp; Labcorp Nationwide Walk-in Network
+                                        @endif
+                                    </td>
                                 </tr>
                             </table>
 

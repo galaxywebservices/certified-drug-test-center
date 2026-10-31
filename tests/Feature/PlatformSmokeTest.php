@@ -42,6 +42,19 @@ class PlatformSmokeTest extends TestCase
         $response->assertSee('Gilbert');
     }
 
+    public function test_state_location_page_faq_renders_clean_values()
+    {
+        $response = $this->get('/locations/arizona');
+        $response->assertStatus(200);
+        $response->assertSee('Frequently Asked Questions About Arizona Drug Testing');
+        $response->assertSee('How many certified drug testing collection sites does Certified Drug Test Centers offer in Arizona (AZ)?');
+        $response->assertSee('96 certified collection sites across Arizona');
+        $response->assertDontSee('{{City_Name}}');
+        $response->assertDontSee('{{State_Abbr}}');
+        $response->assertDontSee('{{Active_Lab_Count}}');
+        $response->assertDontSee('Accredited Drug Testing');
+    }
+
     public function test_background_checks_page_loads_without_legacy_code()
     {
         $response = $this->get('/background-checks');

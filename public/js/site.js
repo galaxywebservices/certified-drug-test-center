@@ -3,14 +3,43 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Mobile Navigation Toggle
+  // Mobile Navigation Toggle & Accordion Submenus
   const navToggle = document.getElementById('mobileNavToggle');
   const navMenu = document.getElementById('navMenu');
   if (navToggle && navMenu) {
     navToggle.addEventListener('click', function () {
-      navMenu.classList.toggle('open');
-      const isExpanded = navMenu.classList.contains('open');
-      navToggle.setAttribute('aria-expanded', isExpanded);
+      const isOpen = navMenu.classList.toggle('open');
+      navToggle.classList.toggle('open', isOpen);
+      navToggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Mobile Accordion Dropdown Submenus
+    const dropdownItems = navMenu.querySelectorAll('.nav-item.has-dropdown');
+    dropdownItems.forEach(item => {
+      const link = item.querySelector('.nav-link');
+      if (link) {
+        link.addEventListener('click', function (e) {
+          if (window.innerWidth <= 1100) {
+            e.preventDefault();
+            const wasOpen = item.classList.contains('open');
+            dropdownItems.forEach(other => {
+              if (other !== item) other.classList.remove('open');
+            });
+            item.classList.toggle('open', !wasOpen);
+          }
+        });
+      }
+    });
+
+    // Close mobile drawer when clicking outside
+    document.addEventListener('click', function (e) {
+      if (window.innerWidth <= 1100 && navMenu.classList.contains('open')) {
+        if (!navMenu.contains(e.target) && !navToggle.contains(e.target)) {
+          navMenu.classList.remove('open');
+          navToggle.classList.remove('open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        }
+      }
     });
   }
 

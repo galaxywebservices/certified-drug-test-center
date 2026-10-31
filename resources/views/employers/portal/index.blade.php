@@ -361,16 +361,18 @@
     }
     .btn-resend:hover { background: #E2E8F0; }
 
-    /* Modal Overlay & Card */
+    /* Modal Overlay & Executive Card */
     .modal-overlay {
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(11, 37, 69, 0.7);
+        background: rgba(11, 37, 69, 0.75);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
         z-index: 9999;
         align-items: center;
         justify-content: center;
-        padding: 20px;
+        padding: 24px 16px;
         overflow-y: auto;
     }
     .modal-overlay.active {
@@ -378,25 +380,233 @@
     }
     .modal-card {
         background: #FFFFFF;
-        border-radius: 14px;
-        max-width: 640px;
+        border-radius: 16px;
+        max-width: 720px;
         width: 100%;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        max-height: 84vh;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 25px 60px -15px rgba(11, 37, 69, 0.4), 0 0 0 1px rgba(11, 37, 69, 0.05);
         overflow: hidden;
         margin: auto;
+        animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes modalScaleUp {
+        from { opacity: 0; transform: scale(0.96) translateY(-10px); }
+        to { opacity: 1; transform: scale(1) translateY(0); }
     }
     .modal-head {
-        background: #0B2545;
+        background: linear-gradient(135deg, #0B2545 0%, #133E68 100%);
         color: #FFFFFF;
-        padding: 20px 24px;
+        padding: 20px 28px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        border-bottom: 3.5px solid #C1121F;
+        flex-shrink: 0;
     }
-    .modal-head h3 { margin: 0; font-size: 18px; font-weight: 800; color: #FFFFFF; }
-    .modal-head button { background: transparent; border: none; color: #CBD5E1; font-size: 20px; cursor: pointer; }
-    .modal-body { padding: 28px; }
-    .modal-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .modal-head-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+    .modal-head-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #38BDF8;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+    .modal-head h3 {
+        margin: 0;
+        font-size: 19px;
+        font-weight: 800;
+        color: #FFFFFF;
+        letter-spacing: -0.3px;
+    }
+    .modal-head p {
+        margin: 3px 0 0;
+        font-size: 12.5px;
+        color: #94A3B8;
+        font-weight: 500;
+    }
+    .modal-close-btn {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #E2E8F0;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .modal-close-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        color: #FFFFFF;
+        transform: rotate(90deg);
+    }
+    .modal-body {
+        padding: 24px 28px;
+        background: #FFFFFF;
+        overflow-y: auto;
+        flex: 1;
+    }
+    .modal-section-title {
+        font-size: 11.5px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: #64748B;
+        margin: 0 0 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .modal-section-title::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: #F1F5F9;
+    }
+    .modal-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        margin-bottom: 18px;
+    }
+    .portal-form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    .portal-form-label {
+        font-size: 12.5px;
+        font-weight: 700;
+        color: #1E293B;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .portal-form-label .req {
+        color: #C1121F;
+        margin-left: 2px;
+    }
+    .portal-form-input,
+    .portal-form-select {
+        width: 100%;
+        height: 44px;
+        padding: 10px 14px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #0F172A;
+        background: #FFFFFF;
+        border: 1.5px solid #CBD5E1;
+        border-radius: 8px;
+        transition: all 0.2s ease;
+        box-sizing: border-box;
+        font-family: inherit;
+    }
+    .portal-form-input:focus,
+    .portal-form-select:focus {
+        border-color: #0B2545;
+        box-shadow: 0 0 0 3px rgba(11, 37, 69, 0.12);
+        outline: none;
+        background: #F8FAFC;
+    }
+    .portal-form-hint {
+        font-size: 11px;
+        color: #64748B;
+        margin-top: 4px;
+        font-weight: 500;
+    }
+    .modal-dispatch-info {
+        background: linear-gradient(135deg, #EFF6FF 0%, #F0F9FF 100%);
+        border: 1px solid #BFDBFE;
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin-bottom: 22px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .modal-dispatch-info-icon {
+        color: #2563EB;
+        font-size: 18px;
+        margin-top: 2px;
+        flex-shrink: 0;
+    }
+    .modal-dispatch-info-text {
+        font-size: 12.5px;
+        color: #1E3A8A;
+        line-height: 1.5;
+        margin: 0;
+    }
+    .modal-dispatch-info-text strong {
+        color: #0B2545;
+    }
+    .modal-foot {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 14px;
+        padding: 18px 28px;
+        background: #F8FAFC;
+        border-top: 1px solid #E2E8F0;
+        flex-shrink: 0;
+    }
+    .btn-modal-cancel {
+        padding: 11px 22px;
+        border-radius: 8px;
+        border: 1.5px solid #CBD5E1;
+        background: #FFFFFF;
+        color: #475569;
+        font-size: 13.5px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .btn-modal-cancel:hover {
+        background: #F1F5F9;
+        color: #0F172A;
+        border-color: #94A3B8;
+    }
+    .btn-modal-dispatch {
+        padding: 12px 28px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #0B2545 0%, #1A365D 100%);
+        color: #FFFFFF;
+        font-size: 14px;
+        font-weight: 800;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(11, 37, 69, 0.25);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+    }
+    .btn-modal-dispatch:hover {
+        background: linear-gradient(135deg, #133E68 0%, #0B2545 100%);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(11, 37, 69, 0.35);
+    }
+    .btn-modal-dispatch span.arrow {
+        transition: transform 0.2s ease;
+        display: inline-block;
+    }
+    .btn-modal-dispatch:hover span.arrow {
+        transform: translateX(4px);
+    }
 
     /* Compliance Banner */
     .dash-compliance-banner {
@@ -762,54 +972,109 @@
 <div id="dispatchModal" class="modal-overlay">
     <div class="modal-card">
         <div class="modal-head">
-            <div>
-                <h3>Dispatch Electronic Candidate Pass</h3>
-                <p style="margin:2px 0 0; font-size:12px; color:#94A3B8;">Instant delivery to candidate via SMS text and secure email</p>
+            <div class="modal-head-left">
+                <div class="modal-head-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+                    </svg>
+                </div>
+                <div>
+                    <h3>Dispatch Electronic Candidate Pass</h3>
+                    <p>Instant scannable delivery to candidate via SMS text and secure email</p>
+                </div>
             </div>
-            <button type="button" onclick="closeDispatchModal()">&times;</button>
+            <button type="button" class="modal-close-btn" onclick="closeDispatchModal()" aria-label="Close modal">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M13 1L1 13M1 1L13 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
         </div>
 
-        <div class="modal-body">
-            <form action="{{ route('employers.portal.dispatch') }}" method="POST">
-                @csrf
+        <form action="{{ route('employers.portal.dispatch') }}" method="POST" style="display:flex; flex-direction:column; flex:1; min-height:0; margin:0;">
+            @csrf
+            <div class="modal-body">
+                <!-- Delivery Info Callout -->
+                <div class="modal-dispatch-info">
+                    <div class="modal-dispatch-info-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                    </div>
+                    <div class="modal-dispatch-info-text">
+                        <strong>Instant Automated Delivery:</strong> Candidate immediately receives an SMS text and encrypted email containing an official barcoded donor pass, laboratory directions, and testing instructions. Pre-paid through <strong>{{ $account->company_name }}</strong> Net-30 billing.
+                    </div>
+                </div>
+
+                <!-- Section 1: Candidate Contact Info -->
+                <div class="modal-section-title">
+                    <span>Candidate Demographics &amp; Contact</span>
+                </div>
 
                 <div class="modal-grid-2">
-                    <div>
-                        <label class="portal-form-label" style="font-size:11px; font-weight:800; color:#334155; margin-bottom:6px; display:block;">Candidate First Name *</label>
-                        <input type="text" name="first_name" required class="portal-input" placeholder="e.g. Brandon">
+                    <div class="portal-form-group">
+                        <label class="portal-form-label">
+                            <span>Candidate First Name <span class="req">*</span></span>
+                        </label>
+                        <input type="text" name="first_name" required class="portal-form-input" placeholder="e.g. Brandon">
                     </div>
-                    <div>
-                        <label class="portal-form-label" style="font-size:11px; font-weight:800; color:#334155; margin-bottom:6px; display:block;">Candidate Last Name *</label>
-                        <input type="text" name="last_name" required class="portal-input" placeholder="e.g. Miller">
+                    <div class="portal-form-group">
+                        <label class="portal-form-label">
+                            <span>Candidate Last Name <span class="req">*</span></span>
+                        </label>
+                        <input type="text" name="last_name" required class="portal-form-input" placeholder="e.g. Miller">
                     </div>
                 </div>
 
                 <div class="modal-grid-2">
-                    <div>
-                        <label class="portal-form-label" style="font-size:11px; font-weight:800; color:#334155; margin-bottom:6px; display:block;">Candidate Email *</label>
-                        <input type="email" name="email" required class="portal-input" placeholder="candidate@email.com">
+                    <div class="portal-form-group">
+                        <label class="portal-form-label">
+                            <span>Candidate Email Address <span class="req">*</span></span>
+                        </label>
+                        <input type="email" name="email" required class="portal-form-input" placeholder="candidate@email.com">
+                        <span class="portal-form-hint">Official PDF pass &amp; authorization sent here</span>
                     </div>
-                    <div>
-                        <label class="portal-form-label" style="font-size:11px; font-weight:800; color:#334155; margin-bottom:6px; display:block;">Candidate Mobile Phone *</label>
-                        <input type="text" name="phone" required class="portal-input" placeholder="(555) 000-0000">
-                    </div>
-                </div>
-
-                <div class="modal-grid-2">
-                    <div>
-                        <label class="portal-form-label" style="font-size:11px; font-weight:800; color:#334155; margin-bottom:6px; display:block;">Department / Facility</label>
-                        <input type="text" name="candidate_department" class="portal-input" placeholder="e.g. Fleet Logistics, Terminal 4">
-                    </div>
-                    <div>
-                        <label class="portal-form-label" style="font-size:11px; font-weight:800; color:#334155; margin-bottom:6px; display:block;">Job Position / Title</label>
-                        <input type="text" name="candidate_job_title" class="portal-input" placeholder="e.g. CDL Driver, Equipment Operator">
+                    <div class="portal-form-group">
+                        <label class="portal-form-label">
+                            <span>Candidate Mobile Phone <span class="req">*</span></span>
+                        </label>
+                        <input type="text" name="phone" required class="portal-form-input" placeholder="(555) 000-0000">
+                        <span class="portal-form-hint">Instant scannable mobile pass dispatched via SMS</span>
                     </div>
                 </div>
 
+                <!-- Section 2: Department & Role -->
+                <div class="modal-section-title" style="margin-top:8px;">
+                    <span>Department &amp; Job Role</span>
+                </div>
+
                 <div class="modal-grid-2">
-                    <div>
-                        <label class="portal-form-label" style="font-size:11px; font-weight:800; color:#334155; margin-bottom:6px; display:block;">Reason for Testing *</label>
-                        <select name="test_reason" required class="dash-filter-select" style="height:44px;">
+                    <div class="portal-form-group">
+                        <label class="portal-form-label">
+                            <span>Department / Facility</span>
+                        </label>
+                        <input type="text" name="candidate_department" class="portal-form-input" placeholder="e.g. Heavy Fleet Logistics">
+                    </div>
+                    <div class="portal-form-group">
+                        <label class="portal-form-label">
+                            <span>Job Position / Title</span>
+                        </label>
+                        <input type="text" name="candidate_job_title" class="portal-form-input" placeholder="e.g. CDL-A Commercial Driver">
+                    </div>
+                </div>
+
+                <!-- Section 3: Clinical Testing Specifications -->
+                <div class="modal-section-title" style="margin-top:8px;">
+                    <span>Clinical Testing Specification</span>
+                </div>
+
+                <div class="modal-grid-2">
+                    <div class="portal-form-group">
+                        <label class="portal-form-label">
+                            <span>Reason for Testing <span class="req">*</span></span>
+                        </label>
+                        <select name="test_reason" required class="portal-form-select">
                             <option value="Pre-Employment">Pre-Employment Screening</option>
                             <option value="Random Compliance Pool">Quarterly Random Pool Draw</option>
                             <option value="Post-Accident">Post-Accident Investigation</option>
@@ -818,39 +1083,63 @@
                             <option value="Annual Physical">Annual Employment Physical</option>
                         </select>
                     </div>
-                    <div>
-                        <label class="portal-form-label" style="font-size:11px; font-weight:800; color:#334155; margin-bottom:6px; display:block;">Corporate Test Panel *</label>
-                        <select name="product_id" required class="dash-filter-select" style="height:44px;">
+                    <div class="portal-form-group">
+                        <label class="portal-form-label">
+                            <span>Corporate Test Panel <span class="req">*</span></span>
+                        </label>
+                        <select name="product_id" required class="portal-form-select">
                             @foreach($availableProducts as $prod)
                                 <option value="{{ $prod->id }}">
-                                    {{ $prod->name }} - ${{ number_format($prod->price, 2) }}
+                                    {{ $prod->name }} — ${{ number_format($prod->price, 2) }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                 </div>
 
-                <div style="margin-bottom:20px;">
-                    <label class="portal-form-label" style="font-size:11px; font-weight:800; color:#334155; margin-bottom:6px; display:block;">Preferred Collection Site</label>
-                    <select name="location_id" class="dash-filter-select" style="height:44px;">
-                        @foreach($locations as $loc)
-                            <option value="{{ $loc->id }}">
-                                {{ $loc->name }} ({{ $loc->city->name ?? 'FL' }}, {{ $loc->postal_code }})
-                            </option>
-                        @endforeach
-                    </select>
+                <!-- Section 4: Collection Facility Selection -->
+                <div class="modal-section-title" style="margin-top:8px;">
+                    <span>Specimen Collection Facility Selection</span>
                 </div>
 
-                <div style="display:flex; justify-content:flex-end; gap:12px; padding-top:16px; border-top:1px solid #F1F5F9;">
-                    <button type="button" onclick="closeDispatchModal()" class="dash-btn-outline">
-                        Cancel
-                    </button>
-                    <button type="submit" class="dash-btn-primary" style="padding:12px 24px; font-size:14px;">
-                        <span>Dispatch Electronic Pass Now &rarr;</span>
-                    </button>
+                <div class="portal-form-group" style="margin-bottom:10px;">
+                    <label class="portal-form-label">
+                        <span>Assigned Collection Site</span>
+                    </label>
+                    <select name="location_id" class="portal-form-select" style="height:46px;">
+                        <option value="">⚡ Auto-Assign Nearest Certified Site to Candidate's ZIP (Quest &amp; Labcorp Network)</option>
+                        @php
+                            $groupedLocations = $locations->groupBy('state');
+                        @endphp
+                        @foreach($groupedLocations as $state => $locList)
+                            <optgroup label="{{ $state === 'FL' ? 'Florida Certified Facilities (Primary Operations)' : ($state . ' Collection Facilities') }}">
+                                @foreach($locList as $loc)
+                                    @php
+                                        $providerName = ($loc->provider === 'quest' || stripos($loc->name, 'quest') !== false) ? 'Quest Diagnostics' : 'Labcorp';
+                                    @endphp
+                                    <option value="{{ $loc->id }}">
+                                        {{ $providerName }} — {{ $loc->address1 }}, {{ $loc->city }}, {{ $loc->state }} {{ $loc->zip }}
+                                    </option>
+                                @endforeach
+                            </optgroup>
+                        @endforeach
+                    </select>
+                    <span class="portal-form-hint">
+                        Candidate may walk into any of our 20,000+ Quest Diagnostics or Labcorp sites nationwide. No appointment required.
+                    </span>
                 </div>
-            </form>
-        </div>
+            </div>
+
+            <div class="modal-foot">
+                <button type="button" onclick="closeDispatchModal()" class="btn-modal-cancel">
+                    Cancel
+                </button>
+                <button type="submit" class="btn-modal-dispatch">
+                    <span>Dispatch Electronic Pass Now</span>
+                    <span class="arrow">&rarr;</span>
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 

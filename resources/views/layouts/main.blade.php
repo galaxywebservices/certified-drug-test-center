@@ -171,13 +171,17 @@
     <nav class="primary-nav-bar" role="navigation" aria-label="Main Navigation">
         <div class="container nav-inner">
             <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
-                ☰
+                <svg class="hamburger-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <line x1="3" y1="6" x2="21" y2="6" stroke-linecap="round" class="line-top"></line>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke-linecap="round" class="line-mid"></line>
+                    <line x1="3" y1="18" x2="21" y2="18" stroke-linecap="round" class="line-bot"></line>
+                </svg>
             </button>
             <ul class="nav-menu" id="navMenu">
-                <li class="nav-item">
+                <li class="nav-item has-dropdown">
                     <a href="{{ url('/category/urine') }}" class="nav-link">
-                        Urine Drug Tests
-                        <svg width="10" height="10" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
+                        <span>Urine Drug Tests</span>
+                        <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
                     </a>
                     <ul class="nav-dropdown">
                         <li><a href="{{ url('/product/5-panel-nondot') }}" class="nav-dropdown-link">5 Panel NON-DOT ($89.99)</a></li>
@@ -185,13 +189,13 @@
                         <li><a href="{{ url('/product/10-panel') }}" class="nav-dropdown-link">10 Panel Drug Test ($109.99)</a></li>
                         <li><a href="{{ url('/product/10-panel-exp-opiates') }}" class="nav-dropdown-link">10 Panel + Exp Opiates ($119.99)</a></li>
                         <li><a href="{{ url('/product/12-panel-comprehensive') }}" class="nav-dropdown-link">12 Panel Comprehensive ($139.99)</a></li>
-                        <li><a href="{{ url('/category/urine') }}" class="nav-dropdown-link" style="color:#C1121F; font-weight:700;">View All Urine Tests &rarr;</a></li>
+                        <li><a href="{{ url('/category/urine') }}" class="nav-dropdown-link nav-dropdown-viewall">View All Urine Tests &rarr;</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item has-dropdown">
                     <a href="{{ url('/category/dot') }}" class="nav-link">
-                        DOT Testing
-                        <svg width="10" height="10" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
+                        <span>DOT Testing</span>
+                        <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
                     </a>
                     <ul class="nav-dropdown">
                         <li><a href="{{ url('/product/5-panel-dot') }}" class="nav-dropdown-link">5 Panel DOT Drug Screen ($99.99)</a></li>
@@ -199,12 +203,12 @@
                         <li><a href="{{ url('/product/dot-physical') }}" class="nav-dropdown-link">DOT Physical Exam ($159.99)</a></li>
                         <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}" class="nav-dropdown-link">DOT Random Consortium ($99.99)</a></li>
                         <li><a href="{{ url('/product/5-panel-return-to-duty') }}" class="nav-dropdown-link">FMCSA Return to Duty (RTD)</a></li>
-                        <li><a href="{{ url('/category/dot') }}" class="nav-dropdown-link" style="color:#C1121F; font-weight:700;">View All DOT Services &rarr;</a></li>
+                        <li><a href="{{ url('/category/dot') }}" class="nav-dropdown-link nav-dropdown-viewall">View All DOT Services &rarr;</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('/category/hair') }}" class="nav-link">
-                        Hair Follicle Tests
+                        Hair Follicle
                     </a>
                 </li>
                 <li class="nav-item">
@@ -224,7 +228,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('locations.index') }}" class="nav-link">
-                        Testing Locations
+                        Locations
                     </a>
                 </li>
                 <li class="nav-item">
@@ -234,25 +238,38 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('employers.index') }}" class="nav-link" style="color:#C1121F; font-weight:700;">
-                        Employers & Corporate
+                        Employers
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item nav-item-contact">
                     <a href="{{ url('/contact-us') }}" class="nav-link">
                         Contact Us
                     </a>
                 </li>
+                <li class="mobile-nav-footer">
+                    <a href="tel:18009854339" class="mobile-nav-call-btn">
+                        <svg width="15" height="15" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
+                        <span>Toll-Free: (800)-985-4339</span>
+                    </a>
+                    <div class="mobile-nav-sublinks">
+                        <a href="{{ route('order.track') }}">Track Order / Pass</a>
+                        <span>•</span>
+                        <a href="{{ route('locations.index') }}">Find Nearby Labs</a>
+                        <span>•</span>
+                        <a href="{{ url('/contact-us') }}">Support</a>
+                    </div>
+                </li>
             </ul>
 
-            <div style="display:flex; align-items:center; gap:8px;">
+            <div class="nav-actions">
                 <button type="button" class="nav-loc-btn" onclick="openZipModal()" aria-label="Find collection centers near you">
-                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     <span>Find Lab by ZIP</span>
                 </button>
 
                 <a href="{{ route('checkout.index') }}" class="nav-cta-btn">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
-                    Order Test Online
+                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <span>Order Test Online</span>
                 </a>
             </div>
         </div>
