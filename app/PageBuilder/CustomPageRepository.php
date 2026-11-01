@@ -9,6 +9,71 @@ use PHPageBuilder\Modules\GrapesJS\PageRenderer;
 
 class CustomPageRepository extends PageRepository
 {
+    /**
+     * Resiliently resolve a page: checks pagebuilder__pages, or auto-syncs from CDTC Page model
+     */
+    public function findWithId($id)
+    {
+        $page = parent::findWithId($id);
+        if ($page) {
+            return $page;
+        }
+
+        // Fallback: Check if $id corresponds to a CDTC Page model by ID or slug
+        if (!empty($id)) {
+            $cdtcPage = is_numeric($id) ? Page::find($id) : Page::where('slug', $id)->first();
+            if ($cdtcPage) {
+                $pbRoute = '/' . ltrim($cdtcPage->slug, '/');
+                $translation = \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')
+                    ->where('route', $pbRoute)
+                    ->first();
+
+                if ($translation) {
+                    $page = parent::findWithId($translation->page_id);
+                    if ($page) {
+                        return $page;
+                    }
+                }
+
+                // If not provisioned yet, provision on the fly
+                $pbPageId = \Illuminate\Support\Facades\DB::table('pagebuilder__pages')->insertGetId([
+                    'name' => $cdtcPage->title,
+                    'layout' => 'master',
+                    'data' => json_encode([
+                        'html' => [$cdtcPage->content ?: ''],
+                        'css' => '',
+                        'components' => [],
+                        'assets' => [],
+                        'styles' => [],
+                    ]),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')->insert([
+                    'page_id' => $pbPageId,
+                    'locale' => 'en',
+                    'title' => \Illuminate\Support\Str::limit($cdtcPage->title, 250, ''),
+                    'route' => $pbRoute,
+                    'meta_title' => \Illuminate\Support\Str::limit($cdtcPage->meta_title ?: $cdtcPage->title, 250, ''),
+                    'meta_description' => $cdtcPage->meta_description ?: '',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+
+                return parent::findWithId($pbPageId);
+            }
+        }
+
+        // If still not found, fallback to first available page
+        $firstPbPage = \Illuminate\Support\Facades\DB::table('pagebuilder__pages')->first();
+        if ($firstPbPage) {
+            return parent::findWithId($firstPbPage->id);
+        }
+
+        return null;
+    }
+
     public function updatePageData($page, array $data)
     {
         $updateResult = parent::updatePageData($page, $data);

@@ -38,7 +38,10 @@ class AdminPageBuilderTest extends TestCase
             $admin = User::factory()->create(['is_super_admin' => true]);
         }
 
+        ob_start();
         $response = $this->actingAs($admin)->get('/admin/pagebuilder?action=edit&page=86');
+        ob_end_clean();
+
         $response->assertStatus(200);
     }
 }

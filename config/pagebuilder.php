@@ -10,9 +10,28 @@ return [
      |
      */
     'general' => [
-        'base_url' => (isset($_SERVER['HTTP_HOST'])
-            ? ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'])
-            : env('APP_URL', 'http://127.0.0.1:8001')),
+        'base_url' => (function () {
+            $envAppUrl = env('APP_URL');
+            if (!empty($envAppUrl) && parse_url($envAppUrl, PHP_URL_PATH)) {
+                return rtrim($envAppUrl, '/');
+            }
+
+            if (isset($_SERVER['HTTP_HOST'])) {
+                $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+                $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+                $baseDir = str_replace('\\', '/', dirname($scriptName));
+                $baseDir = ($baseDir === '/' || $baseDir === '.') ? '' : $baseDir;
+
+                if (empty($baseDir) && isset($_SERVER['REQUEST_URI'])) {
+                    if (preg_match('#^/([a-zA-Z0-9_\-]+)/admin/pagebuilder#', $_SERVER['REQUEST_URI'], $m)) {
+                        $baseDir = '/' . $m[1];
+                    }
+                }
+
+                return rtrim($scheme . '://' . $_SERVER['HTTP_HOST'] . $baseDir, '/');
+            }
+            return rtrim(env('APP_URL', 'http://127.0.0.1:8001'), '/');
+        })(),
         'language' => 'en',
         'assets_url' => '/assets',
         'uploads_url' => '/uploads'

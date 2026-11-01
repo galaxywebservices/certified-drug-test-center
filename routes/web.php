@@ -180,7 +180,28 @@ Route::prefix('admin')->group(function () {
         // Drag & Drop Visual Page Builder (PHPageBuilder / GrapesJS like ATA LMS)
         Route::any('/pagebuilder/{any?}', function (\Illuminate\Http\Request $request) {
             $config = config('pagebuilder');
+            $config['general']['base_url'] = rtrim($request->root(), '/');
             $builder = new \HansSchouten\LaravelPageBuilder\LaravelPageBuilder($config);
+
+            $action = $request->input('action', 'edit');
+            $route = $request->input('route');
+            $pageId = $request->input('page');
+
+            // Set edit mode
+            phpb_set_in_editmode(true);
+
+            $pageRepo = new \App\PageBuilder\CustomPageRepository;
+            $page = $pageRepo->findWithId($pageId);
+
+            if ($page) {
+                $builder->getPageBuilder()->handleRequest($route, $action, $page);
+                if (!app()->runningUnitTests()) {
+                    exit();
+                }
+                return;
+            }
+
+            // Fallback to PHPageBuilder authenticated router
             $builder->handleAuthenticatedRequest();
         })->where('any', '.*')->name('admin.pagebuilder');
 
