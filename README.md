@@ -66,3 +66,8 @@ When donors register and pay online, an **Electronic Donor Pass** with a unique 
    - **Visual Modular Block Builder:** Hero sections, FAQ accordions, test showcases, and CTA callouts.
    - **100% SEO Inspector:** Live Google SERP desktop snippet preview with title and description character counters.
 3. **PSEO Location Network:** 7,382 physical collection sites across 3,164 cities with real-time ZIP lookup API (`/api/locations/search?zip=...`).
+
+
+
+PayTrace settings in admin panel
+/admin/settings
