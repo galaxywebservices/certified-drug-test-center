@@ -11,7 +11,7 @@ class SuperAdminSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate(
-            ['email' => 'admin@certifieddrugtesting.com'],
+            ['email' => 'admin@certifieddrugtestingcenters.com'],
             [
                 'name' => 'Super Administrator',
                 'password' => Hash::make('Admin@CDTC2026!'),

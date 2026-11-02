@@ -389,7 +389,7 @@ class ImportAdtDataCommand extends Command
     {
         $this->line("-> Seeding Super Admin User...");
         User::updateOrCreate(
-            ['email' => 'admin@certifieddrugtesting.com'],
+            ['email' => 'admin@certifieddrugtestingcenters.com'],
             [
                 'name' => 'Super Administrator',
                 'password' => bcrypt('Admin@CDTC2026!'),
@@ -397,7 +397,7 @@ class ImportAdtDataCommand extends Command
                 'phone' => '(800)-985-4339',
             ]
         );
-        $this->info("   Super Admin created: admin@certifieddrugtesting.com / Admin@CDTC2026!");
+        $this->info("   Super Admin created: admin@certifieddrugtestingcenters.com / Admin@CDTC2026!");
     }
 
     protected function seedDefaultSettings(): void
@@ -406,7 +406,7 @@ class ImportAdtDataCommand extends Command
 
         Setting::set('site_name', 'Certified Drug Test Center', 'general');
         Setting::set('site_phone', '(800)-985-4339', 'general');
-        Setting::set('site_email', 'support@certifieddrugtesting.com', 'general');
+        Setting::set('site_email', 'support@certifieddrugtestingcenters.com', 'general');
         Setting::set('site_tagline', 'Certified Drug Testing Made Fast, Simple & Confidential', 'general');
 
         // PayTrace configuration

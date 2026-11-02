@@ -507,7 +507,7 @@ class PlatformSmokeTest extends TestCase
     public function test_admin_forgot_password_and_reset_workflow(): void
     {
         $admin = \App\Models\User::updateOrCreate(
-            ['email' => 'test-forgot-pw@certifieddrugtesting.com'],
+            ['email' => 'test-forgot-pw@certifieddrugtestingcenters.com'],
             [
                 'name' => 'Test Reset Admin',
                 'password' => \Illuminate\Support\Facades\Hash::make('password123'),
@@ -554,7 +554,7 @@ class PlatformSmokeTest extends TestCase
     public function test_admin_profile_and_password_update_flow(): void
     {
         $admin = \App\Models\User::updateOrCreate(
-            ['email' => 'test-profile-pw@certifieddrugtesting.com'],
+            ['email' => 'test-profile-pw@certifieddrugtestingcenters.com'],
             [
                 'name' => 'Test Super Admin',
                 'password' => \Illuminate\Support\Facades\Hash::make('currentpassword123'),

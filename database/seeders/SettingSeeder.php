@@ -11,7 +11,7 @@ class SettingSeeder extends Seeder
     {
         Setting::set('site_name', 'Certified Drug Test Center', 'general');
         Setting::set('site_phone', '(800)-985-4339', 'general');
-        Setting::set('site_email', 'support@certifieddrugtesting.com', 'general');
+        Setting::set('site_email', 'support@certifieddrugtestingcenters.com', 'general');
         Setting::set('site_tagline', 'Accredited Drug Testing Made Fast, Simple & Confidential', 'general');
 
         // PayTrace configuration defaults

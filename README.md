@@ -6,7 +6,7 @@ Professional, HIPAA-compliant drug and alcohol testing platform built on Laravel
 
 ## 🔑 Super Admin Credentials
 - **Admin Login URL:** `http://127.0.0.1:8000/admin/login`
-- **Super Admin Email:** `admin@certifieddrugtesting.com`
+- **Super Admin Email:** `admin@certifieddrugtestingcenters.com`
 - **Super Admin Password:** `Admin@CDTC2026!`
 
 ---

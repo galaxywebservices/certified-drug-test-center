@@ -179,7 +179,7 @@
 
             <div class="form-group">
                 <label class="form-label" for="email">Admin Email Address</label>
-                <input type="email" id="email" name="email" value="{{ old('email', 'admin@certifieddrugtesting.com') }}" class="form-control" required autofocus placeholder="admin@domain.com">
+                <input type="email" id="email" name="email" value="{{ old('email', 'admin@certifieddrugtestingcenters.com') }}" class="form-control" required autofocus placeholder="admin@domain.com">
             </div>
 
             <div class="form-group">

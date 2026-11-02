@@ -293,7 +293,7 @@
                         </div>
                         <div class="google-serp-preview">
                             <div class="serp-url">
-                                <span>https://certifieddrugtesting.com</span>
+                                <span>https://certifieddrugtestingcenters.com</span>
                                 <span>›</span>
                                 <span id="serpSlugPreview">{{ $page->slug }}</span>
                             </div>

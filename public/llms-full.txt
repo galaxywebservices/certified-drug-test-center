@@ -7,7 +7,7 @@
 ## 1. Company & Laboratory Network Profile
 
 - **Organization Name**: Certified Drug Test Centers (CDTC)
-- **Website**: https://certifieddrugtesting.com (Local Development: http://127.0.0.1:8001)
+- **Website**: https://certifieddrugtestingcenters.com (Local Development: http://127.0.0.1:8001)
 - **Toll-Free Phone**: (800)-985-4339
 - **Operational Hours**: Online Donor Registration 24/7/365; Phone Dispatch Monday-Friday 7:00 AM - 8:00 PM EST.
 - **National Headquarters**: 201 N. Park Ave., Sanford, FL 32771
