@@ -627,6 +627,24 @@ class PlatformSmokeTest extends TestCase
         $response->assertSee('sidebar-footer');
         $response->assertSee('sidebar-btn-logout');
     }
+
+    public function test_admin_can_view_collection_facilities_locations(): void
+    {
+        $admin = \App\Models\User::where('is_super_admin', true)->first();
+        if (!$admin) {
+            $admin = \App\Models\User::create([
+                'name' => 'Test Super Admin',
+                'email' => 'superadmin_loc@test.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('secret'),
+                'is_super_admin' => true,
+            ]);
+        }
+
+        $response = $this->actingAs($admin)->get('/admin/locations');
+        $response->assertStatus(200);
+        $response->assertSee('Certified Collection Centers');
+        $response->assertSee('Search clinic name');
+    }
 }
 
 
