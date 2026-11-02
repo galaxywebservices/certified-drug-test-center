@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AdminHomepageController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\OrderTrackingController;
@@ -176,6 +177,10 @@ Route::prefix('admin')->group(function () {
 
         // CMS Pages & Visual Builder
         Route::resource('pages', AdminPageController::class, ['as' => 'admin']);
+
+        // Dedicated HomePage Content Editor
+        Route::get('/homepage', [AdminHomepageController::class, 'edit'])->name('admin.homepage.edit');
+        Route::match(['put', 'post'], '/homepage', [AdminHomepageController::class, 'update'])->name('admin.homepage.update');
 
         // Drag & Drop Visual Page Builder (PHPageBuilder / GrapesJS like ATA LMS)
         Route::any('/pagebuilder/{any?}', function (\Illuminate\Http\Request $request) {

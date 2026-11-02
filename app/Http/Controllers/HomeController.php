@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Setting;
 
 class HomeController extends Controller
 {
     /**
      * Common data for products, categories, states, and FAQs
      */
-    protected function getSharedData(): array
+    public function getSharedData(): array
     {
         $products = [
             // Urine Drug Tests
@@ -424,7 +425,82 @@ class HomeController extends Controller
             ],
         ];
 
+        // Override default FAQs if managed via Admin HomePage Editor
+        $storedFaqs = Setting::get('homepage_faqs');
+        if (!empty($storedFaqs)) {
+            $decoded = is_string($storedFaqs) ? json_decode($storedFaqs, true) : $storedFaqs;
+            if (is_array($decoded) && count($decoded) > 0) {
+                $faqs = $decoded;
+            }
+        }
+
         return compact('products', 'categories', 'comparisonPanels', 'states', 'faqs');
+    }
+
+    /**
+     * Retrieve all customizable homepage settings with sensible defaults
+     */
+    public static function getHomepageSettings(): array
+    {
+        $bullets = Setting::get('homepage_hero_bullets');
+        if (!empty($bullets)) {
+            $decoded = is_string($bullets) ? json_decode($bullets, true) : $bullets;
+            if (is_array($decoded) && count($decoded) > 0) {
+                $bullets = $decoded;
+            } else {
+                $bullets = null;
+            }
+        } else {
+            $bullets = null;
+        }
+
+        return [
+            'meta_title' => Setting::get('homepage_meta_title', 'Express Drug & Alcohol Testing | Certified Drug Test Centers'),
+            'meta_description' => Setting::get('homepage_meta_description', 'Order your drug test online in 2 minutes. Instant electronic donor pass, 20,000+ Quest & Labcorp collection centers, SAMHSA accredited labs, MRO verified results.'),
+
+            'hero_badge' => Setting::get('homepage_hero_badge', 'Express Online Drug & Alcohol Testing'),
+            'hero_title' => Setting::get('homepage_hero_title', 'Accredited Drug Testing Made <span class="highlight-red">Fast, Simple &amp; Confidential</span>'),
+            'hero_subtitle' => Setting::get('homepage_hero_subtitle', 'Get your electronic donor pass in 2 minutes. Walk in today at over 20,000 Quest Diagnostics and Labcorp certified collection sites nationwide. No doctor order or appointment necessary.'),
+            'hero_bullets' => $bullets ?? [
+                '20,000+ Quest & Labcorp Sites',
+                'SAMHSA Certified Laboratories',
+                'Physician MRO Verification',
+                'Court & DOT Legally Defensible',
+            ],
+
+            'estimator_title' => Setting::get('homepage_estimator_title', 'Instant Test Selector & Estimator'),
+            'estimator_subtitle' => Setting::get('homepage_estimator_subtitle', 'Select your testing criteria to instantly view pricing and register'),
+            'estimator_button' => Setting::get('homepage_estimator_button', 'Register & Obtain Donor Pass Now →'),
+
+            'substance_eyebrow' => Setting::get('homepage_substance_eyebrow', 'Smart Drug Screening Tool'),
+            'substance_title' => Setting::get('homepage_substance_title', 'Looking For A Specific Drug Or Medication?'),
+            'substance_subtitle' => Setting::get('homepage_substance_subtitle', 'Type a drug name, medication, or substance below to find which testing panel detects it.'),
+
+            'timeline_eyebrow' => Setting::get('homepage_timeline_eyebrow', 'Zero Waiting Time'),
+            'timeline_title' => Setting::get('homepage_timeline_title', 'The Fastest Way To Complete A Drug Test'),
+            'timeline_subtitle' => Setting::get('homepage_timeline_subtitle', 'Our automated digital dispatch gets you tested and on with your day.'),
+            'step1_title' => Setting::get('homepage_step1_title', 'Choose Test & Register'),
+            'step1_desc' => Setting::get('homepage_step1_desc', 'Select your testing panel online. Enter donor details and zip code to locate the nearest collection facility.'),
+            'step2_title' => Setting::get('homepage_step2_title', 'Instant Donor Pass'),
+            'step2_desc' => Setting::get('homepage_step2_desc', 'A registration confirmation pass with barcode and site directions is immediately sent to your email and phone.'),
+            'step3_title' => Setting::get('homepage_step3_title', 'Walk-In Collection'),
+            'step3_desc' => Setting::get('homepage_step3_desc', 'Show your pass on your smartphone. The certified collection site handles testing with SAMHSA laboratory analysis.'),
+
+            'catalog_eyebrow' => Setting::get('homepage_catalog_eyebrow', 'Catalog & Pricing'),
+            'catalog_title' => Setting::get('homepage_catalog_title', 'Drug & Alcohol Testing Catalog'),
+            'catalog_subtitle' => Setting::get('homepage_catalog_subtitle', 'Clear upfront pricing with no hidden laboratory fees or collection charges.'),
+
+            'matrix_eyebrow' => Setting::get('homepage_matrix_eyebrow', 'Panel Breakdown'),
+            'matrix_title' => Setting::get('homepage_matrix_title', 'Side-by-Side Substance Detection Matrix'),
+            'matrix_subtitle' => Setting::get('homepage_matrix_subtitle', 'Quick reference table showing which drugs are screened in each panel level.'),
+
+            'locations_eyebrow' => Setting::get('homepage_locations_eyebrow', 'National Directory'),
+            'locations_title' => Setting::get('homepage_locations_title', 'Browse Collection Centers By State'),
+            'locations_subtitle' => Setting::get('homepage_locations_subtitle', 'More than 20,000 collection sites serving every metropolitan and regional area.'),
+
+            'faq_eyebrow' => Setting::get('homepage_faq_eyebrow', 'Help & Support'),
+            'faq_title' => Setting::get('homepage_faq_title', 'Frequently Asked Questions'),
+        ];
     }
 
     /**
@@ -441,9 +517,11 @@ class HomeController extends Controller
     public function design1()
     {
         $data = $this->getSharedData();
+        $homeSettings = self::getHomepageSettings();
         $data['currentDesign'] = 1;
-        $data['pageTitle'] = 'Certified Drug Test Centers | Local, Convenient & Confidential Testing Nationwide';
-        $data['metaDescription'] = 'Certified Drug Test Centers provides fast, confidential same-day drug testing, DOT compliance, urine, hair, alcohol, and DNA testing at 20,000+ certified local centers nationwide.';
+        $data['pageTitle'] = $homeSettings['meta_title'] ?? 'Certified Drug Test Centers | Local, Convenient & Confidential Testing Nationwide';
+        $data['metaDescription'] = $homeSettings['meta_description'] ?? 'Certified Drug Test Centers provides fast, confidential same-day drug testing, DOT compliance, urine, hair, alcohol, and DNA testing at 20,000+ certified local centers nationwide.';
+        $data['homeSettings'] = $homeSettings;
         return view('home-design-1', $data);
     }
 
@@ -453,9 +531,11 @@ class HomeController extends Controller
     public function design2()
     {
         $data = $this->getSharedData();
+        $homeSettings = self::getHomepageSettings();
         $data['currentDesign'] = 2;
-        $data['pageTitle'] = 'Express Drug & Alcohol Testing | Certified Drug Test Centers';
-        $data['metaDescription'] = 'Order your drug test online in 2 minutes. Instant electronic donor pass, 20,000+ Quest & Labcorp collection centers, SAMHSA accredited labs, MRO verified results.';
+        $data['pageTitle'] = $homeSettings['meta_title'];
+        $data['metaDescription'] = $homeSettings['meta_description'];
+        $data['homeSettings'] = $homeSettings;
         return view('home-design-2', $data);
     }
 }

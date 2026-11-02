@@ -12,35 +12,30 @@
         <div class="hero-split-left">
             <div class="hero-tagline-badge" style="background:#F0F5FA; border:1px solid #CBD5E1; color:#0B2545;">
                 <span style="color:#C1121F;">★</span>
-                Express Online Drug &amp; Alcohol Testing
+                {!! $homeSettings['hero_badge'] ?? 'Express Online Drug &amp; Alcohol Testing' !!}
                 <span style="color:#C1121F;">★</span>
             </div>
 
             <h1>
-                Accredited Drug Testing Made <span class="highlight-red">Fast, Simple &amp; Confidential</span>
+                {!! $homeSettings['hero_title'] ?? 'Accredited Drug Testing Made <span class="highlight-red">Fast, Simple &amp; Confidential</span>' !!}
             </h1>
 
             <p>
-                Get your electronic donor pass in 2 minutes. Walk in today at over 20,000 Quest Diagnostics and Labcorp certified collection sites nationwide. No doctor order or appointment necessary.
+                {{ $homeSettings['hero_subtitle'] ?? 'Get your electronic donor pass in 2 minutes. Walk in today at over 20,000 Quest Diagnostics and Labcorp certified collection sites nationwide. No doctor order or appointment necessary.' }}
             </p>
 
             <ul class="hero-split-checklist">
+                @foreach($homeSettings['hero_bullets'] ?? [
+                    '20,000+ Quest & Labcorp Sites',
+                    'SAMHSA Certified Laboratories',
+                    'Physician MRO Verification',
+                    'Court & DOT Legally Defensible'
+                ] as $bullet)
                 <li>
                     <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    20,000+ Quest &amp; Labcorp Sites
+                    {{ $bullet }}
                 </li>
-                <li>
-                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    SAMHSA Certified Laboratories
-                </li>
-                <li>
-                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    Physician MRO Verification
-                </li>
-                <li>
-                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    Court &amp; DOT Legally Defensible
-                </li>
+                @endforeach
             </ul>
 
             <!-- Inline Quick Zip Search -->
@@ -64,9 +59,9 @@
                 <div class="estimator-header">
                     <h3>
                         <svg width="22" height="22" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 100 2h.01a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
-                        Instant Test Selector &amp; Estimator
+                        {{ $homeSettings['estimator_title'] ?? 'Instant Test Selector & Estimator' }}
                     </h3>
-                    <p>Select your testing criteria to instantly view pricing and register</p>
+                    <p>{{ $homeSettings['estimator_subtitle'] ?? 'Select your testing criteria to instantly view pricing and register' }}</p>
                 </div>
 
                 <div class="estimator-field">
@@ -106,7 +101,7 @@
                 </div>
 
                 <button type="button" class="btn btn-primary btn-lg" style="width:100%; margin-top:16px;" onclick="openOrderModal('5-panel-non-dot', document.getElementById('estPanelName').textContent, 89.99)">
-                    Register &amp; Obtain Donor Pass Now →
+                    {{ $homeSettings['estimator_button'] ?? 'Register & Obtain Donor Pass Now →' }}
                 </button>
             </div>
         </div>
@@ -118,12 +113,12 @@
     <div class="container container-narrow">
         <div class="substance-checker-box">
             <div style="text-align:center; margin-bottom:20px;">
-                <span class="section-eyebrow">Smart Drug Screening Tool</span>
+                <span class="section-eyebrow">{{ $homeSettings['substance_eyebrow'] ?? 'Smart Drug Screening Tool' }}</span>
                 <h2 style="font-family:var(--font-heading); font-size:24px; font-weight:800; color:var(--color-primary);" id="substanceToolTitle">
-                    Looking For A Specific Drug Or Medication?
+                    {{ $homeSettings['substance_title'] ?? 'Looking For A Specific Drug Or Medication?' }}
                 </h2>
                 <p style="font-size:14px; color:var(--color-text-muted);">
-                    Type a drug name, medication, or substance below to find which testing panel detects it.
+                    {{ $homeSettings['substance_subtitle'] ?? 'Type a drug name, medication, or substance below to find which testing panel detects it.' }}
                 </p>
             </div>
 
@@ -150,26 +145,26 @@
 <section class="section section-white" aria-label="Process Overview">
     <div class="container">
         <div class="section-header">
-            <span class="section-eyebrow">Zero Waiting Time</span>
-            <h2 class="section-title">The Fastest Way To Complete A Drug Test</h2>
-            <p class="section-desc">Our automated digital dispatch gets you tested and on with your day.</p>
+            <span class="section-eyebrow">{{ $homeSettings['timeline_eyebrow'] ?? 'Zero Waiting Time' }}</span>
+            <h2 class="section-title">{{ $homeSettings['timeline_title'] ?? 'The Fastest Way To Complete A Drug Test' }}</h2>
+            <p class="section-desc">{{ $homeSettings['timeline_subtitle'] ?? 'Our automated digital dispatch gets you tested and on with your day.' }}</p>
         </div>
 
         <div class="process-grid">
             <div class="process-card" style="text-align:left;">
                 <div style="font-family:var(--font-heading); font-size:32px; font-weight:800; color:var(--color-accent-red); margin-bottom:10px;">01.</div>
-                <h3>Choose Test &amp; Register</h3>
-                <p>Select your testing panel online. Enter donor details and zip code to locate the nearest collection facility.</p>
+                <h3>{{ $homeSettings['step1_title'] ?? 'Choose Test & Register' }}</h3>
+                <p>{{ $homeSettings['step1_desc'] ?? 'Select your testing panel online. Enter donor details and zip code to locate the nearest collection facility.' }}</p>
             </div>
             <div class="process-card" style="text-align:left;">
                 <div style="font-family:var(--font-heading); font-size:32px; font-weight:800; color:var(--color-accent-red); margin-bottom:10px;">02.</div>
-                <h3>Instant Donor Pass</h3>
-                <p>A registration confirmation pass with barcode and site directions is immediately sent to your email and phone.</p>
+                <h3>{{ $homeSettings['step2_title'] ?? 'Instant Donor Pass' }}</h3>
+                <p>{{ $homeSettings['step2_desc'] ?? 'A registration confirmation pass with barcode and site directions is immediately sent to your email and phone.' }}</p>
             </div>
             <div class="process-card" style="text-align:left;">
                 <div style="font-family:var(--font-heading); font-size:32px; font-weight:800; color:var(--color-accent-red); margin-bottom:10px;">03.</div>
-                <h3>Walk-In Collection</h3>
-                <p>Show your pass on your smartphone. The certified collection site handles testing with SAMHSA laboratory analysis.</p>
+                <h3>{{ $homeSettings['step3_title'] ?? 'Walk-In Collection' }}</h3>
+                <p>{{ $homeSettings['step3_desc'] ?? 'Show your pass on your smartphone. The certified collection site handles testing with SAMHSA laboratory analysis.' }}</p>
             </div>
         </div>
     </div>
@@ -179,10 +174,10 @@
 <section class="section section-light" id="products-section" aria-labelledby="allPanelsTitle">
     <div class="container">
         <div class="section-header">
-            <span class="section-eyebrow">Catalog &amp; Pricing</span>
-            <h2 class="section-title" id="allPanelsTitle">Drug &amp; Alcohol Testing Catalog</h2>
+            <span class="section-eyebrow">{{ $homeSettings['catalog_eyebrow'] ?? 'Catalog & Pricing' }}</span>
+            <h2 class="section-title" id="allPanelsTitle">{{ $homeSettings['catalog_title'] ?? 'Drug & Alcohol Testing Catalog' }}</h2>
             <p class="section-desc">
-                Clear upfront pricing with no hidden laboratory fees or collection charges.
+                {{ $homeSettings['catalog_subtitle'] ?? 'Clear upfront pricing with no hidden laboratory fees or collection charges.' }}
             </p>
         </div>
 
@@ -244,9 +239,9 @@
 <section class="section section-white" id="comparison-section" aria-labelledby="compTableTitle">
     <div class="container">
         <div class="section-header">
-            <span class="section-eyebrow">Panel Breakdown</span>
-            <h2 class="section-title" id="compTableTitle">Side-by-Side Substance Detection Matrix</h2>
-            <p class="section-desc">Quick reference table showing which drugs are screened in each panel level.</p>
+            <span class="section-eyebrow">{{ $homeSettings['matrix_eyebrow'] ?? 'Panel Breakdown' }}</span>
+            <h2 class="section-title" id="compTableTitle">{{ $homeSettings['matrix_title'] ?? 'Side-by-Side Substance Detection Matrix' }}</h2>
+            <p class="section-desc">{{ $homeSettings['matrix_subtitle'] ?? 'Quick reference table showing which drugs are screened in each panel level.' }}</p>
         </div>
 
         <div class="table-responsive">
@@ -300,9 +295,9 @@
 <section class="section section-light" id="locations" aria-labelledby="statesDirectoryTitle">
     <div class="container">
         <div class="section-header">
-            <span class="section-eyebrow">National Directory</span>
-            <h2 class="section-title" id="statesDirectoryTitle">Browse Collection Centers By State</h2>
-            <p class="section-desc">More than 20,000 collection sites serving every metropolitan and regional area.</p>
+            <span class="section-eyebrow">{{ $homeSettings['locations_eyebrow'] ?? 'National Directory' }}</span>
+            <h2 class="section-title" id="statesDirectoryTitle">{{ $homeSettings['locations_title'] ?? 'Browse Collection Centers By State' }}</h2>
+            <p class="section-desc">{{ $homeSettings['locations_subtitle'] ?? 'More than 20,000 collection sites serving every metropolitan and regional area.' }}</p>
         </div>
 
         <div class="state-search-bar">
@@ -324,8 +319,8 @@
 <section class="section section-white" id="faq-section" aria-labelledby="faqTitle2">
     <div class="container">
         <div class="section-header">
-            <span class="section-eyebrow">Help &amp; Support</span>
-            <h2 class="section-title" id="faqTitle2">Frequently Asked Questions</h2>
+            <span class="section-eyebrow">{{ $homeSettings['faq_eyebrow'] ?? 'Help & Support' }}</span>
+            <h2 class="section-title" id="faqTitle2">{{ $homeSettings['faq_title'] ?? 'Frequently Asked Questions' }}</h2>
         </div>
 
         <div class="faq-wrap">
