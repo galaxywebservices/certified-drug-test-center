@@ -645,6 +645,30 @@ class PlatformSmokeTest extends TestCase
         $response->assertSee('Certified Collection Centers');
         $response->assertSee('Search clinic name');
     }
+
+    public function test_admin_settings_route_is_accessible_directly_while_hidden_from_sidebar(): void
+    {
+        $admin = \App\Models\User::where('is_super_admin', true)->first();
+        if (!$admin) {
+            $admin = \App\Models\User::create([
+                'name' => 'Test Super Admin',
+                'email' => 'superadmin_settings@test.com',
+                'password' => \Illuminate\Support\Facades\Hash::make('secret'),
+                'is_super_admin' => true,
+            ]);
+        }
+
+        // Direct access to /admin/settings still works for super admin
+        $settingsResponse = $this->actingAs($admin)->get('/admin/settings');
+        $settingsResponse->assertStatus(200);
+        $settingsResponse->assertSee('PayTrace Payment Gateway');
+        $settingsResponse->assertSee('PayTrace Username');
+
+        // Verify the menu item is hidden/commented out from rendered sidebar HTML
+        $dashboardResponse = $this->actingAs($admin)->get(route('admin.dashboard'));
+        $dashboardResponse->assertStatus(200);
+        $dashboardResponse->assertDontSee('<a href="' . route('admin.settings.index') . '" class="sidebar-nav-link', false);
+    }
 }
 
 
