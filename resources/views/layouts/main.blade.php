@@ -34,6 +34,146 @@
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/site.css') }}?v={{ time() }}">
 
+    <style>
+        /* Header Trust Badges & Alignment */
+        .header-inner {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 16px !important;
+        }
+        .header-brand-wrap {
+            display: flex !important;
+            align-items: center !important;
+            gap: 16px !important;
+            flex-wrap: nowrap !important;
+            flex-shrink: 0 !important;
+        }
+        .header-trust-badges {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            background: #F8FAFC !important;
+            border: 1px solid #E2E8F0 !important;
+            border-radius: 999px !important;
+            padding: 7px 16px !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            color: #0B2545 !important;
+            box-shadow: 0 1px 4px rgba(11,37,69,0.05) !important;
+            white-space: nowrap !important;
+            flex-shrink: 0 !important;
+            transition: all 0.2s ease !important;
+        }
+        .header-trust-badges:hover {
+            border-color: #CBD5E1 !important;
+            box-shadow: 0 2px 8px rgba(11,37,69,0.08) !important;
+        }
+        .header-review-link {
+            color: #0B2545 !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 5px !important;
+            font-weight: 700 !important;
+        }
+        .header-review-link:hover {
+            color: #C1121F !important;
+        }
+        .header-espanol-tag {
+            color: #0284C7 !important;
+            font-weight: 700 !important;
+            font-size: 12.5px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 5px !important;
+        }
+        @media (max-width: 992px) {
+            .header-trust-badges {
+                display: none !important;
+            }
+        }
+
+        /* Accreditation & Partner Network Bar */
+        .partner-logo-bar {
+            background: #F8FAFC !important;
+            border-top: 1px solid #E2E8F0 !important;
+            border-bottom: 1px solid #E2E8F0 !important;
+            padding: 34px 0 !important;
+        }
+        .partner-logo-heading {
+            font-size: 11.5px !important;
+            font-weight: 800 !important;
+            letter-spacing: 1.5px !important;
+            text-transform: uppercase !important;
+            color: #64748B !important;
+            margin: 0 0 18px 0 !important;
+            text-align: center !important;
+        }
+        .partner-network-flex {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 14px !important;
+            flex-wrap: wrap !important;
+        }
+        .partner-network-hero-pill {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 10px !important;
+            background: #0B2545 !important;
+            color: #FFFFFF !important;
+            padding: 10px 22px !important;
+            border-radius: 999px !important;
+            font-size: 13.5px !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.2px !important;
+            box-shadow: 0 3px 10px rgba(11,37,69,0.15) !important;
+            border: 1px solid rgba(255,255,255,0.15) !important;
+            white-space: nowrap !important;
+        }
+        .partner-org-pills {
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 12px !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+        }
+        .partner-badge-item {
+            display: inline-flex !important;
+            align-items: center !important;
+            background: #FFFFFF !important;
+            border: 1px solid #CBD5E1 !important;
+            border-radius: 8px !important;
+            padding: 7px 16px !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
+            transition: all 0.2s ease !important;
+            white-space: nowrap !important;
+        }
+        .partner-badge-item:hover {
+            transform: translateY(-2px) !important;
+            border-color: #0B2545 !important;
+            box-shadow: 0 4px 12px rgba(11,37,69,0.08) !important;
+        }
+        .partner-badge-name {
+            font-weight: 900 !important;
+            color: #0B2545 !important;
+            font-size: 13px !important;
+            letter-spacing: 0.5px !important;
+        }
+        .partner-badge-divider {
+            color: #CBD5E1 !important;
+            margin: 0 8px !important;
+            font-weight: 300 !important;
+        }
+        .partner-badge-sub {
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            color: #64748B !important;
+            letter-spacing: 0.5px !important;
+        }
+    </style>
+
     <!-- Structured Data (JSON-LD) for 100% SEO Dominance -->
     <!-- Structured Data (JSON-LD) for 100% SEO Dominance -->
     @php
@@ -254,32 +394,36 @@
     </main>
 
     <!-- Accreditation & Partner Bar -->
-    <section class="partner-logo-bar" aria-label="Accreditation & Certified Laboratory Network">
+    <section class="partner-logo-bar" aria-label="Accreditation &amp; Certified Laboratory Network" style="background:#F8FAFC; border-top:1px solid #E2E8F0; border-bottom:1px solid #E2E8F0; padding:34px 0;">
         <div class="container" style="text-align:center;">
-            <p class="partner-logo-heading">
+            <p class="partner-logo-heading" style="font-size:11.5px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:#64748B; margin:0 0 18px 0; text-align:center;">
                 Certified National Specimen Collection &amp; SAMHSA Accredited Laboratory Network
             </p>
-            <div class="partner-network-flex">
-                <div class="partner-network-hero-pill">
-                    <span class="partner-network-check">✓</span>
-                    <strong>Quest &amp; Labcorp National Scheduling Network</strong>
+            <div class="partner-network-flex" style="display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;">
+                <div class="partner-network-hero-pill" style="display:inline-flex; align-items:center; gap:10px; background:#0B2545; color:#FFFFFF; padding:10px 22px; border-radius:999px; font-size:13.5px; font-weight:800; letter-spacing:0.2px; box-shadow:0 3px 10px rgba(11,37,69,0.15); border:1px solid rgba(255,255,255,0.15); white-space:nowrap;">
+                    <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" style="color:#22C55E; flex-shrink:0;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                    <span>Quest &amp; Labcorp National Scheduling Network</span>
                 </div>
-                <div class="partner-org-pills">
-                    <div class="partner-badge-item" title="National Drug & Alcohol Screening Association">
-                        <span class="partner-badge-name">NDASA</span>
-                        <span class="partner-badge-sub">MEMBER</span>
+                <div class="partner-org-pills" style="display:inline-flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:center;">
+                    <div class="partner-badge-item" title="National Drug &amp; Alcohol Screening Association" style="display:inline-flex; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:8px; padding:7px 16px; box-shadow:0 1px 3px rgba(0,0,0,0.04); white-space:nowrap;">
+                        <span class="partner-badge-name" style="font-weight:900; color:#0B2545; font-size:13px; letter-spacing:0.5px;">NDASA</span>
+                        <span class="partner-badge-divider" style="color:#CBD5E1; margin:0 8px; font-weight:300;">|</span>
+                        <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">MEMBER</span>
                     </div>
-                    <div class="partner-badge-item" title="Alere Toxicology Laboratory Network">
-                        <span class="partner-badge-name">ALERE</span>
-                        <span class="partner-badge-sub">TOXICOLOGY</span>
+                    <div class="partner-badge-item" title="Alere Toxicology Laboratory Network" style="display:inline-flex; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:8px; padding:7px 16px; box-shadow:0 1px 3px rgba(0,0,0,0.04); white-space:nowrap;">
+                        <span class="partner-badge-name" style="font-weight:900; color:#0B2545; font-size:13px; letter-spacing:0.5px;">ALERE</span>
+                        <span class="partner-badge-divider" style="color:#CBD5E1; margin:0 8px; font-weight:300;">|</span>
+                        <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">TOXICOLOGY</span>
                     </div>
-                    <div class="partner-badge-item" title="Substance Abuse Program Administrators Association">
-                        <span class="partner-badge-name">SAPAA</span>
-                        <span class="partner-badge-sub">C/TPA ALLIANCE</span>
+                    <div class="partner-badge-item" title="Substance Abuse Program Administrators Association" style="display:inline-flex; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:8px; padding:7px 16px; box-shadow:0 1px 3px rgba(0,0,0,0.04); white-space:nowrap;">
+                        <span class="partner-badge-name" style="font-weight:900; color:#0B2545; font-size:13px; letter-spacing:0.5px;">SAPAA</span>
+                        <span class="partner-badge-divider" style="color:#CBD5E1; margin:0 8px; font-weight:300;">|</span>
+                        <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">C/TPA ALLIANCE</span>
                     </div>
-                    <div class="partner-badge-item" title="i3screen Electronic CCF Logistics">
-                        <span class="partner-badge-name">i3screen</span>
-                        <span class="partner-badge-sub">eCCF CERTIFIED</span>
+                    <div class="partner-badge-item" title="i3screen Electronic CCF Logistics" style="display:inline-flex; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:8px; padding:7px 16px; box-shadow:0 1px 3px rgba(0,0,0,0.04); white-space:nowrap;">
+                        <span class="partner-badge-name" style="font-weight:900; color:#0B2545; font-size:13px; letter-spacing:0.5px;">i3screen</span>
+                        <span class="partner-badge-divider" style="color:#CBD5E1; margin:0 8px; font-weight:300;">|</span>
+                        <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">eCCF CERTIFIED</span>
                     </div>
                 </div>
             </div>

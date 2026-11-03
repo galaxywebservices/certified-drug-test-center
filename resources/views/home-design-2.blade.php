@@ -165,6 +165,68 @@
 </section>
 
 <!-- Horizontal 4-Step Express Timeline -->
+<style>
+    .process-grid-4-wrap {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 20px !important;
+        margin-top: 30px !important;
+    }
+    .process-card-step {
+        background: #FFFFFF !important;
+        border: 1px solid #E2E8F0 !important;
+        border-top: 3px solid #E2E8F0 !important;
+        border-radius: 12px !important;
+        padding: 26px 20px !important;
+        text-align: left !important;
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+        box-shadow: 0 2px 8px rgba(11,37,69,0.04) !important;
+    }
+    .process-card-step:hover {
+        transform: translateY(-4px) !important;
+        border-color: #0B2545 !important;
+        border-top-color: #C1121F !important;
+        box-shadow: 0 8px 20px rgba(11,37,69,0.08) !important;
+    }
+    .process-step-num {
+        font-family: var(--font-heading, 'Montserrat', sans-serif) !important;
+        font-size: 30px !important;
+        font-weight: 800 !important;
+        color: #C1121F !important;
+        margin-bottom: 10px !important;
+        line-height: 1 !important;
+    }
+    .process-card-step h3 {
+        font-family: var(--font-heading, 'Montserrat', sans-serif) !important;
+        font-size: 17px !important;
+        font-weight: 800 !important;
+        color: #0B2545 !important;
+        margin: 0 0 8px 0 !important;
+        letter-spacing: -0.2px !important;
+    }
+    .process-card-step p {
+        font-size: 13.5px !important;
+        color: #64748B !important;
+        line-height: 1.5 !important;
+        margin: 0 !important;
+        flex-grow: 1 !important;
+    }
+    @media (max-width: 1024px) {
+        .process-grid-4-wrap {
+            grid-template-columns: repeat(2, 1fr) !important;
+            gap: 16px !important;
+        }
+    }
+    @media (max-width: 600px) {
+        .process-grid-4-wrap {
+            grid-template-columns: 1fr !important;
+        }
+    }
+</style>
+
 <section class="section section-white" aria-label="Process Overview">
     <div class="container">
         <div class="section-header">
@@ -173,24 +235,24 @@
             <p class="section-desc">{{ $homeSettings['timeline_subtitle'] ?? 'Our online scheduling system gets you tested and on with your day.' }}</p>
         </div>
 
-        <div class="process-grid process-grid-4">
-            <div class="process-card" style="text-align:left;">
-                <div style="font-family:var(--font-heading); font-size:32px; font-weight:800; color:var(--color-accent-red); margin-bottom:10px;">01.</div>
+        <div class="process-grid-4-wrap">
+            <div class="process-card-step">
+                <div class="process-step-num">01.</div>
                 <h3>{{ $homeSettings['step1_title'] ?? 'Choose Test & Register' }}</h3>
                 <p>{{ $homeSettings['step1_desc'] ?? 'Select your testing panel online. Enter donor details and zip code to locate the nearest collection facility.' }}</p>
             </div>
-            <div class="process-card" style="text-align:left;">
-                <div style="font-family:var(--font-heading); font-size:32px; font-weight:800; color:var(--color-accent-red); margin-bottom:10px;">02.</div>
+            <div class="process-card-step">
+                <div class="process-step-num">02.</div>
                 <h3>{{ $homeSettings['step2_title'] ?? 'Instant Donor Pass' }}</h3>
                 <p>{{ $homeSettings['step2_desc'] ?? 'A registration confirmation pass with barcode and site directions is immediately sent to your email and phone.' }}</p>
             </div>
-            <div class="process-card" style="text-align:left;">
-                <div style="font-family:var(--font-heading); font-size:32px; font-weight:800; color:var(--color-accent-red); margin-bottom:10px;">03.</div>
+            <div class="process-card-step">
+                <div class="process-step-num">03.</div>
                 <h3>{{ $homeSettings['step3_title'] ?? 'Walk-In Collection' }}</h3>
                 <p>{{ $homeSettings['step3_desc'] ?? 'Show your pass on your smartphone. The certified collection site handles testing with SAMHSA laboratory analysis.' }}</p>
             </div>
-            <div class="process-card" style="text-align:left;">
-                <div style="font-family:var(--font-heading); font-size:32px; font-weight:800; color:var(--color-accent-red); margin-bottom:10px;">04.</div>
+            <div class="process-card-step">
+                <div class="process-step-num">04.</div>
                 <h3>{{ $homeSettings['step4_title'] ?? 'Fast Electronic Results' }}</h3>
                 <p>{{ $homeSettings['step4_desc'] ?? 'Negative Results sent out via email within 24-48 hours.' }}</p>
             </div>
