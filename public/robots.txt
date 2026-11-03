@@ -37,8 +37,8 @@ User-agent: Meta-ExternalAgent
 Allow: /
 
 # XML Sitemap
-Sitemap: http://127.0.0.1:8001/sitemap.xml
 Sitemap: https://certifieddrugtestingcenters.com/sitemap.xml
+Sitemap: https://certifieddrugtestingcenters.com/sitemap-chain1.xml
 
 # LLM & AI Answer Engine Context (llmstxt.org standard)
 # Clean summary: /llms.txt

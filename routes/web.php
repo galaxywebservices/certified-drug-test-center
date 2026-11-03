@@ -37,6 +37,8 @@ Route::get('/design-1', [HomeController::class, 'design1'])->name('home.design1'
 
 // XML Dynamic Sitemap for SEO
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/sitemap-chain{id}.xml', [\App\Http\Controllers\PseoSitemapController::class, 'chain'])->where('id', '[1-9]')->name('sitemap.chain');
+Route::get('/sitemap-index.xml', [\App\Http\Controllers\PseoSitemapController::class, 'index'])->name('sitemap.index');
 
 // AEO & GEO Standards: llms.txt, llms-full.txt, robots.txt
 Route::get('/llms.txt', function () {
@@ -146,6 +148,30 @@ Route::get('/{state_name}-drug-testing', function(string $stateName) {
     }
     abort(404);
 })->where('state_name', '[a-zA-Z\-]+');
+
+/*
+|--------------------------------------------------------------------------
+| Programmatic SEO 4-Tier Hierarchy (/services/{service}/{state}/{city}/)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['pseo_cache'])->prefix('services')->group(function () {
+    Route::get('/{service_slug}/{state_slug}/{city_slug}/', [\App\Http\Controllers\PseoServiceController::class, 'city'])
+        ->where(['service_slug' => '[a-z0-9\-]+', 'state_slug' => '[a-z0-9\-]+', 'city_slug' => '[a-z0-9\-]+'])
+        ->name('services.city');
+
+    Route::get('/{service_slug}/{state_slug}/', [\App\Http\Controllers\PseoServiceController::class, 'state'])
+        ->where(['service_slug' => '[a-z0-9\-]+', 'state_slug' => '[a-z0-9\-]+'])
+        ->name('services.state');
+
+    Route::get('/{service_slug}/', [\App\Http\Controllers\PseoServiceController::class, 'service'])
+        ->where('service_slug', '[a-z0-9\-]+')
+        ->name('services.service');
+
+    // Non-trailing-slash fallbacks (intercepted by EnforceTrailingSlash middleware to 301 redirect)
+    Route::get('/{service_slug}/{state_slug}/{city_slug}', [\App\Http\Controllers\PseoServiceController::class, 'city']);
+    Route::get('/{service_slug}/{state_slug}', [\App\Http\Controllers\PseoServiceController::class, 'state']);
+    Route::get('/{service_slug}', [\App\Http\Controllers\PseoServiceController::class, 'service']);
+});
 
 /*
 |--------------------------------------------------------------------------

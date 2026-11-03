@@ -6,12 +6,15 @@
     <title>{{ $pageTitle ?? 'Certified Drug Test Centers | Nationwide Drug & Alcohol Testing' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers provides fast, confidential same-day drug testing, DOT compliance, urine, hair, alcohol, and DNA testing at 20,000+ certified local centers nationwide.' }}">
     <meta name="keywords" content="drug testing, drug test near me, DOT drug test, urine drug test, 5 panel drug test, 10 panel drug test, 12 panel drug test, hair follicle drug test, breath alcohol test, accredited drug testing, Quest Diagnostics drug test, Labcorp drug test">
-    <link rel="canonical" href="{{ url()->current() }}">
+    @php
+        $canonicalUrl = $canonicalUrl ?? (str_starts_with(request()->getPathInfo(), '/services') ? url(rtrim(request()->getPathInfo(), '/') . '/') : url()->current());
+    @endphp
+    <link rel="canonical" href="{{ $canonicalUrl }}">
     <meta name="robots" content="index, follow">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:url" content="{{ $canonicalUrl }}">
     <meta property="og:title" content="{{ $pageTitle ?? 'Certified Drug Test Centers' }}">
     <meta property="og:description" content="{{ $metaDescription ?? 'Same-day drug & alcohol testing at 20,000+ local certified collection centers nationwide.' }}">
     <meta property="og:image" content="{{ asset('images/logo.png') }}">
