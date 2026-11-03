@@ -223,6 +223,36 @@ class PseoServiceController extends Controller
     ) {}
 
     /**
+     * Master Services Catalog & Nationwide Directory: /services/
+     */
+    public function index()
+    {
+        $allChains = self::CHAINS;
+        $states = State::where('is_active', true)->orderBy('name')->get();
+
+        $pageTitle = 'Nationwide Drug & Alcohol Testing Services Directory | Certified Drug Test Centers';
+        $metaDescription = 'Explore our complete directory of certified drug, alcohol, DOT, and specialized testing services. Walk in today at over 20,000 Quest & Labcorp collection centers nationwide.';
+        $canonicalUrl = rtrim(url('/services'), '/') . '/';
+
+        $breadcrumbs = [
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Services', 'url' => $canonicalUrl],
+        ];
+
+        $schemaBreadcrumbs = $this->buildBreadcrumbSchema($breadcrumbs);
+
+        return view('services.index', compact(
+            'allChains',
+            'states',
+            'pageTitle',
+            'metaDescription',
+            'canonicalUrl',
+            'breadcrumbs',
+            'schemaBreadcrumbs'
+        ));
+    }
+
+    /**
      * City Landing Page: /services/{service-slug}/{state-slug}/{city-slug}/
      */
     public function city(string $serviceSlug, string $stateSlug, string $citySlug)

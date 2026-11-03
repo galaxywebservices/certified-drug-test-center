@@ -155,6 +155,9 @@ Route::get('/{state_name}-drug-testing', function(string $stateName) {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['pseo_cache'])->prefix('services')->group(function () {
+    Route::get('/', [\App\Http\Controllers\PseoServiceController::class, 'index'])
+        ->name('services.index');
+
     Route::get('/{service_slug}/{state_slug}/{city_slug}/', [\App\Http\Controllers\PseoServiceController::class, 'city'])
         ->where(['service_slug' => '[a-z0-9\-]+', 'state_slug' => '[a-z0-9\-]+', 'city_slug' => '[a-z0-9\-]+'])
         ->name('services.city');

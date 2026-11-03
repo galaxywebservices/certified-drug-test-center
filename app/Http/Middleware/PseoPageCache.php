@@ -29,7 +29,7 @@ class PseoPageCache
             return $next($request);
         }
 
-        $cacheKey = 'pseo_page:' . md5($request->getRequestUri());
+        $cacheKey = 'pseo_page:' . md5($request->getHttpHost() . ':' . $request->getRequestUri());
 
         $cachedData = Cache::get($cacheKey);
         if ($cachedData && is_array($cachedData) && isset($cachedData['content'], $cachedData['status'])) {
