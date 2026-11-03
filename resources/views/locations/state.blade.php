@@ -517,8 +517,12 @@
                                     {{ $partnerLabel }}
                                 </span>
                                 <span class="badge-walkin">
-                                    <span class="badge-walkin-dot"></span>Walk-Ins Welcome
+                                    <span class="badge-walkin-dot"></span>Walk-Ins Accepted Today
                                 </span>
+                            </div>
+
+                            <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:6px; padding:6px 10px; margin:8px 0 10px; font-size:11.5px; color:#92400E; line-height:1.4;">
+                                <strong style="color:#B45309;">Pre-registration required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
                             </div>
 
                             <h3 class="lab-card-title">

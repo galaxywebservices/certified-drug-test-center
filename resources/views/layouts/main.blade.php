@@ -109,55 +109,28 @@
 <body>
 
 
-    <!-- Top Announcement Bar -->
-    <div class="top-notice-bar">
-        <div class="container top-notice-inner">
-            <div class="top-notice-left">
-                <span class="top-notice-tag">
-                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                    Same-Day Testing Available
-                </span>
-                <span>Over 20,000 Certified Quest & Labcorp Collection Sites Nationwide</span>
-            </div>
-            <div class="top-notice-right">
-                <a href="{{ route('order.track') }}" style="color:#0B2545; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:4px; font-size:12.5px;">
-                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                    Track Order / Donor Pass
-                </a>
-                <span>•</span>
-                <a href="{{ route('reviews.index') }}" style="color:#0B2545; font-weight:700; text-decoration:none; display:inline-flex; align-items:center; gap:3px; font-size:12.5px;">
-                    <span style="color:#F59E0B;">★</span> 4.9 Reviews (4.8k+)
-                </a>
-                <span>•</span>
-                <span style="color:#C1121F; font-weight:700;">¡Hablamos Español!</span>
-                <span>•</span>
-                <a href="tel:18009854339" class="top-phone-link">
-                    <svg width="15" height="15" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
-                    Call: (800)-985-4339
-                </a>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Header -->
     <header class="main-header" role="banner">
         <div class="container header-inner">
-            <a href="{{ url('/') }}" class="brand-logo-link" title="Certified Drug Test Centers Home">
-                <img src="{{ asset('images/logo.png') }}" alt="Certified Drug Test Centers - Local Convenient Confidential" class="brand-logo-img">
-            </a>
+            <div class="header-brand-wrap">
+                <a href="{{ url('/') }}" class="brand-logo-link" title="Certified Drug Test Centers Home">
+                    <img src="{{ asset('images/logo.png') }}" alt="Certified Drug Test Centers - Local Convenient Confidential" class="brand-logo-img">
+                </a>
+                <div class="header-trust-badges">
+                    <a href="{{ route('reviews.index') }}" class="header-review-link" title="Verified Customer Reviews">
+                        <span style="color:#F59E0B; font-weight:800;">★ 4.9</span> Reviews (4.8k+)
+                    </a>
+                    <span class="header-badge-sep">•</span>
+                    <span class="header-espanol-tag">¡Hablamos Español!</span>
+                </div>
+            </div>
 
             <div class="header-contact-callout">
-                <button type="button" class="header-search-btn" onclick="openGlobalSearch()" aria-label="Search tests, drugs, or panels">
-                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                    <span>Search Tests & Substances</span>
-                    <kbd class="search-kbd">⌘K</kbd>
-                </button>
                 <div class="header-hours">
                     <strong>Online Scheduling: 24/7</strong>
-                    Phone Assistance: Mon-Fri 7AM - 8PM EST
+                    <span>M-F 8am - 8pm EST &bull; SAT 9am - 5pm</span>
                 </div>
                 <div class="header-phone-box">
-                    <span class="header-phone-label">Toll Free Scheduling</span>
                     <a href="tel:18009854339" class="header-phone-number">(800)-985-4339</a>
                 </div>
                 <a href="{{ route('checkout.index') }}" class="btn btn-primary">
@@ -167,7 +140,7 @@
         </div>
     </header>
 
-    <!-- Primary Navigation Bar -->
+    <!-- Primary Navigation Bar (Toolbar) -->
     <nav class="primary-nav-bar" role="navigation" aria-label="Main Navigation">
         <div class="container nav-inner">
             <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
@@ -180,7 +153,7 @@
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item has-dropdown">
                     <a href="{{ url('/category/urine') }}" class="nav-link">
-                        <span>Urine Drug Tests</span>
+                        <span>Urine Tests</span>
                         <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
                     </a>
                     <ul class="nav-dropdown">
@@ -194,7 +167,7 @@
                 </li>
                 <li class="nav-item has-dropdown">
                     <a href="{{ url('/category/dot') }}" class="nav-link">
-                        <span>DOT Testing</span>
+                        <span>DOT Tests/Services</span>
                         <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
                     </a>
                     <ul class="nav-dropdown">
@@ -208,42 +181,47 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('/category/hair') }}" class="nav-link">
-                        Hair Follicle
+                        Hair Tests
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('/category/alcohol') }}" class="nav-link">
-                        Alcohol & EtG
+                        Alcohol/EtG Tests
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/category/oral-fluid-testing') }}" class="nav-link">
+                        Oral Fluid Tests
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('/category/occupational-health') }}" class="nav-link">
-                        Occupational Health
+                        Occupational Tests
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/category/labblood-testing') }}" class="nav-link">
+                        Clinical Tests
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('/category/dna-testing') }}" class="nav-link">
+                        DNA Tests
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('employers.index') }}" class="nav-link" style="color:#F59E0B; font-weight:700;">
+                        EMPLOYER SERVICES
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('/category/on-site-mobile') }}" class="nav-link">
-                        Mobile Testing
+                        MOBILE TESTING
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('locations.index') }}" class="nav-link">
-                        Locations
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('test-finder.index') }}" class="nav-link" style="color:#0284C7; font-weight:700;">
-                        ✨ Find My Test
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('employers.index') }}" class="nav-link" style="color:#C1121F; font-weight:700;">
-                        Employers
-                    </a>
-                </li>
-                <li class="nav-item nav-item-contact">
-                    <a href="{{ url('/contact-us') }}" class="nav-link">
-                        Contact Us
+                        LOCATIONS
                     </a>
                 </li>
                 <li class="mobile-nav-footer">
@@ -262,11 +240,6 @@
             </ul>
 
             <div class="nav-actions">
-                <button type="button" class="nav-loc-btn" onclick="openZipModal()" aria-label="Find collection centers near you">
-                    <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <span>Find Lab by ZIP</span>
-                </button>
-
                 <a href="{{ route('checkout.index') }}" class="nav-cta-btn">
                     <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
                     <span>Order Test Online</span>
@@ -286,13 +259,29 @@
             <p class="partner-logo-heading">
                 Certified National Specimen Collection &amp; SAMHSA Accredited Laboratory Network
             </p>
-            <div class="partner-credbar-wrap">
-                <img src="{{ asset('images/credbar.jpg') }}" 
-                     alt="Accredited Laboratory & Network Partners: Quest Diagnostics, LabCorp, NDASA, DATIA, Alere, SAPAA, i3screen" 
-                     class="partner-credbar-img" 
-                     width="1413"
-                     height="162"
-                     loading="lazy">
+            <div class="partner-network-flex">
+                <div class="partner-network-hero-pill">
+                    <span class="partner-network-check">✓</span>
+                    <strong>Quest &amp; Labcorp National Scheduling Network</strong>
+                </div>
+                <div class="partner-org-pills">
+                    <div class="partner-badge-item" title="National Drug & Alcohol Screening Association">
+                        <span class="partner-badge-name">NDASA</span>
+                        <span class="partner-badge-sub">MEMBER</span>
+                    </div>
+                    <div class="partner-badge-item" title="Alere Toxicology Laboratory Network">
+                        <span class="partner-badge-name">ALERE</span>
+                        <span class="partner-badge-sub">TOXICOLOGY</span>
+                    </div>
+                    <div class="partner-badge-item" title="Substance Abuse Program Administrators Association">
+                        <span class="partner-badge-name">SAPAA</span>
+                        <span class="partner-badge-sub">C/TPA ALLIANCE</span>
+                    </div>
+                    <div class="partner-badge-item" title="i3screen Electronic CCF Logistics">
+                        <span class="partner-badge-name">i3screen</span>
+                        <span class="partner-badge-sub">eCCF CERTIFIED</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -399,12 +388,13 @@
                 </div>
             </div>
 
-            <form id="expressOrderForm" onsubmit="event.preventDefault(); alert('Registration details captured! Donor pass generated and sent to the email address.'); closeOrderModal();">
+            <form id="expressOrderForm" action="{{ route('checkout.index') }}" method="GET">
                 <input type="hidden" id="modalInputTestName" name="test_name" value="5 Panel NON-DOT Drug Test">
+                <input type="hidden" id="modalInputProductId" name="product_id" value="">
 
                 <div class="modal-form-group">
                     <label for="donorZip">Testing Zip Code (Closest Center Locator) *</label>
-                    <input type="text" id="donorZip" name="donor_zip" placeholder="Enter 5-digit zip code" required maxlength="5">
+                    <input type="text" id="donorZip" name="zip" placeholder="Enter 5-digit zip code" required maxlength="5" pattern="[0-9]{5}">
                 </div>
 
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
@@ -419,34 +409,80 @@
                 </div>
 
                 <div class="modal-form-group">
-                    <label for="donorEmail">Email (To Receive Electronic Donor Pass) *</label>
+                    <label for="donorEmail">Email (For Confidential Results) *</label>
                     <input type="email" id="donorEmail" name="email" placeholder="donor@example.com" required>
+                    <small style="font-size:11.5px; color:#64748B;">Confidential results &amp; electronic donor pass sent here within 24-48 hours.</small>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+                    <div class="modal-form-group">
+                        <label for="modalDob">Date of Birth *</label>
+                        <input type="date" id="modalDob" name="dob" required>
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="donorPhone">Phone Number *</label>
+                        <input type="tel" id="donorPhone" name="phone" placeholder="(555) 000-0000" required>
+                    </div>
                 </div>
 
                 <div class="modal-form-group">
-                    <label for="donorPhone">Phone Number (For SMS Pass & Status) *</label>
-                    <input type="tel" id="donorPhone" name="phone" placeholder="(555) 000-0000" required>
-                </div>
-
-                <div class="modal-form-group">
-                    <label for="testingReason">Reason for Testing *</label>
-                    <select id="testingReason" name="reason" required>
-                        <option value="pre-employment">Pre-Employment Screening</option>
-                        <option value="dot">DOT Regulated Mandate</option>
-                        <option value="court">Court Ordered / Legal / Probation</option>
+                    <label for="testingReason">1. What is the reason for testing? *</label>
+                    <select id="testingReason" name="test_reason" onchange="handleModalReasonChange(this.value)" required>
+                        <option value="employment">Pre-Employment / Workplace</option>
+                        <option value="dot">DOT Regulated (FMCSA / FAA / USCG / FTA / PHMSA / FRA)</option>
+                        <option value="court">Court Ordered / Probation / Legal</option>
                         <option value="personal">Personal / Family Testing</option>
-                        <option value="post-accident">Post-Accident / Reasonable Suspicion</option>
                     </select>
                 </div>
 
+                <!-- Conditional DOT Agency -->
+                <div class="modal-form-group" id="modalDotAgencyGroup" style="display:none;">
+                    <label for="modalDotAgency">DOT Regulated Agency *</label>
+                    <select id="modalDotAgency" name="dot_agency" onchange="handleModalDotAgencyChange(this.value)">
+                        <option value="FMCSA">FMCSA (Federal Motor Carrier Safety Administration)</option>
+                        <option value="FAA">FAA (Federal Aviation Administration)</option>
+                        <option value="USCG">USCG (United States Coast Guard)</option>
+                        <option value="FTA">FTA (Federal Transit Administration)</option>
+                        <option value="PHMSA">PHMSA (Pipeline &amp; Hazardous Materials)</option>
+                        <option value="FRA">FRA (Federal Railroad Administration)</option>
+                    </select>
+                </div>
+
+                <!-- Non-DOT ID -->
+                <div class="modal-form-group" id="modalNonDotIdGroup">
+                    <label for="modalNonDotId">At least last 6 of SSN or Employee ID *</label>
+                    <input type="text" id="modalNonDotId" name="donor_id_number" placeholder="Enter last 6 of SSN or Employee ID">
+                </div>
+
+                <!-- DOT FMCSA ID -->
+                <div id="modalFmcsaGroup" style="display:none; grid-template-columns:1fr 1fr; gap:12px;">
+                    <div class="modal-form-group">
+                        <label for="modalCdlNumber">CDL Number *</label>
+                        <input type="text" id="modalCdlNumber" name="cdl_number" placeholder="Commercial Driver License #">
+                    </div>
+                    <div class="modal-form-group">
+                        <label for="modalCdlState">State of Issuance *</label>
+                        <select id="modalCdlState" name="cdl_state">
+                            <option value="">Select State</option>
+                            <option value="AL">AL</option><option value="AK">AK</option><option value="AZ">AZ</option><option value="AR">AR</option><option value="CA">CA</option><option value="CO">CO</option><option value="CT">CT</option><option value="DE">DE</option><option value="FL">FL</option><option value="GA">GA</option><option value="HI">HI</option><option value="ID">ID</option><option value="IL">IL</option><option value="IN">IN</option><option value="IA">IA</option><option value="KS">KS</option><option value="KY">KY</option><option value="LA">LA</option><option value="ME">ME</option><option value="MD">MD</option><option value="MA">MA</option><option value="MI">MI</option><option value="MN">MN</option><option value="MS">MS</option><option value="MO">MO</option><option value="MT">MT</option><option value="NE">NE</option><option value="NV">NV</option><option value="NH">NH</option><option value="NJ">NJ</option><option value="NM">NM</option><option value="NY">NY</option><option value="NC">NC</option><option value="ND">ND</option><option value="OH">OH</option><option value="OK">OK</option><option value="OR">OR</option><option value="PA">PA</option><option value="RI">RI</option><option value="SC">SC</option><option value="SD">SD</option><option value="TN">TN</option><option value="TX">TX</option><option value="UT">UT</option><option value="VT">VT</option><option value="VA">VA</option><option value="WA">WA</option><option value="WV">WV</option><option value="WI">WI</option><option value="WY">WY</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- DOT Other ID -->
+                <div class="modal-form-group" id="modalDotOtherGroup" style="display:none;">
+                    <label for="modalDotOtherId">Full Social Security Number or Employee ID *</label>
+                    <input type="text" id="modalDotOtherId" placeholder="Full 9-digit SSN or Employee ID" oninput="document.getElementById('modalNonDotId').value = this.value">
+                </div>
+
                 <p style="font-size:12px; color:var(--color-text-muted); margin-bottom:16px;">
-                    🔒 <strong>Secure Electronic Registration:</strong> Testing centers do not accept payments directly on-site. Once completed, your electronic donor registration pass is immediately generated with local collection site address and barcoded order slip.
+                    🔒 <strong>Secure Electronic Registration:</strong> Pre-registration is required. Testing centers do not accept payments on-site. You must receive an electronic registration form/donor pass prior to proceeding to the testing center.
                 </p>
 
                 <div style="display:flex; justify-content:flex-end; gap:10px;">
                     <button type="button" class="btn btn-outline-navy btn-sm" onclick="closeOrderModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">
-                        Proceed to Express Donor Registration →
+                    <button type="submit" class="btn btn-primary" style="background:#C1121F; color:#fff;">
+                        Register / Order Now →
                     </button>
                 </div>
             </form>

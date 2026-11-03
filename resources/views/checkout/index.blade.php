@@ -649,7 +649,7 @@
                         <div class="checkout-form-row">
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="email">
-                                    <span>Donor Email <span class="checkout-label-req">*</span></span>
+                                    <span>Email (For Confidential Results) <span class="checkout-label-req">*</span></span>
                                 </label>
                                 <div class="checkout-input-wrap">
                                     <span class="checkout-input-icon">
@@ -657,7 +657,7 @@
                                     </span>
                                     <input type="email" id="email" name="email" value="{{ old('email') }}" class="checkout-input with-icon" placeholder="donor@example.com" required>
                                 </div>
-                                <div class="checkout-hint">Electronic Donor Pass &amp; lab results notification will be sent here.</div>
+                                <div class="checkout-hint">Electronic Donor Pass &amp; confidential lab results (24-48 hrs) sent here.</div>
                             </div>
 
                             <div class="checkout-form-group">
@@ -668,22 +668,17 @@
                                     </span>
                                     <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" class="checkout-input with-icon" placeholder="(555) 000-0000" required>
                                 </div>
-                                <div class="checkout-hint">For MRO physician verification if needed.</div>
+                                <div class="checkout-hint">For MRO physician verification and SMS pass status.</div>
                             </div>
                         </div>
 
-                        <div class="checkout-form-row" style="margin-bottom:0;">
+                        <div class="checkout-form-row">
                             <div class="checkout-form-group">
-                                <label class="checkout-label" for="test_reason">Reason for Testing <span class="checkout-label-req">*</span></label>
+                                <label class="checkout-label" for="dob">Date of Birth <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
-                                    <select id="test_reason" name="test_reason" class="checkout-input checkout-select" required>
-                                        <option value="employment">Pre-Employment / Job Requirement</option>
-                                        <option value="dot">DOT Regulated Federal Test (FMCSA/FAA/USCG)</option>
-                                        <option value="court">Court Ordered / Probation / Legal</option>
-                                        <option value="personal">Personal / Family Testing</option>
-                                        <option value="post-accident">Post-Accident / Reasonable Suspicion</option>
-                                    </select>
+                                    <input type="date" id="dob" name="dob" value="{{ old('dob') }}" class="checkout-input" required>
                                 </div>
+                                <div class="checkout-hint">Required for laboratory verification and chain of custody.</div>
                             </div>
 
                             <div class="checkout-form-group">
@@ -694,7 +689,93 @@
                                     </span>
                                     <input type="text" id="zip" name="zip" value="{{ old('zip', $selectedLocation ? $selectedLocation->zip : request('zip', '')) }}" class="checkout-input with-icon" placeholder="e.g. 90210" maxlength="5" pattern="[0-9]{5}" required>
                                 </div>
-                                <div class="checkout-hint">We will assign the nearest certified Quest or Labcorp center.</div>
+                                <div class="checkout-hint">We will assign the closest certified Quest or Labcorp center.</div>
+                            </div>
+                        </div>
+
+                        <div class="checkout-form-row">
+                            <div class="checkout-form-group" style="grid-column: span 2;">
+                                <label class="checkout-label" for="test_reason">1. What is the reason for testing? <span class="checkout-label-req">*</span></label>
+                                <div class="checkout-input-wrap">
+                                    <select id="test_reason" name="test_reason" class="checkout-input checkout-select" onchange="handleCheckoutReasonChange(this.value)" required>
+                                        <option value="employment">Pre-Employment / Workplace</option>
+                                        <option value="dot">DOT Regulated (FMCSA / FAA / USCG / FTA / PHMSA / FRA)</option>
+                                        <option value="court">Court Ordered / Probation / Legal</option>
+                                        <option value="personal">Personal / Family Testing</option>
+                                        <option value="post-accident">Post-Accident / Reasonable Suspicion</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conditional DOT Agency Dropdown -->
+                        <div class="checkout-form-row" id="checkoutDotAgencyRow" style="display:none;">
+                            <div class="checkout-form-group" style="grid-column: span 2;">
+                                <label class="checkout-label" for="checkout_dot_agency">DOT Regulated Agency <span class="checkout-label-req">*</span></label>
+                                <div class="checkout-input-wrap">
+                                    <select id="checkout_dot_agency" name="dot_agency" class="checkout-input checkout-select" onchange="handleCheckoutDotAgencyChange(this.value)">
+                                        <option value="FMCSA">FMCSA (Federal Motor Carrier Safety Administration - Trucking / CDL)</option>
+                                        <option value="FAA">FAA (Federal Aviation Administration)</option>
+                                        <option value="USCG">USCG (United States Coast Guard)</option>
+                                        <option value="FTA">FTA (Federal Transit Administration)</option>
+                                        <option value="PHMSA">PHMSA (Pipeline &amp; Hazardous Materials Safety Administration)</option>
+                                        <option value="FRA">FRA (Federal Railroad Administration)</option>
+                                    </select>
+                                </div>
+                                <div class="checkout-hint">FMCSA mandates CDL Number &amp; State of Issuance. Other agencies require Full SSN or Employee ID.</div>
+                            </div>
+                        </div>
+
+                        <!-- Donor Identification Group: Non-DOT vs DOT FMCSA vs DOT Other -->
+                        <div id="checkoutNonDotIdGroup" class="checkout-form-row">
+                            <div class="checkout-form-group">
+                                <label class="checkout-label" for="donor_id_type_nondot">Donor ID Type</label>
+                                <select id="donor_id_type_nondot" name="donor_id_type" class="checkout-input checkout-select">
+                                    <option value="ssn_last6">Social Security Number (Last 6)</option>
+                                    <option value="employee_id">Employee ID</option>
+                                </select>
+                            </div>
+                            <div class="checkout-form-group">
+                                <label class="checkout-label" for="donor_id_number_nondot">Last 6 of SSN or Employee ID <span class="checkout-label-req">*</span></label>
+                                <input type="text" id="donor_id_number_nondot" name="donor_id_number" value="{{ old('donor_id_number') }}" class="checkout-input" placeholder="e.g. 123456" minlength="6" maxlength="20">
+                                <div class="checkout-hint">At least last 6 digits of SSN or your workplace Employee ID.</div>
+                            </div>
+                        </div>
+
+                        <!-- DOT FMCSA: CDL Number & State of Issuance -->
+                        <div id="checkoutFmcsaGroup" class="checkout-form-row" style="display:none;">
+                            <div class="checkout-form-group">
+                                <label class="checkout-label" for="cdl_number">CDL Number (Commercial Driver's License) <span class="checkout-label-req">*</span></label>
+                                <input type="text" id="cdl_number" name="cdl_number" value="{{ old('cdl_number') }}" class="checkout-input" placeholder="Enter CDL Number">
+                                <div class="checkout-hint">Required by FMCSA Federal Drug &amp; Alcohol Clearinghouse.</div>
+                            </div>
+                            <div class="checkout-form-group">
+                                <label class="checkout-label" for="cdl_state">CDL State of Issuance <span class="checkout-label-req">*</span></label>
+                                <select id="cdl_state" name="cdl_state" class="checkout-input checkout-select">
+                                    <option value="">Select State</option>
+                                    @php
+                                        $usStates = ['AL'=>'Alabama','AK'=>'Alaska','AZ'=>'Arizona','AR'=>'Arkansas','CA'=>'California','CO'=>'Colorado','CT'=>'Connecticut','DE'=>'Delaware','FL'=>'Florida','GA'=>'Georgia','HI'=>'Hawaii','ID'=>'Idaho','IL'=>'Illinois','IN'=>'Indiana','IA'=>'Iowa','KS'=>'Kansas','KY'=>'Kentucky','LA'=>'Louisiana','ME'=>'Maine','MD'=>'Maryland','MA'=>'Massachusetts','MI'=>'Michigan','MN'=>'Minnesota','MS'=>'Mississippi','MO'=>'Missouri','MT'=>'Montana','NE'=>'Nebraska','NV'=>'Nevada','NH'=>'New Hampshire','NJ'=>'New Jersey','NM'=>'New Mexico','NY'=>'New York','NC'=>'North Carolina','ND'=>'North Dakota','OH'=>'Ohio','OK'=>'Oklahoma','OR'=>'Oregon','PA'=>'Pennsylvania','RI'=>'Rhode Island','SC'=>'South Carolina','SD'=>'South Dakota','TN'=>'Tennessee','TX'=>'Texas','UT'=>'Utah','VT'=>'Vermont','VA'=>'Virginia','WA'=>'Washington','WV'=>'West Virginia','WI'=>'Wisconsin','WY'=>'Wyoming'];
+                                    @endphp
+                                    @foreach($usStates as $abbr => $stName)
+                                        <option value="{{ $abbr }}">{{ $abbr }} - {{ $stName }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- DOT Other Agencies: Full SSN or Employee ID -->
+                        <div id="checkoutDotOtherGroup" class="checkout-form-row" style="display:none;">
+                            <div class="checkout-form-group">
+                                <label class="checkout-label" for="dot_other_id_type">DOT ID Type</label>
+                                <select id="dot_other_id_type" class="checkout-input checkout-select" onchange="document.getElementById('donor_id_type_nondot').value = this.value">
+                                    <option value="full_ssn">Full Social Security Number</option>
+                                    <option value="employee_id">Employee ID</option>
+                                </select>
+                            </div>
+                            <div class="checkout-form-group">
+                                <label class="checkout-label" for="dot_other_id_number">Full Social Security Number or Employee ID <span class="checkout-label-req">*</span></label>
+                                <input type="text" id="dot_other_id_number" class="checkout-input" placeholder="9-digit SSN (XXX-XX-XXXX) or Employee ID" oninput="document.getElementById('donor_id_number_nondot').value = this.value">
+                                <div class="checkout-hint">FAA, USCG, FTA, PHMSA &amp; FRA mandate full SSN or Employee ID on chain of custody.</div>
                             </div>
                         </div>
                     </div>
@@ -866,5 +947,40 @@
             e.target.value = val;
         }
     });
+
+    function handleCheckoutReasonChange(reason) {
+        const dotRow = document.getElementById('checkoutDotAgencyRow');
+        const nonDotGroup = document.getElementById('checkoutNonDotIdGroup');
+        const fmcsaGroup = document.getElementById('checkoutFmcsaGroup');
+        const dotOtherGroup = document.getElementById('checkoutDotOtherGroup');
+        const dotAgency = document.getElementById('checkout_dot_agency')?.value || 'FMCSA';
+
+        if (reason === 'dot') {
+            if (dotRow) dotRow.style.display = 'grid';
+            if (nonDotGroup) nonDotGroup.style.display = 'none';
+            handleCheckoutDotAgencyChange(dotAgency);
+        } else {
+            if (dotRow) dotRow.style.display = 'none';
+            if (nonDotGroup) nonDotGroup.style.display = 'grid';
+            if (fmcsaGroup) fmcsaGroup.style.display = 'none';
+            if (dotOtherGroup) dotOtherGroup.style.display = 'none';
+        }
+    }
+
+    function handleCheckoutDotAgencyChange(agency) {
+        const fmcsaGroup = document.getElementById('checkoutFmcsaGroup');
+        const dotOtherGroup = document.getElementById('checkoutDotOtherGroup');
+        const nonDotGroup = document.getElementById('checkoutNonDotIdGroup');
+
+        if (nonDotGroup) nonDotGroup.style.display = 'none';
+
+        if (agency === 'FMCSA') {
+            if (fmcsaGroup) fmcsaGroup.style.display = 'grid';
+            if (dotOtherGroup) dotOtherGroup.style.display = 'none';
+        } else {
+            if (fmcsaGroup) fmcsaGroup.style.display = 'none';
+            if (dotOtherGroup) dotOtherGroup.style.display = 'grid';
+        }
+    }
 </script>
 @endsection

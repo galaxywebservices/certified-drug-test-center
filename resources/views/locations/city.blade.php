@@ -388,11 +388,15 @@
 
             @forelse($locations as $loc)
             <div class="lab-location-card">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                     <span class="badge" style="background:#E0F2FE; color:#0369A1; text-transform:uppercase; font-size:11px;">
                         {{ $loc->provider ?: 'Quest / Labcorp' }} Collection Facility
                     </span>
-                    <span style="color:#16A34A; font-weight:700; font-size:12px;">Walk-Ins Accepted Today</span>
+                    <span style="color:#16A34A; font-weight:800; font-size:12px;">✓ Walk-Ins Accepted Today</span>
+                </div>
+
+                <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:6px; padding:8px 12px; margin-bottom:12px; font-size:12px; color:#92400E;">
+                    <strong style="color:#B45309;">Pre-registration required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
                 </div>
 
                 <h3 style="font-size:18px; font-weight:800; color:#0B2545; margin-bottom:6px;">

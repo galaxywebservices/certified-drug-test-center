@@ -407,9 +407,13 @@
                         <span class="status-dot"></span>
                         {{ $parsedHours['today_status'] }}
                     </span>
-                    <span style="font-size:12px; color:#CBD5E1; font-weight:600;">
-                        ● Walk-Ins Accepted Daily
+                    <span style="font-size:12px; color:#4ADE80; font-weight:700;">
+                        ● Walk-Ins Accepted Today
                     </span>
+                </div>
+
+                <div style="background:#FEF3C7; border:1px solid #FCD34D; border-radius:6px; padding:8px 14px; margin:10px 0 12px; font-size:12.5px; color:#92400E; display:inline-block;">
+                    <strong>Pre-registration required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
                 </div>
 
                 <h1 class="facility-title">

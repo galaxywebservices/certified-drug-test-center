@@ -59,14 +59,14 @@
                 <div class="estimator-header">
                     <h3>
                         <svg width="22" height="22" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 100 2h.01a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
-                        {{ $homeSettings['estimator_title'] ?? 'Instant Test Selector & Estimator' }}
+                        {{ $homeSettings['estimator_title'] ?? 'Online Test Order' }}
                     </h3>
                     <p>{{ $homeSettings['estimator_subtitle'] ?? 'Select your testing criteria to instantly view pricing and register' }}</p>
                 </div>
 
                 <div class="estimator-field">
                     <label class="estimator-label" for="estReason">1. What is the reason for testing?</label>
-                    <select id="estReason" class="estimator-select">
+                    <select id="estReason" class="estimator-select" onchange="handleEstimatorReasonChange(this.value)">
                         <option value="employment">Pre-Employment / Workplace</option>
                         <option value="dot">DOT Regulated (FMCSA / FAA / USCG)</option>
                         <option value="court">Court Ordered / Probation / Legal</option>
@@ -74,34 +74,57 @@
                     </select>
                 </div>
 
+                <div class="estimator-field" id="estDotAgencyGroup" style="display:none;">
+                    <label class="estimator-label" for="estDotAgency">DOT Regulated Agency</label>
+                    <select id="estDotAgency" class="estimator-select">
+                        <option value="FMCSA">FMCSA (Federal Motor Carrier Safety Administration)</option>
+                        <option value="FAA">FAA (Federal Aviation Administration)</option>
+                        <option value="USCG">USCG (United States Coast Guard)</option>
+                        <option value="FTA">FTA (Federal Transit Administration)</option>
+                        <option value="PHMSA">PHMSA (Pipeline &amp; Hazardous Materials)</option>
+                        <option value="FRA">FRA (Federal Railroad Administration)</option>
+                    </select>
+                </div>
+
                 <div class="estimator-field">
-                    <label class="estimator-label" for="estSpecimen">2. Select Specimen or Test Panel</label>
-                    <select id="estSpecimen" class="estimator-select">
-                        <option value="urine-5">5 Panel Non-DOT Urine Test (Basic)</option>
-                        <option value="urine-10">10 Panel Comprehensive Urine Test</option>
-                        <option value="urine-12">12 Panel Maximum Coverage Urine Test</option>
-                        <option value="dot-5">5 Panel DOT Federal Urine Screen</option>
-                        <option value="hair-5">Hair Follicle 5-Panel (90-Day History)</option>
-                        <option value="alcohol-breath">Breath Alcohol Test (BAT / EBT)</option>
-                        <option value="physical-dot">DOT Physical Exam (NRCME Doctor)</option>
+                    <label class="estimator-label" for="estMethod">2. Select your Testing Method</label>
+                    <select id="estMethod" class="estimator-select" onchange="handleEstimatorMethodChange(this.value)">
+                        <option value="urine">Urine Tests</option>
+                        <option value="dot">DOT Tests/Services</option>
+                        <option value="hair">Hair Tests</option>
+                        <option value="alcohol">Alcohol/EtG Tests</option>
+                        <option value="oral">Oral Fluid Tests</option>
+                        <option value="occupational">Occupational Tests</option>
+                        <option value="clinical">Clinical Tests</option>
+                        <option value="dna">DNA Tests</option>
+                    </select>
+                </div>
+
+                <div class="estimator-field">
+                    <label class="estimator-label" for="estSpecimen">3. Select Specimen or Test Panel</label>
+                    <select id="estSpecimen" class="estimator-select" onchange="updateEstimatorDisplay()">
+                        <option value="5-panel-non-dot" data-name="5 Panel Non-DOT Urine Test" data-price="89.99">5 Panel Non-DOT Urine Test (Basic)</option>
+                        <option value="10-panel" data-name="10 Panel Comprehensive Urine Test" data-price="109.99">10 Panel Comprehensive Urine Test</option>
+                        <option value="12-panel-comprehensive" data-name="12 Panel Maximum Coverage Urine Test" data-price="139.99">12 Panel Maximum Coverage Urine Test</option>
+                        <option value="5-panel-dot" data-name="5 Panel DOT Federal Urine Screen" data-price="99.99">5 Panel DOT Federal Urine Screen</option>
+                        <option value="hair-follicle-5-panel" data-name="Hair Follicle 5-Panel (90-Day History)" data-price="169.99">Hair Follicle 5-Panel (90-Day History)</option>
+                        <option value="dot-breath-alcohol" data-name="Breath Alcohol Test (BAT / EBT)" data-price="89.99">Breath Alcohol Test (BAT / EBT)</option>
+                        <option value="dot-physical" data-name="DOT Physical Exam (NRCME Doctor)" data-price="159.99">DOT Physical Exam (NRCME Doctor)</option>
                     </select>
                 </div>
 
                 <div class="estimator-price-display">
-                    <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:#64748B; margin-bottom:4px;">
-                        Guaranteed Package Price
-                    </div>
-                    <div class="estimator-price-val" id="estPriceVal">$89.99</div>
-                    <div style="font-size:14px; font-weight:700; color:var(--color-primary); margin-top:4px;" id="estPanelName">
+                    <div style="font-size:15px; font-weight:800; color:var(--color-primary); line-height:1.2;" id="estPanelName">
                         5 Panel Non-DOT Urine Test
                     </div>
-                    <div class="estimator-features-preview" id="estTurnaround">
-                        Turnaround: 1 - 2 Business Days • MRO Physician Reviewed
+                    <div class="estimator-price-val" id="estPriceVal">$89.99</div>
+                    <div class="estimator-features-preview" id="estTurnaround" style="font-size:12.5px; color:#166534; font-weight:600; margin-top:4px;">
+                        Includes: Laboratory Analysis, MRO/Physician Verified, Results 24-48 hours
                     </div>
                 </div>
 
-                <button type="button" class="btn btn-primary btn-lg" style="width:100%; margin-top:16px;" onclick="openOrderModal('5-panel-non-dot', document.getElementById('estPanelName').textContent, 89.99)">
-                    {{ $homeSettings['estimator_button'] ?? 'Register & Obtain Donor Pass Now →' }}
+                <button type="button" class="btn btn-primary btn-lg" style="width:100%; margin-top:16px; background:#C1121F; color:#fff;" onclick="handleEstimatorOrder()">
+                    {{ $homeSettings['estimator_button'] ?? 'Register / Order Now' }}
                 </button>
             </div>
         </div>
@@ -141,16 +164,16 @@
     </div>
 </section>
 
-<!-- Horizontal 3-Step Express Timeline -->
+<!-- Horizontal 4-Step Express Timeline -->
 <section class="section section-white" aria-label="Process Overview">
     <div class="container">
         <div class="section-header">
             <span class="section-eyebrow">{{ $homeSettings['timeline_eyebrow'] ?? 'Zero Waiting Time' }}</span>
             <h2 class="section-title">{{ $homeSettings['timeline_title'] ?? 'The Fastest Way To Complete A Drug Test' }}</h2>
-            <p class="section-desc">{{ $homeSettings['timeline_subtitle'] ?? 'Our automated digital dispatch gets you tested and on with your day.' }}</p>
+            <p class="section-desc">{{ $homeSettings['timeline_subtitle'] ?? 'Our online scheduling system gets you tested and on with your day.' }}</p>
         </div>
 
-        <div class="process-grid">
+        <div class="process-grid process-grid-4">
             <div class="process-card" style="text-align:left;">
                 <div style="font-family:var(--font-heading); font-size:32px; font-weight:800; color:var(--color-accent-red); margin-bottom:10px;">01.</div>
                 <h3>{{ $homeSettings['step1_title'] ?? 'Choose Test & Register' }}</h3>
@@ -166,6 +189,11 @@
                 <h3>{{ $homeSettings['step3_title'] ?? 'Walk-In Collection' }}</h3>
                 <p>{{ $homeSettings['step3_desc'] ?? 'Show your pass on your smartphone. The certified collection site handles testing with SAMHSA laboratory analysis.' }}</p>
             </div>
+            <div class="process-card" style="text-align:left;">
+                <div style="font-family:var(--font-heading); font-size:32px; font-weight:800; color:var(--color-accent-red); margin-bottom:10px;">04.</div>
+                <h3>{{ $homeSettings['step4_title'] ?? 'Fast Electronic Results' }}</h3>
+                <p>{{ $homeSettings['step4_desc'] ?? 'Negative Results sent out via email within 24-48 hours.' }}</p>
+            </div>
         </div>
     </div>
 </section>
@@ -174,20 +202,23 @@
 <section class="section section-light" id="products-section" aria-labelledby="allPanelsTitle">
     <div class="container">
         <div class="section-header">
-            <span class="section-eyebrow">{{ $homeSettings['catalog_eyebrow'] ?? 'Catalog & Pricing' }}</span>
-            <h2 class="section-title" id="allPanelsTitle">{{ $homeSettings['catalog_title'] ?? 'Drug & Alcohol Testing Catalog' }}</h2>
+            <span class="section-eyebrow">{{ $homeSettings['catalog_eyebrow'] ?? 'TESTS & PRICING' }}</span>
+            <h2 class="section-title" id="allPanelsTitle">{{ $homeSettings['catalog_title'] ?? 'Drug & Alcohol Testing Options' }}</h2>
             <p class="section-desc">
                 {{ $homeSettings['catalog_subtitle'] ?? 'Clear upfront pricing with no hidden laboratory fees or collection charges.' }}
             </p>
         </div>
 
         <div class="filter-tabs">
-            <button type="button" class="filter-tab-btn active" data-filter="all">All Products</button>
+            <button type="button" class="filter-tab-btn active" data-filter="all">All Services</button>
             <button type="button" class="filter-tab-btn" data-filter="urine">Urine Panels</button>
             <button type="button" class="filter-tab-btn" data-filter="dot">DOT Regulated</button>
             <button type="button" class="filter-tab-btn" data-filter="hair">Hair Follicle</button>
             <button type="button" class="filter-tab-btn" data-filter="alcohol">Alcohol &amp; EtG</button>
+            <button type="button" class="filter-tab-btn" data-filter="oral">Oral Fluid</button>
             <button type="button" class="filter-tab-btn" data-filter="occupational">Occupational</button>
+            <button type="button" class="filter-tab-btn" data-filter="clinical">Clinical Blood</button>
+            <button type="button" class="filter-tab-btn" data-filter="dna">DNA Testing</button>
         </div>
 
         <div class="products-grid">
@@ -298,6 +329,10 @@
             <span class="section-eyebrow">{{ $homeSettings['locations_eyebrow'] ?? 'National Directory' }}</span>
             <h2 class="section-title" id="statesDirectoryTitle">{{ $homeSettings['locations_title'] ?? 'Browse Collection Centers By State' }}</h2>
             <p class="section-desc">{{ $homeSettings['locations_subtitle'] ?? 'More than 20,000 collection sites serving every metropolitan and regional area.' }}</p>
+        </div>
+
+        <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:8px; padding:12px 18px; margin-bottom:20px; text-align:center; color:#991B1B; font-size:13.5px; font-weight:600;">
+            <span style="color:#16A34A; font-weight:800;">✓ Walk-Ins Accepted Today</span> &bull; <strong style="color:#C1121F;">Pre-Registration Required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
         </div>
 
         <div class="state-search-bar">

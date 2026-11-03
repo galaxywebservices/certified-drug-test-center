@@ -72,7 +72,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div>
                   <strong>📍 Nearest Certified Site: ${loc.name}</strong><br>
                   <span style="font-size:12.5px; color:#475569;">${loc.address1}, ${loc.city}, ${loc.state} ${loc.zip}</span><br>
-                  <span style="font-size:12px; color:#16a34a; font-weight:600;">● Walk-Ins Accepted: ${loc.hours || 'Mon-Fri 8:00 AM - 5:00 PM'}</span>
+                  <span style="font-size:12px; color:#16a34a; font-weight:700;">● Walk-Ins Accepted Today</span>
+                  <div style="font-size:11.5px; color:#92400E; background:#FFFBEB; padding:3px 8px; border-radius:4px; margin-top:4px; border:1px solid #FDE68A;">
+                    <strong>Pre-registration required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
+                  </div>
                 </div>
                 <a href="/checkout?zip=${encodeURIComponent(loc.zip)}" class="btn btn-primary btn-sm">
                   Register at This Center →
@@ -84,7 +87,10 @@ document.addEventListener('DOMContentLoaded', function () {
               <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                 <div>
                   <strong>📍 Quest & Labcorp Certified Centers Serving ZIP ${zipVal}</strong><br>
-                  <span style="font-size:12px; color:#16a34a; font-weight:600;">● Same-Day Walk-Ins Accepted Nationwide</span>
+                  <span style="font-size:12px; color:#16a34a; font-weight:700;">● Walk-Ins Accepted Today</span>
+                  <div style="font-size:11.5px; color:#92400E; background:#FFFBEB; padding:3px 8px; border-radius:4px; margin-top:4px; border:1px solid #FDE68A;">
+                    <strong>Pre-registration required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
+                  </div>
                 </div>
                 <a href="/checkout?zip=${encodeURIComponent(zipVal)}" class="btn btn-primary btn-sm">
                   Schedule Test Online →
@@ -98,7 +104,10 @@ document.addEventListener('DOMContentLoaded', function () {
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
               <div>
                 <strong>📍 Quest Diagnostics & Labcorp Partner Facilities Serving ZIP ${zipVal}</strong><br>
-                <span style="font-size:12px; color:#16a34a; font-weight:600;">● No Appointment Needed</span>
+                <span style="font-size:12px; color:#16a34a; font-weight:700;">● Walk-Ins Accepted Today</span>
+                <div style="font-size:11.5px; color:#92400E; background:#FFFBEB; padding:3px 8px; border-radius:4px; margin-top:4px; border:1px solid #FDE68A;">
+                  <strong>Pre-registration required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
+                </div>
               </div>
               <a href="/checkout?zip=${encodeURIComponent(zipVal)}" class="btn btn-primary btn-sm">
                 Schedule Test Online →
@@ -223,41 +232,150 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Instant Test Estimator (Design 2 Feature)
   const estReason = document.getElementById('estReason');
+  const estMethod = document.getElementById('estMethod');
   const estSpecimen = document.getElementById('estSpecimen');
   const estPriceDisplay = document.getElementById('estPriceVal');
   const estPanelNameDisplay = document.getElementById('estPanelName');
   const estTurnaroundDisplay = document.getElementById('estTurnaround');
 
-  const estimatorData = {
-    'urine-5': { name: '5 Panel Non-DOT Urine Test', price: '$89.99', turnaround: '1 - 2 Business Days' },
-    'urine-10': { name: '10 Panel Comprehensive Urine Test', price: '$109.99', turnaround: '1 - 2 Business Days' },
-    'urine-12': { name: '12 Panel Comprehensive Urine Test', price: '$139.99', turnaround: '24 - 48 Hours' },
-    'dot-5': { name: '5 Panel DOT Urine Drug Screen', price: '$99.99', turnaround: '24 - 48 Hours' },
-    'hair-5': { name: 'Hair Follicle 5-Panel (90 Days)', price: '$169.99', turnaround: '2 - 3 Business Days' },
-    'alcohol-breath': { name: 'DOT/Non-DOT Breath Alcohol Test', price: '$89.99', turnaround: 'Instant Reading' },
-    'physical-dot': { name: 'DOT Physical Examination (NRCME)', price: '$159.99', turnaround: 'Same-Day Card' }
+  const estimatorMethodPanels = {
+    urine: [
+      { value: '5-panel-non-dot', name: '5 Panel Non-DOT Urine Test (Basic)', price: '89.99', turnaround: '24-48 hours' },
+      { value: '10-panel', name: '10 Panel Comprehensive Urine Test', price: '109.99', turnaround: '24-48 hours' },
+      { value: '12-panel-comprehensive', name: '12 Panel Maximum Coverage Urine Test', price: '139.99', turnaround: '24-48 hours' },
+      { value: '5-panel-expanded-opiates', name: '5 Panel + Expanded Opiates Urine Test', price: '99.99', turnaround: '24-48 hours' },
+      { value: '10-panel-expanded-opiates', name: '10 Panel + Expanded Opiates Urine Test', price: '119.99', turnaround: '24-48 hours' },
+    ],
+    dot: [
+      { value: '5-panel-dot', name: '5 Panel DOT Federal Urine Screen', price: '99.99', turnaround: '24-48 hours' },
+      { value: 'dot-breath-alcohol', name: 'Breath Alcohol Test (BAT / EBT)', price: '89.99', turnaround: 'Instant Reading' },
+      { value: 'dot-physical', name: 'DOT Physical Exam (NRCME Doctor)', price: '159.99', turnaround: 'Same-Day Card' },
+      { value: 'dot-consortium', name: 'DOT Random Consortium Annual Enrollment', price: '149.00', turnaround: 'Instant Certificate' },
+    ],
+    hair: [
+      { value: 'hair-follicle-5-panel', name: 'Hair Follicle 5-Panel (90-Day History)', price: '169.99', turnaround: '2-3 Business Days' },
+      { value: 'hair-follicle-10-panel', name: 'Hair Follicle 10-Panel Comprehensive', price: '249.99', turnaround: '2-3 Business Days' },
+      { value: 'hair-follicle-etg', name: 'Hair Follicle Alcohol EtG (3-Month History)', price: '199.99', turnaround: '3-5 Business Days' },
+    ],
+    alcohol: [
+      { value: 'dot-breath-alcohol', name: 'Breath Alcohol Test (BAT / EBT)', price: '89.99', turnaround: 'Instant Reading' },
+      { value: 'etg-urine-alcohol', name: '80-Hour EtG Urine Alcohol Test', price: '89.99', turnaround: '24-48 hours' },
+      { value: 'hair-follicle-etg', name: 'Hair Follicle Alcohol EtG (90-Day)', price: '199.99', turnaround: '3-5 Business Days' },
+    ],
+    oral: [
+      { value: 'oral-fluid-6-panel', name: 'Oral Fluid 6-Panel Saliva Drug Test', price: '109.99', turnaround: '24-48 hours' },
+      { value: 'oral-fluid-10-panel', name: 'Oral Fluid 10-Panel Saliva Drug Test', price: '129.99', turnaround: '24-48 hours' },
+    ],
+    occupational: [
+      { value: 'dot-physical', name: 'DOT Physical Exam (NRCME Doctor)', price: '159.99', turnaround: 'Same-Day Card' },
+      { value: 'fit-for-duty', name: 'Fit-For-Duty Medical Examination', price: '179.99', turnaround: 'Comprehensive Report' },
+      { value: 'tb-skin-test', name: 'TB Skin Test (Mantoux PPD)', price: '79.99', turnaround: '48-72 Hour Read' },
+      { value: 'respirator-clearance', name: 'OSHA Respirator Clearance Exam', price: '99.99', turnaround: 'Same-Day Clearance' },
+    ],
+    clinical: [
+      { value: 'comprehensive-health-profile', name: 'Comprehensive Health Profile (CBC & CMP)', price: '99.99', turnaround: '24-48 hours' },
+      { value: 'heavy-metals-blood-panel', name: 'Heavy Metals Comprehensive Blood Panel', price: '149.99', turnaround: '2-3 Business Days' },
+      { value: 'hepatitis-b-c-panel', name: 'Hepatitis B & C Antibody Blood Panel', price: '89.99', turnaround: '24-48 hours' },
+    ],
+    dna: [
+      { value: 'legal-paternity-dna-test', name: 'Legal Paternity DNA Test (Court Admissible)', price: '289.99', turnaround: '2-3 Business Days' },
+      { value: 'non-invasive-prenatal-paternity-nipp', name: 'Non-Invasive Prenatal Paternity (NIPP)', price: '999.00', turnaround: '5-7 Business Days' },
+      { value: 'informational-paternity-kit', name: 'Informational At-Home Paternity Kit', price: '179.99', turnaround: '3-5 Business Days' },
+    ]
   };
 
-  function updateEstimator() {
-    if (!estSpecimen || !estPriceDisplay) return;
-    const selectedKey = estSpecimen.value;
-    const match = estimatorData[selectedKey] || estimatorData['urine-5'];
+  window.handleEstimatorReasonChange = function (reason) {
+    const dotAgencyGroup = document.getElementById('estDotAgencyGroup');
+    const methodSelect = document.getElementById('estMethod');
+    if (reason === 'dot') {
+      if (dotAgencyGroup) dotAgencyGroup.style.display = 'block';
+      if (methodSelect) {
+        methodSelect.value = 'dot';
+        handleEstimatorMethodChange('dot');
+      }
+    } else {
+      if (dotAgencyGroup) dotAgencyGroup.style.display = 'none';
+      if (methodSelect && methodSelect.value === 'dot') {
+        methodSelect.value = 'urine';
+        handleEstimatorMethodChange('urine');
+      }
+    }
+  };
 
-    estPriceDisplay.textContent = match.price;
-    if (estPanelNameDisplay) estPanelNameDisplay.textContent = match.name;
-    if (estTurnaroundDisplay) estTurnaroundDisplay.textContent = 'Turnaround: ' + match.turnaround;
-  }
+  window.handleEstimatorMethodChange = function (method) {
+    const specimenSelect = document.getElementById('estSpecimen');
+    if (!specimenSelect) return;
+
+    const panels = estimatorMethodPanels[method] || estimatorMethodPanels['urine'];
+    specimenSelect.innerHTML = '';
+
+    panels.forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = p.value;
+      opt.setAttribute('data-name', p.name);
+      opt.setAttribute('data-price', p.price);
+      opt.setAttribute('data-turnaround', p.turnaround);
+      opt.textContent = p.name;
+      specimenSelect.appendChild(opt);
+    });
+
+    updateEstimatorDisplay();
+  };
+
+  window.updateEstimatorDisplay = function () {
+    const specimenSelect = document.getElementById('estSpecimen');
+    const priceDisplay = document.getElementById('estPriceVal');
+    const nameDisplay = document.getElementById('estPanelName');
+    const turnaroundDisplay = document.getElementById('estTurnaround');
+
+    if (!specimenSelect) return;
+    const selectedOpt = specimenSelect.options[specimenSelect.selectedIndex];
+    if (!selectedOpt) return;
+
+    const price = selectedOpt.getAttribute('data-price') || '89.99';
+    const name = selectedOpt.getAttribute('data-name') || selectedOpt.text;
+    const turnaround = selectedOpt.getAttribute('data-turnaround') || '24-48 hours';
+
+    if (priceDisplay) priceDisplay.textContent = '$' + Number(price).toFixed(2);
+    if (nameDisplay) nameDisplay.textContent = name;
+    if (turnaroundDisplay) {
+      turnaroundDisplay.innerHTML = 'Includes: Laboratory Analysis, MRO/Physician Verified, Results ' + turnaround;
+    }
+  };
+
+  window.handleEstimatorOrder = function () {
+    const specimenSelect = document.getElementById('estSpecimen');
+    const reasonSelect = document.getElementById('estReason');
+    const dotAgencySelect = document.getElementById('estDotAgency');
+
+    const selectedOpt = specimenSelect ? specimenSelect.options[specimenSelect.selectedIndex] : null;
+    const panelKey = specimenSelect?.value || '5-panel-non-dot';
+    const panelName = selectedOpt ? (selectedOpt.getAttribute('data-name') || selectedOpt.text) : '5 Panel Non-DOT Urine Test';
+    const panelPrice = selectedOpt ? (selectedOpt.getAttribute('data-price') || '89.99') : '89.99';
+    const reason = reasonSelect ? reasonSelect.value : 'employment';
+    const dotAgency = (reason === 'dot' && dotAgencySelect) ? dotAgencySelect.value : '';
+
+    openOrderModal(panelKey, panelName, panelPrice);
+
+    // Sync modal reason & agency
+    const modalReason = document.getElementById('testingReason');
+    if (modalReason) {
+      modalReason.value = reason;
+      if (typeof handleModalReasonChange === 'function') {
+        handleModalReasonChange(reason);
+      }
+    }
+    const modalDotAgency = document.getElementById('modalDotAgency');
+    if (modalDotAgency && dotAgency) {
+      modalDotAgency.value = dotAgency;
+      if (typeof handleModalDotAgencyChange === 'function') {
+        handleModalDotAgencyChange(dotAgency);
+      }
+    }
+  };
 
   if (estSpecimen) {
-    estSpecimen.addEventListener('change', updateEstimator);
-  }
-  if (estReason) {
-    estReason.addEventListener('change', function () {
-      if (this.value === 'dot' && estSpecimen) {
-        estSpecimen.value = 'dot-5';
-      }
-      updateEstimator();
-    });
+    estSpecimen.addEventListener('change', updateEstimatorDisplay);
   }
 });
 
@@ -268,10 +386,12 @@ function openOrderModal(productId, productName, price) {
   const nameEl = document.getElementById('modalProductName');
   const priceEl = document.getElementById('modalProductPrice');
   const testInput = document.getElementById('modalInputTestName');
+  const prodIdInput = document.getElementById('modalInputProductId');
 
   if (nameEl) nameEl.textContent = productName || 'Drug Test Registration';
   if (priceEl) priceEl.textContent = price ? '$' + Number(price).toFixed(2) : '$89.99';
   if (testInput) testInput.value = productName;
+  if (prodIdInput && productId) prodIdInput.value = productId;
 
   if (typeof modal.showModal === 'function') {
     modal.showModal();
@@ -287,6 +407,42 @@ function closeOrderModal() {
     modal.close();
   } else {
     modal.style.display = 'none';
+  }
+}
+
+function handleModalReasonChange(reason) {
+  const dotAgencyGroup = document.getElementById('modalDotAgencyGroup');
+  const nonDotGroup = document.getElementById('modalNonDotIdGroup');
+  const fmcsaGroup = document.getElementById('modalFmcsaGroup');
+  const dotOtherGroup = document.getElementById('modalDotOtherGroup');
+  const agencySelect = document.getElementById('modalDotAgency');
+  const currentAgency = agencySelect ? agencySelect.value : 'FMCSA';
+
+  if (reason === 'dot') {
+    if (dotAgencyGroup) dotAgencyGroup.style.display = 'block';
+    if (nonDotGroup) nonDotGroup.style.display = 'none';
+    handleModalDotAgencyChange(currentAgency);
+  } else {
+    if (dotAgencyGroup) dotAgencyGroup.style.display = 'none';
+    if (nonDotGroup) nonDotGroup.style.display = 'block';
+    if (fmcsaGroup) fmcsaGroup.style.display = 'none';
+    if (dotOtherGroup) dotOtherGroup.style.display = 'none';
+  }
+}
+
+function handleModalDotAgencyChange(agency) {
+  const fmcsaGroup = document.getElementById('modalFmcsaGroup');
+  const dotOtherGroup = document.getElementById('modalDotOtherGroup');
+  const nonDotGroup = document.getElementById('modalNonDotIdGroup');
+
+  if (nonDotGroup) nonDotGroup.style.display = 'none';
+
+  if (agency === 'FMCSA') {
+    if (fmcsaGroup) fmcsaGroup.style.display = 'grid';
+    if (dotOtherGroup) dotOtherGroup.style.display = 'none';
+  } else {
+    if (fmcsaGroup) fmcsaGroup.style.display = 'none';
+    if (dotOtherGroup) dotOtherGroup.style.display = 'block';
   }
 }
 
