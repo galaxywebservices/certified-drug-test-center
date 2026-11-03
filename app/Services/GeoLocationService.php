@@ -45,7 +45,11 @@ class GeoLocationService
             $lat = (float) $city->lat;
             $lng = (float) $city->lng;
 
-            // MySQL Haversine query on indexed coordinates
+            $latDelta = ($maxMiles / 69.0) + 0.05;
+            $cosLat = cos(deg2rad($lat));
+            $lngDelta = ($maxMiles / (69.0 * max(0.15, abs($cosLat)))) + 0.05;
+
+            // MySQL Haversine query on indexed coordinates bounded by bounding box
             $rawLocations = Location::select([
                 'locations.*',
                 DB::raw("(3959 * acos(
@@ -57,8 +61,8 @@ class GeoLocationService
             ])
             ->setBindings([$lat, $lng, $lat], 'select')
             ->where('is_active', true)
-            ->whereNotNull('lat')
-            ->whereNotNull('lng')
+            ->whereBetween('lat', [$lat - $latDelta, $lat + $latDelta])
+            ->whereBetween('lng', [$lng - $lngDelta, $lng + $lngDelta])
             ->having('distance', '<=', $maxMiles)
             ->orderBy('distance', 'asc')
             ->limit($limit)

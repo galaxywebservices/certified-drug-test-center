@@ -273,7 +273,30 @@ class PseoServiceController extends Controller
 
         $price = $product ? (float) $product->price : $chain['default_price'];
 
-        // 8. Generate Cross-Service Links for all other 8 chains in this exact city
+        // 8. Resolve Unique Localized City Content (from live GPT dataset)
+        $pseoContent = $city->pseoContent;
+        $uniqueLocalText = null;
+        if ($pseoContent) {
+            $rawText = match ($serviceSlug) {
+                '5-panel-drug-test' => $pseoContent->gpt_5panel,
+                '10-panel-drug-test' => $pseoContent->gpt_10panel,
+                'dot-drug-test' => $pseoContent->gpt_dot,
+                'hair-follicle-drug-test' => $pseoContent->gpt_hair,
+                'breath-alcohol-test' => $pseoContent->gpt_alcohol,
+                'random-drug-testing' => $pseoContent->gpt_consortium,
+                default => $pseoContent->gpt_services,
+            };
+
+            if (!empty($rawText)) {
+                $uniqueLocalText = str_replace(
+                    ['<CITY>', '<STATE>', '1-1-800-985-4339', '18009854339'],
+                    [$city->name, $state->name, '1-800-985-4339', '1-800-985-4339'],
+                    $rawText
+                );
+            }
+        }
+
+        // 9. Generate Cross-Service Links for all other 8 chains in this exact city
         $otherServices = [];
         foreach (self::CHAINS as $key => $otherChain) {
             if ($key !== $serviceSlug) {
@@ -287,7 +310,7 @@ class PseoServiceController extends Controller
             }
         }
 
-        // 9. SEO Meta & Absolute Canonical URL (with trailing slash)
+        // 10. SEO Meta & Absolute Canonical URL (with trailing slash)
         $cityName = $city->name;
         $stateName = $state->name;
         $stateAbbr = $state->abbr;
@@ -300,7 +323,7 @@ class PseoServiceController extends Controller
         );
         $canonicalUrl = rtrim(url("/services/{$serviceSlug}/{$state->slug}/{$city->slug}"), '/') . '/';
 
-        // 10. Dynamic Breadcrumbs
+        // 11. Dynamic Breadcrumbs
         $breadcrumbs = [
             ['name' => 'Home', 'url' => url('/')],
             ['name' => 'Services', 'url' => rtrim(url("/services/{$serviceSlug}"), '/') . '/'],
@@ -309,7 +332,7 @@ class PseoServiceController extends Controller
             ['name' => $cityName, 'url' => $canonicalUrl],
         ];
 
-        // 11. Schema.org JSON-LD Generation
+        // 12. Schema.org JSON-LD Generation
         $schemaBreadcrumbs = $this->buildBreadcrumbSchema($breadcrumbs);
         $schemaMedicalBusiness = $this->buildMedicalBusinessSchema($chain, $city, $state, $locations->first(), $canonicalUrl, $price);
 
@@ -320,6 +343,8 @@ class PseoServiceController extends Controller
             'locations',
             'product',
             'price',
+            'pseoContent',
+            'uniqueLocalText',
             'otherServices',
             'pageTitle',
             'metaDescription',

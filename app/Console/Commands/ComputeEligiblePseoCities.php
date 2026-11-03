@@ -29,14 +29,18 @@ class ComputeEligiblePseoCities extends Command
      */
     public function handle(GeoLocationService $geo): int
     {
+        ini_set('memory_limit', '1024M');
+        DB::disableQueryLog();
+
         $this->info('Starting programmatic SEO eligible cities computation (35-mile radius)...');
 
-        $cities = City::with('state')->orderBy('id')->get();
-        $total = $cities->count();
+        $total = City::count();
         $this->info("Evaluating {$total} total cities in database...");
 
         $bar = $this->output->createProgressBar($total);
         $bar->start();
+
+        $cities = City::with('state')->orderBy('id')->lazy(500);
 
         $eligibleCount = 0;
         $ineligibleCount = 0;

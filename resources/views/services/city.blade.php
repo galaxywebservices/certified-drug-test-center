@@ -142,6 +142,29 @@
                 </div>
             </div>
 
+            <!-- Unique Local Editorial / Municipal Testing Overview -->
+            @if(!empty($uniqueLocalText))
+                <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center gap-2 pb-3 border-b border-slate-100 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-700 flex items-center justify-center font-bold flex-shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">
+                                Local Drug Testing Overview for {{ $city->name }}, {{ $state->abbr }}
+                            </h2>
+                            <p class="text-xs text-slate-500">
+                                Verified municipal regulations, screening requirements, and local standards.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="text-slate-700 text-sm leading-relaxed space-y-3 font-normal [&_p]:mb-3 [&_b]:text-slate-900 [&_b]:font-semibold">
+                        {!! $uniqueLocalText !!}
+                    </div>
+                </div>
+            @endif
+
             <!-- Dynamic 3-Step Walk-In Guide -->
             <div class="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
                 <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-6">
