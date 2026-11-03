@@ -2914,6 +2914,633 @@ select.form-control {
   letter-spacing: 0.5px !important;
 }
 
+/* ==========================================================================
+   Programmatic SEO (pSEO) & Services Pages Suite Styling
+   ========================================================================== */
+.breadcrumbs-bar {
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  padding: 12px 0;
+  font-size: 13px;
+  color: #64748B;
+}
+
+.breadcrumbs-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.breadcrumbs-inner a {
+  color: #0B2545;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+
+.breadcrumbs-inner a:hover {
+  color: #C1121F;
+  text-decoration: underline;
+}
+
+.breadcrumbs-sep {
+  color: #94A3B8;
+  font-size: 11px;
+}
+
+.breadcrumbs-current {
+  color: #1E293B;
+  font-weight: 700;
+}
+
+/* Service Hero Banner */
+.city-hero-bar {
+  background: linear-gradient(135deg, #07172C 0%, #0B2545 55%, #133E6E 100%) !important;
+  color: #FFFFFF !important;
+  padding: 52px 0 56px !important;
+  border-bottom: 3px solid #C1121F !important;
+  position: relative;
+}
+
+.hero-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #FFFFFF;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.hero-pill-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22C55E;
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.8);
+}
+
+.service-hero-title {
+  font-family: var(--font-heading, 'Montserrat', sans-serif) !important;
+  font-size: 38px !important;
+  font-weight: 800 !important;
+  color: #FFFFFF !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.5px !important;
+  margin: 0 0 16px 0 !important;
+}
+
+.service-hero-desc {
+  font-size: 16px !important;
+  color: #E2E8F0 !important;
+  line-height: 1.65 !important;
+  max-width: 840px !important;
+  margin: 0 0 26px 0 !important;
+}
+
+.hero-btn-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* 4-Item Feature Strip Below Hero */
+.service-trust-strip {
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+  padding: 18px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.service-trust-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.service-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.service-trust-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #F0F5FA;
+  color: #0B2545;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #CBD5E1;
+}
+
+.service-trust-title {
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0B2545;
+  line-height: 1.2;
+}
+
+.service-trust-sub {
+  font-size: 12px;
+  color: #64748B;
+  margin-top: 2px;
+}
+
+/* Service City Layout */
+.pseo-city-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  padding: 40px 0 60px;
+}
+
+/* Location Card */
+.pseo-location-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 22px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 6px rgba(11, 37, 69, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.pseo-location-card:hover {
+  transform: translateY(-2px);
+  border-color: #0B2545;
+  box-shadow: 0 8px 20px rgba(11, 37, 69, 0.08);
+}
+
+.pseo-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.pseo-location-name {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 800;
+  color: #0B2545;
+  margin-bottom: 4px;
+}
+
+.pseo-distance-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #166534;
+}
+
+/* Sub-card Sections */
+.pseo-section-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 26px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 6px rgba(11, 37, 69, 0.04);
+}
+
+.pseo-section-card h2 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  color: #0B2545;
+  margin-bottom: 8px;
+}
+
+/* Fast Booking Card */
+.pseo-booking-card {
+  background: #FFFFFF;
+  border: 2px solid rgba(11, 37, 69, 0.15);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(11, 37, 69, 0.08);
+  position: sticky;
+  top: 80px;
+}
+
+@media (max-width: 1024px) {
+  .pseo-city-grid {
+    grid-template-columns: 1fr;
+  }
+  .service-trust-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .service-hero-title {
+    font-size: 28px !important;
+  }
+  .service-trust-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   pSEO Enhanced Service Directory & Clinical Components
+   ========================================================================== */
+.service-order-summary-card {
+  background: #FFFFFF;
+  border: 2px solid #0B2545;
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 12px 36px rgba(11, 37, 69, 0.12);
+  position: relative;
+}
+
+.service-order-summary-header {
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 14px;
+  margin-bottom: 16px;
+}
+
+.service-order-badge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.service-order-spec-pill {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #EFF6FF;
+  color: #1D4ED8;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  border: 1px solid #BFDBFE;
+}
+
+.service-order-verified-pill {
+  font-size: 11px;
+  font-weight: 700;
+  color: #15803D;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.service-order-title {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 800;
+  color: #0B2545;
+  line-height: 1.25;
+  margin: 0 0 4px 0;
+}
+
+.service-order-subtitle {
+  font-size: 12.5px;
+  color: #64748B;
+  margin: 0;
+}
+
+.service-order-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+
+.service-order-price-val {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 900;
+  color: #0B2545;
+  line-height: 1;
+}
+
+.service-order-price-note {
+  font-size: 12px;
+  font-weight: 600;
+  color: #166534;
+}
+
+.service-order-meta-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-order-meta-item {
+  font-size: 13px;
+  color: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #E2E8F0;
+}
+
+.service-order-meta-item strong {
+  color: #0B2545;
+}
+
+/* Quick Jump State Selector */
+.service-state-jump-wrap {
+  margin-bottom: 16px;
+}
+
+.service-state-jump-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #0B2545;
+  margin-bottom: 6px;
+}
+
+.service-state-jump-select {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #0B2545;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.service-state-jump-select:focus {
+  border-color: #0B2545;
+  box-shadow: 0 0 0 3px rgba(11, 37, 69, 0.1);
+}
+
+/* Enhanced States Grid */
+.states-grid-enhanced {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.state-card-v2 {
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(11, 37, 69, 0.03);
+}
+
+.state-card-v2:hover {
+  border-color: #0B2545;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(11, 37, 69, 0.08);
+}
+
+.state-card-v2-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.state-abbr-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: #F0F5FA;
+  border: 1px solid #CBD5E1;
+  color: #0B2545;
+  font-family: var(--font-heading);
+  font-size: 13.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.state-card-v2:hover .state-abbr-badge {
+  background: #0B2545;
+  color: #FFFFFF;
+  border-color: #0B2545;
+}
+
+.state-card-v2-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.state-card-v2-name {
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #0B2545;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.state-card-v2-cities {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748B;
+  margin-top: 1px;
+}
+
+.state-card-v2-arrow {
+  color: #94A3B8;
+  font-size: 16px;
+  font-weight: 700;
+  transition: transform 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.state-card-v2:hover .state-card-v2-arrow {
+  color: #C1121F;
+  transform: translateX(4px);
+}
+
+/* Popular States Quick Chips */
+.popular-states-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 12px 16px;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+}
+
+.popular-states-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #0B2545;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.popular-state-chip {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #0B2545;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  padding: 5px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.popular-state-chip:hover {
+  background: #0B2545;
+  color: #FFFFFF;
+  border-color: #0B2545;
+}
+
+/* Clinical Specification Table */
+.clinical-table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2px 8px rgba(11, 37, 69, 0.04);
+  background: #FFFFFF;
+  margin-top: 20px;
+}
+
+.clinical-spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.clinical-spec-table th {
+  background: #0B2545;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 18px;
+  border-bottom: 2px solid #C1121F;
+}
+
+.clinical-spec-table td {
+  padding: 14px 18px;
+  font-size: 13.5px;
+  color: #334155;
+  border-bottom: 1px solid #F1F5F9;
+  vertical-align: middle;
+}
+
+.clinical-spec-table tr:last-child td {
+  border-bottom: none;
+}
+
+.clinical-spec-table tr:hover td {
+  background: #F8FAFC;
+}
+
+.clinical-badge-detect {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: 4px;
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+/* FAQ Cards */
+.pseo-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.pseo-faq-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-left: 4px solid #0B2545;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(11, 37, 69, 0.03);
+}
+
+.pseo-faq-card h3 {
+  font-family: var(--font-heading);
+  font-size: 15.5px;
+  font-weight: 800;
+  color: #0B2545;
+  margin: 0 0 8px 0;
+}
+
+.pseo-faq-card p {
+  font-size: 13.5px;
+  color: #64748B;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .states-grid-enhanced {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .pseo-faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .states-grid-enhanced {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .states-grid-enhanced {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 
 

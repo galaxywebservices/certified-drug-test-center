@@ -471,7 +471,7 @@ class PseoServiceController extends Controller
 
         $breadcrumbs = [
             ['name' => 'Home', 'url' => url('/')],
-            ['name' => 'Services', 'url' => url('/')],
+            ['name' => 'Services', 'url' => rtrim(url('/services'), '/') . '/'],
             ['name' => $chain['name'], 'url' => $canonicalUrl],
         ];
 
