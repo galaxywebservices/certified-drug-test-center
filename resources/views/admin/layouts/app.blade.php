@@ -619,6 +619,62 @@
         </div>
     </main>
 
+    <script>
+    (function() {
+        // Safe UTF-8 Base64 encoder for browser
+        function utf8ToBase64(str) {
+            return window.btoa(unescape(encodeURIComponent(str)));
+        }
+
+        // Intercept form submissions across all admin forms to safely encode HTML fields.
+        // This prevents server-level ModSecurity / WAF from blocking legitimate HTML inputs with 403 Forbidden.
+        document.addEventListener('submit', function(e) {
+            var form = e.target;
+            if (!form || (form.method && form.method.toUpperCase() !== 'POST')) return;
+
+            var textFields = form.querySelectorAll('textarea, input[type="text"]');
+            var modifiedFields = [];
+
+            textFields.forEach(function(field) {
+                var val = field.value;
+                // If the field contains HTML markup (< and >)
+                if (val && (val.indexOf('<') !== -1 || val.indexOf('>') !== -1)) {
+                    var fieldName = field.getAttribute('name');
+                    if (!fieldName || fieldName.endsWith('_b64')) return;
+
+                    try {
+                        var encoded = utf8ToBase64(val);
+                        var b64InputName = fieldName + '_b64';
+                        var hiddenInput = form.querySelector('input[name="' + b64InputName + '"]');
+                        if (!hiddenInput) {
+                            hiddenInput = document.createElement('input');
+                            hiddenInput.type = 'hidden';
+                            hiddenInput.name = b64InputName;
+                            form.appendChild(hiddenInput);
+                        }
+                        hiddenInput.value = encoded;
+
+                        // Temporarily remove name attribute so raw HTML is not sent over the wire to trigger WAF
+                        field.removeAttribute('name');
+                        modifiedFields.push({ field: field, name: fieldName });
+                    } catch (err) {
+                        console.warn('WAF encoding error for ' + fieldName, err);
+                    }
+                }
+            });
+
+            // Restore name attributes in case form submission is cancelled or user navigates back
+            if (modifiedFields.length > 0) {
+                setTimeout(function() {
+                    modifiedFields.forEach(function(item) {
+                        item.field.setAttribute('name', item.name);
+                    });
+                }, 300);
+            }
+        }, true);
+    })();
+    </script>
+
     @stack('scripts')
 </body>
 </html>

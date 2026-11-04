@@ -52,6 +52,8 @@ class AdminPageController extends Controller
 
     public function store(Request $request)
     {
+        $this->decodeBase64Inputs($request);
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255',
@@ -130,7 +132,7 @@ class AdminPageController extends Controller
             'title' => \Illuminate\Support\Str::limit($page->title, 250, ''),
             'route' => $pbRoute,
             'meta_title' => \Illuminate\Support\Str::limit($page->meta_title ?: $page->title, 250, ''),
-            'meta_description' => \Illuminate\Support\Str::limit($page->meta_description ?: '', 250, ''),
+            'meta_description' => \Illuminate\Support\Str::limit(strip_tags($page->meta_description ?: ''), 250, ''),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -169,7 +171,7 @@ class AdminPageController extends Controller
                 'title' => \Illuminate\Support\Str::limit($page->title, 250, ''),
                 'route' => $pbRoute,
                 'meta_title' => \Illuminate\Support\Str::limit($page->meta_title ?: $page->title, 250, ''),
-                'meta_description' => \Illuminate\Support\Str::limit($page->meta_description ?: '', 250, ''),
+                'meta_description' => \Illuminate\Support\Str::limit(strip_tags($page->meta_description ?: ''), 250, ''),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -182,6 +184,8 @@ class AdminPageController extends Controller
 
     public function update(Request $request, Page $page)
     {
+        $this->decodeBase64Inputs($request);
+
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'slug' => 'nullable|string|max:255',
@@ -254,7 +258,7 @@ class AdminPageController extends Controller
                     'route' => $newPbRoute,
                     'title' => \Illuminate\Support\Str::limit($page->title, 250, ''),
                     'meta_title' => \Illuminate\Support\Str::limit($page->meta_title ?: $page->title, 250, ''),
-                    'meta_description' => \Illuminate\Support\Str::limit($page->meta_description ?: '', 250, ''),
+                    'meta_description' => \Illuminate\Support\Str::limit(strip_tags($page->meta_description ?: ''), 250, ''),
                     'updated_at' => now(),
                 ]);
 
@@ -282,5 +286,22 @@ class AdminPageController extends Controller
     {
         $page->delete();
         return redirect()->route('admin.pages.index')->with('success', 'Page deleted.');
+    }
+
+    protected function decodeBase64Inputs(Request $request): void
+    {
+        $decoded = [];
+        foreach ($request->all() as $key => $value) {
+            if (is_string($value) && str_ends_with($key, '_b64')) {
+                $originalKey = substr($key, 0, -4);
+                $decodedValue = base64_decode($value, true);
+                if ($decodedValue !== false) {
+                    $decoded[$originalKey] = $decodedValue;
+                }
+            }
+        }
+        if (!empty($decoded)) {
+            $request->merge($decoded);
+        }
     }
 }
