@@ -53,35 +53,35 @@
             </div>
         </div>
 
-        <!-- Right Side: Interactive Instant Test Selector & Price Estimator -->
+        <!-- Right Side: Express Online Scheduling -->
         <div class="hero-split-right">
             <div class="quick-estimator-card">
                 <div class="estimator-header">
                     <h3>
                         <svg width="22" height="22" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 100 2h.01a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
-                        {{ $homeSettings['estimator_title'] ?? 'Online Test Order' }}
+                        {{ $homeSettings['estimator_title'] ?? 'Express Online Scheduling' }}
                     </h3>
-                    <p>{{ $homeSettings['estimator_subtitle'] ?? 'Select your testing criteria to instantly view pricing and register' }}</p>
+                    <p>{{ $homeSettings['estimator_subtitle'] ?? 'Select your testing criteria to instantly view pricing and schedule online' }}</p>
                 </div>
 
                 <div class="estimator-field">
                     <label class="estimator-label" for="estReason">1. What is the reason for testing?</label>
                     <select id="estReason" class="estimator-select" onchange="handleEstimatorReasonChange(this.value)">
                         <option value="employment">Pre-Employment / Workplace</option>
-                        <option value="dot">DOT Regulated (FMCSA / FAA / USCG)</option>
+                        <option value="dot">DOT Regulated (FMCSA, FAA, USCG, FTA, PHMSA, FRA)</option>
                         <option value="court">Court Ordered / Probation / Legal</option>
                         <option value="personal">Personal / Family Testing</option>
                     </select>
                 </div>
 
                 <div class="estimator-field" id="estDotAgencyGroup" style="display:none;">
-                    <label class="estimator-label" for="estDotAgency">DOT Regulated Agency</label>
-                    <select id="estDotAgency" class="estimator-select">
+                    <label class="estimator-label" for="estDotAgency">DOT Regulated Agency / Mode</label>
+                    <select id="estDotAgency" class="estimator-select" onchange="handleEstimatorAgencyChange(this.value)">
                         <option value="FMCSA">FMCSA (Federal Motor Carrier Safety Administration)</option>
                         <option value="FAA">FAA (Federal Aviation Administration)</option>
                         <option value="USCG">USCG (United States Coast Guard)</option>
                         <option value="FTA">FTA (Federal Transit Administration)</option>
-                        <option value="PHMSA">PHMSA (Pipeline &amp; Hazardous Materials)</option>
+                        <option value="PHMSA">PHMSA (Pipeline &amp; Hazardous Materials Safety)</option>
                         <option value="FRA">FRA (Federal Railroad Administration)</option>
                     </select>
                 </div>
@@ -103,19 +103,17 @@
                 <div class="estimator-field">
                     <label class="estimator-label" for="estSpecimen">3. Select Specimen or Test Panel</label>
                     <select id="estSpecimen" class="estimator-select" onchange="updateEstimatorDisplay()">
-                        <option value="5-panel-non-dot" data-name="5 Panel Non-DOT Urine Test" data-price="89.99">5 Panel Non-DOT Urine Test (Basic)</option>
-                        <option value="10-panel" data-name="10 Panel Comprehensive Urine Test" data-price="109.99">10 Panel Comprehensive Urine Test</option>
-                        <option value="12-panel-comprehensive" data-name="12 Panel Maximum Coverage Urine Test" data-price="139.99">12 Panel Maximum Coverage Urine Test</option>
-                        <option value="5-panel-dot" data-name="5 Panel DOT Federal Urine Screen" data-price="99.99">5 Panel DOT Federal Urine Screen</option>
-                        <option value="hair-follicle-5-panel" data-name="Hair Follicle 5-Panel (90-Day History)" data-price="169.99">Hair Follicle 5-Panel (90-Day History)</option>
-                        <option value="dot-breath-alcohol" data-name="Breath Alcohol Test (BAT / EBT)" data-price="89.99">Breath Alcohol Test (BAT / EBT)</option>
-                        <option value="dot-physical" data-name="DOT Physical Exam (NRCME Doctor)" data-price="159.99">DOT Physical Exam (NRCME Doctor)</option>
+                        <option value="5-panel-non-dot" data-name="5 Panel Non-DOT Urine Test (Basic)" data-price="89.99" data-turnaround="24-48 hours">5 Panel Non-DOT Urine Test (Basic)</option>
+                        <option value="10-panel" data-name="10 Panel Comprehensive Urine Test" data-price="109.99" data-turnaround="24-48 hours">10 Panel Comprehensive Urine Test</option>
+                        <option value="12-panel-comprehensive" data-name="12 Panel Maximum Coverage Urine Test" data-price="139.99" data-turnaround="24-48 hours">12 Panel Maximum Coverage Urine Test</option>
+                        <option value="5-panel-expanded-opiates" data-name="5 Panel + Expanded Opiates Urine Test" data-price="99.99" data-turnaround="24-48 hours">5 Panel + Expanded Opiates Urine Test</option>
+                        <option value="10-panel-expanded-opiates" data-name="10 Panel + Expanded Opiates Urine Test" data-price="119.99" data-turnaround="24-48 hours">10 Panel + Expanded Opiates Urine Test</option>
                     </select>
                 </div>
 
                 <div class="estimator-price-display">
                     <div style="font-size:15px; font-weight:800; color:var(--color-primary); line-height:1.2;" id="estPanelName">
-                        5 Panel Non-DOT Urine Test
+                        5 Panel Non-DOT Urine Test (Basic)
                     </div>
                     <div class="estimator-price-val" id="estPriceVal">$89.99</div>
                     <div class="estimator-features-preview" id="estTurnaround" style="font-size:12.5px; color:#166534; font-weight:600; margin-top:4px;">
@@ -124,7 +122,7 @@
                 </div>
 
                 <button type="button" class="btn btn-primary btn-lg" style="width:100%; margin-top:16px; background:#C1121F; color:#fff;" onclick="handleEstimatorOrder()">
-                    {{ $homeSettings['estimator_button'] ?? 'Register / Order Now' }}
+                    {{ $homeSettings['estimator_button'] ?? 'Schedule Online Now' }}
                 </button>
             </div>
         </div>

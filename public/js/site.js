@@ -249,8 +249,14 @@ document.addEventListener('DOMContentLoaded', function () {
     dot: [
       { value: '5-panel-dot', name: '5 Panel DOT Federal Urine Screen', price: '99.99', turnaround: '24-48 hours' },
       { value: 'dot-breath-alcohol', name: 'Breath Alcohol Test (BAT / EBT)', price: '89.99', turnaround: 'Instant Reading' },
+      { value: '5-panel-dot-breath-alcohol', name: '5 Panel DOT & Breath Alcohol Combo', price: '169.99', turnaround: 'Same-Day / 24-48 hrs' },
       { value: 'dot-physical', name: 'DOT Physical Exam (NRCME Doctor)', price: '159.99', turnaround: 'Same-Day Card' },
-      { value: 'dot-consortium', name: 'DOT Random Consortium Annual Enrollment', price: '149.00', turnaround: 'Instant Certificate' },
+      { value: 'dot-drug-test-physical', name: 'DOT Drug Test & Physical Exam Combo', price: '239.99', turnaround: 'Complete DOT Clearance' },
+      { value: '5-panel-return-to-duty', name: '5 Panel Return to Duty (RTD) Test', price: '99.99', turnaround: 'Directly Observed / 24-48 hrs' },
+      { value: 'dot-uscg-drug-test', name: 'DOT USCG Merchant Mariner Drug Test', price: '99.99', turnaround: 'Coast Guard Form 719P' },
+      { value: '1-year-enrollment', name: '1-Year DOT Consortium Enrollment', price: '99.99', turnaround: 'Instant Certificate' },
+      { value: '1-year-consortium-membership-dot-drug-test', name: '1-Year Consortium + DOT Drug Test', price: '249.99', turnaround: 'Instant Certificate & Pass' },
+      { value: 'fmcsa-clearinghouse-accucheck', name: 'FMCSA Clearinghouse Services', price: '199.99', turnaround: 'Full Query & Violation Support' },
     ],
     hair: [
       { value: 'hair-follicle-5-panel', name: 'Hair Follicle 5-Panel (90-Day History)', price: '169.99', turnaround: '2-3 Business Days' },
@@ -267,7 +273,6 @@ document.addEventListener('DOMContentLoaded', function () {
       { value: 'oral-fluid-10-panel', name: 'Oral Fluid 10-Panel Saliva Drug Test', price: '129.99', turnaround: '24-48 hours' },
     ],
     occupational: [
-      { value: 'dot-physical', name: 'DOT Physical Exam (NRCME Doctor)', price: '159.99', turnaround: 'Same-Day Card' },
       { value: 'fit-for-duty', name: 'Fit-For-Duty Medical Examination', price: '179.99', turnaround: 'Comprehensive Report' },
       { value: 'tb-skin-test', name: 'TB Skin Test (Mantoux PPD)', price: '79.99', turnaround: '48-72 Hour Read' },
       { value: 'respirator-clearance', name: 'OSHA Respirator Clearance Exam', price: '99.99', turnaround: 'Same-Day Clearance' },
@@ -298,12 +303,45 @@ document.addEventListener('DOMContentLoaded', function () {
       if (methodSelect && methodSelect.value === 'dot') {
         methodSelect.value = 'urine';
         handleEstimatorMethodChange('urine');
+      } else if (methodSelect) {
+        handleEstimatorMethodChange(methodSelect.value);
       }
+    }
+  };
+
+  window.handleEstimatorAgencyChange = function (agency) {
+    const specimenSelect = document.getElementById('estSpecimen');
+    if (!specimenSelect) return;
+
+    if (agency === 'USCG') {
+      const uscgOpt = Array.from(specimenSelect.options).find(o => o.value === 'dot-uscg-drug-test');
+      if (uscgOpt) {
+        specimenSelect.value = 'dot-uscg-drug-test';
+        updateEstimatorDisplay();
+      }
+    } else if (specimenSelect.value === 'dot-uscg-drug-test') {
+      specimenSelect.value = '5-panel-dot';
+      updateEstimatorDisplay();
     }
   };
 
   window.handleEstimatorMethodChange = function (method) {
     const specimenSelect = document.getElementById('estSpecimen');
+    const dotAgencyGroup = document.getElementById('estDotAgencyGroup');
+    const reasonSelect = document.getElementById('estReason');
+
+    if (method === 'dot') {
+      if (reasonSelect && reasonSelect.value !== 'dot') {
+        reasonSelect.value = 'dot';
+      }
+      if (dotAgencyGroup) dotAgencyGroup.style.display = 'block';
+    } else {
+      if (reasonSelect && reasonSelect.value === 'dot') {
+        reasonSelect.value = 'employment';
+      }
+      if (dotAgencyGroup) dotAgencyGroup.style.display = 'none';
+    }
+
     if (!specimenSelect) return;
 
     const panels = estimatorMethodPanels[method] || estimatorMethodPanels['urine'];
@@ -353,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const panelName = selectedOpt ? (selectedOpt.getAttribute('data-name') || selectedOpt.text) : '5 Panel Non-DOT Urine Test';
     const panelPrice = selectedOpt ? (selectedOpt.getAttribute('data-price') || '89.99') : '89.99';
     const reason = reasonSelect ? reasonSelect.value : 'employment';
-    const dotAgency = (reason === 'dot' && dotAgencySelect) ? dotAgencySelect.value : '';
+    const dotAgency = (reason === 'dot' && dotAgencySelect) ? dotAgencySelect.value : 'FMCSA';
 
     openOrderModal(panelKey, panelName, panelPrice);
 
@@ -366,7 +404,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     const modalDotAgency = document.getElementById('modalDotAgency');
-    if (modalDotAgency && dotAgency) {
+    if (modalDotAgency && reason === 'dot') {
       modalDotAgency.value = dotAgency;
       if (typeof handleModalDotAgencyChange === 'function') {
         handleModalDotAgencyChange(dotAgency);

@@ -117,13 +117,13 @@
                 </div>
             </div>
 
-            <!-- Estimator Card Right Side -->
+            <!-- Express Online Scheduling Card Right Side -->
             <div class="card">
                 <div class="card-header">
                     <div>
-                        <h2 class="card-title">Instant Estimator Card</h2>
+                        <h2 class="card-title">Express Online Scheduling Card</h2>
                         <p style="font-size:13px; color:var(--admin-slate-500); margin-top:2px;">
-                            Interactive selector box on the right of hero
+                            Interactive test selector and scheduling box on the right of hero
                         </p>
                     </div>
                     <span class="badge badge-success">Interactive</span>
