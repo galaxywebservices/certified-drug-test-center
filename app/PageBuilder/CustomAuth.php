@@ -20,14 +20,14 @@ class CustomAuth implements AuthContract
     public function requireAuth()
     {
         if (! $this->isAuthenticated()) {
-            header('Location: /admin/login');
+            header('Location: ' . route('admin.login'));
             exit();
         }
     }
 
     public function renderLoginForm()
     {
-        header('Location: /admin/login');
+        header('Location: ' . route('admin.login'));
         exit();
     }
 }

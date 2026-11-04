@@ -60,7 +60,7 @@ Route::redirect('/terms-of-service', '/terms-and-conditions');
 Route::redirect('/terms', '/terms-and-conditions');
 Route::redirect('/privacy', '/privacy-policy');
 Route::redirect('/contact', '/contact-us');
-Route::redirect('/login', '/admin/login')->name('login');
+Route::get('/login', fn() => redirect()->route('admin.login'))->name('login');
 
 // Contact Us & Corporate Consultation
 Route::get('/contact-us', [ContactController::class, 'show'])->name('contact.show');

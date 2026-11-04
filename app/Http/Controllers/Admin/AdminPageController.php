@@ -54,7 +54,7 @@ class AdminPageController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:255|unique:pages,slug',
+            'slug' => 'nullable|string|max:255',
             'page_heading' => 'nullable|string|max:255',
             'template' => 'required|string|max:50',
             'content' => 'nullable|string',
@@ -70,7 +70,14 @@ class AdminPageController extends Controller
             'robots_follow' => 'boolean',
         ]);
 
-        $slug = $validated['slug'] ? Str::slug($validated['slug']) : Str::slug($validated['title']);
+        $rawSlug = !empty($validated['slug']) ? $validated['slug'] : $validated['title'];
+        $baseSlug = Str::slug($rawSlug) ?: ('page-' . time());
+        $slug = $baseSlug;
+        $counter = 1;
+        while (Page::where('slug', $slug)->exists()) {
+            $slug = "{$baseSlug}-{$counter}";
+            $counter++;
+        }
 
         $blocks = null;
         if (!empty($validated['blocks_json'])) {
@@ -97,6 +104,12 @@ class AdminPageController extends Controller
 
         // Auto-create PageBuilder entry
         $pbRoute = '/' . ltrim($page->slug, '/');
+
+        // Delete any existing translation for the same route to prevent duplicate route conflict
+        \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')
+            ->where('route', $pbRoute)
+            ->delete();
+
         $pbPageId = \Illuminate\Support\Facades\DB::table('pagebuilder__pages')->insertGetId([
             'name' => $page->title,
             'layout' => 'master',
@@ -171,7 +184,7 @@ class AdminPageController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:pages,slug,' . $page->id,
+            'slug' => 'nullable|string|max:255',
             'page_heading' => 'nullable|string|max:255',
             'template' => 'required|string|max:50',
             'content' => 'nullable|string',
@@ -193,7 +206,14 @@ class AdminPageController extends Controller
         }
 
         $oldSlug = $page->slug;
-        $newSlug = trim(Str::slug($validated['slug']), '/');
+        $rawSlug = !empty($validated['slug']) ? $validated['slug'] : $validated['title'];
+        $baseSlug = Str::slug($rawSlug) ?: ('page-' . time());
+        $newSlug = $baseSlug;
+        $counter = 1;
+        while (Page::where('slug', $newSlug)->where('id', '!=', $page->id)->exists()) {
+            $newSlug = "{$baseSlug}-{$counter}";
+            $counter++;
+        }
 
         $page->update([
             'title' => $validated['title'],
@@ -216,6 +236,13 @@ class AdminPageController extends Controller
         // Sync with PageBuilder translations & content
         $oldPbRoute = '/' . ltrim($oldSlug, '/');
         $newPbRoute = '/' . ltrim($newSlug, '/');
+
+        if ($oldPbRoute !== $newPbRoute) {
+            \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')
+                ->where('route', $newPbRoute)
+                ->delete();
+        }
+
         $pbTranslation = \Illuminate\Support\Facades\DB::table('pagebuilder__page_translations')
             ->where('route', $oldPbRoute)
             ->first();
