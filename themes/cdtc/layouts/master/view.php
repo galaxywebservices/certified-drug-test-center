@@ -479,7 +479,7 @@
                     <li><a href="<?= url('/employers') ?>">Employer Corporate Accounts</a></li>
                     <li><a href="<?= url('/track-order') ?>">Track Donor Pass</a></li>
                     <li><a href="<?= url('/contact-us') ?>">Contact Support</a></li>
-                    <li><a href="<?= url('/admin/login') ?>">Admin Portal</a></li>
+                    <li><a href="<?= route('admin.login') ?>">Admin Portal</a></li>
                 </ul>
             </div>
             <div class="footer-col">

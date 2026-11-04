@@ -1,7 +1,7 @@
 @extends('admin.layouts.app', ['title' => 'Page Editor & Builder', 'heading' => 'Editor: ' . $page->title])
 
 @section('topbar_actions')
-<a href="{{ url('/admin/pagebuilder?action=edit&page=' . ($pbPageId ?? 1)) }}" target="_blank" class="btn btn-sm" style="background:#e85b24; border-color:#d44d18; color:#fff; display:inline-flex; align-items:center; gap:6px; font-weight:700; box-shadow:0 2px 4px rgba(232,91,36,0.25);">
+<a href="{{ route('admin.pagebuilder', ['action' => 'edit', 'page' => ($pbPageId ?? 1)]) }}" target="_blank" class="btn btn-sm" style="background:#e85b24; border-color:#d44d18; color:#fff; display:inline-flex; align-items:center; gap:6px; font-weight:700; box-shadow:0 2px 4px rgba(232,91,36,0.25);">
     <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
     Launch Visual PageBuilder
 </a>
@@ -208,7 +208,7 @@
                             <span style="font-size:12px; color:#94a3b8; font-weight:600;">
                                 Page ID: #{{ $page->id }} &bull; PB: #{{ $pbPageId ?? 1 }}
                             </span>
-                            <a href="{{ url('/admin/pagebuilder?action=edit&page=' . ($pbPageId ?? 1)) }}" target="_blank" class="btn btn-sm" style="background:#e85b24; border-color:#d44d18; color:#fff; font-weight:700; display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:6px; box-shadow:0 4px 12px rgba(232,91,36,0.35);">
+                            <a href="{{ route('admin.pagebuilder', ['action' => 'edit', 'page' => ($pbPageId ?? 1)]) }}" target="_blank" class="btn btn-sm" style="background:#e85b24; border-color:#d44d18; color:#fff; font-weight:700; display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:6px; box-shadow:0 4px 12px rgba(232,91,36,0.35);">
                                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                                 Launch Fullscreen PageBuilder
                             </a>
@@ -257,12 +257,12 @@
                                     <button type="button" class="btn btn-sm btn-outline" onclick="document.getElementById('pbIframe').src = document.getElementById('pbIframe').src" style="color:#fff; border-color:#475569; font-size:11px; padding:3px 8px;">
                                         🔄 Reload Builder
                                     </button>
-                                    <a href="{{ url('/admin/pagebuilder?action=edit&page=' . ($pbPageId ?? 1)) }}" target="_blank" class="btn btn-sm" style="background:#e85b24; color:#fff; font-size:11px; padding:3px 10px; font-weight:600;">
+                                    <a href="{{ route('admin.pagebuilder', ['action' => 'edit', 'page' => ($pbPageId ?? 1)]) }}" target="_blank" class="btn btn-sm" style="background:#e85b24; color:#fff; font-size:11px; padding:3px 10px; font-weight:600;">
                                         ↗ Open in Full Screen
                                     </a>
                                 </div>
                             </div>
-                            <iframe id="pbIframe" src="{{ url('/admin/pagebuilder?action=edit&page=' . ($pbPageId ?? 1)) }}" style="width:100%; height:760px; border:none; display:block; background:#fff;" loading="lazy"></iframe>
+                            <iframe id="pbIframe" src="{{ route('admin.pagebuilder', ['action' => 'edit', 'page' => ($pbPageId ?? 1)]) }}" style="width:100%; height:760px; border:none; display:block; background:#fff;" loading="lazy"></iframe>
                         </div>
 
                         <div style="margin-top:14px; font-size:12px; color:#64748b; display:flex; align-items:center; gap:6px;">

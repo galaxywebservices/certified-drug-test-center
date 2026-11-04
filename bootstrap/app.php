@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(\App\Http\Middleware\SecurityHeadersMiddleware::class);
         $middleware->append(\App\Http\Middleware\EnforceTrailingSlash::class);
         $middleware->append(\App\Http\Middleware\RetiredRouteMiddleware::class);
-        $middleware->redirectGuestsTo('/admin/login');
+        $middleware->redirectGuestsTo(fn () => route('admin.login'));
         $middleware->alias([
             'super_admin' => \App\Http\Middleware\SuperAdminMiddleware::class,
             'pseo_cache' => \App\Http\Middleware\PseoPageCache::class,
