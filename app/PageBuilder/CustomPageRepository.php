@@ -56,7 +56,7 @@ class CustomPageRepository extends PageRepository
                     'title' => \Illuminate\Support\Str::limit($cdtcPage->title, 250, ''),
                     'route' => $pbRoute,
                     'meta_title' => \Illuminate\Support\Str::limit($cdtcPage->meta_title ?: $cdtcPage->title, 250, ''),
-                    'meta_description' => $cdtcPage->meta_description ?: '',
+                    'meta_description' => \Illuminate\Support\Str::limit($cdtcPage->meta_description ?: '', 250, ''),
                     'created_at' => now(),
                     'updated_at' => now(),
                 ]);
