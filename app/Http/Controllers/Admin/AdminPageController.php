@@ -130,7 +130,7 @@ class AdminPageController extends Controller
             'title' => \Illuminate\Support\Str::limit($page->title, 250, ''),
             'route' => $pbRoute,
             'meta_title' => \Illuminate\Support\Str::limit($page->meta_title ?: $page->title, 250, ''),
-            'meta_description' => $page->meta_description ?: '',
+            'meta_description' => \Illuminate\Support\Str::limit($page->meta_description ?: '', 250, ''),
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -169,7 +169,7 @@ class AdminPageController extends Controller
                 'title' => \Illuminate\Support\Str::limit($page->title, 250, ''),
                 'route' => $pbRoute,
                 'meta_title' => \Illuminate\Support\Str::limit($page->meta_title ?: $page->title, 250, ''),
-                'meta_description' => $page->meta_description ?: '',
+                'meta_description' => \Illuminate\Support\Str::limit($page->meta_description ?: '', 250, ''),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
@@ -254,7 +254,7 @@ class AdminPageController extends Controller
                     'route' => $newPbRoute,
                     'title' => \Illuminate\Support\Str::limit($page->title, 250, ''),
                     'meta_title' => \Illuminate\Support\Str::limit($page->meta_title ?: $page->title, 250, ''),
-                    'meta_description' => $page->meta_description ?: '',
+                    'meta_description' => \Illuminate\Support\Str::limit($page->meta_description ?: '', 250, ''),
                     'updated_at' => now(),
                 ]);
 
