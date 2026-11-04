@@ -510,9 +510,9 @@ class HomeController extends Controller
                 'Court & DOT Legally Defensible',
             ],
 
-            'estimator_title' => Setting::get('homepage_estimator_title', 'Online Test Order'),
-            'estimator_subtitle' => Setting::get('homepage_estimator_subtitle', 'Select your testing criteria to instantly view pricing and register'),
-            'estimator_button' => Setting::get('homepage_estimator_button', 'Register / Order Now'),
+            'estimator_title' => Setting::get('homepage_estimator_title', 'Express Online Scheduling'),
+            'estimator_subtitle' => Setting::get('homepage_estimator_subtitle', 'Select your testing criteria to instantly view pricing and schedule online'),
+            'estimator_button' => Setting::get('homepage_estimator_button', 'Schedule Online Now'),
 
             'substance_eyebrow' => Setting::get('homepage_substance_eyebrow', 'Smart Drug Screening Tool'),
             'substance_title' => Setting::get('homepage_substance_title', 'Looking For A Specific Drug Or Medication?'),
