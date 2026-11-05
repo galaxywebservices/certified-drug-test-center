@@ -76,11 +76,46 @@
 
                     <div class="form-group">
                         <label class="form-label" for="template">Layout Template</label>
-                        <select id="template" name="template" class="form-control">
-                            <option value="default">Standard Corporate (Option 2)</option>
-                            <option value="wide">Full-Width Clean</option>
-                            <option value="landing">Direct-to-Test Landing</option>
+                        <select id="template" name="template" class="form-control" onchange="handleTemplateChange(this.value)">
+                            <option value="default" {{ old('template') == 'default' ? 'selected' : '' }}>Standard Corporate (with Sidebar)</option>
+                            <option value="wide" {{ old('template') == 'wide' ? 'selected' : '' }}>Full-Width Clean (No Sidebar)</option>
+                            <option value="landing" {{ old('template') == 'landing' ? 'selected' : '' }}>Full-Screen Landing (100% Width, No Sidebar, No Hero)</option>
+                            <option value="fullscreen" {{ old('template') == 'fullscreen' ? 'selected' : '' }}>Full-Screen Clean (100% Width, No Sidebar)</option>
                         </select>
+                    </div>
+
+                    <input type="hidden" name="show_sidebar_submitted" value="1">
+                    <input type="hidden" name="show_hero_submitted" value="1">
+                    <input type="hidden" name="full_width_submitted" value="1">
+
+                    <div class="form-group" style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px; margin-top:12px;">
+                        <div style="font-size:12px; font-weight:700; color:#0B2545; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">
+                            Layout &amp; Sidebar Controls
+                        </div>
+
+                        <label style="display:flex; align-items:flex-start; gap:8px; font-size:13px; font-weight:600; cursor:pointer; margin-bottom:8px;">
+                            <input type="checkbox" id="toggle_show_sidebar" name="show_sidebar" value="1" {{ old('show_sidebar', '1') == '1' ? 'checked' : '' }}>
+                            <span>
+                                Show Sidebar (Popular Tests &amp; Categories)
+                                <small style="display:block; font-size:11px; color:#64748B; font-weight:400;">Uncheck to remove side panel and give content full width</small>
+                            </span>
+                        </label>
+
+                        <label style="display:flex; align-items:flex-start; gap:8px; font-size:13px; font-weight:600; cursor:pointer; margin-bottom:8px;">
+                            <input type="checkbox" id="toggle_show_hero" name="show_hero" value="1" {{ old('show_hero', '1') == '1' ? 'checked' : '' }}>
+                            <span>
+                                Show Top Hero Header Bar
+                                <small style="display:block; font-size:11px; color:#64748B; font-weight:400;">Uncheck if your custom HTML contains its own header</small>
+                            </span>
+                        </label>
+
+                        <label style="display:flex; align-items:flex-start; gap:8px; font-size:13px; font-weight:600; cursor:pointer;">
+                            <input type="checkbox" id="toggle_full_width" name="full_width" value="1" {{ old('full_width') == '1' ? 'checked' : '' }}>
+                            <span>
+                                Full-Screen Fluid (100% Edge-to-Edge)
+                                <small style="display:block; font-size:11px; color:#64748B; font-weight:400;">Removes container boundaries for custom full-screen HTML</small>
+                            </span>
+                        </label>
                     </div>
 
                     <div class="form-group">
@@ -105,4 +140,30 @@
         </div>
     </div>
 </form>
+
+<script>
+function handleTemplateChange(template) {
+    const sidebar = document.getElementById('toggle_show_sidebar');
+    const hero = document.getElementById('toggle_show_hero');
+    const fullWidth = document.getElementById('toggle_full_width');
+
+    if (template === 'default') {
+        if (sidebar) sidebar.checked = true;
+        if (hero) hero.checked = true;
+        if (fullWidth) fullWidth.checked = false;
+    } else if (template === 'wide') {
+        if (sidebar) sidebar.checked = false;
+        if (hero) hero.checked = true;
+        if (fullWidth) fullWidth.checked = false;
+    } else if (template === 'landing') {
+        if (sidebar) sidebar.checked = false;
+        if (hero) hero.checked = false;
+        if (fullWidth) fullWidth.checked = true;
+    } else if (template === 'fullscreen') {
+        if (sidebar) sidebar.checked = false;
+        if (hero) hero.checked = true;
+        if (fullWidth) fullWidth.checked = true;
+    }
+}
+</script>
 @endsection
