@@ -27,6 +27,9 @@ class Page extends Model
         'robots_index',
         'robots_follow',
         'schema_json',
+        'show_sidebar',
+        'show_hero',
+        'full_width',
     ];
 
     protected $casts = [
@@ -34,6 +37,9 @@ class Page extends Model
         'schema_json' => 'array',
         'is_published' => 'boolean',
         'show_in_menu' => 'boolean',
+        'show_sidebar' => 'boolean',
+        'show_hero' => 'boolean',
+        'full_width' => 'boolean',
         'robots_index' => 'boolean',
         'robots_follow' => 'boolean',
         'menu_order' => 'integer',

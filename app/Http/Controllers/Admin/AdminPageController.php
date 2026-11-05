@@ -70,6 +70,9 @@ class AdminPageController extends Controller
             'canonical_url' => 'nullable|string',
             'robots_index' => 'boolean',
             'robots_follow' => 'boolean',
+            'show_sidebar' => 'nullable|boolean',
+            'show_hero' => 'nullable|boolean',
+            'full_width' => 'nullable|boolean',
         ]);
 
         $rawSlug = !empty($validated['slug']) ? $validated['slug'] : $validated['title'];
@@ -86,7 +89,19 @@ class AdminPageController extends Controller
             $blocks = json_decode($validated['blocks_json'], true);
         }
 
-        $page = Page::create([
+        $showSidebar = $request->has('show_sidebar_submitted')
+            ? $request->boolean('show_sidebar')
+            : ($validated['template'] === 'default');
+
+        $showHero = $request->has('show_hero_submitted')
+            ? $request->boolean('show_hero')
+            : ($validated['template'] !== 'landing');
+
+        $fullWidth = $request->has('full_width_submitted')
+            ? $request->boolean('full_width')
+            : in_array($validated['template'], ['landing', 'fullscreen']);
+
+        $pageData = [
             'title' => $validated['title'],
             'slug' => $slug,
             'page_heading' => $validated['page_heading'] ?? $validated['title'],
@@ -102,7 +117,19 @@ class AdminPageController extends Controller
             'canonical_url' => $validated['canonical_url'] ?? url('/' . $slug),
             'robots_index' => $request->boolean('robots_index', true),
             'robots_follow' => $request->boolean('robots_follow', true),
-        ]);
+        ];
+
+        if (\Illuminate\Support\Facades\Schema::hasColumn('pages', 'show_sidebar')) {
+            $pageData['show_sidebar'] = $showSidebar;
+        }
+        if (\Illuminate\Support\Facades\Schema::hasColumn('pages', 'show_hero')) {
+            $pageData['show_hero'] = $showHero;
+        }
+        if (\Illuminate\Support\Facades\Schema::hasColumn('pages', 'full_width')) {
+            $pageData['full_width'] = $fullWidth;
+        }
+
+        $page = Page::create($pageData);
 
         // Auto-create PageBuilder entry
         $pbRoute = '/' . ltrim($page->slug, '/');
@@ -202,6 +229,9 @@ class AdminPageController extends Controller
             'canonical_url' => 'nullable|string',
             'robots_index' => 'boolean',
             'robots_follow' => 'boolean',
+            'show_sidebar' => 'nullable|boolean',
+            'show_hero' => 'nullable|boolean',
+            'full_width' => 'nullable|boolean',
         ]);
 
         $blocks = null;
@@ -219,7 +249,19 @@ class AdminPageController extends Controller
             $counter++;
         }
 
-        $page->update([
+        $showSidebar = $request->has('show_sidebar_submitted')
+            ? $request->boolean('show_sidebar')
+            : ($validated['template'] === 'default');
+
+        $showHero = $request->has('show_hero_submitted')
+            ? $request->boolean('show_hero')
+            : ($validated['template'] !== 'landing');
+
+        $fullWidth = $request->has('full_width_submitted')
+            ? $request->boolean('full_width')
+            : in_array($validated['template'], ['landing', 'fullscreen']);
+
+        $updateData = [
             'title' => $validated['title'],
             'slug' => $newSlug,
             'page_heading' => $validated['page_heading'] ?? $validated['title'],
@@ -235,7 +277,19 @@ class AdminPageController extends Controller
             'canonical_url' => $validated['canonical_url'] ?? null,
             'robots_index' => $request->boolean('robots_index', true),
             'robots_follow' => $request->boolean('robots_follow', true),
-        ]);
+        ];
+
+        if (\Illuminate\Support\Facades\Schema::hasColumn('pages', 'show_sidebar')) {
+            $updateData['show_sidebar'] = $showSidebar;
+        }
+        if (\Illuminate\Support\Facades\Schema::hasColumn('pages', 'show_hero')) {
+            $updateData['show_hero'] = $showHero;
+        }
+        if (\Illuminate\Support\Facades\Schema::hasColumn('pages', 'full_width')) {
+            $updateData['full_width'] = $fullWidth;
+        }
+
+        $page->update($updateData);
 
         // Sync with PageBuilder translations & content
         $oldPbRoute = '/' . ltrim($oldSlug, '/');

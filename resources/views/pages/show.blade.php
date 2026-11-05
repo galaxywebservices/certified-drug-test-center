@@ -28,6 +28,21 @@
         }
     }
 
+    .cms-layout-full {
+        width: 100%;
+        padding: 40px 0 60px;
+    }
+
+    .cms-article-full {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .cms-page-fluid {
+        width: 100%;
+        min-width: 0;
+    }
+
     .cms-article-body {
         background: #fff;
         border: 1px solid #E2E8F0;
@@ -420,6 +435,41 @@
     }
 </style>
 
+@php
+    $template = $page->template ?? 'default';
+
+    // Check if content has custom landing page wrapper (.cdtc or similar full-bleed structure)
+    $hasCustomFullBleed = is_string($page->content) && (
+        str_contains($page->content, 'class="cdtc"') ||
+        str_contains($page->content, "class='cdtc'") ||
+        str_contains($page->content, 'cdtc')
+    );
+
+    // Sidebar:
+    // If explicit show_sidebar field exists in DB, honor it.
+    // Otherwise fallback: only 'default' template has sidebar. 'wide', 'landing', 'fullscreen' do NOT.
+    if (isset($page->show_sidebar) && $page->show_sidebar !== null) {
+        $hasSidebar = (bool) $page->show_sidebar;
+    } else {
+        $hasSidebar = ($template === 'default');
+    }
+
+    // Hero:
+    if (isset($page->show_hero) && $page->show_hero !== null) {
+        $hasHero = (bool) $page->show_hero;
+    } else {
+        $hasHero = ($template !== 'landing' && !$hasCustomFullBleed);
+    }
+
+    // Full-screen fluid edge-to-edge:
+    if (isset($page->full_width) && $page->full_width !== null) {
+        $isFullWidth = (bool) $page->full_width;
+    } else {
+        $isFullWidth = in_array($template, ['landing', 'fullscreen']) || ($template === 'wide' && $hasCustomFullBleed);
+    }
+@endphp
+
+@if($hasHero)
 <!-- Top Hero Header -->
 <div class="cms-hero-bar">
     <div class="container">
@@ -434,20 +484,21 @@
         </h1>
     </div>
 </div>
+@endif
 
-<div class="container">
-    <div class="cms-layout-grid">
-        <!-- Main Formatted Article -->
-        <article class="cms-article-body">
-            @if($page->featured_image)
-                <div style="margin-bottom:24px;">
-                    <img src="{{ $page->featured_image }}" alt="{{ $page->title }}" style="width:100%; max-height:400px; object-fit:cover; border-radius:8px;">
-                </div>
-            @endif
+@if($isFullWidth)
+    {{-- Full-Screen Fluid Mode (Edge-to-Edge 100% width, no side panel) --}}
+    <div class="cms-page-fluid">
+        @if($page->featured_image)
+            <div class="container" style="margin-top:24px; margin-bottom:24px;">
+                <img src="{{ $page->featured_image }}" alt="{{ $page->title }}" style="width:100%; max-height:450px; object-fit:cover; border-radius:8px;">
+            </div>
+        @endif
 
-            {!! $page->content !!}
+        {!! $page->content !!}
 
-            @if(!empty($page->blocks_json) && is_array($page->blocks_json))
+        @if(!empty($page->blocks_json) && is_array($page->blocks_json))
+            <div class="container" style="padding-bottom:60px;">
                 @foreach($page->blocks_json as $block)
                     @if(($block['type'] ?? '') === 'faq' && !empty($block['items']))
                         <div class="cms-faq-section" style="margin-top:36px; padding-top:28px; border-top:2px solid #F1F5F9;">
@@ -469,63 +520,105 @@
                         </div>
                     @endif
                 @endforeach
-            @endif
-        </article>
+            </div>
+        @endif
+    </div>
+@else
+    {{-- Container Mode (Standard container with or without sidebar) --}}
+    <div class="container">
+        <div class="{{ $hasSidebar ? 'cms-layout-grid' : 'cms-layout-full' }}">
+            <!-- Main Formatted Article -->
+            <article class="cms-article-body {{ $hasSidebar ? '' : 'cms-article-full' }}">
+                @if($page->featured_image)
+                    <div style="margin-bottom:24px;">
+                        <img src="{{ $page->featured_image }}" alt="{{ $page->title }}" style="width:100%; max-height:400px; object-fit:cover; border-radius:8px;">
+                    </div>
+                @endif
 
-        <!-- Right Side: Sticky Sidebar with Tests, Categories & Hotline -->
-        <aside class="cms-sidebar">
-            @if(isset($popularTests) && $popularTests->count())
-            <div class="sidebar-widget">
-                <h3 class="sidebar-title">Popular Tests Available Today</h3>
-                <div class="sidebar-tests-list">
-                    @foreach($popularTests as $t)
-                    <div class="sidebar-test-item">
-                        <div class="sidebar-test-header">
-                            <a href="{{ url('/product/' . $t->slug) }}" class="sidebar-test-name">
-                                {{ $t->name }}
+                {!! $page->content !!}
+
+                @if(!empty($page->blocks_json) && is_array($page->blocks_json))
+                    @foreach($page->blocks_json as $block)
+                        @if(($block['type'] ?? '') === 'faq' && !empty($block['items']))
+                            <div class="cms-faq-section" style="margin-top:36px; padding-top:28px; border-top:2px solid #F1F5F9;">
+                                <h3 style="font-size:22px; font-weight:800; color:#0B2545; margin-bottom:18px;">Frequently Asked Questions</h3>
+                                @foreach($block['items'] as $item)
+                                    <div style="margin-bottom:16px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:18px 20px;">
+                                        <strong style="color:#0B2545; font-size:16px; display:block; margin-bottom:6px;">Q: {{ $item['question'] }}</strong>
+                                        <p style="color:#475569; font-size:14.5px; margin:0; line-height:1.6;">{{ $item['answer'] }}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @elseif(($block['type'] ?? '') === 'cta')
+                            <div class="cms-cta-callout" style="background:linear-gradient(135deg, #0B2545, #133E6E); color:#fff; border-radius:10px; padding:32px 24px; margin-top:36px; text-align:center;">
+                                <h3 style="font-size:22px; font-weight:800; color:#fff; margin-bottom:8px;">{{ $block['title'] ?? 'Need Testing Assistance?' }}</h3>
+                                <p style="color:#CBD5E1; font-size:14px; max-width:600px; margin:0 auto 18px;">{{ $block['subtitle'] ?? 'Our nationwide drug testing specialists are available 24/7 to assist with walk-in registrations.' }}</p>
+                                <a href="{{ $block['btn_url'] ?? 'tel:18009854339' }}" class="btn btn-primary" style="display:inline-flex; font-size:15px; padding:12px 24px;">
+                                    {{ $block['btn_text'] ?? 'Call Toll-Free: (800)-985-4339' }}
+                                </a>
+                            </div>
+                        @endif
+                    @endforeach
+                @endif
+            </article>
+
+            @if($hasSidebar)
+                <!-- Right Side: Sticky Sidebar with Tests, Categories & Hotline -->
+                <aside class="cms-sidebar">
+                    @if(isset($popularTests) && $popularTests->count())
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-title">Popular Tests Available Today</h3>
+                        <div class="sidebar-tests-list">
+                            @foreach($popularTests as $t)
+                            <div class="sidebar-test-item">
+                                <div class="sidebar-test-header">
+                                    <a href="{{ url('/product/' . $t->slug) }}" class="sidebar-test-name">
+                                        {{ $t->name }}
+                                    </a>
+                                    <span class="sidebar-test-price">${{ number_format($t->price, 2) }}</span>
+                                </div>
+                                <div class="sidebar-test-meta">
+                                    <span>⚡ {{ $t->turnaround_time }}</span>
+                                </div>
+                                <a href="{{ route('checkout.index', $t->slug) }}" class="sidebar-order-btn">
+                                    <span>Order This Test</span>
+                                    <span class="arrow">&rarr;</span>
+                                </a>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
+                    @if(isset($categories) && $categories->count())
+                    <div class="sidebar-widget">
+                        <h3 class="sidebar-title">Clinical Testing Services</h3>
+                        <div class="sidebar-cat-list">
+                            @foreach($categories as $cat)
+                            <a href="{{ url('/category/' . $cat->slug) }}" class="sidebar-cat-item">
+                                <span>{{ $cat->name }}</span>
+                                <span class="sidebar-cat-arrow">&rsaquo;</span>
                             </a>
-                            <span class="sidebar-test-price">${{ number_format($t->price, 2) }}</span>
+                            @endforeach
                         </div>
-                        <div class="sidebar-test-meta">
-                            <span>⚡ {{ $t->turnaround_time }}</span>
-                        </div>
-                        <a href="{{ route('checkout.index', $t->slug) }}" class="sidebar-order-btn">
-                            <span>Order This Test</span>
-                            <span class="arrow">&rarr;</span>
+                    </div>
+                    @endif
+
+                    <!-- Certified Testing Locations Hotline -->
+                    <div class="sidebar-hotline-card">
+                        <div class="sidebar-hotline-sub">Walk-In Drug Testing</div>
+                        <h4 class="sidebar-hotline-title">20,000+ Collection Sites</h4>
+                        <p class="sidebar-hotline-desc">
+                            Walk in today at Quest Diagnostics &amp; Labcorp facilities. No doctor order or appointment required.
+                        </p>
+                        <a href="tel:18009854339" class="sidebar-hotline-btn">
+                            <svg width="15" height="15" fill="currentColor" viewBox="0 0 20 20" style="margin-right:6px;"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
+                            Call Toll-Free (800)-985-4339
                         </a>
                     </div>
-                    @endforeach
-                </div>
-            </div>
+                </aside>
             @endif
-
-            @if(isset($categories) && $categories->count())
-            <div class="sidebar-widget">
-                <h3 class="sidebar-title">Clinical Testing Services</h3>
-                <div class="sidebar-cat-list">
-                    @foreach($categories as $cat)
-                    <a href="{{ url('/category/' . $cat->slug) }}" class="sidebar-cat-item">
-                        <span>{{ $cat->name }}</span>
-                        <span class="sidebar-cat-arrow">&rsaquo;</span>
-                    </a>
-                    @endforeach
-                </div>
-            </div>
-            @endif
-
-            <!-- Certified Testing Locations Hotline -->
-            <div class="sidebar-hotline-card">
-                <div class="sidebar-hotline-sub">Walk-In Drug Testing</div>
-                <h4 class="sidebar-hotline-title">20,000+ Collection Sites</h4>
-                <p class="sidebar-hotline-desc">
-                    Walk in today at Quest Diagnostics &amp; Labcorp facilities. No doctor order or appointment required.
-                </p>
-                <a href="tel:18009854339" class="sidebar-hotline-btn">
-                    <svg width="15" height="15" fill="currentColor" viewBox="0 0 20 20" style="margin-right:6px;"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
-                    Call Toll-Free (800)-985-4339
-                </a>
-            </div>
-        </aside>
+        </div>
     </div>
-</div>
+@endif
 @endsection
