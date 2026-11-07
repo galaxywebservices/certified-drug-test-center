@@ -11,6 +11,9 @@ class CertifiedDrugTestCentersChainTest extends TestCase
     {
         $response = $this->get('/certified-drug-test-centers');
         $response->assertStatus(200);
+        $response->assertSee('<title>Certified Drug Test Centers Near You | 800-985-4339</title>', false);
+        $response->assertSee('Certified Drug Test Centers are located in all cities and in most cases within minutes', false);
+        $response->assertSee('Drug Test near me, DOT Drug Test near me', false);
         $response->assertSee('Certified Drug Test Centers Near You');
         $response->assertSee('Find a drug testing center near you');
         $response->assertSee('Quick answer: how to get a drug or alcohol test near you today');
