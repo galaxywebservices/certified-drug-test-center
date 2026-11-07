@@ -27,7 +27,7 @@
     <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/images/logo.png">
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
 
     <!-- Google Fonts: Montserrat (American authoritative headlines) & Inter (ultra-readable body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,7 +40,7 @@
     @endif
 
     <!-- Core Stylesheet -->
-    <link rel="stylesheet" href="/css/site.css?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/site.css') }}?v={{ time() }}">
 
     <style>
         /* Header Trust Badges & Alignment */
@@ -262,7 +262,7 @@
         <div class="container header-inner">
             <div class="header-brand-wrap">
                 <a href="{{ url('/') }}" class="brand-logo-link" title="Certified Drug Test Centers Home">
-                    <img src="/images/logo.png" alt="Certified Drug Test Centers - Local Convenient Confidential" class="brand-logo-img">
+                    <img src="{{ asset('images/logo.png') }}" alt="Certified Drug Test Centers - Local Convenient Confidential" class="brand-logo-img">
                 </a>
                 <div class="header-trust-badges">
                     <a href="{{ route('reviews.index') }}" class="header-review-link" title="Verified Customer Reviews">
@@ -461,7 +461,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <img src="/images/logo.png" alt="Certified Drug Test Centers" style="max-height:64px; margin-bottom:16px;">
+                    <img src="{{ asset('images/logo.png') }}" alt="Certified Drug Test Centers" style="max-height:64px; margin-bottom:16px;">
                     <p style="margin-bottom:16px; line-height:1.6; color:#CBD5E1;">
                         Certified Drug Test Centers is a premier nationwide provider of drug, alcohol, DNA, and occupational health testing. Partnering with SAMHSA-certified laboratories and over 20,000 collection facilities across all 50 states.
                     </p>
