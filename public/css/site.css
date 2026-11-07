@@ -3547,6 +3547,30 @@ select.form-control {
 
 
 
+/* CMS Hero Bar */
+.cms-hero-bar {
+    background: linear-gradient(135deg, #0B2545 0%, #133E6E 100%);
+    color: #fff;
+    padding: 40px 0;
+    border-bottom: 3px solid #C1121F;
+}
+.cms-hero-bar .breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #94A3B8;
+    margin-bottom: 12px;
+}
+.cms-hero-bar .breadcrumbs a {
+    color: #CBD5E1;
+    text-decoration: none;
+}
+.cms-hero-bar .breadcrumbs a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
 /* ==========================================================================
    Programmatic SEO Chain Nationalize System Styles (.cdtc)
    Matches client sample: /certified-drug-test-centers
