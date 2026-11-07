@@ -232,7 +232,7 @@ class PseoServiceController extends Controller
 
         $pageTitle = 'Nationwide Drug & Alcohol Testing Services Directory | Certified Drug Test Centers';
         $metaDescription = 'Explore our complete directory of certified drug, alcohol, DOT, and specialized testing services. Walk in today at over 20,000 Quest & Labcorp collection centers nationwide.';
-        $canonicalUrl = rtrim(url('/services'), '/') . '/';
+        $canonicalUrl = rtrim(url('/services'), '/');
 
         $breadcrumbs = [
             ['name' => 'Home', 'url' => url('/')],
@@ -351,14 +351,14 @@ class PseoServiceController extends Controller
             [$cityName, "{$stateName} ({$stateAbbr})"],
             $chain['meta_description_template']
         );
-        $canonicalUrl = rtrim(url("/services/{$serviceSlug}/{$state->slug}/{$city->slug}"), '/') . '/';
+        $canonicalUrl = rtrim(url("/services/{$serviceSlug}/{$state->slug}/{$city->slug}"), '/');
 
         // 11. Dynamic Breadcrumbs
         $breadcrumbs = [
             ['name' => 'Home', 'url' => url('/')],
-            ['name' => 'Services', 'url' => rtrim(url("/services/{$serviceSlug}"), '/') . '/'],
-            ['name' => $chain['name'], 'url' => rtrim(url("/services/{$serviceSlug}"), '/') . '/'],
-            ['name' => $stateName, 'url' => rtrim(url("/services/{$serviceSlug}/{$state->slug}"), '/') . '/'],
+            ['name' => 'Services', 'url' => rtrim(url("/services/{$serviceSlug}"), '/')],
+            ['name' => $chain['name'], 'url' => rtrim(url("/services/{$serviceSlug}"), '/')],
+            ['name' => $stateName, 'url' => rtrim(url("/services/{$serviceSlug}/{$state->slug}"), '/')],
             ['name' => $cityName, 'url' => $canonicalUrl],
         ];
 
@@ -419,12 +419,12 @@ class PseoServiceController extends Controller
 
         $pageTitle = "{$chain['name']} in {$state->name} ({$state->abbr}) | Certified Walk-in Labs";
         $metaDescription = "Find certified {$chain['name']} collection locations across {$state->name}. Walk in today at Quest Diagnostics & Labcorp partner facilities. Fast MRO-reviewed results.";
-        $canonicalUrl = rtrim(url("/services/{$serviceSlug}/{$state->slug}"), '/') . '/';
+        $canonicalUrl = rtrim(url("/services/{$serviceSlug}/{$state->slug}"), '/');
 
         $breadcrumbs = [
             ['name' => 'Home', 'url' => url('/')],
-            ['name' => 'Services', 'url' => rtrim(url("/services/{$serviceSlug}"), '/') . '/'],
-            ['name' => $chain['name'], 'url' => rtrim(url("/services/{$serviceSlug}"), '/') . '/'],
+            ['name' => 'Services', 'url' => rtrim(url("/services/{$serviceSlug}"), '/')],
+            ['name' => $chain['name'], 'url' => rtrim(url("/services/{$serviceSlug}"), '/')],
             ['name' => $state->name, 'url' => $canonicalUrl],
         ];
 
@@ -467,11 +467,11 @@ class PseoServiceController extends Controller
 
         $pageTitle = "Nationwide {$chain['full_title']} | Same-Day Certified Walk-in Centers";
         $metaDescription = "Order a {$chain['name']} online and walk into any of 20,000+ Quest & Labcorp certified partner facilities across all 50 states. Confidential MRO results.";
-        $canonicalUrl = rtrim(url("/services/{$serviceSlug}"), '/') . '/';
+        $canonicalUrl = rtrim(url("/services/{$serviceSlug}"), '/');
 
         $breadcrumbs = [
             ['name' => 'Home', 'url' => url('/')],
-            ['name' => 'Services', 'url' => rtrim(url('/services'), '/') . '/'],
+            ['name' => 'Services', 'url' => rtrim(url('/services'), '/')],
             ['name' => $chain['name'], 'url' => $canonicalUrl],
         ];
 

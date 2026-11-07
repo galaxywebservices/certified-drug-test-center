@@ -7,7 +7,7 @@
     <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers provides fast, confidential same-day drug testing, DOT compliance, urine, hair, alcohol, and DNA testing at 20,000+ certified local centers nationwide.' }}">
     <meta name="keywords" content="drug testing, drug test near me, DOT drug test, urine drug test, 5 panel drug test, 10 panel drug test, 12 panel drug test, hair follicle drug test, breath alcohol test, accredited drug testing, Quest Diagnostics drug test, Labcorp drug test">
     @php
-        $canonicalUrl = $canonicalUrl ?? (str_starts_with(request()->getPathInfo(), '/services') ? url(rtrim(request()->getPathInfo(), '/') . '/') : url()->current());
+        $canonicalUrl = $canonicalUrl ?? (str_starts_with(request()->getPathInfo(), '/services') ? url(rtrim(request()->getPathInfo(), '/')) : url()->current());
     @endphp
     <link rel="canonical" href="{{ $canonicalUrl }}">
     <meta name="robots" content="index, follow">
@@ -300,12 +300,12 @@
             </button>
             <ul class="nav-menu" id="navMenu">
                 <li class="nav-item has-dropdown">
-                    <a href="{{ url('/services/') }}" class="nav-link" style="color: #FEF08A; font-weight: 700;">
+                    <a href="{{ url('/services') }}" class="nav-link" style="color: #FEF08A; font-weight: 700;">
                         <span>Services</span>
                         <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
                     </a>
                     <ul class="nav-dropdown">
-                        <li><a href="{{ url('/services/5-panel-drug-test/') }}" class="nav-dropdown-link font-semibold">5-Panel Urine Drug Test</a></li>
+                        <li><a href="{{ url('/services/5-panel-drug-test') }}" class="nav-dropdown-link font-semibold">5-Panel Urine Drug Test</a></li>
                         <!-- <li><a href="{{ url('/services/10-panel-drug-test/') }}" class="nav-dropdown-link">10-Panel Drug Test</a></li>
                         <li><a href="{{ url('/services/12-panel-drug-test/') }}" class="nav-dropdown-link">12-Panel Comprehensive</a></li>
                         <li><a href="{{ url('/services/dot-drug-test/') }}" class="nav-dropdown-link">DOT Drug Test &amp; Physical</a></li>
@@ -478,7 +478,7 @@
                 <div class="footer-col">
                     <h4>Drug Testing Panels</h4>
                     <ul class="footer-links">
-                        <li><a href="{{ url('/services/') }}" style="color:#FEF08A; font-weight:700;">★ All Services Directory</a></li>
+                        <li><a href="{{ url('/services') }}" style="color:#FEF08A; font-weight:700;">★ All Services Directory</a></li>
                         <li><a href="{{ route('test-finder.index') }}" style="color:#38BDF8; font-weight:700;">Guided Test Selector (Quiz)</a></li>
                         <li><a href="{{ url('/product/5-panel-nondot') }}">5 Panel NON-DOT Test</a></li>
                         <li><a href="{{ url('/product/5-panel-dot') }}">5 Panel DOT Mandated</a></li>
@@ -525,7 +525,7 @@
                     © {{ date('Y') }} Certified Drug Test Centers. All Rights Reserved. Local, Convenient & Confidential.
                 </div>
                 <div style="display:flex; gap:16px; flex-wrap:wrap;">
-                    <a href="{{ url('/services/') }}" style="color:#FEF08A; font-weight:700;">Services Directory</a>
+                    <a href="{{ url('/services') }}" style="color:#FEF08A; font-weight:700;">Services Directory</a>
                     <a href="{{ route('test-finder.index') }}" style="color:#CBD5E1; font-weight:700;">Find My Test</a>
                     <a href="{{ route('reviews.index') }}" style="color:#CBD5E1; font-weight:700;">Reviews</a>
                     <a href="{{ route('employers.index') }}" style="color:#CBD5E1; font-weight:700;">Employers &amp; Corporate</a>

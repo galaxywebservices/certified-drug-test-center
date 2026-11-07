@@ -64,12 +64,12 @@ class AuditPseoSitemap extends Command
         foreach ($xml->url as $urlNode) {
             $loc = (string) $urlNode->loc;
             $locs[] = $loc;
-            if (!str_ends_with($loc, '/')) {
+            if (str_ends_with($loc, '/')) {
                 $slashErrors++;
             }
         }
 
-        $this->line(" - Trailing Slash Check: " . ($slashErrors === 0 ? "PASSED (100% contain trailing slash)" : "FAILED ({$slashErrors} URLs missing slash)"));
+        $this->line(" - URL Format Check: " . ($slashErrors === 0 ? "PASSED (100% clean URLs without trailing slash)" : "FAILED ({$slashErrors} URLs have trailing slash)"));
 
         // 3. Sample Verification (Status Code, Latency, Canonical, Structured Data)
         $sampleSize = min((int) $this->option('sample'), $totalUrls);

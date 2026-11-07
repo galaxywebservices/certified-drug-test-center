@@ -41,7 +41,7 @@ class PseoSitemapController extends Controller
         // 1. Service Root Node
         $urls = [
             [
-                'loc' => rtrim(url("/services/{$serviceSlug}"), '/') . '/',
+                'loc' => rtrim(url("/services/{$serviceSlug}"), '/'),
                 'lastmod' => $now,
                 'changefreq' => 'weekly',
                 'priority' => '0.9',
@@ -52,7 +52,7 @@ class PseoSitemapController extends Controller
         $states = State::where('is_active', true)->orderBy('name')->get();
         foreach ($states as $state) {
             $urls[] = [
-                'loc' => rtrim(url("/services/{$serviceSlug}/{$state->slug}"), '/') . '/',
+                'loc' => rtrim(url("/services/{$serviceSlug}/{$state->slug}"), '/'),
                 'lastmod' => $now,
                 'changefreq' => 'weekly',
                 'priority' => '0.8',
@@ -72,7 +72,7 @@ class PseoSitemapController extends Controller
 
         foreach ($cities as $city) {
             $urls[] = [
-                'loc' => rtrim(url("/services/{$serviceSlug}/{$city->state_slug}/{$city->city_slug}"), '/') . '/',
+                'loc' => rtrim(url("/services/{$serviceSlug}/{$city->state_slug}/{$city->city_slug}"), '/'),
                 'lastmod' => $city->updated_at ? $city->updated_at->toAtomString() : $now,
                 'changefreq' => 'weekly',
                 'priority' => '0.8',
