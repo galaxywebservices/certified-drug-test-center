@@ -306,7 +306,7 @@
                     </a>
                     <ul class="nav-dropdown">
                         <li><a href="{{ url('/services/5-panel-drug-test/') }}" class="nav-dropdown-link font-semibold">5-Panel Urine Drug Test</a></li>
-                        <li><a href="{{ url('/services/10-panel-drug-test/') }}" class="nav-dropdown-link">10-Panel Drug Test</a></li>
+                        <!-- <li><a href="{{ url('/services/10-panel-drug-test/') }}" class="nav-dropdown-link">10-Panel Drug Test</a></li>
                         <li><a href="{{ url('/services/12-panel-drug-test/') }}" class="nav-dropdown-link">12-Panel Comprehensive</a></li>
                         <li><a href="{{ url('/services/dot-drug-test/') }}" class="nav-dropdown-link">DOT Drug Test &amp; Physical</a></li>
                         <li><a href="{{ url('/services/hair-follicle-drug-test/') }}" class="nav-dropdown-link">Hair Follicle Drug Test</a></li>
@@ -314,7 +314,7 @@
                         <li><a href="{{ url('/services/instant-drug-test/') }}" class="nav-dropdown-link">Rapid / Instant Test</a></li>
                         <li><a href="{{ url('/services/court-ordered-drug-test/') }}" class="nav-dropdown-link">Court-Ordered Drug Test</a></li>
                         <li><a href="{{ url('/services/random-drug-testing/') }}" class="nav-dropdown-link">Random Testing &amp; Consortium</a></li>
-                        <li><a href="{{ url('/services/') }}" class="nav-dropdown-link nav-dropdown-viewall">All Testing Services Directory &rarr;</a></li>
+                        <li><a href="{{ url('/services/') }}" class="nav-dropdown-link nav-dropdown-viewall">All Testing Services Directory &rarr;</a></li> -->
                     </ul>
                 </li>
                 <li class="nav-item has-dropdown">
