@@ -67,6 +67,21 @@
         box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
 
+    .prod-section-body {
+        font-size: 15px;
+        color: #334155;
+        line-height: 1.7;
+    }
+    .prod-section-body p { margin-bottom: 14px; }
+    .prod-section-body ul, .prod-section-body ol {
+        margin: 0 0 16px 20px;
+        padding-left: 10px;
+        list-style-type: disc;
+    }
+    .prod-section-body li {
+        margin-bottom: 6px;
+    }
+
     .prod-section-title {
         font-size: 20px;
         font-weight: 800;
@@ -195,8 +210,12 @@
             @if($product->short_description)
             <div class="prod-section">
                 <h2 class="prod-section-title">Test Overview</h2>
-                <div style="font-size:15px; color:#334155; line-height:1.7;">
-                    {!! nl2br(e($product->short_description)) !!}
+                <div class="prod-section-body">
+                    @if(strip_tags($product->short_description) !== $product->short_description)
+                        {!! $product->short_description !!}
+                    @else
+                        {!! nl2br(e($product->short_description)) !!}
+                    @endif
                 </div>
             </div>
             @endif
@@ -221,8 +240,12 @@
             @if($product->details)
             <div class="prod-section">
                 <h2 class="prod-section-title">Detailed Scientific Description</h2>
-                <div style="font-size:14px; color:#334155; line-height:1.7;">
-                    {!! nl2br(e($product->details)) !!}
+                <div class="prod-section-body">
+                    @if(strip_tags($product->details) !== $product->details)
+                        {!! $product->details !!}
+                    @else
+                        {!! nl2br(e($product->details)) !!}
+                    @endif
                 </div>
             </div>
             @endif
@@ -230,8 +253,12 @@
             @if($product->preparation_instructions)
             <div class="prod-section">
                 <h2 class="prod-section-title">Donor Preparation &amp; Collection Guidelines</h2>
-                <div style="font-size:14px; color:#334155; line-height:1.7; background:#F8FAFC; padding:16px; border-radius:8px; border-left:4px solid #0B2545;">
-                    {!! nl2br(e($product->preparation_instructions)) !!}
+                <div class="prod-section-body" style="background:#F8FAFC; padding:16px; border-radius:8px; border-left:4px solid #0B2545;">
+                    @if(strip_tags($product->preparation_instructions) !== $product->preparation_instructions)
+                        {!! $product->preparation_instructions !!}
+                    @else
+                        {!! nl2br(e($product->preparation_instructions)) !!}
+                    @endif
                 </div>
             </div>
             @endif
@@ -292,7 +319,7 @@
                 </div>
 
                 <div class="order-card-badge">
-                    {{ $product->subtitle ?: 'Online Discount Applied' }}
+                    {{ strip_tags($product->subtitle) ?: 'Online Discount Applied' }}
                 </div>
 
                 <ul class="order-checklist">

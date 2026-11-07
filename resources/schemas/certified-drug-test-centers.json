@@ -1,0 +1,528 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalOrganization",
+      "@id": "https://certifieddrugtestingcenters.com/#organization",
+      "name": "Certified Drug Test Centers",
+      "alternateName": [
+        "Certified Drug Testing Centers",
+        "CDTC"
+      ],
+      "url": "https://certifieddrugtestingcenters.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://certifieddrugtestingcenters.com/images/logo.png"
+      },
+      "description": "Nationwide provider of drug, alcohol, DNA and occupational health testing through a network of 20,000+ collection sites and SAMHSA-certified laboratories in all 50 states.",
+      "telephone": "+1-800-985-4339",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "201 N. Park Ave.",
+        "addressLocality": "Sanford",
+        "addressRegion": "FL",
+        "postalCode": "32771",
+        "addressCountry": "US"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "knowsLanguage": [
+        "en",
+        "es"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-800-985-4339",
+        "contactType": "customer service",
+        "areaServed": "US",
+        "availableLanguage": [
+          "English",
+          "Spanish"
+        ],
+        "hoursAvailable": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": "Saturday",
+            "opens": "09:00",
+            "closes": "17:00"
+          }
+        ]
+      },
+      "sameAs": [
+        "REPLACE_WITH_GOOGLE_BUSINESS_PROFILE_URL",
+        "REPLACE_WITH_FACEBOOK_URL",
+        "REPLACE_WITH_LINKEDIN_URL",
+        "REPLACE_WITH_BBB_URL"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://certifieddrugtestingcenters.com/#website",
+      "url": "https://certifieddrugtestingcenters.com/",
+      "name": "Certified Drug Test Centers",
+      "publisher": {
+        "@id": "https://certifieddrugtestingcenters.com/#organization"
+      },
+      "inLanguage": "en-US",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://certifieddrugtestingcenters.com/locations?zip={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": [
+        "WebPage",
+        "MedicalWebPage"
+      ],
+      "@id": "https://certifieddrugtestingcenters.com/drug-testing-centers#webpage",
+      "url": "https://certifieddrugtestingcenters.com/drug-testing-centers",
+      "name": "Certified Drug Test Centers | Drug Testing Near Me",
+      "description": "Order a drug or alcohol test online and walk in today at 20,000+ certified collection sites in all 50 states. SAMHSA-certified labs and MRO-verified results.",
+      "isPartOf": {
+        "@id": "https://certifieddrugtestingcenters.com/#website"
+      },
+      "about": {
+        "@id": "https://certifieddrugtestingcenters.com/#service"
+      },
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Job applicants, employers, DOT-regulated drivers and employees, court and probation participants, individuals and families"
+      },
+      "breadcrumb": {
+        "@id": "https://certifieddrugtestingcenters.com/drug-testing-centers#breadcrumb"
+      },
+      "inLanguage": "en-US",
+      "datePublished": "2026-11-03",
+      "dateModified": "2026-11-03",
+      "lastReviewed": "2026-11-03",
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [
+          ".quick-answer",
+          ".faq-answer"
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://certifieddrugtestingcenters.com/drug-testing-centers#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://certifieddrugtestingcenters.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Drug Testing Centers Nationwide",
+          "item": "https://certifieddrugtestingcenters.com/drug-testing-centers"
+        }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://certifieddrugtestingcenters.com/#service",
+      "serviceType": "Drug and alcohol testing",
+      "name": "Nationwide Drug & Alcohol Testing",
+      "provider": {
+        "@id": "https://certifieddrugtestingcenters.com/#organization"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "availableChannel": {
+        "@type": "ServiceChannel",
+        "serviceUrl": "https://certifieddrugtestingcenters.com/checkout",
+        "servicePhone": {
+          "@type": "ContactPoint",
+          "telephone": "+1-800-985-4339"
+        }
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Drug, Alcohol & Occupational Tests",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "price": "89.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/product/5-panel-nondot",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "5 Panel Non-DOT Urine Drug Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "99.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/product/5-panel-dot",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "5 Panel DOT Drug Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "99.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/product/5-panel-exp-opiates",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "5 Panel + Expanded Opiates Drug Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "109.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/product/10-panel",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "10 Panel Urine Drug Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "119.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/product/10-panel-exp-opiates",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "10 Panel + Expanded Opiates Drug Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "139.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/product/12-panel-comprehensive",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "12 Panel Comprehensive Drug Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "169.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/category/hair",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hair Follicle 5 Panel Drug Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "249.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/category/hair",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Hair Follicle 10 Panel Drug Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "119.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/category/oral-fluid-testing",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "6 Panel Oral Fluid (Saliva) Drug Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "89.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/product/dot-breath-alcohol",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "DOT Breath Alcohol Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "89.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/product/etg-alcohol",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "EtG 80-Hour Urine Alcohol Test"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "159.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/product/dot-physical",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "DOT Physical Exam (FMCSA)"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "99.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/product/1-year-consortium-membership-dot-drug-test",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "1-Year DOT Random Consortium Enrollment"
+            }
+          },
+          {
+            "@type": "Offer",
+            "price": "299.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://certifieddrugtestingcenters.com/category/dna-testing",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Legal AABB DNA Paternity Test"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://certifieddrugtestingcenters.com/drug-testing-centers#howto",
+      "name": "How to get a drug test at a certified testing center near you",
+      "description": "Order online, receive an electronic donor pass, walk in to a nearby collection site, and receive lab results.",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": "89.99"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Choose your test and register",
+          "text": "Select the test you need online or by phone at (800) 985-4339, enter the donor's details and ZIP code, and pay. Registration is completed within minutes.",
+          "url": "https://certifieddrugtestingcenters.com/drug-testing-centers#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Receive your electronic donor pass",
+          "text": "A donor registration pass with the collection site address, hours and instructions is emailed and texted to you immediately.",
+          "url": "https://certifieddrugtestingcenters.com/drug-testing-centers#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Walk in to the collection site",
+          "text": "Bring your donor pass and a government-issued photo ID to the selected site. Most sites accept walk-ins; no payment is taken on site.",
+          "url": "https://certifieddrugtestingcenters.com/drug-testing-centers#how-it-works"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Get your results",
+          "text": "Negative results are typically reported within 24\u201348 hours. Non-negative screens are confirmed by GC/MS or LC/MS and reviewed by a Medical Review Officer.",
+          "url": "https://certifieddrugtestingcenters.com/drug-testing-centers#how-it-works"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://certifieddrugtestingcenters.com/drug-testing-centers#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where can I get a drug test near me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Certified Drug Test Centers schedules drug and alcohol tests at more than 20,000 certified collection sites in all 50 states, including Quest Diagnostics and Labcorp patient service centers. Enter your ZIP code online or call (800) 985-4339 to find the closest site, register within minutes, and walk in the same day."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does a drug test cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A 5-panel urine drug test costs $89.99, a 10-panel costs $109.99, a 12-panel costs $139.99, a DOT 5-panel costs $99.99, and a 5-panel hair follicle test costs $169.99. Prices include the collection, laboratory analysis and Medical Review Officer (MRO) review, with no fees paid at the testing site."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get a same-day drug test?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Most people order and test on the same day. Once you register online or by phone, your electronic donor pass arrives within minutes, and you can walk in to a nearby certified drug testing center that day during its collection hours. No appointment is needed at most locations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I get a pre-employment drug test near me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can get a pre-employment drug test at any of 20,000+ certified collection sites nationwide, including Quest Diagnostics and Labcorp locations. Order the panel your employer requested (usually a 5-panel or 10-panel urine test), get your donor pass within minutes, and walk in with a photo ID."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get a drug test at Quest Diagnostics or Labcorp?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Certified Drug Test Centers schedules drug tests at Quest Diagnostics and Labcorp patient service centers across the country. Quest and Labcorp sites require pre-registration and do not take payment on site, so you order through us first and receive a donor pass to bring with you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I get a DOT drug test near me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "DOT drug tests are available at certified collection sites in all 50 states. Order the DOT 5-panel drug test ($99.99), choose the closest site by ZIP code, and bring your donor pass, photo ID and CDL or employee ID. Collections follow 49 CFR Part 40 using a Federal Custody and Control Form."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get a drug test at urgent care?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Some urgent care clinics offer drug testing, but prices, panels and lab standards vary and many add office-visit fees. Ordering through Certified Drug Test Centers gives you upfront all-inclusive pricing, a SAMHSA-certified lab and MRO review at a certified collection site near you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the most affordable way to get a drug test?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ordering online is usually the most affordable way to get a certified drug test. A 5-panel urine drug test costs $89.99 all-inclusive \u2014 collection, SAMHSA-certified lab analysis and MRO review \u2014 with no extra fees at the testing site."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I walk in for a drug test without an appointment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Most collection sites accept walk-ins, but you must register and pay before you go. After you order, you receive an electronic donor pass that you show at the site along with a photo ID. Testing sites do not accept payment on site."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long do drug test results take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Negative urine results are typically available within 24\u201348 hours of collection. Hair tests take 2\u20134 business days. If an initial screen is non-negative, the sample is confirmed by GC/MS or LC/MS and reviewed by a Medical Review Officer, which can add 24\u201372 hours. Breath alcohol results are immediate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a 5-panel and a 10-panel drug test?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A 5-panel drug test screens for amphetamines (including methamphetamine), cocaine, marijuana (THC), opiates and PCP. A 10-panel test screens for those five plus barbiturates, benzodiazepines, methadone, methaqualone and propoxyphene. A 12-panel adds tramadol, meperidine and expanded opiates such as oxycodone and hydrocodone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a DOT drug test check for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A DOT drug test under 49 CFR Part 40 screens urine for five drug classes: marijuana metabolites, cocaine metabolites, amphetamines (amphetamine, methamphetamine, MDMA, MDA), opioids (codeine, morphine, 6-acetylmorphine/heroin, hydrocodone, hydromorphone, oxycodone, oxymorphone) and phencyclidine (PCP). It must use a Federal Custody and Control Form, a SAMHSA/HHS-certified laboratory and MRO review."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How far back does a drug test go?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A urine test usually detects drug use from the past 1\u20133 days for most substances, and up to 30 days or more for heavy, chronic marijuana use. A hair follicle test covers about the past 90 days. A saliva (oral fluid) test detects use from roughly the past 24\u201348 hours. An EtG urine alcohol test detects drinking up to about 80 hours prior."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What do I need to bring to my drug test?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bring your electronic donor pass (on your phone or printed) and a valid government-issued photo ID such as a driver's license or passport. For DOT tests, also have your CDL or employee ID number. Do not drink excessive fluids beforehand, as a diluted sample may require a retest."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are your drug test results legally defensible?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Specimens are collected under strict chain-of-custody procedures and analyzed by SAMHSA-certified laboratories. Non-negative results are confirmed by GC/MS or LC/MS and reviewed by an independent, licensed Medical Review Officer, making results suitable for employment, DOT compliance and court purposes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer drug testing for court or probation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Court-ordered and probation testing is available with chain-of-custody documentation, including urine panels, EtG alcohol tests that detect drinking up to about 80 hours prior, and 90-day hair follicle tests. Always confirm the exact test your court or probation officer requires before ordering."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I order a drug test for myself or a family member?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Individuals can order personal or family drug tests online without an employer or doctor's order. Results are confidential and sent only to the email provided at registration."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer on-site mobile drug testing for employers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Certified collectors can travel to job sites, offices, warehouses and construction projects nationwide to test from 1 to 500+ employees, including post-accident and reasonable-suspicion testing. Employers can also open a corporate account for volume pricing and an online results portal."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a Medical Review Officer (MRO)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A Medical Review Officer is a licensed physician trained to review laboratory drug test results. Before a non-negative result is reported, the MRO contacts the donor to check for legitimate medical explanations, such as a valid prescription. Every test ordered through Certified Drug Test Centers includes MRO review."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you test in Spanish?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Our scheduling team speaks Spanish. Call (800) 985-4339 for help ordering a test in Spanish."
+          }
+        }
+      ]
+    }
+  ]
+}

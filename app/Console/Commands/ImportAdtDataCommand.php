@@ -146,7 +146,7 @@ class ImportAdtDataCommand extends Command
                 'id' => $prod->id,
                 'slug' => $slug,
                 'name' => $prod->name,
-                'subtitle' => $prod->subtitle ?: 'Online Discount Applied',
+                'subtitle' => strip_tags($prod->subtitle ?: 'Online Discount Applied'),
                 'sku' => 'CDTC-' . str_pad($prod->id, 4, '0', STR_PAD_LEFT),
                 'retail_price' => $retailPrice,
                 'price' => $price,

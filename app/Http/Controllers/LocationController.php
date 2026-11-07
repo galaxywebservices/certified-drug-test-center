@@ -15,8 +15,31 @@ class LocationController extends Controller
     /**
      * Directory of all 51 US States
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->filled('zip')) {
+            $zip = trim($request->input('zip'));
+            $cleanZip = preg_replace('/[^0-9]/', '', $zip);
+            if (strlen($cleanZip) >= 3) {
+                $location = Location::where('zip', $cleanZip)->where('is_active', true)->first()
+                    ?? Location::where('zip', 'LIKE', substr($cleanZip, 0, 3) . '%')->where('is_active', true)->first();
+                if ($location) {
+                    $state = State::where('abbr', strtoupper($location->state))->first();
+                    if ($state) {
+                        $citySlug = Str::slug($location->city);
+                        $city = City::where('state_id', $state->id)
+                            ->where(function ($q) use ($location, $citySlug) {
+                                $q->where('slug', $citySlug)->orWhere('name', $location->city);
+                            })->first();
+                        if ($city) {
+                            return redirect()->to("/locations/{$state->slug}/{$city->slug}");
+                        }
+                        return redirect()->to("/locations/{$state->slug}");
+                    }
+                }
+            }
+        }
+
         $states = State::where('is_active', true)
             ->withCount('cities')
             ->orderBy('name')
@@ -286,11 +309,11 @@ class LocationController extends Controller
     }
 
     /**
-     * Programmatic SEO Chain Handler (e.g. /drug-testing-orlando-fl, /drug-testing-locations-memphis-tn)
+     * Programmatic SEO Chain Handler (e.g. /drug-testing-orlando-fl, /certified-drug-test-centers-tampa-fl)
      */
     public function resolveChainCity(string $slug)
     {
-        $clean = preg_replace('/^(local-drug-testing-locations-|drug-testing-locations-|drug-testing-)/', '', $slug);
+        $clean = preg_replace('/^(certified-drug-test-centers-|local-drug-testing-locations-|drug-testing-locations-|drug-testing-)/', '', $slug);
 
         if (preg_match('/^(.*?)-([a-z]{2})$/i', $clean, $matches)) {
             $citySlug = $matches[1];

@@ -57,7 +57,8 @@ Route::get('/robots.txt', function () {
     ]);
 });
 
-// Canonical Legal Aliases
+// Canonical Legal Aliases & Chain Aliases
+Route::redirect('/certified-drug-test-centers-sample', '/certified-drug-test-centers', 301);
 Route::redirect('/terms-of-service', '/terms-and-conditions');
 Route::redirect('/terms', '/terms-and-conditions');
 Route::redirect('/privacy', '/privacy-policy');
@@ -131,6 +132,15 @@ Route::get('/locations/{state_slug}/{city_slug}/site-{id}', [\App\Http\Controlle
 Route::get('/api/locations/search', [\App\Http\Controllers\LocationController::class, 'searchZip'])->name('api.locations.search');
 
 // Programmatic SEO Chain URLs & Aliases (e.g. /drug-testing-locations/{state}/{city}, /drug-testing-{city}-{state})
+Route::get('/certified-drug-test-centers', [\App\Http\Controllers\ChainController::class, 'certifiedDrugTestCenters'])
+    ->name('chains.certified-drug-test-centers');
+Route::get('/certified-drug-test-centers/{state_slug}', [\App\Http\Controllers\LocationController::class, 'state'])
+    ->where('state_slug', '[a-zA-Z0-9\-]+');
+Route::get('/certified-drug-test-centers/{state_slug}/{city_slug}', [\App\Http\Controllers\LocationController::class, 'city'])
+    ->where(['state_slug' => '[a-zA-Z0-9\-]+', 'city_slug' => '[a-zA-Z0-9\-]+']);
+Route::get('/certified-drug-test-centers-{chain_city}', [\App\Http\Controllers\LocationController::class, 'resolveChainCity'])
+    ->where('chain_city', '[a-zA-Z0-9\-]+');
+
 Route::get('/drug-testing-locations', [\App\Http\Controllers\LocationController::class, 'index']);
 Route::get('/drug-testing-locations/{state_slug}', [\App\Http\Controllers\LocationController::class, 'state']);
 Route::get('/drug-testing-locations/{state_slug}/{city_slug}', [\App\Http\Controllers\LocationController::class, 'city']);
@@ -155,6 +165,10 @@ Route::get('/{state_name}-drug-testing', function(string $stateName) {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['pseo_cache'])->prefix('services')->group(function () {
+    Route::redirect('/certified-drug-test-centers', '/certified-drug-test-centers', 301);
+    Route::get('/certified-drug-test-centers/{state_slug}', fn($state) => redirect('/certified-drug-test-centers/' . $state, 301));
+    Route::get('/certified-drug-test-centers/{state_slug}/{city_slug}', fn($state, $city) => redirect('/certified-drug-test-centers/' . $state . '/' . $city, 301));
+
     Route::get('/', [\App\Http\Controllers\PseoServiceController::class, 'index'])
         ->name('services.index');
 
