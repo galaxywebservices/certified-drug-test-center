@@ -22,21 +22,19 @@ class EnforceTrailingSlash
             return $next($request);
         }
 
-        $path = $request->getPathInfo(); // e.g. "/services/5-panel-drug-test/florida/orlando"
+        // Target /services/* routes specifically (works both with root and subfolder like /demo)
+        if ($request->is('services*')) {
+            $path = parse_url($request->getRequestUri(), PHP_URL_PATH) ?? '';
 
-        // Target /services/* routes specifically
-        if (str_starts_with($path, '/services')) {
-            // Check if it already ends with slash
+            // Check if the actual requested URL path already ends with slash
             if (!str_ends_with($path, '/')) {
-                $targetUrl = rtrim($request->root() . $path, '/') . '/';
+                $targetUrl = rtrim($request->url(), '/') . '/';
                 $queryString = $request->getQueryString();
                 if (!empty($queryString)) {
                     $targetUrl .= '?' . $queryString;
                 }
 
-                return redirect()->to($targetUrl, 301, [
-                    'Cache-Control' => 'public, max-age=31536000',
-                ]);
+                return redirect()->to($targetUrl, 301);
             }
         }
 
