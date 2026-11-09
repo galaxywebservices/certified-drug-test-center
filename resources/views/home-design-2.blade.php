@@ -402,7 +402,7 @@
         <div class="states-grid" id="statesGrid">
             @foreach($states as $st)
             <a href="{{ url('/locations/' . \Illuminate\Support\Str::slug($st['name'])) }}" class="state-chip" data-state="{{ $st['name'] }}">
-                <span>{{ $st['name'] }}</span>
+                <span>{{ $st['name'] }} Drug Testing</span>
                 <span class="state-count">{{ $st['centers'] }}+ Centers</span>
             </a>
             @endforeach

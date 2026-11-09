@@ -362,9 +362,9 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb" style="display:flex; gap:8px; font-size:13px; color:#94A3B8; margin-bottom:12px;">
             <a href="{{ url('/') }}" style="color:#CBD5E1; text-decoration:none;">Home</a>
             <span>&rsaquo;</span>
-            <a href="{{ url('/locations') }}" style="color:#CBD5E1; text-decoration:none;">Locations</a>
+            <a href="{{ url($baseRoutePrefix ?? '/locations') }}" style="color:#CBD5E1; text-decoration:none;">{{ $baseTitle ?? 'Locations' }}</a>
             <span>&rsaquo;</span>
-            <a href="{{ url('/locations/' . $state->slug) }}" style="color:#CBD5E1; text-decoration:none;">{{ $state->name }}</a>
+            <a href="{{ url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug) }}" style="color:#CBD5E1; text-decoration:none;">{{ $state->name }}</a>
             <span>&rsaquo;</span>
             <span style="color:#fff;">{{ $cityName }}</span>
         </nav>
@@ -508,7 +508,74 @@
             </div>
         </div>
     </div>
+
+    @if(isset($siblingCities) && $siblingCities->isNotEmpty())
+    <!-- Sibling Cities Horizontal Crawl Architecture -->
+    <div class="sibling-cities-section" style="margin-top:20px; padding:32px 0 50px; border-top:1px solid #E2E8F0;">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px; margin-bottom:18px;">
+            <div>
+                <h3 style="font-size:20px; font-weight:800; color:#0B2545; margin:0 0 4px;">
+                    Nearby Drug Testing Centers in {{ $state->name }}
+                </h3>
+                <p style="font-size:13.5px; color:#64748B; margin:0;">
+                    Explore same-day certified drug and alcohol testing collection facilities in neighboring {{ $state->name }} communities:
+                </p>
+            </div>
+            <a href="{{ url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug) }}" style="color:#C1121F; font-size:13px; font-weight:700; text-decoration:none;">
+                View All {{ $state->name }} Cities &rarr;
+            </a>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:12px;">
+            @foreach($siblingCities as $sibling)
+            <a href="{{ url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug . '/' . $sibling->slug) }}" 
+               style="background:#fff; border:1px solid #E2E8F0; border-radius:8px; padding:12px 16px; text-decoration:none; color:#0B2545; font-size:13.5px; font-weight:700; display:flex; justify-content:space-between; align-items:center; transition:all 0.15s ease;"
+               onmouseover="this.style.borderColor='#0B2545'; this.style.color='#C1121F'; this.style.backgroundColor='#F8FAFC';"
+               onmouseout="this.style.borderColor='#E2E8F0'; this.style.color='#0B2545'; this.style.backgroundColor='#fff';">
+                <span>{{ $sibling->name }} Drug Testing</span>
+                <span style="color:#94A3B8; font-size:13px;">&rarr;</span>
+            </a>
+            @endforeach
+        </div>
+    </div>
+    @endif
 </div>
+
+@php
+$breadcrumbSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        [
+            '@type' => 'ListItem',
+            'position' => 1,
+            'name' => 'Home',
+            'item' => url('/'),
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 2,
+            'name' => $baseTitle ?? 'Locations',
+            'item' => url($baseRoutePrefix ?? '/locations'),
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 3,
+            'name' => $state->name,
+            'item' => url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug),
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 4,
+            'name' => $cityName . ' Drug Testing',
+            'item' => $canonicalUrl ?? url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug . '/' . ($city?->slug ?? \Illuminate\Support\Str::slug($cityName))),
+        ],
+    ],
+];
+@endphp
+<script type="application/ld+json">
+{!! json_encode($breadcrumbSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
+</script>
 
 @if($locations->isNotEmpty())
 @php

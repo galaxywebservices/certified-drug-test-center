@@ -405,7 +405,7 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb" style="display:flex; gap:8px; font-size:13px; color:#94A3B8; margin-bottom:12px;">
             <a href="{{ url('/') }}" style="color:#CBD5E1; text-decoration:none;">Home</a>
             <span>&rsaquo;</span>
-            <a href="{{ url('/locations') }}" style="color:#CBD5E1; text-decoration:none;">Locations</a>
+            <a href="{{ url($baseRoutePrefix ?? '/locations') }}" style="color:#CBD5E1; text-decoration:none;">{{ $baseTitle ?? 'Locations' }}</a>
             <span>&rsaquo;</span>
             <span style="color:#fff;">{{ $state->name }}</span>
         </nav>
@@ -485,8 +485,8 @@
 
                 <div class="cities-grid">
                     @forelse($cities as $city)
-                    <a href="{{ url('/locations/' . $state->slug . '/' . $city->slug) }}" class="city-card">
-                        <span>{{ $city->name }}</span>
+                    <a href="{{ url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug . '/' . $city->slug) }}" class="city-card">
+                        <span>{{ $city->name }} Drug Testing</span>
                         <span style="color:#94A3B8; font-size:12px;">&rarr;</span>
                     </a>
                     @empty
@@ -650,4 +650,34 @@ $faqPageSchema = [
 {!! json_encode($faqPageSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
 </script>
 @endif
+
+@php
+$breadcrumbSchema = [
+    '@context' => 'https://schema.org',
+    '@type' => 'BreadcrumbList',
+    'itemListElement' => [
+        [
+            '@type' => 'ListItem',
+            'position' => 1,
+            'name' => 'Home',
+            'item' => url('/'),
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 2,
+            'name' => $baseTitle ?? 'Locations',
+            'item' => url($baseRoutePrefix ?? '/locations'),
+        ],
+        [
+            '@type' => 'ListItem',
+            'position' => 3,
+            'name' => $state->name . ' Drug Testing',
+            'item' => $canonicalUrl ?? url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug),
+        ],
+    ],
+];
+@endphp
+<script type="application/ld+json">
+{!! json_encode($breadcrumbSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
+</script>
 @endsection

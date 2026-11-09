@@ -385,10 +385,21 @@
                         MOBILE TESTING
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item has-dropdown">
                     <a href="{{ route('locations.index') }}" class="nav-link">
-                        LOCATIONS
+                        <span>LOCATIONS</span>
+                        <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
                     </a>
+                    <ul class="nav-dropdown" style="min-width: 280px; max-height: 420px; overflow-y: auto;">
+                        <li><a href="{{ url('/certified-drug-test-centers') }}" class="nav-dropdown-link" style="color:#C1121F; font-weight:700;">★ Certified Drug Test Centers (All 50 States)</a></li>
+                        <li><a href="{{ route('locations.index') }}" class="nav-dropdown-link" style="font-weight:700; border-bottom:1px solid #E2E8F0;">Browse All Testing Locations &rarr;</a></li>
+                        @if(isset($globalStates))
+                            @foreach($globalStates->take(12) as $navState)
+                            <li><a href="{{ url('/locations/' . $navState->slug) }}" class="nav-dropdown-link">{{ $navState->name }} Drug Testing</a></li>
+                            @endforeach
+                        @endif
+                        <li><a href="{{ route('locations.index') }}" class="nav-dropdown-link nav-dropdown-viewall">View All 50 State Directories &rarr;</a></li>
+                    </ul>
                 </li>
                 <li class="mobile-nav-footer">
                     <a href="tel:18009854339" class="mobile-nav-call-btn">
@@ -517,6 +528,27 @@
                     <a href="{{ route('checkout.index') }}" class="btn btn-primary btn-sm">
                         Schedule Test Today
                     </a>
+                </div>
+            </div>
+
+            <!-- 50 States Directory Block for Googlebot & Direct Crawl Authority -->
+            <div class="footer-states-directory" style="border-top:1px solid #334155; margin-top:32px; padding-top:28px;">
+                <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:12px; margin-bottom:14px;">
+                    <h4 style="color:#F8FAFC; font-size:14px; font-weight:800; margin:0; text-transform:uppercase; letter-spacing:0.5px;">
+                        Find A Drug Testing Center By State (All 50 States)
+                    </h4>
+                    <a href="{{ url('/certified-drug-test-centers') }}" style="color:#FEF08A; font-size:13px; font-weight:700; text-decoration:none;">
+                        ★ Certified Drug Test Centers Nationwide &rarr;
+                    </a>
+                </div>
+                <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:8px 14px; font-size:12.5px;">
+                    @if(isset($globalStates))
+                        @foreach($globalStates as $fst)
+                        <a href="{{ url('/locations/' . $fst->slug) }}" style="color:#94A3B8; text-decoration:none; transition:color 0.15s ease;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#94A3B8'">
+                            {{ $fst->name }} Drug Testing
+                        </a>
+                        @endforeach
+                    @endif
                 </div>
             </div>
 

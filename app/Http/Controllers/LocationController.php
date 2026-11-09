@@ -52,7 +52,7 @@ class LocationController extends Controller
     }
 
     /**
-     * State Landing Page (e.g. /locations/florida)
+     * State Landing Page (e.g. /locations/florida or /certified-drug-test-centers/florida)
      */
     public function state(string $stateSlug)
     {
@@ -72,14 +72,42 @@ class LocationController extends Controller
 
         $popularTests = Product::where('is_popular', true)->where('is_active', true)->limit(4)->get();
 
-        $pageTitle = $state->meta_title ?: "{$state->name} Drug Testing Locations & Walk-in Centers";
-        $metaDescription = $state->meta_description ?: "Accredited drug testing collection facilities in {$state->name}. Find local Quest & Labcorp centers for employment, court, and DOT testing.";
+        $isChainRoute = request()->is('certified-drug-test-centers*');
+        $baseRoutePrefix = $isChainRoute ? '/certified-drug-test-centers' : '/locations';
+        $baseTitle = $isChainRoute ? 'Certified Drug Test Centers' : 'Locations';
+        $canonicalUrl = rtrim(url($baseRoutePrefix . '/' . $state->slug), '/');
 
-        return view('locations.state', compact('state', 'cities', 'sampleLocations', 'popularTests', 'pageTitle', 'metaDescription'));
+        if ($isChainRoute) {
+            $pageTitle = "Certified Drug Test Centers in {$state->name} | 800-985-4339";
+            $metaDescription = "Find certified drug testing collection sites across {$state->name}. Walk in today at Quest Diagnostics and Labcorp partner facilities. Fast results in 24-48 hours.";
+        } else {
+            $pageTitle = $state->meta_title ?: "{$state->name} Drug Testing Locations & Walk-in Centers";
+            $metaDescription = $state->meta_description ?: "Accredited drug testing collection facilities in {$state->name}. Find local Quest & Labcorp centers for employment, court, and DOT testing.";
+        }
+
+        $breadcrumbs = [
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => $baseTitle, 'url' => url($baseRoutePrefix)],
+            ['name' => $state->name, 'url' => $canonicalUrl],
+        ];
+
+        return view('locations.state', compact(
+            'state',
+            'cities',
+            'sampleLocations',
+            'popularTests',
+            'pageTitle',
+            'metaDescription',
+            'isChainRoute',
+            'baseRoutePrefix',
+            'baseTitle',
+            'canonicalUrl',
+            'breadcrumbs'
+        ));
     }
 
     /**
-     * City Landing Page (e.g. /locations/florida/orlando)
+     * City Landing Page (e.g. /locations/florida/orlando or /certified-drug-test-centers/florida/orlando)
      */
     public function city(string $stateSlug, string $citySlug)
     {
@@ -107,10 +135,50 @@ class LocationController extends Controller
 
         $popularTests = Product::where('is_popular', true)->where('is_active', true)->limit(6)->get();
 
-        $pageTitle = $city?->meta_title ?: "{$cityName}, {$state->abbr} Drug Testing Centers & Walk-in Labs";
-        $metaDescription = $city?->meta_description ?: "Fast, certified drug and alcohol testing in {$cityName}, {$state->abbr}. Walk in today at Quest Diagnostics and Labcorp certified collection facilities.";
+        $isChainRoute = request()->is('certified-drug-test-centers*');
+        $baseRoutePrefix = $isChainRoute ? '/certified-drug-test-centers' : '/locations';
+        $baseTitle = $isChainRoute ? 'Certified Drug Test Centers' : 'Locations';
+        $canonicalUrl = rtrim(url($baseRoutePrefix . '/' . $state->slug . '/' . $citySlug), '/');
 
-        return view('locations.city', compact('state', 'city', 'cityName', 'locations', 'popularTests', 'pageTitle', 'metaDescription'));
+        // Automate Sibling Linking: 10 other cities within the same state for horizontal crawl paths
+        $siblingCities = City::where('state_id', $state->id)
+            ->where('is_active', true)
+            ->when($city, fn($q) => $q->where('id', '!=', $city->id))
+            ->orderByRaw("CASE WHEN content IS NOT NULL AND content != '' THEN 0 ELSE 1 END")
+            ->orderBy('name')
+            ->limit(10)
+            ->get(['id', 'name', 'slug', 'state_id']);
+
+        if ($isChainRoute) {
+            $pageTitle = "Certified Drug Test Centers in {$cityName}, {$state->abbr} | Same Day Testing";
+            $metaDescription = "Certified drug and alcohol testing in {$cityName}, {$state->abbr}. Walk in today at 20,000+ Quest Diagnostics and Labcorp certified collection sites.";
+        } else {
+            $pageTitle = $city?->meta_title ?: "{$cityName}, {$state->abbr} Drug Testing Centers & Walk-in Labs";
+            $metaDescription = $city?->meta_description ?: "Fast, certified drug and alcohol testing in {$cityName}, {$state->abbr}. Walk in today at Quest Diagnostics and Labcorp certified collection facilities.";
+        }
+
+        $breadcrumbs = [
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => $baseTitle, 'url' => url($baseRoutePrefix)],
+            ['name' => $state->name, 'url' => url($baseRoutePrefix . '/' . $state->slug)],
+            ['name' => $cityName, 'url' => $canonicalUrl],
+        ];
+
+        return view('locations.city', compact(
+            'state',
+            'city',
+            'cityName',
+            'locations',
+            'popularTests',
+            'pageTitle',
+            'metaDescription',
+            'siblingCities',
+            'isChainRoute',
+            'baseRoutePrefix',
+            'baseTitle',
+            'canonicalUrl',
+            'breadcrumbs'
+        ));
     }
 
     /**
