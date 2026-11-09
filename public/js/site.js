@@ -328,17 +328,10 @@ document.addEventListener('DOMContentLoaded', function () {
   window.handleEstimatorMethodChange = function (method) {
     const specimenSelect = document.getElementById('estSpecimen');
     const dotAgencyGroup = document.getElementById('estDotAgencyGroup');
-    const reasonSelect = document.getElementById('estReason');
 
     if (method === 'dot') {
-      if (reasonSelect && reasonSelect.value !== 'dot') {
-        reasonSelect.value = 'dot';
-      }
       if (dotAgencyGroup) dotAgencyGroup.style.display = 'block';
     } else {
-      if (reasonSelect && reasonSelect.value === 'dot') {
-        reasonSelect.value = 'employment';
-      }
       if (dotAgencyGroup) dotAgencyGroup.style.display = 'none';
     }
 
@@ -390,8 +383,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const panelKey = specimenSelect?.value || '5-panel-non-dot';
     const panelName = selectedOpt ? (selectedOpt.getAttribute('data-name') || selectedOpt.text) : '5 Panel Non-DOT Urine Test';
     const panelPrice = selectedOpt ? (selectedOpt.getAttribute('data-price') || '89.99') : '89.99';
-    const reason = reasonSelect ? reasonSelect.value : 'employment';
-    const dotAgency = (reason === 'dot' && dotAgencySelect) ? dotAgencySelect.value : 'FMCSA';
+    const reason = reasonSelect ? reasonSelect.value : 'Pre-Employment';
+    const methodSelect = document.getElementById('estMethod');
+    const isDot = (methodSelect?.value === 'dot' || panelKey.includes('dot'));
+    const dotAgency = (isDot && dotAgencySelect) ? dotAgencySelect.value : 'FMCSA';
 
     openOrderModal(panelKey, panelName, panelPrice);
 
@@ -404,7 +399,9 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     const modalDotAgency = document.getElementById('modalDotAgency');
-    if (modalDotAgency && reason === 'dot') {
+    const modalDotGroup = document.getElementById('modalDotAgencyGroup');
+    if (modalDotAgency && isDot) {
+      if (modalDotGroup) modalDotGroup.style.display = 'block';
       modalDotAgency.value = dotAgency;
       if (typeof handleModalDotAgencyChange === 'function') {
         handleModalDotAgencyChange(dotAgency);

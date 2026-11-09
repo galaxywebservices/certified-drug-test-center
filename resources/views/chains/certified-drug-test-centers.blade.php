@@ -443,7 +443,7 @@
         <ul class="tick">
           <li>Corporate accounts with volume pricing and an online results portal</li>
           <li>Pre-employment, random, post-accident and reasonable-suspicion testing</li>
-          <li>On-site mobile collections for 1 to 500+ employees at job sites, warehouses and offices</li>
+          <li>On-site mobile collections for employees at job sites, warehouses and offices</li>
           <li>DOT consortium/TPA services and MIS reporting assistance</li>
           <li>Background checks and motor vehicle records (MVR)</li>
         </ul>
@@ -469,7 +469,7 @@
   <section id="locations" aria-labelledby="loc-h">
     <div class="wrap">
       <span class="eyebrow">National directory</span>
-      <h2 id="loc-h">Find drug testing centers by state</h2>
+      <h2 id="loc-h">Find drug and alcohol testing centers by State</h2>
       <p class="lead">Certified Drug Test Centers has collection sites in all 50 states, from major metro areas to rural communities. Choose your state to see drug testing locations by city, including Quest Diagnostics and Labcorp drug test sites, or <a href="{{ url('/locations') }}">search by ZIP code</a>. Walk-ins are accepted at most sites once you've registered.</p>
             <ul class="states">
         @foreach($states as $st)
@@ -568,7 +568,7 @@
         <div class="faq-answer"><p>Yes. Individuals can order personal or family drug tests online without an employer or doctor's order. Results are confidential and sent only to the email provided at registration.</p></div></details>
 
       <details><summary><h3>Do you offer on-site mobile drug testing for employers?</h3></summary>
-        <div class="faq-answer"><p>Yes. Certified collectors can travel to job sites, offices, warehouses and construction projects nationwide to test from 1 to 500+ employees, including post-accident and reasonable-suspicion testing. Employers can also open a corporate account for volume pricing and an online results portal.</p></div></details>
+        <div class="faq-answer"><p>Yes. Certified collectors can travel to job sites, offices, warehouses and construction projects nationwide to test employees at job sites, warehouses and offices, including post-accident and reasonable-suspicion testing. Employers can also open a corporate account for volume pricing and an online results portal.</p></div></details>
 
       <details><summary><h3>What is a Medical Review Officer (MRO)?</h3></summary>
         <div class="faq-answer"><p>A Medical Review Officer is a licensed physician trained to review laboratory drug test results. Before a non-negative result is reported, the MRO contacts the donor to check for legitimate medical explanations, such as a valid prescription. Every test ordered through Certified Drug Test Centers includes MRO review.</p></div></details>

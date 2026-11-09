@@ -53,24 +53,28 @@
             </div>
         </div>
 
-        <!-- Right Side: Express Online Scheduling -->
+        <!-- Right Side: Express Online Order -->
         <div class="hero-split-right">
             <div class="quick-estimator-card">
                 <div class="estimator-header">
                     <h3>
                         <svg width="22" height="22" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 100 2h.01a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
-                        {{ $homeSettings['estimator_title'] ?? 'Express Online Scheduling' }}
+                        {{ $homeSettings['estimator_title'] ?? 'Express Online Order' }}
                     </h3>
                     <p>{{ $homeSettings['estimator_subtitle'] ?? 'Select your testing criteria to instantly view pricing and schedule online' }}</p>
                 </div>
 
                 <div class="estimator-field">
-                    <label class="estimator-label" for="estReason">1. What is the reason for testing?</label>
+                    <label class="estimator-label" for="estReason">1. Reason for Testing</label>
                     <select id="estReason" class="estimator-select" onchange="handleEstimatorReasonChange(this.value)">
-                        <option value="employment">Pre-Employment / Workplace</option>
-                        <option value="dot">DOT Regulated (FMCSA, FAA, USCG, FTA, PHMSA, FRA)</option>
-                        <option value="court">Court Ordered / Probation / Legal</option>
-                        <option value="personal">Personal / Family Testing</option>
+                        <option value="Pre-Employment">Pre-Employment</option>
+                        <option value="Random">Random</option>
+                        <option value="Reasonable Suspicion">Reasonable Suspicion</option>
+                        <option value="Post-Accident">Post-Accident</option>
+                        <option value="Follow-Up">Follow-Up</option>
+                        <option value="Return to Duty">Return to Duty</option>
+                        <option value="Court-Ordered">Court-Ordered / Probation</option>
+                        <option value="Personal">Personal / Family Testing</option>
                     </select>
                 </div>
 
@@ -235,22 +239,22 @@
 
         <div class="process-grid-4-wrap">
             <div class="process-card-step">
-                <div class="process-step-num">01.</div>
+                <div class="process-step-num">Step 1</div>
                 <h3>{{ $homeSettings['step1_title'] ?? 'Choose Test & Register' }}</h3>
                 <p>{{ $homeSettings['step1_desc'] ?? 'Select your testing panel online. Enter donor details and zip code to locate the nearest collection facility.' }}</p>
             </div>
             <div class="process-card-step">
-                <div class="process-step-num">02.</div>
+                <div class="process-step-num">Step 2</div>
                 <h3>{{ $homeSettings['step2_title'] ?? 'Instant Donor Pass' }}</h3>
                 <p>{{ $homeSettings['step2_desc'] ?? 'A registration confirmation pass with barcode and site directions is immediately sent to your email and phone.' }}</p>
             </div>
             <div class="process-card-step">
-                <div class="process-step-num">03.</div>
+                <div class="process-step-num">Step 3</div>
                 <h3>{{ $homeSettings['step3_title'] ?? 'Walk-In Collection' }}</h3>
                 <p>{{ $homeSettings['step3_desc'] ?? 'Show your pass on your smartphone. The certified collection site handles testing with SAMHSA laboratory analysis.' }}</p>
             </div>
             <div class="process-card-step">
-                <div class="process-step-num">04.</div>
+                <div class="process-step-num">Step 4</div>
                 <h3>{{ $homeSettings['step4_title'] ?? 'Fast Electronic Results' }}</h3>
                 <p>{{ $homeSettings['step4_desc'] ?? 'Negative Results sent out via email within 24-48 hours.' }}</p>
             </div>

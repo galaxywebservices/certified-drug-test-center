@@ -108,16 +108,16 @@
     }
 
     .guide-step-num {
-        font-size: 18px;
-        font-weight: 900;
+        font-size: 13px;
+        font-weight: 800;
         color: #C1121F;
         background: #FEE2E2;
-        width: 36px;
-        height: 36px;
-        border-radius: 8px;
-        display: flex;
+        padding: 4px 10px;
+        border-radius: 6px;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
+        letter-spacing: 0.3px;
     }
 
     .guide-step-badge {
@@ -458,16 +458,16 @@
                 </h3>
                 <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; font-size:13px; color:#334155; line-height:1.6;">
                     <div>
-                        <strong style="color:#C1121F; display:block; margin-bottom:4px;">1. Order Online (2 Mins)</strong>
+                        <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 1: Order Online (2 Mins)</strong>
                         Choose your test and register online. Testing centers do not take payment on-site.
                     </div>
                     <div>
-                        <strong style="color:#C1121F; display:block; margin-bottom:4px;">2. Get Electronic Pass</strong>
+                        <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 2: Complete Registration</strong>
                         Receive your electronic Donor Registration Pass via email with barcode and directions.
                     </div>
                     <div>
-                        <strong style="color:#C1121F; display:block; margin-bottom:4px;">3. Walk-In &amp; Test</strong>
-                        Walk in during collection hours with your pass and a photo ID. No appointment necessary!
+                        <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 3: Walk-In &amp; Test</strong>
+                        Walk in during collection hours with your pass and a photo ID — no appointment necessary! Receive results securely via email within 24-48 business hours.
                     </div>
                 </div>
             </div>

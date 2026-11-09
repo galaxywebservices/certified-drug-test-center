@@ -276,7 +276,7 @@
             <div class="header-contact-callout">
                 <div class="header-hours">
                     <strong>Online Scheduling: 24/7</strong>
-                    <span>M-F 8am - 8pm EST &bull; SAT 9am - 5pm</span>
+                    <span>Call M-F 8am - 8pm est &bull; SAT 9am - 5pm</span>
                 </div>
                 <div class="header-phone-box">
                     <a href="tel:18009854339" class="header-phone-number">(800)-985-4339</a>
@@ -299,24 +299,6 @@
                 </svg>
             </button>
             <ul class="nav-menu" id="navMenu">
-                <li class="nav-item has-dropdown">
-                    <a href="{{ url('/services') }}" class="nav-link" style="color: #FEF08A; font-weight: 700;">
-                        <span>Services</span>
-                        <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
-                    </a>
-                    <ul class="nav-dropdown">
-                        <li><a href="{{ url('/services/5-panel-drug-test') }}" class="nav-dropdown-link font-semibold">5-Panel Urine Drug Test</a></li>
-                        <!-- <li><a href="{{ url('/services/10-panel-drug-test/') }}" class="nav-dropdown-link">10-Panel Drug Test</a></li>
-                        <li><a href="{{ url('/services/12-panel-drug-test/') }}" class="nav-dropdown-link">12-Panel Comprehensive</a></li>
-                        <li><a href="{{ url('/services/dot-drug-test/') }}" class="nav-dropdown-link">DOT Drug Test &amp; Physical</a></li>
-                        <li><a href="{{ url('/services/hair-follicle-drug-test/') }}" class="nav-dropdown-link">Hair Follicle Drug Test</a></li>
-                        <li><a href="{{ url('/services/breath-alcohol-test/') }}" class="nav-dropdown-link">Breath Alcohol Test</a></li>
-                        <li><a href="{{ url('/services/instant-drug-test/') }}" class="nav-dropdown-link">Rapid / Instant Test</a></li>
-                        <li><a href="{{ url('/services/court-ordered-drug-test/') }}" class="nav-dropdown-link">Court-Ordered Drug Test</a></li>
-                        <li><a href="{{ url('/services/random-drug-testing/') }}" class="nav-dropdown-link">Random Testing &amp; Consortium</a></li>
-                        <li><a href="{{ url('/services/') }}" class="nav-dropdown-link nav-dropdown-viewall">All Testing Services Directory &rarr;</a></li> -->
-                    </ul>
-                </li>
                 <li class="nav-item has-dropdown">
                     <a href="{{ url('/category/urine') }}" class="nav-link">
                         <span>Urine Tests</span>
@@ -376,11 +358,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('employers.index') }}" class="nav-link" style="color:#F59E0B; font-weight:700;">
-                        EMPLOYER SERVICES
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="{{ url('/category/on-site-mobile') }}" class="nav-link">
                         MOBILE TESTING
                     </a>
@@ -400,6 +377,11 @@
                         @endif
                         <li><a href="{{ route('locations.index') }}" class="nav-dropdown-link nav-dropdown-viewall">View All 50 State Directories &rarr;</a></li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('employers.index') }}" class="nav-link" style="color:#F59E0B; font-weight:700;">
+                        EMPLOYER SERVICES
+                    </a>
                 </li>
                 <li class="mobile-nav-footer">
                     <a href="tel:18009854339" class="mobile-nav-call-btn">
@@ -447,20 +429,20 @@
                         <span class="partner-badge-divider" style="color:#CBD5E1; margin:0 8px; font-weight:300;">|</span>
                         <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">MEMBER</span>
                     </div>
-                    <div class="partner-badge-item" title="Alere Toxicology Laboratory Network" style="display:inline-flex; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:8px; padding:7px 16px; box-shadow:0 1px 3px rgba(0,0,0,0.04); white-space:nowrap;">
-                        <span class="partner-badge-name" style="font-weight:900; color:#0B2545; font-size:13px; letter-spacing:0.5px;">ALERE</span>
-                        <span class="partner-badge-divider" style="color:#CBD5E1; margin:0 8px; font-weight:300;">|</span>
-                        <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">TOXICOLOGY</span>
-                    </div>
                     <div class="partner-badge-item" title="Substance Abuse Program Administrators Association" style="display:inline-flex; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:8px; padding:7px 16px; box-shadow:0 1px 3px rgba(0,0,0,0.04); white-space:nowrap;">
                         <span class="partner-badge-name" style="font-weight:900; color:#0B2545; font-size:13px; letter-spacing:0.5px;">SAPAA</span>
                         <span class="partner-badge-divider" style="color:#CBD5E1; margin:0 8px; font-weight:300;">|</span>
-                        <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">C/TPA ALLIANCE</span>
+                        <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">MEMBER</span>
                     </div>
-                    <div class="partner-badge-item" title="i3screen Electronic CCF Logistics" style="display:inline-flex; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:8px; padding:7px 16px; box-shadow:0 1px 3px rgba(0,0,0,0.04); white-space:nowrap;">
+                    <div class="partner-badge-item" title="i3screen Electronic CCF Logistics Software" style="display:inline-flex; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:8px; padding:7px 16px; box-shadow:0 1px 3px rgba(0,0,0,0.04); white-space:nowrap;">
                         <span class="partner-badge-name" style="font-weight:900; color:#0B2545; font-size:13px; letter-spacing:0.5px;">i3screen</span>
                         <span class="partner-badge-divider" style="color:#CBD5E1; margin:0 8px; font-weight:300;">|</span>
-                        <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">eCCF CERTIFIED</span>
+                        <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">SOFTWARE</span>
+                    </div>
+                    <div class="partner-badge-item" title="Origin One Software Network" style="display:inline-flex; align-items:center; background:#FFFFFF; border:1px solid #CBD5E1; border-radius:8px; padding:7px 16px; box-shadow:0 1px 3px rgba(0,0,0,0.04); white-space:nowrap;">
+                        <span class="partner-badge-name" style="font-weight:900; color:#0B2545; font-size:13px; letter-spacing:0.5px;">Origin One</span>
+                        <span class="partner-badge-divider" style="color:#CBD5E1; margin:0 8px; font-weight:300;">|</span>
+                        <span class="partner-badge-sub" style="font-size:11px; font-weight:700; color:#64748B; letter-spacing:0.5px;">SOFTWARE</span>
                     </div>
                 </div>
             </div>
@@ -506,7 +488,7 @@
                         <li><a href="{{ route('employers.index') }}" style="color:#F59E0B; font-weight:700;">Corporate Accounts &amp; Pricing</a></li>
                         <li><a href="{{ route('employers.portal') }}" style="color:#38BDF8; font-weight:700;">🏢 Employer Portal Login</a></li>
                         <li><a href="{{ route('reviews.index') }}" style="color:#34D399; font-weight:700;">Verified Customer Reviews (4.9★)</a></li>
-                        <li><a href="{{ url('/category/dot') }}">FMCSA Drug & Alcohol Testing</a></li>
+                        <li><a href="{{ url('/category/dot') }}">DOT Drug & Alcohol Testing</a></li>
                         <li><a href="{{ url('/product/dot-physical') }}">DOT Physical Examination (NRCME)</a></li>
                         <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}">DOT Random Consortium Pool</a></li>
                         <li><a href="{{ url('/product/fmcsa-clearinghouse-accucheck') }}">FMCSA Clearinghouse Support</a></li>
@@ -613,9 +595,9 @@
                 </div>
 
                 <div class="modal-form-group">
-                    <label for="donorEmail">Email (For Confidential Results) *</label>
+                    <label for="donorEmail">Donor / Electronic Pass Email *</label>
                     <input type="email" id="donorEmail" name="email" placeholder="donor@example.com" required>
-                    <small style="font-size:11.5px; color:#64748B;">Confidential results &amp; electronic donor pass sent here within 24-48 hours.</small>
+                    <small style="font-size:11.5px; color:#64748B;">Donor registration pass &amp; confidential results sent here immediately.</small>
                 </div>
 
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
@@ -630,12 +612,16 @@
                 </div>
 
                 <div class="modal-form-group">
-                    <label for="testingReason">1. What is the reason for testing? *</label>
+                    <label for="testingReason">1. Reason for Testing *</label>
                     <select id="testingReason" name="test_reason" onchange="handleModalReasonChange(this.value)" required>
-                        <option value="employment">Pre-Employment / Workplace</option>
-                        <option value="dot">DOT Regulated (FMCSA / FAA / USCG / FTA / PHMSA / FRA)</option>
-                        <option value="court">Court Ordered / Probation / Legal</option>
-                        <option value="personal">Personal / Family Testing</option>
+                        <option value="Pre-Employment">Pre-Employment</option>
+                        <option value="Random">Random</option>
+                        <option value="Reasonable Suspicion">Reasonable Suspicion</option>
+                        <option value="Post-Accident">Post-Accident</option>
+                        <option value="Follow-Up">Follow-Up</option>
+                        <option value="Return to Duty">Return to Duty</option>
+                        <option value="Court-Ordered / Probation">Court-Ordered / Probation</option>
+                        <option value="Personal / Family">Personal / Family</option>
                     </select>
                 </div>
 
@@ -675,8 +661,8 @@
 
                 <!-- DOT Other ID -->
                 <div class="modal-form-group" id="modalDotOtherGroup" style="display:none;">
-                    <label for="modalDotOtherId">Full Social Security Number or Employee ID *</label>
-                    <input type="text" id="modalDotOtherId" placeholder="Full 9-digit SSN or Employee ID" oninput="document.getElementById('modalNonDotId').value = this.value">
+                    <label for="modalDotOtherId">DL Number, Full Social Security Number, or Employer ID *</label>
+                    <input type="text" id="modalDotOtherId" placeholder="Driver's License #, Full 9-digit SSN, or Employer ID" oninput="document.getElementById('modalNonDotId').value = this.value">
                 </div>
 
                 <p style="font-size:12px; color:var(--color-text-muted); margin-bottom:16px;">

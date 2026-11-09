@@ -38,7 +38,7 @@ class CheckoutController extends Controller
             $product = Product::where('is_popular', true)->first() ?? Product::first();
         }
 
-        $allProducts = Product::where('is_active', true)->orderBy('position')->get();
+        $allProducts = Product::where('is_active', true)->with('categories')->orderBy('position')->get();
 
         $selectedLocation = null;
         if ($request->filled('location_id')) {
@@ -74,6 +74,7 @@ class CheckoutController extends Controller
             'exp' => 'required|string',
             'cvv' => 'required|string|max:4',
             'billing_zip' => 'required|string|max:10',
+            'refund_policy_agreed' => 'required|accepted',
         ]);
 
         $product = Product::findOrFail($validated['product_id']);
@@ -136,6 +137,10 @@ class CheckoutController extends Controller
             'paytrace_approval_code' => $paymentResult['approval_code'] ?? null,
             'donor_pass_token' => $token,
             'status' => 'registered',
+            'refund_policy_agreed' => true,
+            'refund_policy_agreed_at' => now(),
+            'donor_ip' => $request->ip(),
+            'notes' => 'Dispute Proof: Refund Policy accepted by donor on ' . now()->toIso8601String() . ' from IP: ' . $request->ip() . '. Non-refundable once donor pass is issued; lifetime credit policy acknowledged.',
         ]);
 
         OrderItem::create([

@@ -267,6 +267,25 @@
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(193, 18, 31, 0.35);
     }
+    .btn-card-call {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        background: #0B2545;
+        color: #FFFFFF !important;
+        font-weight: 700;
+        font-size: 12.5px;
+        padding: 10px 12px;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+    }
+    .btn-card-call:hover {
+        background: #133E6E;
+        transform: translateY(-1px);
+    }
     .btn-card-details {
         display: inline-flex;
         align-items: center;
@@ -480,7 +499,7 @@
                     Major Cities in {{ $state->name }}
                 </h2>
                 <p style="font-size:14px; color:#64748B; margin-bottom:14px;">
-                    Select your city to view local Quest Diagnostics and Labcorp certified collection sites:
+                    Select your city to view local certified drug testing centers near you
                 </p>
 
                 <div class="cities-grid">
@@ -557,7 +576,11 @@
 
                         <div class="lab-card-actions">
                             <a href="{{ route('checkout.index', ['location_id' => $loc->id]) }}" class="btn-card-schedule">
-                                Schedule Test &rarr;
+                                Order Online
+                            </a>
+                            <a href="tel:18009854339" class="btn-card-call" title="Call (800)-985-4339">
+                                <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>
+                                Call
                             </a>
                             <a href="{{ route('locations.show', $loc->id) }}" class="btn-card-details">
                                 View Details

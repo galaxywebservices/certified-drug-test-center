@@ -71,7 +71,7 @@ class CityGuideFormatter
                 $output .= '<div class="guide-steps-grid">
                     <div class="guide-step-card">
                         <div class="guide-step-header">
-                            <span class="guide-step-num">01</span>
+                            <span class="guide-step-num">Step 1</span>
                             <span class="guide-step-badge">Fast &amp; Online</span>
                         </div>
                         <h4 class="guide-step-title">Order Test Online or By Phone</h4>
@@ -79,19 +79,19 @@ class CityGuideFormatter
                     </div>
                     <div class="guide-step-card">
                         <div class="guide-step-header">
-                            <span class="guide-step-num">02</span>
-                            <span class="guide-step-badge">Auto Location</span>
+                            <span class="guide-step-num">Step 2</span>
+                            <span class="guide-step-badge">Complete Registration</span>
                         </div>
                         <h4 class="guide-step-title">Donor Registration &amp; Site Match</h4>
                         <p class="guide-step-text">Complete the Donor Registration section and specify your destination email for confidential reporting. Your zip code automatically assigns the closest certified facility.</p>
                     </div>
                     <div class="guide-step-card">
                         <div class="guide-step-header">
-                            <span class="guide-step-num">03</span>
+                            <span class="guide-step-num">Step 3</span>
                             <span class="guide-step-badge">Walk In Today</span>
                         </div>
                         <h4 class="guide-step-title">Instant Donor Pass Issued</h4>
-                        <p class="guide-step-text">Receive your official donor authorization pass with barcode and facility hours via email immediately. Bring this pass with a photo ID to the collection site — no appointment necessary!</p>
+                        <p class="guide-step-text">Receive your official donor authorization pass with barcode and facility hours via email immediately. Bring this pass with a photo ID to the collection site — no appointment necessary! Receive results securely via email within 24-48 business hours.</p>
                     </div>
                 </div>';
                 continue;
@@ -116,12 +116,14 @@ class CityGuideFormatter
 
             // 3. Mobile / On-Site Dispatch Card
             if (str_contains($lower, 'on-site') || str_contains($lower, 'mobile')) {
+                $cleanedBody = preg_replace('/\b10\s+employees\b/i', '20 employees', $body);
+                $cleanedBody = preg_replace('/\bat\s+least\s+10\s+employees\b/i', 'at least 20 employees', $cleanedBody);
                 $output .= '<div class="guide-card guide-card-mobile">
                     <div class="guide-card-header">
                         <span class="guide-badge-mobile">🚐 Mobile On-Site Testing Dispatch</span>
                         <h3 class="guide-card-title">' . htmlspecialchars($heading) . '</h3>
                     </div>
-                    <div class="guide-card-body">' . $body . '</div>
+                    <div class="guide-card-body">' . $cleanedBody . '</div>
                 </div>';
                 continue;
             }

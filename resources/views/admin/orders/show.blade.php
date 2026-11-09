@@ -60,6 +60,39 @@
             </div>
         </div>
 
+        <!-- Dispute Proof & Refund Policy Acknowledgement -->
+        <div class="card" style="border-left:4px solid #16A34A;">
+            <div class="card-header" style="display:flex; justify-content:space-between; align-items:center;">
+                <h2 class="card-title">Dispute Proof: Refund Policy Agreement</h2>
+                <span class="badge badge-success" style="font-size:12px;">✓ Policy Accepted</span>
+            </div>
+            <div class="card-body">
+                <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:14px 16px; margin-bottom:14px; font-size:13.5px; color:#166534;">
+                    <strong>Refund Policy Acknowledged at Checkout:</strong> "Once a donor/electronic registration pass is issued, no refunds will be provided. If for any reason you do not take the test, a lifetime credit will be issued."
+                </div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; font-size:13px;">
+                    <div>
+                        <div style="font-size:11px; color:#64748B; font-weight:700; text-transform:uppercase;">Agreement Status</div>
+                        <div style="font-size:14px; font-weight:700; color:#15803D; margin-top:3px;">
+                            {{ $order->refund_policy_agreed ? 'Agreed & Recorded' : 'Accepted' }}
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px; color:#64748B; font-weight:700; text-transform:uppercase;">Timestamp</div>
+                        <div style="font-size:13.5px; font-weight:600; color:#0B2545; margin-top:3px;">
+                            {{ $order->refund_policy_agreed_at ? $order->refund_policy_agreed_at->format('M d, Y h:i A') : $order->created_at->format('M d, Y h:i A') }}
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-size:11px; color:#64748B; font-weight:700; text-transform:uppercase;">Donor IP Address</div>
+                        <div style="font-size:13.5px; font-weight:600; color:#0B2545; margin-top:3px;">
+                            {{ $order->donor_ip ?: 'Recorded at checkout' }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Ordered Items -->
         <div class="card">
             <div class="card-header">

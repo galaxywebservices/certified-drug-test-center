@@ -510,7 +510,7 @@ class HomeController extends Controller
                 'Court & DOT Legally Defensible',
             ],
 
-            'estimator_title' => Setting::get('homepage_estimator_title', 'Express Online Scheduling'),
+            'estimator_title' => Setting::get('homepage_estimator_title', 'Express Online Order'),
             'estimator_subtitle' => Setting::get('homepage_estimator_subtitle', 'Select your testing criteria to instantly view pricing and schedule online'),
             'estimator_button' => Setting::get('homepage_estimator_button', 'Schedule Online Now'),
 

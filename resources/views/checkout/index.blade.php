@@ -512,7 +512,7 @@
         <div class="container checkout-trust-inner">
             <div class="checkout-title-wrap">
                 <h1>Express Online Test Registration &amp; Checkout</h1>
-                <p>Get your official electronic Donor Pass in 2 minutes. Walk-ins accepted at over 20,000 Quest &amp; Labcorp facilities.</p>
+                <p>Get your official electronic Donor Pass in 2 minutes. Walk-ins accepted at over 20,000 Certified Testing Locations.</p>
             </div>
             <div class="checkout-security-badges">
                 <div class="checkout-security-badge-item">
@@ -543,6 +543,21 @@
         <form action="{{ route('checkout.process') }}" method="POST" id="checkoutForm">
             @csrf
 
+            @php
+                $initialCats = $product ? $product->categories->pluck('slug')->toArray() : [];
+                if ($product && $product->dot_required) $initialCats[] = 'dot';
+                if ($product && !empty($product->specimen_type)) $initialCats[] = $product->specimen_type;
+                $initialCat = 'all';
+                if (in_array('dot', $initialCats)) $initialCat = 'dot';
+                elseif (in_array('urine', $initialCats)) $initialCat = 'urine';
+                elseif (in_array('hair', $initialCats)) $initialCat = 'hair';
+                elseif (in_array('alcohol', $initialCats)) $initialCat = 'alcohol';
+                elseif (in_array('saliva', $initialCats) || in_array('oral', $initialCats)) $initialCat = 'oral';
+                elseif (in_array('dna', $initialCats) || in_array('dna-testing', $initialCats)) $initialCat = 'dna';
+                elseif (in_array('blood', $initialCats) || in_array('lab-blood', $initialCats)) $initialCat = 'clinical';
+                elseif (in_array('occupational-health', $initialCats)) $initialCat = 'occupational';
+            @endphp
+
             <div class="checkout-grid">
                 <!-- Left Column: 3 Structured Registration Steps -->
                 <div>
@@ -553,10 +568,31 @@
                                 <span class="checkout-step-pill">1</span>
                                 <div>
                                     <h2 class="checkout-card-heading">Select Testing Package</h2>
-                                    <div class="checkout-card-subheading">Choose your drug or alcohol test panel</div>
+                                    <div class="checkout-card-subheading">Choose category and drug or alcohol testing panel</div>
                                 </div>
                             </div>
-                            <span class="badge" style="background:#E0F2FE; color:#0369A1; font-weight:700;">Quest &amp; Labcorp</span>
+                            <span class="badge" style="background:#E0F2FE; color:#0369A1; font-weight:700;">Certified Testing Locations</span>
+                        </div>
+
+                        <!-- Category Selector (Filter Before Selection) -->
+                        <div class="checkout-form-group">
+                            <label class="checkout-label" for="category_filter">
+                                <span>Select Type / Category of Test <span class="checkout-label-req">*</span></span>
+                                <span style="font-size:12px; color:#64748B; font-weight:500;">Filter panels below</span>
+                            </label>
+                            <div class="checkout-input-wrap">
+                                <select id="category_filter" class="checkout-input checkout-select" onchange="filterProductsByCategory(this.value)">
+                                    <option value="urine" {{ $initialCat === 'urine' ? 'selected' : '' }}>Urine Drug Tests</option>
+                                    <option value="dot" {{ $initialCat === 'dot' ? 'selected' : '' }}>DOT Regulated Tests</option>
+                                    <option value="hair" {{ $initialCat === 'hair' ? 'selected' : '' }}>Hair Follicle Tests</option>
+                                    <option value="alcohol" {{ $initialCat === 'alcohol' ? 'selected' : '' }}>Alcohol &amp; EtG Tests</option>
+                                    <option value="oral" {{ $initialCat === 'oral' ? 'selected' : '' }}>Oral Fluid Tests</option>
+                                    <option value="occupational" {{ $initialCat === 'occupational' ? 'selected' : '' }}>Occupational Health Tests</option>
+                                    <option value="clinical" {{ $initialCat === 'clinical' ? 'selected' : '' }}>Clinical Blood Tests</option>
+                                    <option value="dna" {{ $initialCat === 'dna' ? 'selected' : '' }}>DNA Paternity Tests</option>
+                                    <option value="all" {{ $initialCat === 'all' ? 'selected' : '' }}>View All Testing Categories</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="checkout-form-group" style="margin-bottom:0;">
@@ -567,12 +603,24 @@
                             <div class="checkout-input-wrap">
                                 <select id="product_id" name="product_id" class="checkout-input checkout-select" onchange="updateSelectedProduct(this)" required>
                                     @foreach($allProducts as $p)
+                                        @php
+                                            $pCats = $p->categories->pluck('slug')->toArray();
+                                            if ($p->dot_required && !in_array('dot', $pCats)) $pCats[] = 'dot';
+                                            if (!empty($p->specimen_type) && !in_array($p->specimen_type, $pCats)) $pCats[] = $p->specimen_type;
+                                            if (in_array('saliva', $pCats) && !in_array('oral', $pCats)) $pCats[] = 'oral';
+                                            if (in_array('blood', $pCats) && !in_array('clinical', $pCats)) $pCats[] = 'clinical';
+                                            if (in_array('lab-blood', $pCats) && !in_array('clinical', $pCats)) $pCats[] = 'clinical';
+                                            if (in_array('dna-testing', $pCats) && !in_array('dna', $pCats)) $pCats[] = 'dna';
+                                            $pCatStr = implode(' ', array_unique($pCats));
+                                        @endphp
                                         <option value="{{ $p->id }}" 
                                                 data-price="{{ $p->price }}" 
                                                 data-retail="{{ $p->retail_price }}"
                                                 data-name="{{ $p->name }}" 
                                                 data-specimen="{{ ucfirst($p->specimen_type) }}"
                                                 data-turnaround="{{ $p->turnaround_time }}"
+                                                data-categories="{{ $pCatStr }}"
+                                                data-dot="{{ $p->dot_required ? '1' : '0' }}"
                                                 {{ ($product && $product->id == $p->id) ? 'selected' : '' }}>
                                             {{ $p->name }} — ${{ number_format($p->price, 2) }} ({{ $p->turnaround_time }})
                                         </option>
@@ -649,7 +697,7 @@
                         <div class="checkout-form-row">
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="email">
-                                    <span>Email (For Confidential Results) <span class="checkout-label-req">*</span></span>
+                                    <span>Donor / Electronic Pass Email <span class="checkout-label-req">*</span></span>
                                 </label>
                                 <div class="checkout-input-wrap">
                                     <span class="checkout-input-icon">
@@ -657,7 +705,7 @@
                                     </span>
                                     <input type="email" id="email" name="email" value="{{ old('email') }}" class="checkout-input with-icon" placeholder="donor@example.com" required>
                                 </div>
-                                <div class="checkout-hint">Electronic Donor Pass &amp; confidential lab results (24-48 hrs) sent here.</div>
+                                <div class="checkout-hint">Electronic Donor Pass &amp; confidential lab results (24-48 hrs) sent here immediately.</div>
                             </div>
 
                             <div class="checkout-form-group">
@@ -689,20 +737,23 @@
                                     </span>
                                     <input type="text" id="zip" name="zip" value="{{ old('zip', $selectedLocation ? $selectedLocation->zip : request('zip', '')) }}" class="checkout-input with-icon" placeholder="e.g. 90210" maxlength="5" pattern="[0-9]{5}" required>
                                 </div>
-                                <div class="checkout-hint">We will assign the closest certified Quest or Labcorp center.</div>
+                                <div class="checkout-hint">We will assign the closest Certified Testing Location.</div>
                             </div>
                         </div>
 
                         <div class="checkout-form-row">
                             <div class="checkout-form-group" style="grid-column: span 2;">
-                                <label class="checkout-label" for="test_reason">1. What is the reason for testing? <span class="checkout-label-req">*</span></label>
+                                <label class="checkout-label" for="test_reason">Reason for Testing <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
                                     <select id="test_reason" name="test_reason" class="checkout-input checkout-select" onchange="handleCheckoutReasonChange(this.value)" required>
-                                        <option value="employment">Pre-Employment / Workplace</option>
-                                        <option value="dot">DOT Regulated (FMCSA / FAA / USCG / FTA / PHMSA / FRA)</option>
-                                        <option value="court">Court Ordered / Probation / Legal</option>
-                                        <option value="personal">Personal / Family Testing</option>
-                                        <option value="post-accident">Post-Accident / Reasonable Suspicion</option>
+                                        <option value="Pre-Employment">Pre-Employment</option>
+                                        <option value="Random">Random</option>
+                                        <option value="Reasonable Suspicion">Reasonable Suspicion</option>
+                                        <option value="Post-Accident">Post-Accident</option>
+                                        <option value="Follow-Up">Follow-Up</option>
+                                        <option value="Return to Duty">Return to Duty</option>
+                                        <option value="Court-Ordered / Probation">Court Ordered / Probation / Legal</option>
+                                        <option value="Personal / Family">Personal / Family Testing</option>
                                     </select>
                                 </div>
                             </div>
@@ -722,23 +773,24 @@
                                         <option value="FRA">FRA (Federal Railroad Administration)</option>
                                     </select>
                                 </div>
-                                <div class="checkout-hint">FMCSA mandates CDL Number &amp; State of Issuance. Other agencies require Full SSN or Employee ID.</div>
+                                <div class="checkout-hint">FMCSA mandates CDL Number &amp; State of Issuance. Other agencies require DL Number, Full SSN, or Employer ID.</div>
                             </div>
                         </div>
 
-                        <!-- Donor Identification Group: Non-DOT vs DOT FMCSA vs DOT Other -->
+                        <!-- Donor Identification Group: Non-DOT -->
                         <div id="checkoutNonDotIdGroup" class="checkout-form-row">
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="donor_id_type_nondot">Donor ID Type</label>
                                 <select id="donor_id_type_nondot" name="donor_id_type" class="checkout-input checkout-select">
                                     <option value="ssn_last6">Social Security Number (Last 6)</option>
-                                    <option value="employee_id">Employee ID</option>
+                                    <option value="dl_number">Driver's License (DL Number)</option>
+                                    <option value="employee_id">Employer ID / Employee ID</option>
                                 </select>
                             </div>
                             <div class="checkout-form-group">
-                                <label class="checkout-label" for="donor_id_number_nondot">Last 6 of SSN or Employee ID <span class="checkout-label-req">*</span></label>
-                                <input type="text" id="donor_id_number_nondot" name="donor_id_number" value="{{ old('donor_id_number') }}" class="checkout-input" placeholder="e.g. 123456" minlength="6" maxlength="20">
-                                <div class="checkout-hint">At least last 6 digits of SSN or your workplace Employee ID.</div>
+                                <label class="checkout-label" for="donor_id_number_nondot">Donor ID Number <span class="checkout-label-req">*</span></label>
+                                <input type="text" id="donor_id_number_nondot" name="donor_id_number" value="{{ old('donor_id_number') }}" class="checkout-input" placeholder="e.g. Last 6 of SSN, DL #, or Employer ID" minlength="4" maxlength="25">
+                                <div class="checkout-hint">Last 6 of SSN, Driver's License #, or workplace Employee ID.</div>
                             </div>
                         </div>
 
@@ -763,19 +815,20 @@
                             </div>
                         </div>
 
-                        <!-- DOT Other Agencies: Full SSN or Employee ID -->
+                        <!-- DOT Other Agencies: DL Number, Full SSN, or Employer ID -->
                         <div id="checkoutDotOtherGroup" class="checkout-form-row" style="display:none;">
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="dot_other_id_type">DOT ID Type</label>
-                                <select id="dot_other_id_type" class="checkout-input checkout-select" onchange="document.getElementById('donor_id_type_nondot').value = this.value">
+                                <select id="dot_other_id_type" class="checkout-input checkout-select" onchange="handleDotOtherIdTypeChange(this.value)">
+                                    <option value="dl_number">Driver's License (DL Number)</option>
                                     <option value="full_ssn">Full Social Security Number</option>
-                                    <option value="employee_id">Employee ID</option>
+                                    <option value="employee_id">Employer ID / Employee ID</option>
                                 </select>
                             </div>
                             <div class="checkout-form-group">
-                                <label class="checkout-label" for="dot_other_id_number">Full Social Security Number or Employee ID <span class="checkout-label-req">*</span></label>
-                                <input type="text" id="dot_other_id_number" class="checkout-input" placeholder="9-digit SSN (XXX-XX-XXXX) or Employee ID" oninput="document.getElementById('donor_id_number_nondot').value = this.value">
-                                <div class="checkout-hint">FAA, USCG, FTA, PHMSA &amp; FRA mandate full SSN or Employee ID on chain of custody.</div>
+                                <label class="checkout-label" for="dot_other_id_number">DL Number, Full SSN, or Employer ID <span class="checkout-label-req">*</span></label>
+                                <input type="text" id="dot_other_id_number" class="checkout-input" placeholder="Driver's License #, 9-digit SSN, or Employer ID" oninput="document.getElementById('donor_id_number_nondot').value = this.value">
+                                <div class="checkout-hint">FAA, USCG, FTA, PHMSA &amp; FRA accept DL Number, Full SSN, or Employer ID.</div>
                             </div>
                         </div>
                     </div>
@@ -801,6 +854,21 @@
                         <div class="payment-security-notice">
                             <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
                             <span>Encrypted 256-Bit SSL Connection. Direct PayTrace Merchant Gateway Clearance.</span>
+                        </div>
+
+                        <!-- Mandatory Refund Policy Acknowledgement Box (Dispute Proof Tracking) -->
+                        <div class="refund-policy-box" style="background:#FFFBEB; border:1.5px solid #FDE68A; border-radius:8px; padding:16px 18px; margin-bottom:20px;">
+                            <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
+                                <span style="font-size:16px;">⚠️</span>
+                                <strong style="color:#92400E; font-size:13.5px; text-transform:uppercase; letter-spacing:0.5px;">Refund Policy</strong>
+                            </div>
+                            <p style="font-size:13px; color:#78350F; line-height:1.5; margin:0 0 12px; font-weight:500;">
+                                Once a donor/electronic registration pass is issued, no refunds will be provided. If for any reason you do not take the test, a lifetime credit will be issued.
+                            </p>
+                            <label style="display:flex; align-items:flex-start; gap:10px; font-size:12.5px; font-weight:700; color:#92400E; cursor:pointer;">
+                                <input type="checkbox" name="refund_policy_agreed" id="refund_policy_agreed" value="1" required style="width:18px; height:18px; margin-top:2px; accent-color:#C1121F; flex-shrink:0;">
+                                <span>I have read and agree to the Refund Policy (I acknowledge that once an electronic registration pass is issued, no refunds will be provided and lifetime credit applies). <span style="color:#C1121F;">*</span></span>
+                            </label>
                         </div>
 
                         <div class="checkout-form-group">
@@ -859,11 +927,11 @@
 
                         <ul class="order-breakdown-list">
                             <li class="order-breakdown-row">
-                                <span>Laboratory Testing Service</span>
+                                <span>Test/Service Selected</span>
                                 <strong id="summaryBasePrice">${{ number_format($product->price ?? 89.99, 2) }}</strong>
                             </li>
                             <li class="order-breakdown-row">
-                                <span>Quest &amp; Labcorp Collection Fee</span>
+                                <span>Certified Laboratory Analysis</span>
                                 <span class="order-breakdown-free">INCLUDED ($0.00)</span>
                             </li>
                             <li class="order-breakdown-row">
@@ -911,6 +979,7 @@
 <script>
     function updateSelectedProduct(selectElem) {
         const option = selectElem.options[selectElem.selectedIndex];
+        if (!option) return;
         const price = parseFloat(option.getAttribute('data-price')).toFixed(2);
         const name = option.getAttribute('data-name');
         const specimen = option.getAttribute('data-specimen');
@@ -929,6 +998,86 @@
         document.getElementById('summaryBasePrice').textContent = '$' + price;
         document.getElementById('summaryTotalDue').textContent = '$' + price;
         document.getElementById('btnPricePreview').textContent = '$' + price;
+
+        checkAndToggleDotRequirements();
+    }
+
+    function filterProductsByCategory(cat) {
+        const select = document.getElementById('product_id');
+        if (!select) return;
+        const options = select.querySelectorAll('option');
+        let firstVisible = null;
+        let currentSelectedVisible = false;
+
+        options.forEach(opt => {
+            const cats = (opt.getAttribute('data-categories') || '').split(' ');
+            let matches = (cat === 'all');
+            if (!matches) {
+                if (cat === 'urine') matches = cats.includes('urine');
+                else if (cat === 'dot') matches = cats.includes('dot');
+                else if (cat === 'hair') matches = cats.includes('hair');
+                else if (cat === 'alcohol') matches = cats.includes('alcohol');
+                else if (cat === 'oral') matches = cats.includes('saliva') || cats.includes('oral') || cats.includes('oral-fluid-testing');
+                else if (cat === 'occupational') matches = cats.includes('occupational-health') || cats.includes('occupational');
+                else if (cat === 'clinical') matches = cats.includes('blood') || cats.includes('lab-blood') || cats.includes('labblood-testing') || cats.includes('clinical');
+                else if (cat === 'dna') matches = cats.includes('dna') || cats.includes('dna-testing');
+                else matches = cats.includes(cat);
+            }
+
+            if (matches) {
+                opt.hidden = false;
+                opt.style.display = '';
+                if (!firstVisible) firstVisible = opt;
+                if (opt.selected) currentSelectedVisible = true;
+            } else {
+                opt.hidden = true;
+                opt.style.display = 'none';
+            }
+        });
+
+        if (!currentSelectedVisible && firstVisible) {
+            select.value = firstVisible.value;
+            updateSelectedProduct(select);
+        }
+
+        checkAndToggleDotRequirements();
+    }
+
+    function checkAndToggleDotRequirements() {
+        const prodSelect = document.getElementById('product_id');
+        const selectedOpt = prodSelect ? prodSelect.options[prodSelect.selectedIndex] : null;
+        const catFilter = document.getElementById('category_filter')?.value;
+        const isDotProduct = selectedOpt ? (selectedOpt.getAttribute('data-dot') === '1') : false;
+        const isDot = (catFilter === 'dot' || isDotProduct);
+
+        const dotRow = document.getElementById('checkoutDotAgencyRow');
+        const nonDotGroup = document.getElementById('checkoutNonDotIdGroup');
+        const dotAgency = document.getElementById('checkout_dot_agency')?.value || 'FMCSA';
+
+        if (isDot) {
+            if (dotRow) dotRow.style.display = 'grid';
+            if (nonDotGroup) nonDotGroup.style.display = 'none';
+            handleCheckoutDotAgencyChange(dotAgency);
+        } else {
+            if (dotRow) dotRow.style.display = 'none';
+            if (nonDotGroup) nonDotGroup.style.display = 'grid';
+            const fmcsaGroup = document.getElementById('checkoutFmcsaGroup');
+            const dotOtherGroup = document.getElementById('checkoutDotOtherGroup');
+            if (fmcsaGroup) fmcsaGroup.style.display = 'none';
+            if (dotOtherGroup) dotOtherGroup.style.display = 'none';
+        }
+    }
+
+    function handleDotOtherIdTypeChange(type) {
+        const input = document.getElementById('dot_other_id_number');
+        if (!input) return;
+        if (type === 'dl_number') {
+            input.placeholder = "Driver's License # (e.g. D1234567 FL)";
+        } else if (type === 'full_ssn') {
+            input.placeholder = "Full 9-digit SSN (XXX-XX-XXXX)";
+        } else {
+            input.placeholder = "Employer ID Number / Employee Badge #";
+        }
     }
 
     // Auto-format card number with spaces (4 4 4 4)
@@ -949,22 +1098,7 @@
     });
 
     function handleCheckoutReasonChange(reason) {
-        const dotRow = document.getElementById('checkoutDotAgencyRow');
-        const nonDotGroup = document.getElementById('checkoutNonDotIdGroup');
-        const fmcsaGroup = document.getElementById('checkoutFmcsaGroup');
-        const dotOtherGroup = document.getElementById('checkoutDotOtherGroup');
-        const dotAgency = document.getElementById('checkout_dot_agency')?.value || 'FMCSA';
-
-        if (reason === 'dot') {
-            if (dotRow) dotRow.style.display = 'grid';
-            if (nonDotGroup) nonDotGroup.style.display = 'none';
-            handleCheckoutDotAgencyChange(dotAgency);
-        } else {
-            if (dotRow) dotRow.style.display = 'none';
-            if (nonDotGroup) nonDotGroup.style.display = 'grid';
-            if (fmcsaGroup) fmcsaGroup.style.display = 'none';
-            if (dotOtherGroup) dotOtherGroup.style.display = 'none';
-        }
+        checkAndToggleDotRequirements();
     }
 
     function handleCheckoutDotAgencyChange(agency) {
@@ -982,5 +1116,14 @@
             if (dotOtherGroup) dotOtherGroup.style.display = 'grid';
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const catFilter = document.getElementById('category_filter');
+        if (catFilter) {
+            filterProductsByCategory(catFilter.value);
+        } else {
+            checkAndToggleDotRequirements();
+        }
+    });
 </script>
 @endsection

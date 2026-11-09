@@ -65,10 +65,26 @@ class LocationController extends Controller
             ->orderBy('name')
             ->get();
 
-        $sampleLocations = Location::where('state', $state->abbr)
+        $questLocations = Location::where('state', $state->abbr)
+            ->where('provider', 'quest')
             ->where('is_active', true)
-            ->limit(10)
+            ->limit(8)
             ->get();
+
+        $labcorpLocations = Location::where('state', $state->abbr)
+            ->where('provider', 'labcorp')
+            ->where('is_active', true)
+            ->limit(8)
+            ->get();
+
+        if ($questLocations->isNotEmpty() && $labcorpLocations->isNotEmpty()) {
+            $sampleLocations = $questLocations->zip($labcorpLocations)->flatten()->filter()->values();
+        } else {
+            $sampleLocations = Location::where('state', $state->abbr)
+                ->where('is_active', true)
+                ->limit(16)
+                ->get();
+        }
 
         $popularTests = Product::where('is_popular', true)->where('is_active', true)->limit(4)->get();
 
