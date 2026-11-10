@@ -300,6 +300,15 @@ Route::prefix('admin')->group(function () {
         Route::get('/cities', [\App\Http\Controllers\Admin\AdminLocationController::class, 'cities'])->name('admin.cities.index');
         Route::get('/cities/{city}/edit', [\App\Http\Controllers\Admin\AdminLocationController::class, 'editCity'])->name('admin.cities.edit');
         Route::put('/cities/{city}', [\App\Http\Controllers\Admin\AdminLocationController::class, 'updateCity'])->name('admin.cities.update');
+
+        // National Chain Page Content Editor (/certified-drug-test-centers)
+        Route::get('/chain/national', [\App\Http\Controllers\Admin\AdminChainController::class, 'editNational'])->name('admin.chains.national');
+        Route::put('/chain/national', [\App\Http\Controllers\Admin\AdminChainController::class, 'updateNational'])->name('admin.chains.national.update');
+
+        // State Landing Pages & Workplace Compliance (/locations/{state} & /certified-drug-test-centers/{state})
+        Route::get('/states', [\App\Http\Controllers\Admin\AdminStateController::class, 'index'])->name('admin.states.index');
+        Route::get('/states/{state}/edit', [\App\Http\Controllers\Admin\AdminStateController::class, 'edit'])->name('admin.states.edit');
+        Route::put('/states/{state}', [\App\Http\Controllers\Admin\AdminStateController::class, 'update'])->name('admin.states.update');
     });
 });
 

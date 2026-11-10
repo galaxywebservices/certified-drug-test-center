@@ -24,7 +24,7 @@ class CertifiedDrugTestCentersChainTest extends TestCase
         $response->assertSee('How long do drugs stay in your system?');
         $response->assertSee('DOT drug and alcohol testing nationwide');
         $response->assertSee('Employer drug testing programs & on-site mobile testing');
-        $response->assertSee('Find drug testing centers by state');
+        $response->assertSee('Find drug and alcohol testing centers by State');
         $response->assertSee('Accredited labs, certified collectors, verified results');
         $response->assertSee('Drug testing terms explained');
         $response->assertSee('Drug testing frequently asked questions');

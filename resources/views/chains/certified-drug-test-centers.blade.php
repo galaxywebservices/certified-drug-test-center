@@ -224,9 +224,9 @@
       </nav>
       <div class="hero-grid">
         <div>
-          <span class="eyebrow">Nationwide &#xB7; All 50 States</span>
-          <h1>Certified Drug Test Centers Near You</h1>
-          <p class="lead"><strong>Certified Drug Test Centers</strong> are located in all cities and in most cases within minutes of your home or office. Order a drug or alcohol test online or call and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers &#x2014; including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within <strong>24&#x2013;48 hours</strong>.</p>
+          <span class="eyebrow">{!! $chainSettings['hero_eyebrow'] ?? 'Nationwide · All 50 States' !!}</span>
+          <h1>{{ $chainSettings['hero_title'] ?? 'Certified Drug Test Centers Near You' }}</h1>
+          <p class="lead">{!! $chainSettings['hero_lead'] ?? '<strong>Certified Drug Test Centers</strong> are located in all cities and in most cases within minutes of your home or office. Order a drug or alcohol test online or call and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within <strong>24–48 hours</strong>.' !!}</p>
         </div><!-- /left column -->
 
         <aside class="finder" aria-labelledby="finder-h">
@@ -249,12 +249,16 @@
       <!-- Full-width row: centered checkmarks + buttons under paragraph and ZIP box -->
       <div class="hero-bottom">
         <ul class="checks checks-3">
-          <li>20,000+ Quest &amp; Labcorp sites</li>
-          <li>SAMHSA-certified laboratories</li>
-          <li>Physician MRO review included</li>
-          <li>DOT-compliant &amp; legally defensible</li>
-          <li>Order Today, Test Today</li>
-          <li>No hidden fees at the testing site</li>
+          @foreach($chainSettings['hero_checks'] ?? [
+            '20,000+ Quest & Labcorp sites',
+            'SAMHSA-certified laboratories',
+            'Physician MRO review included',
+            'DOT-compliant & legally defensible',
+            'Order Today, Test Today',
+            'No hidden fees at the testing site',
+          ] as $check)
+          <li>{{ $check }}</li>
+          @endforeach
         </ul>
         <div class="hero-cta">
           <a class="btn btn-primary" href="{{ url('/checkout') }}">Order a Test Online</a>
@@ -268,14 +272,14 @@
   <section aria-labelledby="qa-h">
     <div class="wrap">
       <div class="quick-answer">
-        <h2 id="qa-h">Quick answer: how to get a drug or alcohol test near you today</h2>
-        <p>To get a drug or alcohol test near you, order the test online or by phone and within minutes receive your electronic donor pass by email and text, then walk in with a photo ID to the nearest certified collection site. Certified Drug Test Centers schedules same-day urine, hair follicle, saliva, breath alcohol, EtG and DOT drug tests at 20,000+ drug testing centers in all 50 states, with prices from $89.99 and results in 24&#x2013;48 hours for most negative urine tests.</p>
+        <h2 id="qa-h">{{ $chainSettings['quick_answer_title'] ?? 'Quick answer: how to get a drug or alcohol test near you today' }}</h2>
+        <p>{!! $chainSettings['quick_answer_text'] ?? 'To get a drug or alcohol test near you, order the test online or by phone and within minutes receive your electronic donor pass by email and text, then walk in with a photo ID to the nearest certified collection site. Certified Drug Test Centers schedules same-day urine, hair follicle, saliva, breath alcohol, EtG and DOT drug tests at 20,000+ drug testing centers in all 50 states, with prices from $89.99 and results in 24–48 hours for most negative urine tests.' !!}</p>
       </div>
       <div class="facts">
-        <div class="fact"><strong>20,000+</strong><span>certified collection sites</span></div>
-        <div class="fact"><strong>50</strong><span>states covered</span></div>
-        <div class="fact"><strong>24&#x2013;48 hrs</strong><span>typical negative results</span></div>
-        <div class="fact"><strong>$89.99</strong><span>starting price, all-inclusive</span></div>
+        <div class="fact"><strong>{{ $chainSettings['fact_sites'] ?? '20,000+' }}</strong><span>{{ $chainSettings['fact_sites_label'] ?? 'certified collection sites' }}</span></div>
+        <div class="fact"><strong>{{ $chainSettings['fact_states'] ?? '50' }}</strong><span>{{ $chainSettings['fact_states_label'] ?? 'states covered' }}</span></div>
+        <div class="fact"><strong>{{ $chainSettings['fact_results'] ?? '24–48 hrs' }}</strong><span>{{ $chainSettings['fact_results_label'] ?? 'typical negative results' }}</span></div>
+        <div class="fact"><strong>{{ $chainSettings['fact_price'] ?? '$89.99' }}</strong><span>{{ $chainSettings['fact_price_label'] ?? 'starting price, all-inclusive' }}</span></div>
       </div>
     </div>
   </section>
@@ -437,15 +441,19 @@
   <section class="soft" id="employers" aria-labelledby="emp-h">
     <div class="wrap two-col">
       <div>
-        <span class="eyebrow">For employers</span>
-        <h2 id="emp-h">Employer drug testing programs &amp; on-site mobile testing</h2>
-        <p>Businesses of every size use Certified Drug Test Centers for employee drug screening and compliant, nationwide drug-free workplace programs from one account &#x2014; whether you hire one employee a year or manage a multi-state fleet.</p>
+        <span class="eyebrow">{{ $chainSettings['onsite_eyebrow'] ?? 'For employers' }}</span>
+        <h2 id="emp-h">{{ $chainSettings['onsite_title'] ?? 'Employer drug testing programs & on-site mobile testing' }}</h2>
+        <p>{!! $chainSettings['onsite_lead'] ?? 'Businesses of every size use Certified Drug Test Centers for employee drug screening and compliant, nationwide drug-free workplace programs from one account — whether you hire one employee a year or manage a multi-state fleet.' !!}</p>
         <ul class="tick">
-          <li>Corporate accounts with volume pricing and an online results portal</li>
-          <li>Pre-employment, random, post-accident and reasonable-suspicion testing</li>
-          <li>On-site mobile collections for employees at job sites, warehouses and offices</li>
-          <li>DOT consortium/TPA services and MIS reporting assistance</li>
-          <li>Background checks and motor vehicle records (MVR)</li>
+          @foreach($chainSettings['onsite_checks'] ?? [
+            'Corporate accounts with volume pricing and an online results portal',
+            'Pre-employment, random, post-accident and reasonable-suspicion testing',
+            'On-site mobile collections for employees at job sites, warehouses and offices',
+            'DOT consortium/TPA services and MIS reporting assistance',
+            'Background checks and motor vehicle records (MVR)',
+          ] as $check)
+          <li>{{ $check }}</li>
+          @endforeach
         </ul>
         <div class="cta-row">
           <a class="btn btn-primary" href="{{ url('/employers') }}">Open an employer account</a>
@@ -468,9 +476,9 @@
   <!-- ===== STATES ===== -->
   <section id="locations" aria-labelledby="loc-h">
     <div class="wrap">
-      <span class="eyebrow">National directory</span>
-      <h2 id="loc-h">Find drug and alcohol testing centers by State</h2>
-      <p class="lead">Certified Drug Test Centers has collection sites in all 50 states, from major metro areas to rural communities. Choose your state to see drug testing locations by city, including Quest Diagnostics and Labcorp drug test sites, or <a href="{{ url('/locations') }}">search by ZIP code</a>. Walk-ins are accepted at most sites once you've registered.</p>
+      <span class="eyebrow">{{ $chainSettings['directory_eyebrow'] ?? 'National directory' }}</span>
+      <h2 id="loc-h">{{ $chainSettings['directory_title'] ?? 'Find drug and alcohol testing centers by State' }}</h2>
+      <p class="lead">{!! $chainSettings['directory_lead'] ?? 'Certified Drug Test Centers has collection sites in all 50 states, from major metro areas to rural communities. Choose your state to see drug testing locations by city, including Quest Diagnostics and Labcorp drug test sites, or <a href="'.url('/locations').'">search by ZIP code</a>. Walk-ins are accepted at most sites once you\'ve registered.' !!}</p>
             <ul class="states">
         @foreach($states as $st)
         <li><a href="{{ $st['url'] }}">{{ $st['name'] }}<span>{{ $st['centers'] }}</span></a></li>
@@ -516,65 +524,12 @@
       <span class="eyebrow">FAQ</span>
       <h2 id="faq-h">Drug testing frequently asked questions</h2>
 
-      <details open><summary><h3>Where can I get a drug test near me?</h3></summary>
-        <div class="faq-answer"><p>Certified Drug Test Centers schedules drug and alcohol tests at more than 20,000 certified collection sites in all 50 states, including Quest Diagnostics and Labcorp patient service centers. Enter your ZIP code online or call (800) 985-4339 to find the closest site, register within minutes, and walk in the same day.</p></div></details>
-
-      <details><summary><h3>How much does a drug test cost?</h3></summary>
-        <div class="faq-answer"><p>A 5-panel urine drug test costs $89.99, a 10-panel costs $109.99, a 12-panel costs $139.99, a DOT 5-panel costs $99.99, and a 5-panel hair follicle test costs $169.99. Prices include the collection, laboratory analysis and Medical Review Officer (MRO) review, with no fees paid at the testing site.</p></div></details>
-
-      <details><summary><h3>Can I get a same-day drug test?</h3></summary>
-        <div class="faq-answer"><p>Yes. Most people order and test on the same day. Once you register online or by phone, your electronic donor pass arrives within minutes, and you can walk in to a nearby certified drug testing center that day during its collection hours. No appointment is needed at most locations.</p></div></details>
-
-      <details><summary><h3>Where can I get a pre-employment drug test near me?</h3></summary>
-        <div class="faq-answer"><p>You can get a pre-employment drug test at any of 20,000+ certified collection sites nationwide, including Quest Diagnostics and Labcorp locations. Order the panel your employer requested (usually a 5-panel or 10-panel urine test), get your donor pass within minutes, and walk in with a photo ID.</p></div></details>
-
-      <details><summary><h3>Can I get a drug test at Quest Diagnostics or Labcorp?</h3></summary>
-        <div class="faq-answer"><p>Yes. Certified Drug Test Centers schedules drug tests at Quest Diagnostics and Labcorp patient service centers across the country. Quest and Labcorp sites require pre-registration and do not take payment on site, so you order through us first and receive a donor pass to bring with you.</p></div></details>
-
-      <details><summary><h3>Where can I get a DOT drug test near me?</h3></summary>
-        <div class="faq-answer"><p>DOT drug tests are available at certified collection sites in all 50 states. Order the DOT 5-panel drug test ($99.99), choose the closest site by ZIP code, and bring your donor pass, photo ID and CDL or employee ID. Collections follow 49 CFR Part 40 using a Federal Custody and Control Form.</p></div></details>
-
-      <details><summary><h3>Can I get a drug test at urgent care?</h3></summary>
-        <div class="faq-answer"><p>Some urgent care clinics offer drug testing, but prices, panels and lab standards vary and many add office-visit fees. Ordering through Certified Drug Test Centers gives you upfront all-inclusive pricing, a SAMHSA-certified lab and MRO review at a certified collection site near you.</p></div></details>
-
-      <details><summary><h3>What is the most affordable way to get a drug test?</h3></summary>
-        <div class="faq-answer"><p>Ordering online is usually the most affordable way to get a certified drug test. A 5-panel urine drug test costs $89.99 all-inclusive &#x2014; collection, SAMHSA-certified lab analysis and MRO review &#x2014; with no extra fees at the testing site.</p></div></details>
-
-      <details><summary><h3>Can I walk in for a drug test without an appointment?</h3></summary>
-        <div class="faq-answer"><p>Yes. Most collection sites accept walk-ins, but you must register and pay before you go. After you order, you receive an electronic donor pass that you show at the site along with a photo ID. Testing sites do not accept payment on site.</p></div></details>
-
-      <details><summary><h3>How long do drug test results take?</h3></summary>
-        <div class="faq-answer"><p>Negative urine results are typically available within 24&#x2013;48 hours of collection. Hair tests take 2&#x2013;4 business days. If an initial screen is non-negative, the sample is confirmed by GC/MS or LC/MS and reviewed by a Medical Review Officer, which can add 24&#x2013;72 hours. Breath alcohol results are immediate.</p></div></details>
-
-      <details><summary><h3>What is the difference between a 5-panel and a 10-panel drug test?</h3></summary>
-        <div class="faq-answer"><p>A 5-panel drug test screens for amphetamines (including methamphetamine), cocaine, marijuana (THC), opiates and PCP. A 10-panel test screens for those five plus barbiturates, benzodiazepines, methadone, methaqualone and propoxyphene. A 12-panel adds tramadol, meperidine and expanded opiates such as oxycodone and hydrocodone.</p></div></details>
-
-      <details><summary><h3>What does a DOT drug test check for?</h3></summary>
-        <div class="faq-answer"><p>A DOT drug test under 49 CFR Part 40 screens urine for five drug classes: marijuana metabolites, cocaine metabolites, amphetamines (amphetamine, methamphetamine, MDMA, MDA), opioids (codeine, morphine, 6-acetylmorphine/heroin, hydrocodone, hydromorphone, oxycodone, oxymorphone) and phencyclidine (PCP). It must use a Federal Custody and Control Form, a SAMHSA/HHS-certified laboratory and MRO review.</p></div></details>
-
-      <details><summary><h3>How far back does a drug test go?</h3></summary>
-        <div class="faq-answer"><p>A urine test usually detects drug use from the past 1&#x2013;3 days for most substances, and up to 30 days or more for heavy, chronic marijuana use. A hair follicle test covers about the past 90 days. A saliva (oral fluid) test detects use from roughly the past 24&#x2013;48 hours. An EtG urine alcohol test detects drinking up to about 80 hours prior.</p></div></details>
-
-      <details><summary><h3>What do I need to bring to my drug test?</h3></summary>
-        <div class="faq-answer"><p>Bring your electronic donor pass (on your phone or printed) and a valid government-issued photo ID such as a driver's license or passport. For DOT tests, also have your CDL or employee ID number. Do not drink excessive fluids beforehand, as a diluted sample may require a retest.</p></div></details>
-
-      <details><summary><h3>Are your drug test results legally defensible?</h3></summary>
-        <div class="faq-answer"><p>Yes. Specimens are collected under strict chain-of-custody procedures and analyzed by SAMHSA-certified laboratories. Non-negative results are confirmed by GC/MS or LC/MS and reviewed by an independent, licensed Medical Review Officer, making results suitable for employment, DOT compliance and court purposes.</p></div></details>
-
-      <details><summary><h3>Do you offer drug testing for court or probation?</h3></summary>
-        <div class="faq-answer"><p>Yes. Court-ordered and probation testing is available with chain-of-custody documentation, including urine panels, EtG alcohol tests that detect drinking up to about 80 hours prior, and 90-day hair follicle tests. Always confirm the exact test your court or probation officer requires before ordering.</p></div></details>
-
-      <details><summary><h3>Can I order a drug test for myself or a family member?</h3></summary>
-        <div class="faq-answer"><p>Yes. Individuals can order personal or family drug tests online without an employer or doctor's order. Results are confidential and sent only to the email provided at registration.</p></div></details>
-
-      <details><summary><h3>Do you offer on-site mobile drug testing for employers?</h3></summary>
-        <div class="faq-answer"><p>Yes. Certified collectors can travel to job sites, offices, warehouses and construction projects nationwide to test employees at job sites, warehouses and offices, including post-accident and reasonable-suspicion testing. Employers can also open a corporate account for volume pricing and an online results portal.</p></div></details>
-
-      <details><summary><h3>What is a Medical Review Officer (MRO)?</h3></summary>
-        <div class="faq-answer"><p>A Medical Review Officer is a licensed physician trained to review laboratory drug test results. Before a non-negative result is reported, the MRO contacts the donor to check for legitimate medical explanations, such as a valid prescription. Every test ordered through Certified Drug Test Centers includes MRO review.</p></div></details>
-
-      <details><summary><h3>Do you test in Spanish?</h3></summary>
-        <div class="faq-answer"><p>Yes. Our scheduling team speaks Spanish. Call (800) 985-4339 for help ordering a test in Spanish.</p></div></details>
+      @foreach($chainSettings['faqs'] ?? [] as $faq)
+      <details {{ $loop->first ? 'open' : '' }}><summary><h3>{{ $faq['question'] }}</h3></summary>
+        <div class="faq-answer"><p>{!! $faq['answer'] !!}</p></div></details>
+      @endforeach
+    </div>
+  </section>
     </div>
   </section>
 

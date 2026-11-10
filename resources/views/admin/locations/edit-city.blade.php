@@ -1,8 +1,11 @@
 @extends('admin.layouts.app', ['title' => 'Edit City SEO Guide', 'heading' => 'Edit ' . $city->name . ', ' . $city->state->abbr . ' SEO Guide'])
 
 @section('topbar_actions')
-<a href="{{ url('/drug-testing-' . $city->slug . '-' . strtolower($city->state->abbr)) }}" target="_blank" class="btn btn-outline btn-sm">
-    View Live Landing Page &rarr;
+<a href="{{ url('/locations/' . $city->state->slug . '/' . $city->slug) }}" target="_blank" class="btn btn-outline btn-sm">
+    Live City Page ↗
+</a>
+<a href="{{ url('/certified-drug-test-centers/' . $city->state->slug . '/' . $city->slug) }}" target="_blank" class="btn btn-outline btn-sm">
+    Live Chain City Page ↗
 </a>
 <a href="{{ route('admin.cities.index') }}" class="btn btn-outline btn-sm">
     &larr; Back to Cities
