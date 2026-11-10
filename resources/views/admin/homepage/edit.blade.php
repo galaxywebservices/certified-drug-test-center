@@ -72,7 +72,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label class="form-label" for="hero_badge">Hero Top Tagline / Pill Badge</label>
-                        <input type="text" id="hero_badge" name="hero_badge" value="{{ old('hero_badge', $homeSettings['hero_badge']) }}" class="form-control" placeholder="Express Online Drug & Alcohol Testing">
+                        <input type="text" id="hero_badge" name="hero_badge" value="{{ old('hero_badge', $homeSettings['hero_badge']) }}" class="form-control" placeholder="Nationwide - All States - All CITIES">
                         <div class="form-hint">Displayed between two red stars inside the top pill badge.</div>
                     </div>
 
@@ -121,9 +121,9 @@
             <div class="card">
                 <div class="card-header">
                     <div>
-                        <h2 class="card-title">Express Online Scheduling Card</h2>
+                        <h2 class="card-title">Express Online Order Card</h2>
                         <p style="font-size:13px; color:var(--admin-slate-500); margin-top:2px;">
-                            Interactive test selector and scheduling box on the right of hero
+                            Interactive test selector and order box on the right of hero
                         </p>
                     </div>
                     <span class="badge badge-success">Interactive</span>

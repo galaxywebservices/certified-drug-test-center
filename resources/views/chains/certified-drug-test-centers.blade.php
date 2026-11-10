@@ -127,9 +127,23 @@
 .cdtc .faq summary h3{display:inline;font-size:1.05rem;color:var(--ink);margin:0}
 .cdtc .faq-answer{padding:0 20px 18px;color:#36414f}
 .cdtc .faq-answer p{margin:0}
-.cdtc .sources{padding-left:20px}
-.cdtc .sources li{margin-bottom:6px;overflow-wrap:anywhere}
-.cdtc .updated{font-size:.88rem;color:var(--muted);margin-top:14px}
+.cdtc .sources-section{padding:44px 0;background:#F8FAFC;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cdtc .sources-card{background:#FFFFFF;border:1px solid #E2E8F0;border-radius:12px;padding:32px 28px;box-shadow:0 2px 10px rgba(11,37,69,0.03)}
+.cdtc .sources-badge{display:inline-flex;align-items:center;gap:6px;background:#F0FDF4;color:#166534;font-size:11px;font-weight:800;padding:4px 10px;border-radius:9999px;border:1px solid #BBF7D0;margin-bottom:10px;text-transform:uppercase;letter-spacing:0.3px}
+.cdtc .sources-title{font-size:1.45rem;font-weight:800;color:var(--navy);margin:0 0 4px}
+.cdtc .sources-subtitle{font-size:0.95rem;color:var(--muted);margin:0 0 22px}
+.cdtc .sources-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:22px}
+@media (max-width:768px){.cdtc .sources-grid{grid-template-columns:1fr}}
+.cdtc .source-item{display:flex;align-items:center;gap:14px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:16px;text-decoration:none;color:inherit;transition:all 0.2s ease}
+.cdtc .source-item:hover{transform:translateY(-2px);border-color:var(--navy);box-shadow:0 6px 16px rgba(11,37,69,0.06);background:#FFFFFF}
+.cdtc .source-icon{font-size:24px;flex-shrink:0}
+.cdtc .source-info{flex:1}
+.cdtc .source-info strong{display:block;font-size:0.95rem;color:var(--navy);margin-bottom:2px}
+.cdtc .source-info span{display:block;font-size:0.82rem;color:#64748B;line-height:1.35}
+.cdtc .source-arrow{font-size:16px;color:var(--teal);font-weight:800;margin-left:6px;flex-shrink:0}
+.cdtc .sources-footer{border-top:1px solid #F1F5F9;padding-top:16px;margin-top:6px}
+.cdtc .sources-audit{display:flex;gap:12px;align-items:flex-start;font-size:0.86rem;color:#475569;line-height:1.55}
+.cdtc .sources-audit svg{flex-shrink:0;color:#16A34A;margin-top:3px}
 .cdtc .final{background:var(--navy);text-align:center}
 .cdtc .final h2{color:#fff}
 .cdtc .final p{color:#cfdbe8}
@@ -530,20 +544,67 @@
       @endforeach
     </div>
   </section>
-    </div>
-  </section>
 
   <!-- ===== SOURCES / E-E-A-T ===== -->
-  <section id="sources" aria-labelledby="src-h">
+  <section id="sources" class="sources-section" aria-labelledby="src-h">
     <div class="wrap">
-      <h2 id="src-h" class="h-sm">References &amp; regulatory sources</h2>
-      <ul class="sources">
-        <li><a href="https://www.transportation.gov/odapc/part40" rel="noopener" target="_blank">U.S. DOT &#x2014; 49 CFR Part 40: Procedures for Transportation Workplace Drug and Alcohol Testing Programs</a></li>
-        <li><a href="https://www.samhsa.gov/workplace/drug-testing/certified-lab-list" rel="noopener" target="_blank">SAMHSA &#x2014; HHS-Certified Laboratories List</a></li>
-        <li><a href="https://clearinghouse.fmcsa.dot.gov/" rel="noopener" target="_blank">FMCSA &#x2014; Drug &amp; Alcohol Clearinghouse</a></li>
-        <li><a href="https://www.transportation.gov/odapc" rel="noopener" target="_blank">U.S. DOT Office of Drug &amp; Alcohol Policy &amp; Compliance (ODAPC)</a></li>
-      </ul>
-      <p class="updated">Written by the Certified Drug Test Centers compliance team. Last reviewed and updated: <time datetime="2026-11-03">November 3, 2026</time>. Information on this page is for general education and is not medical or legal advice.</p>
+      <div class="sources-card">
+        <div class="sources-header">
+          <span class="sources-badge">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            Official Regulatory Authorities
+          </span>
+          <h2 id="src-h" class="sources-title">References &amp; regulatory sources</h2>
+          <p class="sources-subtitle">Federal standards, approved laboratory listings, and statutory compliance guidelines</p>
+        </div>
+
+        <div class="sources-grid">
+          <a href="https://www.transportation.gov/odapc/part40" rel="noopener" target="_blank" class="source-item">
+            <div class="source-icon">🏛️</div>
+            <div class="source-info">
+              <strong>U.S. DOT — 49 CFR Part 40</strong>
+              <span>Procedures for Transportation Workplace Drug and Alcohol Testing Programs</span>
+            </div>
+            <div class="source-arrow">&nearr;</div>
+          </a>
+
+          <a href="https://www.samhsa.gov/workplace/drug-testing/certified-lab-list" rel="noopener" target="_blank" class="source-item">
+            <div class="source-icon">🔬</div>
+            <div class="source-info">
+              <strong>SAMHSA — HHS-Certified Laboratories List</strong>
+              <span>Substance Abuse &amp; Mental Health Services Administration certified labs</span>
+            </div>
+            <div class="source-arrow">&nearr;</div>
+          </a>
+
+          <a href="https://clearinghouse.fmcsa.dot.gov/" rel="noopener" target="_blank" class="source-item">
+            <div class="source-icon">🚛</div>
+            <div class="source-info">
+              <strong>FMCSA — Drug &amp; Alcohol Clearinghouse</strong>
+              <span>Federal Motor Carrier Safety Administration official driver registry</span>
+            </div>
+            <div class="source-arrow">&nearr;</div>
+          </a>
+
+          <a href="https://www.transportation.gov/odapc" rel="noopener" target="_blank" class="source-item">
+            <div class="source-icon">⚖️</div>
+            <div class="source-info">
+              <strong>U.S. DOT Office of Drug &amp; Alcohol Policy &amp; Compliance (ODAPC)</strong>
+              <span>Federal regulatory guidance, interpretations, and safety protocols</span>
+            </div>
+            <div class="source-arrow">&nearr;</div>
+          </a>
+        </div>
+
+        <div class="sources-footer">
+          <div class="sources-audit">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            <div>
+              <strong>Compliance Audit &amp; Clinical Accuracy:</strong> Written by the Certified Drug Test Centers compliance team. Last reviewed and updated: <time datetime="2026-11-03">November 3, 2026</time>. Information on this page is for general education and is not medical or legal advice.
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -552,17 +613,17 @@
     <div class="wrap">
       <h2 id="final-h">Get tested today at a certified center near you</h2>
       <p>Order within minutes, get your donor pass instantly, and walk in at any of 20,000+ sites nationwide.</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="{{ url('/checkout') }}">Schedule My Test</a>
-        <a class="btn btn-ghost" href="tel:+18009854339">Call (800) 985-4339</a>
+      <div class="cta-row" style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:20px;">
+        <a class="btn btn-primary" href="{{ url('/checkout') }}" style="background:#C1121F; color:#fff; border-color:#C1121F; padding:12px 26px; font-weight:700;">Schedule My Test</a>
+        <a class="btn btn-ghost" href="tel:+18009854339" style="border:2px solid #fff; color:#fff; padding:12px 26px; font-weight:700; text-decoration:none;">📞 Call (800) 985-4339</a>
       </div>
     </div>
   </section>
-<nav class="sticky-call" aria-label="Quick actions">
-  <a href="tel:+18009854339">&#128222; Call Now</a>
-  <a href="{{ url('/checkout') }}">Order Test Online</a>
-</nav>
-</div>
+
+  <nav class="sticky-call" aria-label="Quick actions">
+    <a href="tel:+18009854339">&#128222; Call Now</a>
+    <a href="{{ url('/checkout') }}">Order Test Online</a>
+  </nav>
 </div>
 
 <!-- Structured Data (JSON-LD) for 100% SEO Dominance -->

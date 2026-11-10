@@ -52,14 +52,14 @@
             Nationwide Drug Testing Collection Locations
         </h1>
         <p style="font-size:16px; color:#E2E8F0; max-width:800px;">
-            Walk into any of our 20,000+ certified Quest Diagnostics and Labcorp partner facilities across all 51 states. Select your state below to find local collection centers.
+            Walk into any of our 20,000+ certified Quest Diagnostics and Labcorp partner facilities across all 50 states &amp; territories. Select your state below to find local collection centers.
         </p>
     </div>
 </div>
 
 <div class="container" style="padding-top:30px;">
     <h2 style="font-size:22px; font-weight:800; color:#0B2545;">
-        Select Your State (51 States &amp; Territories)
+        Select Your State (50 States &amp; Territories)
     </h2>
 
     <div class="state-grid">

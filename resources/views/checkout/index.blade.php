@@ -512,7 +512,7 @@
         <div class="container checkout-trust-inner">
             <div class="checkout-title-wrap">
                 <h1>Express Online Test Registration &amp; Checkout</h1>
-                <p>Get your official electronic Donor Pass in 2 minutes. Walk-ins accepted at over 20,000 Certified Testing Locations.</p>
+                <p>Get your official electronic Donor Pass in 2 minutes. Same Day Testing accepted at over 20,000 Certified Testing Locations.</p>
             </div>
             <div class="checkout-security-badges">
                 <div class="checkout-security-badge-item">
@@ -547,7 +547,7 @@
                 $initialCats = $product ? $product->categories->pluck('slug')->toArray() : [];
                 if ($product && $product->dot_required) $initialCats[] = 'dot';
                 if ($product && !empty($product->specimen_type)) $initialCats[] = $product->specimen_type;
-                $initialCat = 'all';
+                $initialCat = 'urine';
                 if (in_array('dot', $initialCats)) $initialCat = 'dot';
                 elseif (in_array('urine', $initialCats)) $initialCat = 'urine';
                 elseif (in_array('hair', $initialCats)) $initialCat = 'hair';
@@ -586,11 +586,10 @@
                                     <option value="dot" {{ $initialCat === 'dot' ? 'selected' : '' }}>DOT Regulated Tests</option>
                                     <option value="hair" {{ $initialCat === 'hair' ? 'selected' : '' }}>Hair Follicle Tests</option>
                                     <option value="alcohol" {{ $initialCat === 'alcohol' ? 'selected' : '' }}>Alcohol &amp; EtG Tests</option>
-                                    <option value="oral" {{ $initialCat === 'oral' ? 'selected' : '' }}>Oral Fluid Tests</option>
+                                    <option value="oral" {{ $initialCat === 'oral' ? 'selected' : '' }}>Oral Fluid / Saliva Tests</option>
                                     <option value="occupational" {{ $initialCat === 'occupational' ? 'selected' : '' }}>Occupational Health Tests</option>
                                     <option value="clinical" {{ $initialCat === 'clinical' ? 'selected' : '' }}>Clinical Blood Tests</option>
-                                    <option value="dna" {{ $initialCat === 'dna' ? 'selected' : '' }}>DNA Paternity Tests</option>
-                                    <option value="all" {{ $initialCat === 'all' ? 'selected' : '' }}>View All Testing Categories</option>
+                                    <option value="dna" {{ $initialCat === 'dna' ? 'selected' : '' }}>DNA Testing</option>
                                 </select>
                             </div>
                         </div>
@@ -705,9 +704,24 @@
                                     </span>
                                     <input type="email" id="email" name="email" value="{{ old('email') }}" class="checkout-input with-icon" placeholder="donor@example.com" required>
                                 </div>
-                                <div class="checkout-hint">Electronic Donor Pass &amp; confidential lab results (24-48 hrs) sent here immediately.</div>
+                                <div class="checkout-hint">Electronic Donor Pass sent here immediately.</div>
                             </div>
 
+                            <div class="checkout-form-group">
+                                <label class="checkout-label" for="results_email">
+                                    <span>Confidential Results Email</span>
+                                </label>
+                                <div class="checkout-input-wrap">
+                                    <span class="checkout-input-icon">
+                                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
+                                    </span>
+                                    <input type="email" id="results_email" name="results_email" value="{{ old('results_email') }}" class="checkout-input with-icon" placeholder="results@example.com (optional if same as donor pass)">
+                                </div>
+                                <div class="checkout-hint">Confidential lab results (24-48 hrs) sent here.</div>
+                            </div>
+                        </div>
+
+                        <div class="checkout-form-row">
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="phone">Donor Phone Number <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
@@ -718,9 +732,7 @@
                                 </div>
                                 <div class="checkout-hint">For MRO physician verification and SMS pass status.</div>
                             </div>
-                        </div>
 
-                        <div class="checkout-form-row">
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="dob">Date of Birth <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
@@ -728,7 +740,9 @@
                                 </div>
                                 <div class="checkout-hint">Required for laboratory verification and chain of custody.</div>
                             </div>
+                        </div>
 
+                        <div class="checkout-form-row">
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="zip">Preferred Collection ZIP Code <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
@@ -739,10 +753,8 @@
                                 </div>
                                 <div class="checkout-hint">We will assign the closest Certified Testing Location.</div>
                             </div>
-                        </div>
 
-                        <div class="checkout-form-row">
-                            <div class="checkout-form-group" style="grid-column: span 2;">
+                            <div class="checkout-form-group">
                                 <label class="checkout-label" for="test_reason">Reason for Testing <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
                                     <select id="test_reason" name="test_reason" class="checkout-input checkout-select" onchange="handleCheckoutReasonChange(this.value)" required>
@@ -752,10 +764,9 @@
                                         <option value="Post-Accident">Post-Accident</option>
                                         <option value="Follow-Up">Follow-Up</option>
                                         <option value="Return to Duty">Return to Duty</option>
-                                        <option value="Court-Ordered / Probation">Court Ordered / Probation / Legal</option>
-                                        <option value="Personal / Family">Personal / Family Testing</option>
                                     </select>
                                 </div>
+                                <div class="checkout-hint">Select the compliance or testing reason.</div>
                             </div>
                         </div>
 

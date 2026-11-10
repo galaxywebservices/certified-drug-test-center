@@ -426,7 +426,7 @@
     {
         "id": 15,
         "slug": "5-panel-hair-follicle",
-        "name": "5 Panel Hair Follicle",
+        "name": "5 Panel Hair Test",
         "subtitle": "<b>Online Discount Applied</b>",
         "sku": "CDTC-0015",
         "retail_price": 256.49,
@@ -444,7 +444,7 @@
             "Opiates (OPI)",
             "Phencyclidine (PCP)"
         ],
-        "is_popular": false,
+        "is_popular": true,
         "is_active": true,
         "position": 15,
         "meta_title": "5 Panel Hair Follicle | Certified Drug Test Centers",
@@ -603,7 +603,7 @@
         "details": "",
         "preparation_instructions": "Bring a valid government-issued photo ID and your electronic Donor Pass. Drink plenty of water prior to collection if providing a urine specimen.",
         "included_panels": [],
-        "is_popular": true,
+        "is_popular": false,
         "is_active": true,
         "position": 20,
         "meta_title": "Body Hair Collection | Certified Drug Test Centers",

@@ -640,7 +640,13 @@
                     @endforeach
                 </div>
 
-                <div style="margin-top:20px; background:#0B2545; color:#fff; border-radius:8px; padding:18px; text-align:center;">
+                <div style="margin-top:14px;">
+                    <a href="{{ url('/services') }}" class="btn btn-navy" style="width:100%; display:block; text-align:center; padding:11px 16px; font-weight:700; border-radius:6px; background:#0B2545; color:#fff; text-decoration:none; box-sizing:border-box;">
+                        View All Tests &rarr;
+                    </a>
+                </div>
+
+                <div style="margin-top:18px; background:#0B2545; color:#fff; border-radius:8px; padding:18px; text-align:center;">
                     <div style="font-size:11px; text-transform:uppercase; color:#94A3B8; font-weight:700;">Need Employer Compliance Setup?</div>
                     <div style="font-size:15px; font-weight:800; margin:4px 0 10px;">Nationwide Account Scheduling</div>
                     <a href="tel:18009854339" style="display:inline-block; background:#C1121F; color:#fff; padding:8px 16px; border-radius:4px; font-weight:700; text-decoration:none; font-size:14px;">

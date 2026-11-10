@@ -392,7 +392,6 @@
                     <span class="badge" style="background:#E0F2FE; color:#0369A1; text-transform:uppercase; font-size:11px;">
                         {{ $loc->provider ?: 'Quest / Labcorp' }} Collection Facility
                     </span>
-                    <span style="color:#16A34A; font-weight:800; font-size:12px;">✓ Walk-Ins Accepted Today</span>
                 </div>
 
                 <div style="background:#FFFBEB; border:1px solid #FDE68A; border-radius:6px; padding:8px 12px; margin-bottom:12px; font-size:12px; color:#92400E;">
@@ -411,9 +410,12 @@
                     <strong>Operating Hours:</strong> {{ $loc->hours ?: 'Monday - Friday 8:00 AM - 5:00 PM' }}
                 </div>
 
-                <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
                     <a href="{{ route('checkout.index', ['location_id' => $loc->id]) }}" class="btn btn-primary btn-sm">
                         Schedule Test at This Center &rarr;
+                    </a>
+                    <a href="tel:18009854339" class="btn btn-navy btn-sm" style="background:#0B2545; color:#fff; border-color:#0B2545; display:inline-flex; align-items:center; gap:6px;">
+                        📞 Call Now
                     </a>
                     <a href="{{ route('locations.show', $loc->id) }}" class="btn btn-outline btn-sm">
                         Facility Profile &amp; Hours
@@ -432,46 +434,6 @@
                 <a href="{{ route('checkout.index') }}" class="btn btn-primary" style="margin-top:12px;">Order Test Online</a>
             </div>
             @endforelse
-
-            @if(!empty($city?->content))
-            <!-- Localized City Guide Content Formatted Professionally -->
-            <div class="city-guide-container">
-                <div class="city-guide-top-header">
-                    <div>
-                        <h3 class="city-guide-main-title">Local Testing Guide for {{ $cityName }}, {{ $state->abbr }}</h3>
-                        <small style="color:#64748B; font-size:13px;">Official testing protocols, legal standards, and collection center guidelines</small>
-                    </div>
-                    <span class="city-guide-trust-pill">
-                        🛡️ CLIA &amp; SAMHSA Certified Network
-                    </span>
-                </div>
-
-                <div class="city-content-body">
-                    {!! \App\Services\CityGuideFormatter::format($city->content, $cityName, $state->abbr) !!}
-                </div>
-            </div>
-            @else
-            <!-- Standard 3-Step Walkthrough for locations without custom content -->
-            <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:28px; margin-top:24px;">
-                <h3 style="font-size:18px; font-weight:800; color:#0B2545; margin-bottom:14px;">
-                    How Walk-In Drug Testing Works in {{ $cityName }}
-                </h3>
-                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; font-size:13px; color:#334155; line-height:1.6;">
-                    <div>
-                        <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 1: Order Online (2 Mins)</strong>
-                        Choose your test and register online. Testing centers do not take payment on-site.
-                    </div>
-                    <div>
-                        <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 2: Complete Registration</strong>
-                        Receive your electronic Donor Registration Pass via email with barcode and directions.
-                    </div>
-                    <div>
-                        <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 3: Walk-In &amp; Test</strong>
-                        Walk in during collection hours with your pass and a photo ID — no appointment necessary! Receive results securely via email within 24-48 business hours.
-                    </div>
-                </div>
-            </div>
-            @endif
         </div>
 
         <!-- Right Side: Available Tests in this city -->
@@ -498,6 +460,12 @@
                     @endforeach
                 </div>
 
+                <div style="margin-top:14px;">
+                    <a href="{{ url('/services') }}" class="btn btn-navy btn-sm" style="width:100%; display:block; text-align:center; padding:10px 14px; font-weight:700; border-radius:6px; background:#0B2545; color:#fff; text-decoration:none; box-sizing:border-box;">
+                        View All Tests &rarr;
+                    </a>
+                </div>
+
                 <div style="margin-top:20px; background:#0B2545; color:#fff; border-radius:8px; padding:18px; text-align:center;">
                     <div style="font-size:11px; text-transform:uppercase; color:#94A3B8; font-weight:700;">Need Help Ordering?</div>
                     <div style="font-size:15px; font-weight:800; margin:4px 0 10px;">Phone Scheduling Available</div>
@@ -508,6 +476,46 @@
             </div>
         </div>
     </div>
+
+    <!-- Full-Width Local Testing Guide Section -->
+    @if(!empty($city?->content))
+    <div class="city-guide-container" style="margin-top:10px; margin-bottom:40px;">
+        <div class="city-guide-top-header">
+            <div>
+                <h3 class="city-guide-main-title">Local Testing Guide for {{ $cityName }}, {{ $state->abbr }}</h3>
+                <small style="color:#64748B; font-size:13px;">Official testing protocols, legal standards, and collection center guidelines</small>
+            </div>
+            <span class="city-guide-trust-pill">
+                🛡️ CLIA &amp; SAMHSA Certified Network
+            </span>
+        </div>
+
+        <div class="city-content-body">
+            {!! \App\Services\CityGuideFormatter::format($city->content, $cityName, $state->abbr) !!}
+        </div>
+    </div>
+    @else
+    <!-- Standard 3-Step Walkthrough for locations without custom content -->
+    <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:28px; margin-top:20px; margin-bottom:40px;">
+        <h3 style="font-size:18px; font-weight:800; color:#0B2545; margin-bottom:14px;">
+            How Walk-In Drug Testing Works in {{ $cityName }}
+        </h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; font-size:13px; color:#334155; line-height:1.6;">
+            <div>
+                <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 1: Order Online (2 Mins)</strong>
+                Choose your test and register online. Testing centers do not take payment on-site.
+            </div>
+            <div>
+                <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 2: Complete Registration</strong>
+                Receive your electronic Donor Registration Pass via email with barcode and directions.
+            </div>
+            <div>
+                <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 3: Walk-In &amp; Test</strong>
+                Walk in during collection hours with your pass and a photo ID — no appointment necessary! Receive results securely via email within 24-48 business hours.
+            </div>
+        </div>
+    </div>
+    @endif
 
     @if(isset($siblingCities) && $siblingCities->isNotEmpty())
     <!-- Sibling Cities Horizontal Crawl Architecture -->

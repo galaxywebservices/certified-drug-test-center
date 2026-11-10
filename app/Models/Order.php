@@ -16,6 +16,7 @@ class Order extends Model
         'donor_first_name',
         'donor_last_name',
         'donor_email',
+        'results_email',
         'donor_phone',
         'donor_dob',
         'donor_ssn_last4',

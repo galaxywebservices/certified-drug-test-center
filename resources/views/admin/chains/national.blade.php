@@ -77,13 +77,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="hero_title">Primary H1 Headline *</label>
-                    <input type="text" id="hero_title" name="hero_title" value="{{ old('hero_title', $chainSettings['hero_title']) }}" class="form-control" required>
+                    <label class="form-label" for="hero_title">Primary H1 Headline</label>
+                    <input type="text" id="hero_title" name="hero_title" value="{{ old('hero_title', $chainSettings['hero_title']) }}" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="hero_lead">Hero Narrative Paragraph *</label>
-                    <textarea id="hero_lead" name="hero_lead" rows="4" class="form-control" required>{{ old('hero_lead', $chainSettings['hero_lead']) }}</textarea>
+                    <label class="form-label" for="hero_lead">Hero Narrative Paragraph</label>
+                    <textarea id="hero_lead" name="hero_lead" rows="4" class="form-control">{{ old('hero_lead', $chainSettings['hero_lead']) }}</textarea>
                     <div style="font-size:12px; color:var(--admin-slate-500); margin-top:4px;">HTML formatting like &lt;strong&gt; tags is supported.</div>
                 </div>
 
@@ -298,14 +298,14 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <label class="form-label" for="meta_title">Meta Title (Browser Tab Title) *</label>
-                    <input type="text" id="meta_title" name="meta_title" value="{{ old('meta_title', $chainSettings['meta_title']) }}" class="form-control" required>
+                    <label class="form-label" for="meta_title">Meta Title (Browser Tab Title)</label>
+                    <input type="text" id="meta_title" name="meta_title" value="{{ old('meta_title', $chainSettings['meta_title']) }}" class="form-control">
                     <div style="font-size:12px; color:var(--admin-slate-500); margin-top:4px;">Recommended: 50–65 characters.</div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="meta_description">Meta Description *</label>
-                    <textarea id="meta_description" name="meta_description" rows="3" class="form-control" required>{{ old('meta_description', $chainSettings['meta_description']) }}</textarea>
+                    <label class="form-label" for="meta_description">Meta Description</label>
+                    <textarea id="meta_description" name="meta_description" rows="3" class="form-control">{{ old('meta_description', $chainSettings['meta_description']) }}</textarea>
                     <div style="font-size:12px; color:var(--admin-slate-500); margin-top:4px;">Recommended: 150–160 characters. Appears in Google search snippets.</div>
                 </div>
 

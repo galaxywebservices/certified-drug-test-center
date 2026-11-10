@@ -70,7 +70,7 @@
                 <div class="estimator-header">
                     <h3>
                         <svg width="22" height="22" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 100 2h.01a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
-                        Express Online Scheduling
+                        Express Online Order
                     </h3>
                     <p>Select your testing criteria to instantly view pricing and register</p>
                 </div>
@@ -78,10 +78,12 @@
                 <div class="estimator-field">
                     <label class="estimator-label" for="estReason">1. Reason for Testing</label>
                     <select id="estReason" class="estimator-select">
-                        <option value="employment">Pre-Employment / Workplace</option>
-                        <option value="dot">DOT Regulated (FMCSA, FAA, USCG, FTA, PHMSA, FRA)</option>
-                        <option value="court">Court Ordered / Probation / Legal</option>
-                        <option value="personal">Personal / Family Testing</option>
+                        <option value="Pre-Employment">Pre-Employment</option>
+                        <option value="Random">Random</option>
+                        <option value="Reasonable Suspicion">Reasonable Suspicion</option>
+                        <option value="Post-Accident">Post-Accident</option>
+                        <option value="Follow-Up">Follow-Up</option>
+                        <option value="Return to Duty">Return to Duty</option>
                     </select>
                 </div>
 

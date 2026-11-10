@@ -66,34 +66,54 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(res => res.json())
         .then(data => {
           if (data.success && data.locations && data.locations.length > 0) {
-            const loc = data.locations[0];
-            feedback.innerHTML = `
-              <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-                <div>
-                  <strong>📍 Nearest Certified Site: ${loc.name}</strong><br>
-                  <span style="font-size:12.5px; color:#475569;">${loc.address1}, ${loc.city}, ${loc.state} ${loc.zip}</span><br>
-                  <span style="font-size:12px; color:#16a34a; font-weight:700;">● Walk-Ins Accepted Today</span>
-                  <div style="font-size:11.5px; color:#92400E; background:#FFFBEB; padding:3px 8px; border-radius:4px; margin-top:4px; border:1px solid #FDE68A;">
-                    <strong>Pre-registration required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
+            let locationsHtml = `
+              <div style="margin-bottom:10px;">
+                <div style="font-weight:800; color:#0B2545; font-size:14px; margin-bottom:4px;">
+                  📍 Found ${data.locations.length} Certified Collection Centers Near ${zipVal}:
+                </div>
+                <div style="font-size:11.5px; color:#92400E; background:#FFFBEB; padding:5px 10px; border-radius:6px; border:1px solid #FDE68A;">
+                  <strong>Pre-registration required:</strong> You must receive a registration form/donor pass prior to proceeding to any testing center.
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:10px; max-height:360px; overflow-y:auto; padding-right:4px;">
+            `;
+
+            data.locations.forEach((loc, idx) => {
+              locationsHtml += `
+                <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:8px; padding:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; box-shadow:0 1px 3px rgba(0,0,0,0.03);">
+                  <div style="flex:1; min-width:220px;">
+                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:3px;">
+                      <span style="background:#E0F2FE; color:#0369A1; font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; text-transform:uppercase;">${loc.provider || 'Certified'}</span>
+                      <strong style="color:#0B2545; font-size:13.5px;">${loc.name}</strong>
+                    </div>
+                    <div style="font-size:12px; color:#475569;">${loc.address}, ${loc.city}, ${loc.state} ${loc.zip}</div>
+                    <div style="font-size:11px; color:#64748B; margin-top:2px;">🕒 ${loc.hours || 'Mon-Fri 8:00 AM - 5:00 PM'}</div>
+                  </div>
+                  <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
+                    <a href="tel:18009854339" class="btn btn-sm" style="background:#0B2545; color:#fff; border-color:#0B2545; padding:6px 10px; font-size:11.5px; text-decoration:none;">
+                      📞 Call Now
+                    </a>
+                    <a href="/checkout?location_id=${loc.id}&zip=${encodeURIComponent(loc.zip)}" class="btn btn-primary btn-sm" style="padding:6px 12px; font-size:12px;">
+                      Schedule at This Center &rarr;
+                    </a>
                   </div>
                 </div>
-                <a href="/checkout?zip=${encodeURIComponent(loc.zip)}" class="btn btn-primary btn-sm">
-                  Register at This Center →
-                </a>
-              </div>
-            `;
+              `;
+            });
+
+            locationsHtml += `</div>`;
+            feedback.innerHTML = locationsHtml;
           } else {
             feedback.innerHTML = `
               <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
                 <div>
-                  <strong>📍 Quest & Labcorp Certified Centers Serving ZIP ${zipVal}</strong><br>
-                  <span style="font-size:12px; color:#16a34a; font-weight:700;">● Walk-Ins Accepted Today</span>
+                  <strong>📍 Certified Centers Serving ZIP ${zipVal}</strong><br>
                   <div style="font-size:11.5px; color:#92400E; background:#FFFBEB; padding:3px 8px; border-radius:4px; margin-top:4px; border:1px solid #FDE68A;">
                     <strong>Pre-registration required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
                   </div>
                 </div>
                 <a href="/checkout?zip=${encodeURIComponent(zipVal)}" class="btn btn-primary btn-sm">
-                  Schedule Test Online →
+                  Schedule Test Online &rarr;
                 </a>
               </div>
             `;
@@ -103,14 +123,13 @@ document.addEventListener('DOMContentLoaded', function () {
           feedback.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
               <div>
-                <strong>📍 Quest Diagnostics & Labcorp Partner Facilities Serving ZIP ${zipVal}</strong><br>
-                <span style="font-size:12px; color:#16a34a; font-weight:700;">● Walk-Ins Accepted Today</span>
+                <strong>📍 Certified Collection Facilities Serving ZIP ${zipVal}</strong><br>
                 <div style="font-size:11.5px; color:#92400E; background:#FFFBEB; padding:3px 8px; border-radius:4px; margin-top:4px; border:1px solid #FDE68A;">
                   <strong>Pre-registration required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
                 </div>
               </div>
               <a href="/checkout?zip=${encodeURIComponent(zipVal)}" class="btn btn-primary btn-sm">
-                Schedule Test Online →
+                Schedule Test Online &rarr;
               </a>
             </div>
           `;
@@ -290,23 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   window.handleEstimatorReasonChange = function (reason) {
-    const dotAgencyGroup = document.getElementById('estDotAgencyGroup');
-    const methodSelect = document.getElementById('estMethod');
-    if (reason === 'dot') {
-      if (dotAgencyGroup) dotAgencyGroup.style.display = 'block';
-      if (methodSelect) {
-        methodSelect.value = 'dot';
-        handleEstimatorMethodChange('dot');
-      }
-    } else {
-      if (dotAgencyGroup) dotAgencyGroup.style.display = 'none';
-      if (methodSelect && methodSelect.value === 'dot') {
-        methodSelect.value = 'urine';
-        handleEstimatorMethodChange('urine');
-      } else if (methodSelect) {
-        handleEstimatorMethodChange(methodSelect.value);
-      }
-    }
+    // Preserves selected reason without overwriting testing method
   };
 
   window.handleEstimatorAgencyChange = function (agency) {

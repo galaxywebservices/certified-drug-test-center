@@ -12,7 +12,7 @@
         <div class="hero-split-left">
             <div class="hero-tagline-badge" style="background:#F0F5FA; border:1px solid #CBD5E1; color:#0B2545;">
                 <span style="color:#C1121F;">★</span>
-                {!! $homeSettings['hero_badge'] ?? 'Express Online Drug &amp; Alcohol Testing' !!}
+                {!! $homeSettings['hero_badge'] ?? 'Nationwide - All States - All CITIES' !!}
                 <span style="color:#C1121F;">★</span>
             </div>
 
@@ -73,8 +73,6 @@
                         <option value="Post-Accident">Post-Accident</option>
                         <option value="Follow-Up">Follow-Up</option>
                         <option value="Return to Duty">Return to Duty</option>
-                        <option value="Court-Ordered">Court-Ordered / Probation</option>
-                        <option value="Personal">Personal / Family Testing</option>
                     </select>
                 </div>
 
