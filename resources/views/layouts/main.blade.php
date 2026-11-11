@@ -180,6 +180,101 @@
             color: #64748B !important;
             letter-spacing: 0.5px !important;
         }
+
+        /* Mobile Section Spacing - Tightened & Unified across all pages & chain */
+        @media (max-width: 768px) {
+            .section {
+                padding: 16px 0 !important;
+            }
+            .section-header {
+                margin: 0 auto 12px !important;
+            }
+            .section-eyebrow {
+                font-size: 11px !important;
+                letter-spacing: 1.2px !important;
+                margin-bottom: 4px !important;
+            }
+            .section-title {
+                font-size: 22px !important;
+                margin-bottom: 6px !important;
+                line-height: 1.22 !important;
+            }
+            .section-desc {
+                font-size: 13.5px !important;
+                line-height: 1.4 !important;
+            }
+            .hero-split {
+                padding: 16px 0 8px !important;
+            }
+            .hero-split-grid {
+                gap: 12px !important;
+            }
+            .quick-estimator-card {
+                padding: 14px 14px !important;
+            }
+            #substance-checker.section {
+                padding: 4px 0 6px !important;
+            }
+            .substance-checker-box {
+                padding: 14px 14px 10px !important;
+                margin-bottom: 0 !important;
+            }
+            .process-grid-4-wrap {
+                margin-top: 10px !important;
+                gap: 10px !important;
+            }
+            .process-card-step {
+                padding: 14px 16px !important;
+            }
+            .filter-tabs {
+                margin-bottom: 14px !important;
+                gap: 6px !important;
+            }
+            .products-grid {
+                gap: 12px !important;
+                margin-top: 10px !important;
+            }
+            .state-search-bar {
+                margin-bottom: 12px !important;
+            }
+            .states-grid {
+                gap: 8px !important;
+            }
+            .faq-wrap {
+                gap: 8px !important;
+                margin-top: 10px !important;
+            }
+
+            /* Chain Pages (.cdtc) Mobile Spacing */
+            .cdtc section {
+                padding: 16px 0 !important;
+            }
+            .cdtc .hero {
+                padding: 14px 0 20px !important;
+            }
+            .cdtc .hero-grid {
+                gap: 16px !important;
+                margin-top: 12px !important;
+            }
+            .cdtc .steps {
+                gap: 10px !important;
+                margin-top: 12px !important;
+            }
+            .cdtc .cards {
+                gap: 10px !important;
+                margin-top: 12px !important;
+            }
+            .cdtc .facts {
+                gap: 8px !important;
+                margin-top: 10px !important;
+            }
+            .cdtc .table-wrap {
+                margin-top: 10px !important;
+            }
+            .cdtc .sources-section {
+                padding: 16px 0 !important;
+            }
+        }
     </style>
 
     <!-- Structured Data (JSON-LD) for 100% SEO Dominance -->

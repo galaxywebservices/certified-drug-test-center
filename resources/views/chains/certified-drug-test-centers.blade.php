@@ -160,19 +160,19 @@
 /* ===== Phone: everything stacks to one column ===== */
 @media (max-width:640px){
   .cdtc{font-size:16px}
-  .cdtc section{padding:26px 0}
-  .cdtc .hero{padding-bottom:24px}
+  .cdtc section{padding:16px 0 !important}
+  .cdtc .hero{padding-bottom:18px !important}
   .cdtc ul.checks,.cdtc .steps,.cdtc .cards,.cdtc dl.gloss{grid-template-columns:minmax(0,1fr)}
-  .cdtc .facts{gap:8px;margin-top:14px}
-  .cdtc .steps{gap:12px;margin-top:16px}
-  .cdtc .cards{gap:12px;margin-top:16px}
-  .cdtc .table-wrap{margin-top:14px}
-  .cdtc .sources-section{padding:24px 0}
-  .cdtc .fact{padding:14px 10px}
+  .cdtc .facts{gap:8px !important;margin-top:10px !important}
+  .cdtc .steps{gap:10px !important;margin-top:12px !important}
+  .cdtc .cards{gap:10px !important;margin-top:12px !important}
+  .cdtc .table-wrap{margin-top:10px !important}
+  .cdtc .sources-section{padding:16px 0 !important}
+  .cdtc .fact{padding:12px 10px}
   .cdtc .fact strong{font-size:1.3rem}
   .cdtc .states{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cdtc .cta-row .btn{flex:1 1 100%}
-  .cdtc .finder{padding:18px}
+  .cdtc .finder{padding:16px}
   .cdtc .finder .row{flex-direction:column}
   .cdtc .finder .row .btn{width:100%}
   .cdtc .quick-answer{padding:18px}

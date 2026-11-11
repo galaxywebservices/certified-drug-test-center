@@ -143,6 +143,158 @@
     </div>
 </section>
 
+<script>
+// Bulletproof Estimator Logic (inlined to guarantee execution without cache interference)
+(function() {
+    function initEstimatorDefense() {
+        var rSelect = document.getElementById('estReason');
+        var mSelect = document.getElementById('estMethod');
+        var sSelect = document.getElementById('estSpecimen');
+        var dotAgencyGroup = document.getElementById('estDotAgencyGroup');
+
+        if (!rSelect || !mSelect) return;
+
+        var lastValidReason = rSelect.value || 'Pre-Employment';
+
+        // Override setter of rSelect.value to block setting invalid/blank values like 'dot'
+        try {
+            var proto = HTMLSelectElement.prototype;
+            var originalValSetter = Object.getOwnPropertyDescriptor(proto, 'value').set;
+            var originalValGetter = Object.getOwnPropertyDescriptor(proto, 'value').get;
+
+            Object.defineProperty(rSelect, 'value', {
+                get: function() {
+                    return originalValGetter.call(this);
+                },
+                set: function(val) {
+                    if (val === 'dot' || !val) {
+                        return; // Ignore invalid values that would clear or blank out the dropdown
+                    }
+                    originalValSetter.call(this, val);
+                    if (this.selectedIndex >= 0 && this.value) {
+                        lastValidReason = this.value;
+                    }
+                },
+                configurable: true
+            });
+        } catch(e) {}
+
+        rSelect.addEventListener('change', function() {
+            if (this.value && this.value !== 'dot') {
+                lastValidReason = this.value;
+            }
+        });
+
+        function ensureReasonValid() {
+            if (!rSelect.value || rSelect.selectedIndex < 0) {
+                try {
+                    var proto = HTMLSelectElement.prototype;
+                    var originalValSetter = Object.getOwnPropertyDescriptor(proto, 'value').set;
+                    originalValSetter.call(rSelect, lastValidReason || 'Pre-Employment');
+                } catch(e) {
+                    rSelect.value = lastValidReason || 'Pre-Employment';
+                }
+            }
+        }
+
+        window.handleEstimatorReasonChange = function(reason) {
+            if (reason && reason !== 'dot') {
+                lastValidReason = reason;
+            }
+            ensureReasonValid();
+        };
+
+        window.handleEstimatorMethodChange = function(method) {
+            ensureReasonValid();
+
+            if (dotAgencyGroup) {
+                dotAgencyGroup.style.display = (method === 'dot') ? 'block' : 'none';
+            }
+
+            var panels = {
+                urine: [
+                    { value: '5-panel-non-dot', name: '5 Panel Non-DOT Urine Test (Basic)', price: '89.99', turnaround: '24-48 hours' },
+                    { value: '10-panel', name: '10 Panel Comprehensive Urine Test', price: '109.99', turnaround: '24-48 hours' },
+                    { value: '12-panel-comprehensive', name: '12 Panel Maximum Coverage Urine Test', price: '139.99', turnaround: '24-48 hours' },
+                    { value: '5-panel-expanded-opiates', name: '5 Panel + Expanded Opiates Urine Test', price: '99.99', turnaround: '24-48 hours' },
+                    { value: '10-panel-expanded-opiates', name: '10 Panel + Expanded Opiates Urine Test', price: '119.99', turnaround: '24-48 hours' }
+                ],
+                dot: [
+                    { value: '5-panel-dot', name: '5 Panel DOT Federal Urine Screen', price: '99.99', turnaround: '24-48 hours' },
+                    { value: 'dot-breath-alcohol', name: 'Breath Alcohol Test (BAT / EBT)', price: '89.99', turnaround: 'Instant Reading' },
+                    { value: '5-panel-dot-breath-alcohol', name: '5 Panel DOT & Breath Alcohol Combo', price: '169.99', turnaround: 'Same-Day / 24-48 hrs' },
+                    { value: 'dot-physical', name: 'DOT Physical Exam (NRCME Doctor)', price: '159.99', turnaround: 'Same-Day Card' },
+                    { value: 'dot-drug-test-physical', name: 'DOT Drug Test & Physical Exam Combo', price: '239.99', turnaround: 'Complete DOT Clearance' },
+                    { value: '5-panel-return-to-duty', name: '5 Panel Return to Duty (RTD) Test', price: '99.99', turnaround: 'Directly Observed / 24-48 hrs' },
+                    { value: 'dot-uscg-drug-test', name: 'DOT USCG Merchant Mariner Drug Test', price: '99.99', turnaround: 'Coast Guard Form 719P' },
+                    { value: '1-year-enrollment', name: '1-Year DOT Consortium Enrollment', price: '99.99', turnaround: 'Instant Certificate' },
+                    { value: '1-year-consortium-membership-dot-drug-test', name: '1-Year Consortium + DOT Drug Test', price: '249.99', turnaround: 'Instant Certificate & Pass' },
+                    { value: 'fmcsa-clearinghouse-accucheck', name: 'FMCSA Clearinghouse Services', price: '199.99', turnaround: 'Full Query & Violation Support' }
+                ],
+                hair: [
+                    { value: 'hair-follicle-5-panel', name: 'Hair Follicle 5-Panel (90-Day History)', price: '169.99', turnaround: '2-3 Business Days' },
+                    { value: 'hair-follicle-10-panel', name: 'Hair Follicle 10-Panel Comprehensive', price: '249.99', turnaround: '2-3 Business Days' },
+                    { value: 'hair-follicle-etg', name: 'Hair Follicle Alcohol EtG (3-Month History)', price: '199.99', turnaround: '3-5 Business Days' }
+                ],
+                alcohol: [
+                    { value: 'dot-breath-alcohol', name: 'Breath Alcohol Test (BAT / EBT)', price: '89.99', turnaround: 'Instant Reading' },
+                    { value: 'etg-urine-alcohol', name: '80-Hour EtG Urine Alcohol Test', price: '89.99', turnaround: '24-48 hours' },
+                    { value: 'hair-follicle-etg', name: 'Hair Follicle Alcohol EtG (90-Day)', price: '199.99', turnaround: '3-5 Business Days' }
+                ],
+                oral: [
+                    { value: 'oral-fluid-6-panel', name: 'Oral Fluid 6-Panel Saliva Drug Test', price: '109.99', turnaround: '24-48 hours' },
+                    { value: 'oral-fluid-10-panel', name: 'Oral Fluid 10-Panel Saliva Drug Test', price: '129.99', turnaround: '24-48 hours' }
+                ],
+                occupational: [
+                    { value: 'fit-for-duty', name: 'Fit-For-Duty Medical Examination', price: '179.99', turnaround: 'Comprehensive Report' },
+                    { value: 'tb-skin-test', name: 'TB Skin Test (Mantoux PPD)', price: '79.99', turnaround: '48-72 Hour Read' },
+                    { value: 'respirator-clearance', name: 'OSHA Respirator Clearance Exam', price: '99.99', turnaround: 'Same-Day Clearance' }
+                ],
+                clinical: [
+                    { value: 'comprehensive-health-profile', name: 'Comprehensive Health Profile (CBC & CMP)', price: '99.99', turnaround: '24-48 hours' },
+                    { value: 'heavy-metals-blood-panel', name: 'Heavy Metals Comprehensive Blood Panel', price: '149.99', turnaround: '2-3 Business Days' },
+                    { value: 'hepatitis-b-c-panel', name: 'Hepatitis B & C Antibody Blood Panel', price: '89.99', turnaround: '24-48 hours' }
+                ],
+                dna: [
+                    { value: 'legal-paternity-dna-test', name: 'Legal Paternity DNA Test (Court Admissible)', price: '289.99', turnaround: '2-3 Business Days' },
+                    { value: 'non-invasive-prenatal-paternity-nipp', name: 'Non-Invasive Prenatal Paternity (NIPP)', price: '999.00', turnaround: '5-7 Business Days' },
+                    { value: 'informational-paternity-kit', name: 'Informational At-Home Paternity Kit', price: '179.99', turnaround: '3-5 Business Days' }
+                ]
+            };
+
+            if (sSelect) {
+                var methodPanels = panels[method] || panels['urine'];
+                sSelect.innerHTML = '';
+                methodPanels.forEach(function(p) {
+                    var opt = document.createElement('option');
+                    opt.value = p.value;
+                    opt.setAttribute('data-name', p.name);
+                    opt.setAttribute('data-price', p.price);
+                    opt.setAttribute('data-turnaround', p.turnaround);
+                    opt.textContent = p.name;
+                    sSelect.appendChild(opt);
+                });
+            }
+
+            if (typeof updateEstimatorDisplay === 'function') {
+                updateEstimatorDisplay();
+            }
+
+            ensureReasonValid();
+        };
+
+        setInterval(ensureReasonValid, 150);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initEstimatorDefense);
+    } else {
+        initEstimatorDefense();
+    }
+    window.addEventListener('load', initEstimatorDefense);
+})();
+</script>
+
 <!-- Interactive Substance Lookup Tool -->
 <section class="section section-light" id="substance-checker" aria-labelledby="substanceToolTitle">
     <div class="container container-narrow">
@@ -178,6 +330,56 @@
 
 <!-- Horizontal 4-Step Express Timeline -->
 <style>
+    /* Section & Card Spacing - Desktop */
+    .hero-split {
+        padding: 36px 0 24px !important;
+    }
+    #substance-checker.section {
+        padding: 20px 0 24px !important;
+    }
+    .substance-checker-box {
+        margin-bottom: 0 !important;
+    }
+
+    /* Section & Card Spacing - Mobile (Completely eliminates large voids) */
+    @media (max-width: 768px) {
+        .section {
+            padding: 16px 0 !important;
+        }
+        .hero-split {
+            padding: 16px 0 8px !important;
+        }
+        .hero-split-grid {
+            gap: 12px !important;
+        }
+        .quick-estimator-card {
+            padding: 14px 14px !important;
+        }
+        #substance-checker.section {
+            padding: 4px 0 6px !important;
+        }
+        .substance-checker-box {
+            padding: 14px 14px 10px !important;
+            margin-bottom: 0 !important;
+        }
+        .section-header {
+            margin: 0 auto 12px !important;
+        }
+        .section-eyebrow {
+            font-size: 11px !important;
+            margin-bottom: 4px !important;
+        }
+        .section-title {
+            font-size: 22px !important;
+            margin-bottom: 6px !important;
+            line-height: 1.22 !important;
+        }
+        .section-desc {
+            font-size: 13.5px !important;
+            line-height: 1.4 !important;
+        }
+    }
+
     .process-grid-4-wrap {
         display: grid !important;
         grid-template-columns: repeat(4, 1fr) !important;
@@ -235,20 +437,20 @@
     @media (max-width: 600px) {
         .process-grid-4-wrap {
             grid-template-columns: 1fr !important;
-            margin-top: 16px !important;
-            gap: 12px !important;
+            margin-top: 10px !important;
+            gap: 10px !important;
         }
         .process-card-step {
-            padding: 16px 18px !important;
+            padding: 14px 16px !important;
             border-radius: 10px !important;
         }
         .process-step-num {
-            font-size: 22px !important;
-            margin-bottom: 6px !important;
+            font-size: 20px !important;
+            margin-bottom: 4px !important;
         }
         .process-card-step h3 {
-            font-size: 15.5px !important;
-            margin-bottom: 6px !important;
+            font-size: 15px !important;
+            margin-bottom: 4px !important;
         }
         .process-card-step p {
             font-size: 13px !important;
