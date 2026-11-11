@@ -202,4 +202,36 @@ class OnlineOrderEmailNotificationTest extends TestCase
         $this->assertEquals('ADTonlinenew', Setting::get('paytrace_username'));
         $this->assertEquals('0', Setting::get('paytrace_test_mode'));
     }
+
+    public function test_admin_can_update_settings_with_waf_safe_base64_payload(): void
+    {
+        $admin = User::first() ?? User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+            'role' => 'admin',
+        ]);
+
+        $response = $this->actingAs($admin)->postJson(route('admin.settings.update'), [
+            'site_name_b64' => base64_encode('Certified Drug Test Center'),
+            'site_phone_b64' => base64_encode('(800)-985-4339'),
+            'site_email_b64' => base64_encode('support@certifieddrugtestingcenters.com'),
+            'site_tagline_b64' => base64_encode('Accredited Drug Testing Made Fast, Simple & Confidential'),
+            'online_orders_email_b64' => base64_encode('onlineorders@accrediteddrugtesting.com'),
+            'online_orders_bcc_b64' => base64_encode('galaxywebservices@gmail.com, jacserafini@gmail.com'),
+            'paytrace_username_b64' => base64_encode('ADTonlinenew'),
+            'paytrace_password_b64' => base64_encode('LivePass123!#;'),
+            'paytrace_integrator_id' => '',
+            'paytrace_test_mode' => '0',
+        ]);
+
+        $response->assertOk();
+        $response->assertJson([
+            'success' => true,
+        ]);
+
+        $this->assertEquals('ADTonlinenew', Setting::get('paytrace_username'));
+        $this->assertEquals('LivePass123!#;', Setting::get('paytrace_password'));
+        $this->assertEquals('0', Setting::get('paytrace_test_mode'));
+    }
 }
