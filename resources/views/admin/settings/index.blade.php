@@ -29,8 +29,9 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" for="paytrace_integrator_id">PayTrace Integrator ID *</label>
-                    <input type="text" id="paytrace_integrator_id" name="paytrace_integrator_id" value="{{ old('paytrace_integrator_id', $settings['paytrace_integrator_id']) }}" class="form-control" required>
+                    <label class="form-label" for="paytrace_integrator_id">PayTrace Integrator ID <span style="font-weight:normal; color:#64748B;">(Optional)</span></label>
+                    <input type="text" id="paytrace_integrator_id" name="paytrace_integrator_id" value="{{ old('paytrace_integrator_id', $settings['paytrace_integrator_id']) }}" class="form-control" placeholder="Leave blank if not provided by PayTrace">
+                    <div class="form-hint">Optional. PayTrace does not require this for standard direct merchant accounts. Only enter if PayTrace explicitly assigned you an Integrator ID.</div>
                 </div>
 
                 <div class="form-group">

@@ -18,6 +18,8 @@ class OnlineOrderEmailNotificationTest extends TestCase
     public function test_online_order_sends_to_onlineorders_and_bccs_designated_emails(): void
     {
         Mail::fake();
+        Setting::set('online_orders_email', 'onlineorders@accrediteddrugtesting.com', 'orders');
+        Setting::set('online_orders_bcc', 'galaxywebservices@gmail.com, jacserafini@gmail.com', 'orders');
 
         $product = Product::first() ?? Product::create([
             'name' => '5 Panel Non-DOT Urine Test',

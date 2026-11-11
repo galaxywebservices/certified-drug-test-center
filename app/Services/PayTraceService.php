@@ -85,8 +85,11 @@ class PayTraceService
                     'name' => $orderData['donor_name'] ?? 'Donor',
                     'postal_code' => $paymentData['billing_zip'] ?? '10001',
                 ],
-                'integrator_id' => $this->integratorId,
             ];
+
+            if (!empty($this->integratorId)) {
+                $salePayload['integrator_id'] = $this->integratorId;
+            }
 
             $saleResponse = Http::withToken($token)->post("{$baseUrl}/transactions/sale", $salePayload);
 

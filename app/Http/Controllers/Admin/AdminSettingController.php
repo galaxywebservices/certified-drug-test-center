@@ -37,7 +37,7 @@ class AdminSettingController extends Controller
             'online_orders_bcc' => 'nullable|string|max:255',
             'paytrace_username' => 'required|string|max:100',
             'paytrace_password' => 'nullable|string',
-            'paytrace_integrator_id' => 'required|string|max:100',
+            'paytrace_integrator_id' => 'nullable|string|max:100',
             'paytrace_test_mode' => 'required|in:0,1',
         ]);
 
@@ -52,7 +52,7 @@ class AdminSettingController extends Controller
         if (!empty($validated['paytrace_password'])) {
             Setting::set('paytrace_password', $validated['paytrace_password'], 'payment', true);
         }
-        Setting::set('paytrace_integrator_id', $validated['paytrace_integrator_id'], 'payment');
+        Setting::set('paytrace_integrator_id', $validated['paytrace_integrator_id'] ?? '', 'payment');
         Setting::set('paytrace_test_mode', $validated['paytrace_test_mode'], 'payment');
 
         return redirect()->route('admin.settings.index')->with('success', 'Settings updated successfully.');
