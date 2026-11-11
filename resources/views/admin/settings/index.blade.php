@@ -1,7 +1,30 @@
 @extends('admin.layouts.app', ['title' => 'PayTrace & Settings', 'heading' => 'PayTrace Gateway & Site Settings'])
 
 @section('content')
-<form action="" method="POST" autocomplete="off">
+<div id="settingsAlert">
+    @if(session('success') || request('saved'))
+        <div class="alert alert-success" style="font-weight:600;">
+            ✓ {{ session('success') ?? 'PayTrace credentials and site settings saved successfully in database.' }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger" style="font-weight:600;">
+            ✕ {{ session('error') }}
+        </div>
+    @endif
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <div style="font-weight:700; margin-bottom:6px;">Please fix the following validation errors:</div>
+            <ul style="margin-left:20px; margin-bottom:0;">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+</div>
+
+<form id="adminSettingsForm" action="{{ route('admin.settings.update') }}" method="POST" autocomplete="off">
     @csrf
 
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
@@ -102,7 +125,7 @@
                 </div>
 
                 <div style="margin-top:24px;">
-                    <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px;">
+                    <button type="submit" id="btnSaveSettings" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px; font-weight:700;">
                         Save Configuration Changes
                     </button>
                 </div>
@@ -111,3 +134,76 @@
     </div>
 </form>
 @endsection
+
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var form = document.getElementById('adminSettingsForm');
+    var submitBtn = document.getElementById('btnSaveSettings');
+    var alertBox = document.getElementById('settingsAlert');
+    if (!form || !submitBtn || !alertBox) return;
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Clear previous alerts
+        alertBox.innerHTML = '';
+        var originalBtnHtml = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span style="display:inline-flex; align-items:center; gap:8px;">Saving Changes...</span>';
+
+        var formData = new FormData(form);
+        var postUrl = form.getAttribute('action') || window.location.href;
+
+        fetch(postUrl, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            }
+        })
+        .then(function(res) {
+            return res.json().then(function(data) {
+                return { status: res.status, ok: res.ok, data: data };
+            }).catch(function() {
+                return { status: res.status, ok: res.ok, data: null };
+            });
+        })
+        .then(function(response) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHtml;
+
+            if (response.ok && response.data && response.data.success) {
+                alertBox.innerHTML = '<div class="alert alert-success" style="font-weight:600; padding:14px 20px; border-radius:8px; margin-bottom:24px; background:#DCFCE7; color:#166534; border:1px solid #BBF7D0;">✓ ' + response.data.message + '</div>';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                var passField = document.getElementById('paytrace_password');
+                if (passField) passField.value = '';
+            } else if (response.status === 422 && response.data && response.data.errors) {
+                var errList = '';
+                for (var key in response.data.errors) {
+                    response.data.errors[key].forEach(function(msg) {
+                        errList += '<li>' + msg + '</li>';
+                    });
+                }
+                alertBox.innerHTML = '<div class="alert alert-danger" style="padding:14px 20px; border-radius:8px; margin-bottom:24px; background:#FEE2E2; color:#991B1B; border:1px solid #FECACA;"><div style="font-weight:700; margin-bottom:6px;">Validation Error:</div><ul style="margin-left:20px; margin-bottom:0;">' + errList + '</ul></div>';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else if (response.status === 419) {
+                alertBox.innerHTML = '<div class="alert alert-danger" style="padding:14px 20px; border-radius:8px; margin-bottom:24px; background:#FEE2E2; color:#991B1B; border:1px solid #FECACA;">Your session has expired. Please refresh the page and log in again.</div>';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                var errMsg = (response.data && response.data.message) ? response.data.message : 'An error occurred while saving (HTTP ' + response.status + ').';
+                alertBox.innerHTML = '<div class="alert alert-danger" style="padding:14px 20px; border-radius:8px; margin-bottom:24px; background:#FEE2E2; color:#991B1B; border:1px solid #FECACA;">' + errMsg + '</div>';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        })
+        .catch(function(err) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHtml;
+            alertBox.innerHTML = '<div class="alert alert-danger" style="padding:14px 20px; border-radius:8px; margin-bottom:24px; background:#FEE2E2; color:#991B1B; border:1px solid #FECACA;">Network error: ' + err.message + '</div>';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+});
+</script>
+@endpush

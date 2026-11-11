@@ -17,10 +17,10 @@ class AdminSettingController extends Controller
             'site_tagline' => Setting::get('site_tagline', 'Accredited Drug Testing Made Fast, Simple & Confidential'),
             'online_orders_email' => Setting::get('online_orders_email', config('mail.online_orders.to', 'onlineorders@accrediteddrugtesting.com')),
             'online_orders_bcc' => Setting::get('online_orders_bcc', implode(', ', config('mail.online_orders.bcc', ['galaxywebservices@gmail.com', 'jacserafini@gmail.com']))),
-            'paytrace_username' => Setting::get('paytrace_username', 'demo123'),
-            'paytrace_password' => Setting::get('paytrace_password', 'password123'),
-            'paytrace_integrator_id' => Setting::get('paytrace_integrator_id', '123456'),
-            'paytrace_test_mode' => Setting::get('paytrace_test_mode', '1'),
+            'paytrace_username' => Setting::get('paytrace_username', env('PAYTRACE_USERNAME', 'demo123')),
+            'paytrace_password' => Setting::get('paytrace_password', env('PAYTRACE_PASSWORD', 'password123')),
+            'paytrace_integrator_id' => Setting::get('paytrace_integrator_id', env('PAYTRACE_INTEGRATOR_ID', '')),
+            'paytrace_test_mode' => (string) Setting::get('paytrace_test_mode', env('PAYTRACE_TEST_MODE', '1')),
         ];
 
         return view('admin.settings.index', compact('settings'));
@@ -56,11 +56,32 @@ class AdminSettingController extends Controller
             Setting::set('paytrace_integrator_id', isset($validated['paytrace_integrator_id']) ? trim($validated['paytrace_integrator_id']) : '', 'payment');
             Setting::set('paytrace_test_mode', (string)$validated['paytrace_test_mode'], 'payment');
 
-            return redirect()->route('admin.settings.index')->with('success', 'PayTrace credentials and site settings updated successfully.');
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'PayTrace credentials and site settings updated successfully in database.',
+                    'settings' => [
+                        'paytrace_username' => Setting::get('paytrace_username'),
+                        'paytrace_test_mode' => (string) Setting::get('paytrace_test_mode'),
+                        'paytrace_integrator_id' => Setting::get('paytrace_integrator_id'),
+                    ],
+                ]);
+            }
+
+            return redirect()->route('admin.settings.index', ['saved' => 1])
+                ->with('success', 'PayTrace credentials and site settings updated successfully.');
         } catch (\Throwable $e) {
             \Illuminate\Support\Facades\Log::error('Settings update failed: ' . $e->getMessage(), [
                 'exception' => $e,
             ]);
+
+            if ($request->wantsJson() || $request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to save settings: ' . $e->getMessage(),
+                ], 500);
+            }
+
             return redirect()->back()->withInput()->with('error', 'Failed to save settings: ' . $e->getMessage());
         }
     }
