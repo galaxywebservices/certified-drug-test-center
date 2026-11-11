@@ -115,4 +115,18 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Online Orders Dispatch Recipients
+    |--------------------------------------------------------------------------
+    |
+    | When online orders are placed, dispatch notifications are sent to the
+    | primary operations inbox with BCC copies for tracking.
+    |
+    */
+    'online_orders' => [
+        'to' => env('ONLINE_ORDERS_TO', 'onlineorders@accrediteddrugtesting.com'),
+        'bcc' => array_filter(array_map('trim', explode(',', env('ONLINE_ORDERS_BCC', 'galaxywebservices@gmail.com,jacserafini@gmail.com')))),
+    ],
+
 ];

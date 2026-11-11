@@ -95,6 +95,9 @@
                     <div style="font-size:14px; color:#475569; margin-top:4px;">
                         Phone: {{ $order->donor_phone }}<br>
                         Email: {{ $order->donor_email }}<br>
+                        @if(!empty($order->results_email) && $order->results_email !== $order->donor_email)
+                        Results Email: {{ $order->results_email }}<br>
+                        @endif
                         Reason: {{ ucfirst($order->test_reason) }}
                     </div>
                 </div>

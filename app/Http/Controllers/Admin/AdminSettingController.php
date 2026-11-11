@@ -15,6 +15,8 @@ class AdminSettingController extends Controller
             'site_phone' => Setting::get('site_phone', '(800)-985-4339'),
             'site_email' => Setting::get('site_email', 'support@certifieddrugtestingcenters.com'),
             'site_tagline' => Setting::get('site_tagline', 'Accredited Drug Testing Made Fast, Simple & Confidential'),
+            'online_orders_email' => Setting::get('online_orders_email', config('mail.online_orders.to', 'onlineorders@accrediteddrugtesting.com')),
+            'online_orders_bcc' => Setting::get('online_orders_bcc', implode(', ', config('mail.online_orders.bcc', ['galaxywebservices@gmail.com', 'jacserafini@gmail.com']))),
             'paytrace_username' => Setting::get('paytrace_username', 'demo123'),
             'paytrace_password' => Setting::get('paytrace_password', 'password123'),
             'paytrace_integrator_id' => Setting::get('paytrace_integrator_id', '123456'),
@@ -31,6 +33,8 @@ class AdminSettingController extends Controller
             'site_phone' => 'required|string|max:50',
             'site_email' => 'required|email|max:150',
             'site_tagline' => 'nullable|string|max:255',
+            'online_orders_email' => 'required|email|max:150',
+            'online_orders_bcc' => 'nullable|string|max:255',
             'paytrace_username' => 'required|string|max:100',
             'paytrace_password' => 'nullable|string',
             'paytrace_integrator_id' => 'required|string|max:100',
@@ -41,6 +45,8 @@ class AdminSettingController extends Controller
         Setting::set('site_phone', $validated['site_phone'], 'general');
         Setting::set('site_email', $validated['site_email'], 'general');
         Setting::set('site_tagline', $validated['site_tagline'] ?? '', 'general');
+        Setting::set('online_orders_email', $validated['online_orders_email'], 'orders');
+        Setting::set('online_orders_bcc', $validated['online_orders_bcc'] ?? '', 'orders');
 
         Setting::set('paytrace_username', $validated['paytrace_username'], 'payment');
         if (!empty($validated['paytrace_password'])) {

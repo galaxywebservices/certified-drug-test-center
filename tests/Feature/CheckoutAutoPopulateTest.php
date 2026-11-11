@@ -46,5 +46,17 @@ class CheckoutAutoPopulateTest extends TestCase
         // Ensure it resolved to 5 Panel NON-DOT, not Product #5 Return to Duty
         $response->assertSee('5 Panel NON-DOT');
     }
+
+    public function test_order_modal_has_both_donor_email_and_confidential_results_email_fields(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+
+        // Verify separate lines for donor email and confidential results email in the order modal
+        $response->assertSee('Donor / Electronic Pass Email', false);
+        $response->assertSee('name="email"', false);
+        $response->assertSee('Confidential Results Email', false);
+        $response->assertSee('name="results_email"', false);
+    }
 }
 

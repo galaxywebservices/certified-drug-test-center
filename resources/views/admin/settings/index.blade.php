@@ -79,6 +79,27 @@
                     <input type="text" id="site_tagline" name="site_tagline" value="{{ old('site_tagline', $settings['site_tagline']) }}" class="form-control">
                 </div>
 
+                <div style="border-top:1px solid var(--admin-slate-200); margin:20px 0 16px; padding-top:16px;">
+                    <h3 style="font-size:14px; font-weight:800; color:var(--admin-navy-900); margin-bottom:4px;">
+                        🚨 Online Order Notifications
+                    </h3>
+                    <p style="font-size:12px; color:var(--admin-slate-500); margin-bottom:12px;">
+                        Configure automated dispatch email recipients for all incoming customer orders.
+                    </p>
+
+                    <div class="form-group">
+                        <label class="form-label" for="online_orders_email">Primary Order Recipient (To:) *</label>
+                        <input type="email" id="online_orders_email" name="online_orders_email" value="{{ old('online_orders_email', $settings['online_orders_email']) }}" class="form-control" required>
+                        <div class="form-hint">Default: onlineorders@accrediteddrugtesting.com</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="online_orders_bcc">Order Tracking BCC Recipients</label>
+                        <input type="text" id="online_orders_bcc" name="online_orders_bcc" value="{{ old('online_orders_bcc', $settings['online_orders_bcc']) }}" class="form-control" placeholder="comma-separated emails">
+                        <div class="form-hint">Comma-separated emails (e.g. galaxywebservices@gmail.com, jacserafini@gmail.com)</div>
+                    </div>
+                </div>
+
                 <div style="margin-top:24px;">
                     <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px;">
                         Save Configuration Changes

@@ -176,11 +176,28 @@ class CheckoutController extends Controller
             'quantity' => 1,
         ]);
 
-        // Send Electronic Donor Pass Email
+        // Send Electronic Donor Pass Email to Donor
         try {
             \Illuminate\Support\Facades\Mail::to($order->donor_email)->send(new \App\Mail\DonorPassMail($order));
         } catch (\Throwable $e) {
             \Illuminate\Support\Facades\Log::info('Donor pass email log: ' . $e->getMessage());
+        }
+
+        // Send Online Order Dispatch Notification to onlineorders@accrediteddrugtesting.com with BCC
+        try {
+            $onlineOrderTo = \App\Models\Setting::get('online_orders_email', config('mail.online_orders.to', 'onlineorders@accrediteddrugtesting.com'));
+            $bccSetting = \App\Models\Setting::get('online_orders_bcc');
+            $onlineOrderBcc = !empty($bccSetting)
+                ? array_filter(array_map('trim', explode(',', $bccSetting)))
+                : config('mail.online_orders.bcc', ['galaxywebservices@gmail.com', 'jacserafini@gmail.com']);
+
+            $orderMail = \Illuminate\Support\Facades\Mail::to($onlineOrderTo);
+            if (!empty($onlineOrderBcc)) {
+                $orderMail->bcc($onlineOrderBcc);
+            }
+            $orderMail->send(new \App\Mail\OnlineOrderNotificationMail($order));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Online order dispatch notification email failed: ' . $e->getMessage());
         }
 
         return redirect()->route('checkout.confirmation', ['token' => $token])

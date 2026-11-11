@@ -692,7 +692,13 @@
                 <div class="modal-form-group">
                     <label for="donorEmail">Donor / Electronic Pass Email *</label>
                     <input type="email" id="donorEmail" name="email" placeholder="donor@example.com" required>
-                    <small style="font-size:11.5px; color:#64748B;">Donor registration pass &amp; confidential results sent here immediately.</small>
+                    <small style="font-size:11.5px; color:#64748B;">Electronic donor pass sent here to present at the collection facility.</small>
+                </div>
+
+                <div class="modal-form-group">
+                    <label for="modalResultsEmail">Confidential Results Email</label>
+                    <input type="email" id="modalResultsEmail" name="results_email" placeholder="results@example.com (optional if same as donor pass)">
+                    <small style="font-size:11.5px; color:#64748B;">Confidential laboratory results and MRO reports sent here (can be different from donor email).</small>
                 </div>
 
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">

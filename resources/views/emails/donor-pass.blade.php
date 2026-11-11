@@ -51,9 +51,15 @@
                                     <td style="color:#0B2545; font-weight:700;">{{ $order->donor_full_name }}</td>
                                 </tr>
                                 <tr>
-                                    <td style="color:#64748B; font-weight:600;">Contact Email:</td>
+                                    <td style="color:#64748B; font-weight:600;">Donor Email:</td>
                                     <td style="color:#0B2545;">{{ $order->donor_email }}</td>
                                 </tr>
+                                @if(!empty($order->results_email) && $order->results_email !== $order->donor_email)
+                                <tr>
+                                    <td style="color:#64748B; font-weight:600;">Results Email:</td>
+                                    <td style="color:#0B2545; font-weight:700;">{{ $order->results_email }}</td>
+                                </tr>
+                                @endif
                                 <tr>
                                     <td style="color:#64748B; font-weight:600;">Contact Phone:</td>
                                     <td style="color:#0B2545;">{{ $order->donor_phone }}</td>
