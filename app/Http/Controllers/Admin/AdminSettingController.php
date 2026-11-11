@@ -41,20 +41,27 @@ class AdminSettingController extends Controller
             'paytrace_test_mode' => 'required|in:0,1',
         ]);
 
-        Setting::set('site_name', $validated['site_name'], 'general');
-        Setting::set('site_phone', $validated['site_phone'], 'general');
-        Setting::set('site_email', $validated['site_email'], 'general');
-        Setting::set('site_tagline', $validated['site_tagline'] ?? '', 'general');
-        Setting::set('online_orders_email', $validated['online_orders_email'], 'orders');
-        Setting::set('online_orders_bcc', $validated['online_orders_bcc'] ?? '', 'orders');
+        try {
+            Setting::set('site_name', trim($validated['site_name']), 'general');
+            Setting::set('site_phone', trim($validated['site_phone']), 'general');
+            Setting::set('site_email', trim($validated['site_email']), 'general');
+            Setting::set('site_tagline', isset($validated['site_tagline']) ? trim($validated['site_tagline']) : '', 'general');
+            Setting::set('online_orders_email', trim($validated['online_orders_email']), 'orders');
+            Setting::set('online_orders_bcc', isset($validated['online_orders_bcc']) ? trim($validated['online_orders_bcc']) : '', 'orders');
 
-        Setting::set('paytrace_username', $validated['paytrace_username'], 'payment');
-        if (!empty($validated['paytrace_password'])) {
-            Setting::set('paytrace_password', $validated['paytrace_password'], 'payment', true);
+            Setting::set('paytrace_username', trim($validated['paytrace_username']), 'payment');
+            if (!empty($validated['paytrace_password'])) {
+                Setting::set('paytrace_password', trim($validated['paytrace_password']), 'payment', true);
+            }
+            Setting::set('paytrace_integrator_id', isset($validated['paytrace_integrator_id']) ? trim($validated['paytrace_integrator_id']) : '', 'payment');
+            Setting::set('paytrace_test_mode', (string)$validated['paytrace_test_mode'], 'payment');
+
+            return redirect()->route('admin.settings.index')->with('success', 'PayTrace credentials and site settings updated successfully.');
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Settings update failed: ' . $e->getMessage(), [
+                'exception' => $e,
+            ]);
+            return redirect()->back()->withInput()->with('error', 'Failed to save settings: ' . $e->getMessage());
         }
-        Setting::set('paytrace_integrator_id', $validated['paytrace_integrator_id'] ?? '', 'payment');
-        Setting::set('paytrace_test_mode', $validated['paytrace_test_mode'], 'payment');
-
-        return redirect()->route('admin.settings.index')->with('success', 'Settings updated successfully.');
     }
 }

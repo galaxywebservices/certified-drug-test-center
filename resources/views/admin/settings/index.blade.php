@@ -1,7 +1,7 @@
 @extends('admin.layouts.app', ['title' => 'PayTrace & Settings', 'heading' => 'PayTrace Gateway & Site Settings'])
 
 @section('content')
-<form action="{{ route('admin.settings.update') }}" method="POST">
+<form action="" method="POST" autocomplete="off">
     @csrf
 
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
@@ -19,13 +19,13 @@
             <div class="card-body">
                 <div class="form-group">
                     <label class="form-label" for="paytrace_username">PayTrace Username *</label>
-                    <input type="text" id="paytrace_username" name="paytrace_username" value="{{ old('paytrace_username', $settings['paytrace_username']) }}" class="form-control" required>
+                    <input type="text" id="paytrace_username" name="paytrace_username" value="{{ old('paytrace_username', $settings['paytrace_username']) }}" class="form-control" autocomplete="off" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="paytrace_password">PayTrace Password / API Key</label>
-                    <input type="password" id="paytrace_password" name="paytrace_password" class="form-control" placeholder="•••••••••••••• (Leave blank to keep unchanged)">
-                    <div class="form-hint">Stored securely using 256-bit AES encryption.</div>
+                    <input type="password" id="paytrace_password" name="paytrace_password" class="form-control" autocomplete="new-password" placeholder="•••••••••••••• (Leave blank to keep unchanged)">
+                    <div class="form-hint">Stored securely using 256-bit AES encryption. Leave blank if unchanged.</div>
                 </div>
 
                 <div class="form-group">
@@ -37,10 +37,10 @@
                 <div class="form-group">
                     <label class="form-label" for="paytrace_test_mode">Environment Mode *</label>
                     <select id="paytrace_test_mode" name="paytrace_test_mode" class="form-control" required>
-                        <option value="1" {{ $settings['paytrace_test_mode'] == '1' ? 'selected' : '' }}>
+                        <option value="1" {{ (string) old('paytrace_test_mode', $settings['paytrace_test_mode']) === '1' ? 'selected' : '' }}>
                             Sandbox / Test Mode (Simulated approvals enabled)
                         </option>
-                        <option value="0" {{ $settings['paytrace_test_mode'] == '0' ? 'selected' : '' }}>
+                        <option value="0" {{ (string) old('paytrace_test_mode', $settings['paytrace_test_mode']) === '0' ? 'selected' : '' }}>
                             Live Production Gateway (Real credit card charges)
                         </option>
                     </select>

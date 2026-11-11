@@ -18,6 +18,7 @@ class OnlineOrderEmailNotificationTest extends TestCase
     public function test_online_order_sends_to_onlineorders_and_bccs_designated_emails(): void
     {
         Mail::fake();
+        Setting::set('paytrace_test_mode', '1', 'payment');
         Setting::set('online_orders_email', 'onlineorders@accrediteddrugtesting.com', 'orders');
         Setting::set('online_orders_bcc', 'galaxywebservices@gmail.com, jacserafini@gmail.com', 'orders');
 
@@ -132,5 +133,36 @@ class OnlineOrderEmailNotificationTest extends TestCase
 
         $this->assertEquals('orders-desk@accrediteddrugtesting.com', Setting::get('online_orders_email'));
         $this->assertEquals('galaxywebservices@gmail.com, jacserafini@gmail.com, monitor@example.com', Setting::get('online_orders_bcc'));
+    }
+
+    public function test_admin_can_update_paytrace_live_credentials_with_blank_optional_integrator_id(): void
+    {
+        $admin = User::first() ?? User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+            'role' => 'admin',
+        ]);
+
+        $response = $this->actingAs($admin)->post(route('admin.settings.update'), [
+            'site_name' => 'Certified Drug Test Center',
+            'site_phone' => '(800)-985-4339',
+            'site_email' => 'support@certifieddrugtestingcenters.com',
+            'site_tagline' => 'Accredited Drug Testing Made Fast, Simple & Confidential',
+            'online_orders_email' => 'onlineorders@accrediteddrugtesting.com',
+            'online_orders_bcc' => 'galaxywebservices@gmail.com, jacserafini@gmail.com',
+            'paytrace_username' => 'ADTonlinenew',
+            'paytrace_password' => 'NewLiveSecretPass123',
+            'paytrace_integrator_id' => '',
+            'paytrace_test_mode' => '0',
+        ]);
+
+        $response->assertSessionHasNoErrors();
+        $response->assertRedirect(route('admin.settings.index'));
+
+        $this->assertEquals('ADTonlinenew', Setting::get('paytrace_username'));
+        $this->assertEquals('NewLiveSecretPass123', Setting::get('paytrace_password'));
+        $this->assertEquals('', Setting::get('paytrace_integrator_id'));
+        $this->assertEquals('0', Setting::get('paytrace_test_mode'));
     }
 }

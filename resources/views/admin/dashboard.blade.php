@@ -159,9 +159,6 @@
                 <a href="{{ route('admin.pages.create') }}" class="btn btn-navy" style="justify-content:center;">
                     + Create New CMS Page
                 </a>
-                <a href="{{ route('admin.settings.index') }}" class="btn btn-outline" style="justify-content:center;">
-                    Configure PayTrace Payment Gateway
-                </a>
                 <a href="{{ route('sitemap') }}" target="_blank" class="btn btn-outline" style="justify-content:center;">
                     Verify Live XML Sitemap (SEO)
                 </a>
