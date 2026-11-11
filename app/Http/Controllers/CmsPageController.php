@@ -26,7 +26,13 @@ class CmsPageController extends Controller
         $canonicalUrl = $page->canonical_url ?: url('/' . $page->slug);
 
         // Sidebar categories and popular tests
-        $popularTests = Product::where('is_popular', true)->where('is_active', true)->limit(5)->get();
+        $popularTests = Product::where('is_popular', true)
+            ->where('is_active', true)
+            ->where('slug', '!=', 'body-hair-collection')
+            ->where('name', 'NOT LIKE', '%Body Hair%')
+            ->orderByRaw("CASE WHEN slug = '5-panel-hair-follicle' THEN 0 ELSE 1 END")
+            ->limit(5)
+            ->get();
         $categories = Category::where('is_active', true)->orderBy('position')->limit(8)->get();
 
         return view('pages.show', compact('page', 'pageTitle', 'metaDescription', 'canonicalUrl', 'popularTests', 'categories'));

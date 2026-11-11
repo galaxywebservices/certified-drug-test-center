@@ -86,7 +86,7 @@ class LocationController extends Controller
                 ->get();
         }
 
-        $popularTests = Product::where('is_popular', true)->where('is_active', true)->limit(4)->get();
+        $popularTests = $this->getPopularTests(4);
 
         $isChainRoute = request()->is('certified-drug-test-centers*');
         $baseRoutePrefix = $isChainRoute ? '/certified-drug-test-centers' : '/locations';
@@ -149,7 +149,7 @@ class LocationController extends Controller
                 ->get();
         }
 
-        $popularTests = Product::where('is_popular', true)->where('is_active', true)->limit(6)->get();
+        $popularTests = $this->getPopularTests(6);
 
         $isChainRoute = request()->is('certified-drug-test-centers*');
         $baseRoutePrefix = $isChainRoute ? '/certified-drug-test-centers' : '/locations';
@@ -226,7 +226,7 @@ class LocationController extends Controller
             ->get();
 
         // Popular tests for direct checkout
-        $popularTests = Product::where('is_popular', true)->where('is_active', true)->limit(6)->get();
+        $popularTests = $this->getPopularTests(6);
 
         // Turn-by-turn navigation URLs
         $hasCoords = !empty($location->lat) && !empty($location->lng);
@@ -410,5 +410,19 @@ class LocationController extends Controller
         }
 
         abort(404);
+    }
+
+    /**
+     * Retrieve active popular tests excluding add-ons like Body Hair
+     */
+    protected function getPopularTests(int $limit = 6)
+    {
+        return Product::where('is_popular', true)
+            ->where('is_active', true)
+            ->where('slug', '!=', 'body-hair-collection')
+            ->where('name', 'NOT LIKE', '%Body Hair%')
+            ->orderByRaw("CASE WHEN slug = '5-panel-hair-follicle' THEN 0 ELSE 1 END")
+            ->limit($limit)
+            ->get();
     }
 }

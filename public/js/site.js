@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const panelPrice = selectedOpt ? (selectedOpt.getAttribute('data-price') || '89.99') : '89.99';
     const reason = reasonSelect ? reasonSelect.value : 'Pre-Employment';
     const methodSelect = document.getElementById('estMethod');
-    const isDot = (methodSelect?.value === 'dot' || panelKey.includes('dot'));
+    const isDot = (methodSelect?.value === 'dot' || (panelKey.toLowerCase().includes('dot') && !panelKey.toLowerCase().includes('non-dot') && !panelKey.toLowerCase().includes('nondot')));
     const dotAgency = (isDot && dotAgencySelect) ? dotAgencySelect.value : 'FMCSA';
 
     openOrderModal(panelKey, panelName, panelPrice);
@@ -403,11 +403,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const modalDotAgency = document.getElementById('modalDotAgency');
     const modalDotGroup = document.getElementById('modalDotAgencyGroup');
-    if (modalDotAgency && isDot) {
-      if (modalDotGroup) modalDotGroup.style.display = 'block';
-      modalDotAgency.value = dotAgency;
-      if (typeof handleModalDotAgencyChange === 'function') {
-        handleModalDotAgencyChange(dotAgency);
+    const modalNonDotIdGroup = document.getElementById('modalNonDotIdGroup');
+    const modalFmcsaGroup = document.getElementById('modalFmcsaGroup');
+    const modalDotOtherGroup = document.getElementById('modalDotOtherGroup');
+
+    if (modalDotAgency) {
+      if (isDot) {
+        if (modalDotGroup) modalDotGroup.style.display = 'block';
+        if (modalNonDotIdGroup) modalNonDotIdGroup.style.display = 'none';
+        modalDotAgency.value = dotAgency;
+        if (typeof handleModalDotAgencyChange === 'function') {
+          handleModalDotAgencyChange(dotAgency);
+        }
+      } else {
+        if (modalDotGroup) modalDotGroup.style.display = 'none';
+        if (modalNonDotIdGroup) modalNonDotIdGroup.style.display = 'block';
+        if (modalFmcsaGroup) modalFmcsaGroup.style.display = 'none';
+        if (modalDotOtherGroup) modalDotOtherGroup.style.display = 'none';
       }
     }
   };
@@ -431,6 +443,30 @@ function openOrderModal(productId, productName, price) {
   if (testInput) testInput.value = productName;
   if (prodIdInput && productId) prodIdInput.value = productId;
 
+  const keyStr = (productId || '').toString().toLowerCase();
+  const nameStr = (productName || '').toLowerCase();
+  const isDot = (keyStr.includes('dot') && !keyStr.includes('non-dot') && !keyStr.includes('nondot')) ||
+                (nameStr.includes('dot') && !nameStr.includes('non-dot') && !nameStr.includes('nondot'));
+
+  const modalDotGroup = document.getElementById('modalDotAgencyGroup');
+  const modalNonDotIdGroup = document.getElementById('modalNonDotIdGroup');
+  const modalFmcsaGroup = document.getElementById('modalFmcsaGroup');
+  const modalDotOtherGroup = document.getElementById('modalDotOtherGroup');
+
+  if (isDot) {
+    if (modalDotGroup) modalDotGroup.style.display = 'block';
+    if (modalNonDotIdGroup) modalNonDotIdGroup.style.display = 'none';
+    const agency = document.getElementById('modalDotAgency')?.value || 'FMCSA';
+    if (typeof handleModalDotAgencyChange === 'function') {
+      handleModalDotAgencyChange(agency);
+    }
+  } else {
+    if (modalDotGroup) modalDotGroup.style.display = 'none';
+    if (modalNonDotIdGroup) modalNonDotIdGroup.style.display = 'block';
+    if (modalFmcsaGroup) modalFmcsaGroup.style.display = 'none';
+    if (modalDotOtherGroup) modalDotOtherGroup.style.display = 'none';
+  }
+
   if (typeof modal.showModal === 'function') {
     modal.showModal();
   } else {
@@ -449,6 +485,14 @@ function closeOrderModal() {
 }
 
 function handleModalReasonChange(reason) {
+  const testInput = document.getElementById('modalInputTestName');
+  const prodIdInput = document.getElementById('modalInputProductId');
+  const keyStr = (prodIdInput?.value || '').toLowerCase();
+  const nameStr = (testInput?.value || '').toLowerCase();
+  const isDot = (keyStr.includes('dot') && !keyStr.includes('non-dot') && !keyStr.includes('nondot')) ||
+                (nameStr.includes('dot') && !nameStr.includes('non-dot') && !nameStr.includes('nondot')) ||
+                (reason === 'dot');
+
   const dotAgencyGroup = document.getElementById('modalDotAgencyGroup');
   const nonDotGroup = document.getElementById('modalNonDotIdGroup');
   const fmcsaGroup = document.getElementById('modalFmcsaGroup');
@@ -456,7 +500,7 @@ function handleModalReasonChange(reason) {
   const agencySelect = document.getElementById('modalDotAgency');
   const currentAgency = agencySelect ? agencySelect.value : 'FMCSA';
 
-  if (reason === 'dot') {
+  if (isDot) {
     if (dotAgencyGroup) dotAgencyGroup.style.display = 'block';
     if (nonDotGroup) nonDotGroup.style.display = 'none';
     handleModalDotAgencyChange(currentAgency);

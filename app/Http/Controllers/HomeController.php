@@ -496,11 +496,26 @@ class HomeController extends Controller
             $bullets = null;
         }
 
+        $heroBadge = Setting::get('homepage_hero_badge', 'Nationwide - All States - All CITIES');
+        if (empty($heroBadge) || str_contains($heroBadge, 'Express Online Drug')) {
+            $heroBadge = 'Nationwide - All States - All CITIES';
+        }
+
+        $estimatorTitle = Setting::get('homepage_estimator_title', 'Express Online Order');
+        if (empty($estimatorTitle) || str_contains($estimatorTitle, 'Selector') || str_contains($estimatorTitle, 'Estimator') || $estimatorTitle === 'Online Test Order' || $estimatorTitle === 'Express Online Scheduling') {
+            $estimatorTitle = 'Express Online Order';
+        }
+
+        $estimatorButton = Setting::get('homepage_estimator_button', 'Schedule Online Now');
+        if (empty($estimatorButton) || str_contains($estimatorButton, 'Register & Obtain')) {
+            $estimatorButton = 'Schedule Online Now';
+        }
+
         return [
             'meta_title' => Setting::get('homepage_meta_title', 'Express Drug & Alcohol Testing | Certified Drug Test Centers'),
             'meta_description' => Setting::get('homepage_meta_description', 'Order your drug test online in 2 minutes. Instant electronic donor pass, 20,000+ Quest & Labcorp collection centers, SAMHSA accredited labs, MRO verified results.'),
 
-            'hero_badge' => Setting::get('homepage_hero_badge', 'Nationwide - All States - All CITIES'),
+            'hero_badge' => $heroBadge,
             'hero_title' => Setting::get('homepage_hero_title', 'Accredited Drug Testing Made <span class="highlight-red">Fast, Simple &amp; Confidential</span>'),
             'hero_subtitle' => Setting::get('homepage_hero_subtitle', 'Get your electronic donor pass in 2 minutes. Walk in today at over 20,000 Quest Diagnostics and Labcorp certified collection sites nationwide. No doctor order or appointment necessary.'),
             'hero_bullets' => $bullets ?? [
@@ -510,9 +525,9 @@ class HomeController extends Controller
                 'Court & DOT Legally Defensible',
             ],
 
-            'estimator_title' => Setting::get('homepage_estimator_title', 'Express Online Order'),
+            'estimator_title' => $estimatorTitle,
             'estimator_subtitle' => Setting::get('homepage_estimator_subtitle', 'Select your testing criteria to instantly view pricing and schedule online'),
-            'estimator_button' => Setting::get('homepage_estimator_button', 'Schedule Online Now'),
+            'estimator_button' => $estimatorButton,
 
             'substance_eyebrow' => Setting::get('homepage_substance_eyebrow', 'Smart Drug Screening Tool'),
             'substance_title' => Setting::get('homepage_substance_title', 'Looking For A Specific Drug Or Medication?'),

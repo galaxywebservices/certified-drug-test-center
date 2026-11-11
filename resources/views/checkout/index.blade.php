@@ -547,15 +547,19 @@
                 $initialCats = $product ? $product->categories->pluck('slug')->toArray() : [];
                 if ($product && $product->dot_required) $initialCats[] = 'dot';
                 if ($product && !empty($product->specimen_type)) $initialCats[] = $product->specimen_type;
-                $initialCat = 'urine';
-                if (in_array('dot', $initialCats)) $initialCat = 'dot';
-                elseif (in_array('urine', $initialCats)) $initialCat = 'urine';
-                elseif (in_array('hair', $initialCats)) $initialCat = 'hair';
-                elseif (in_array('alcohol', $initialCats)) $initialCat = 'alcohol';
-                elseif (in_array('saliva', $initialCats) || in_array('oral', $initialCats)) $initialCat = 'oral';
-                elseif (in_array('dna', $initialCats) || in_array('dna-testing', $initialCats)) $initialCat = 'dna';
-                elseif (in_array('blood', $initialCats) || in_array('lab-blood', $initialCats)) $initialCat = 'clinical';
-                elseif (in_array('occupational-health', $initialCats)) $initialCat = 'occupational';
+                $initialCat = request('category', '');
+                if (empty($initialCat)) {
+                    if ($product && $product->dot_required) $initialCat = 'dot';
+                    elseif (in_array('urine', $initialCats)) $initialCat = 'urine';
+                    elseif (in_array('hair', $initialCats)) $initialCat = 'hair';
+                    elseif (in_array('alcohol', $initialCats)) $initialCat = 'alcohol';
+                    elseif (in_array('saliva', $initialCats) || in_array('oral', $initialCats)) $initialCat = 'oral';
+                    elseif (in_array('dna', $initialCats) || in_array('dna-testing', $initialCats)) $initialCat = 'dna';
+                    elseif (in_array('blood', $initialCats) || in_array('lab-blood', $initialCats)) $initialCat = 'clinical';
+                    elseif (in_array('occupational-health', $initialCats)) $initialCat = 'occupational';
+                    elseif (in_array('dot', $initialCats)) $initialCat = 'dot';
+                    else $initialCat = 'urine';
+                }
             @endphp
 
             <div class="checkout-grid">
@@ -681,14 +685,14 @@
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="first_name">Donor First Name <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
-                                    <input type="text" id="first_name" name="first_name" value="{{ old('first_name') }}" class="checkout-input" placeholder="e.g. John" required>
+                                    <input type="text" id="first_name" name="first_name" value="{{ old('first_name', request('first_name', '')) }}" class="checkout-input" placeholder="e.g. John" required>
                                 </div>
                             </div>
 
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="last_name">Donor Last Name <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
-                                    <input type="text" id="last_name" name="last_name" value="{{ old('last_name') }}" class="checkout-input" placeholder="e.g. Doe" required>
+                                    <input type="text" id="last_name" name="last_name" value="{{ old('last_name', request('last_name', '')) }}" class="checkout-input" placeholder="e.g. Doe" required>
                                 </div>
                             </div>
                         </div>
@@ -702,7 +706,7 @@
                                     <span class="checkout-input-icon">
                                         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
                                     </span>
-                                    <input type="email" id="email" name="email" value="{{ old('email') }}" class="checkout-input with-icon" placeholder="donor@example.com" required>
+                                    <input type="email" id="email" name="email" value="{{ old('email', request('email', '')) }}" class="checkout-input with-icon" placeholder="donor@example.com" required>
                                 </div>
                                 <div class="checkout-hint">Electronic Donor Pass sent here immediately.</div>
                             </div>
@@ -715,7 +719,7 @@
                                     <span class="checkout-input-icon">
                                         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
                                     </span>
-                                    <input type="email" id="results_email" name="results_email" value="{{ old('results_email') }}" class="checkout-input with-icon" placeholder="results@example.com (optional if same as donor pass)">
+                                    <input type="email" id="results_email" name="results_email" value="{{ old('results_email', request('results_email', '')) }}" class="checkout-input with-icon" placeholder="results@example.com (optional if same as donor pass)">
                                 </div>
                                 <div class="checkout-hint">Confidential lab results (24-48 hrs) sent here.</div>
                             </div>
@@ -728,7 +732,7 @@
                                     <span class="checkout-input-icon">
                                         <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                                     </span>
-                                    <input type="tel" id="phone" name="phone" value="{{ old('phone') }}" class="checkout-input with-icon" placeholder="(555) 000-0000" required>
+                                    <input type="tel" id="phone" name="phone" value="{{ old('phone', request('phone', '')) }}" class="checkout-input with-icon" placeholder="(555) 000-0000" required>
                                 </div>
                                 <div class="checkout-hint">For MRO physician verification and SMS pass status.</div>
                             </div>
@@ -736,7 +740,7 @@
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="dob">Date of Birth <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
-                                    <input type="date" id="dob" name="dob" value="{{ old('dob') }}" class="checkout-input" required>
+                                    <input type="date" id="dob" name="dob" value="{{ old('dob', request('dob', '')) }}" class="checkout-input" required>
                                 </div>
                                 <div class="checkout-hint">Required for laboratory verification and chain of custody.</div>
                             </div>
@@ -757,13 +761,23 @@
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="test_reason">Reason for Testing <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
+                                    @php
+                                        $selectedReason = old('test_reason', request('test_reason', 'Pre-Employment'));
+                                        $reasonOptions = [
+                                            'Pre-Employment',
+                                            'Random',
+                                            'Reasonable Suspicion',
+                                            'Post-Accident',
+                                            'Follow-Up',
+                                            'Return to Duty',
+                                            'Court-Ordered / Probation',
+                                            'Personal / Family',
+                                        ];
+                                    @endphp
                                     <select id="test_reason" name="test_reason" class="checkout-input checkout-select" onchange="handleCheckoutReasonChange(this.value)" required>
-                                        <option value="Pre-Employment">Pre-Employment</option>
-                                        <option value="Random">Random</option>
-                                        <option value="Reasonable Suspicion">Reasonable Suspicion</option>
-                                        <option value="Post-Accident">Post-Accident</option>
-                                        <option value="Follow-Up">Follow-Up</option>
-                                        <option value="Return to Duty">Return to Duty</option>
+                                        @foreach($reasonOptions as $opt)
+                                            <option value="{{ $opt }}" {{ $selectedReason === $opt ? 'selected' : '' }}>{{ $opt }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="checkout-hint">Select the compliance or testing reason.</div>
@@ -775,13 +789,16 @@
                             <div class="checkout-form-group" style="grid-column: span 2;">
                                 <label class="checkout-label" for="checkout_dot_agency">DOT Regulated Agency <span class="checkout-label-req">*</span></label>
                                 <div class="checkout-input-wrap">
+                                    @php
+                                        $selectedAgency = old('dot_agency', request('dot_agency', 'FMCSA'));
+                                    @endphp
                                     <select id="checkout_dot_agency" name="dot_agency" class="checkout-input checkout-select" onchange="handleCheckoutDotAgencyChange(this.value)">
-                                        <option value="FMCSA">FMCSA (Federal Motor Carrier Safety Administration - Trucking / CDL)</option>
-                                        <option value="FAA">FAA (Federal Aviation Administration)</option>
-                                        <option value="USCG">USCG (United States Coast Guard)</option>
-                                        <option value="FTA">FTA (Federal Transit Administration)</option>
-                                        <option value="PHMSA">PHMSA (Pipeline &amp; Hazardous Materials Safety Administration)</option>
-                                        <option value="FRA">FRA (Federal Railroad Administration)</option>
+                                        <option value="FMCSA" {{ $selectedAgency === 'FMCSA' ? 'selected' : '' }}>FMCSA (Federal Motor Carrier Safety Administration - Trucking / CDL)</option>
+                                        <option value="FAA" {{ $selectedAgency === 'FAA' ? 'selected' : '' }}>FAA (Federal Aviation Administration)</option>
+                                        <option value="USCG" {{ $selectedAgency === 'USCG' ? 'selected' : '' }}>USCG (United States Coast Guard)</option>
+                                        <option value="FTA" {{ $selectedAgency === 'FTA' ? 'selected' : '' }}>FTA (Federal Transit Administration)</option>
+                                        <option value="PHMSA" {{ $selectedAgency === 'PHMSA' ? 'selected' : '' }}>PHMSA (Pipeline &amp; Hazardous Materials Safety Administration)</option>
+                                        <option value="FRA" {{ $selectedAgency === 'FRA' ? 'selected' : '' }}>FRA (Federal Railroad Administration)</option>
                                     </select>
                                 </div>
                                 <div class="checkout-hint">FMCSA mandates CDL Number &amp; State of Issuance. Other agencies require DL Number, Full SSN, or Employer ID.</div>
@@ -792,15 +809,18 @@
                         <div id="checkoutNonDotIdGroup" class="checkout-form-row">
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="donor_id_type_nondot">Donor ID Type</label>
+                                @php
+                                    $selectedIdType = old('donor_id_type', request('donor_id_type', 'ssn_last6'));
+                                @endphp
                                 <select id="donor_id_type_nondot" name="donor_id_type" class="checkout-input checkout-select">
-                                    <option value="ssn_last6">Social Security Number (Last 6)</option>
-                                    <option value="dl_number">Driver's License (DL Number)</option>
-                                    <option value="employee_id">Employer ID / Employee ID</option>
+                                    <option value="ssn_last6" {{ $selectedIdType === 'ssn_last6' ? 'selected' : '' }}>Social Security Number (Last 6)</option>
+                                    <option value="dl_number" {{ $selectedIdType === 'dl_number' ? 'selected' : '' }}>Driver's License (DL Number)</option>
+                                    <option value="employee_id" {{ $selectedIdType === 'employee_id' ? 'selected' : '' }}>Employer ID / Employee ID</option>
                                 </select>
                             </div>
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="donor_id_number_nondot">Donor ID Number <span class="checkout-label-req">*</span></label>
-                                <input type="text" id="donor_id_number_nondot" name="donor_id_number" value="{{ old('donor_id_number') }}" class="checkout-input" placeholder="e.g. Last 6 of SSN, DL #, or Employer ID" minlength="4" maxlength="25">
+                                <input type="text" id="donor_id_number_nondot" name="donor_id_number" value="{{ old('donor_id_number', request('donor_id_number', '')) }}" class="checkout-input" placeholder="e.g. Last 6 of SSN, DL #, or Employer ID" minlength="4" maxlength="25">
                                 <div class="checkout-hint">Last 6 of SSN, Driver's License #, or workplace Employee ID.</div>
                             </div>
                         </div>
@@ -809,7 +829,7 @@
                         <div id="checkoutFmcsaGroup" class="checkout-form-row" style="display:none;">
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="cdl_number">CDL Number (Commercial Driver's License) <span class="checkout-label-req">*</span></label>
-                                <input type="text" id="cdl_number" name="cdl_number" value="{{ old('cdl_number') }}" class="checkout-input" placeholder="Enter CDL Number">
+                                <input type="text" id="cdl_number" name="cdl_number" value="{{ old('cdl_number', request('cdl_number', '')) }}" class="checkout-input" placeholder="Enter CDL Number">
                                 <div class="checkout-hint">Required by FMCSA Federal Drug &amp; Alcohol Clearinghouse.</div>
                             </div>
                             <div class="checkout-form-group">
@@ -818,9 +838,10 @@
                                     <option value="">Select State</option>
                                     @php
                                         $usStates = ['AL'=>'Alabama','AK'=>'Alaska','AZ'=>'Arizona','AR'=>'Arkansas','CA'=>'California','CO'=>'Colorado','CT'=>'Connecticut','DE'=>'Delaware','FL'=>'Florida','GA'=>'Georgia','HI'=>'Hawaii','ID'=>'Idaho','IL'=>'Illinois','IN'=>'Indiana','IA'=>'Iowa','KS'=>'Kansas','KY'=>'Kentucky','LA'=>'Louisiana','ME'=>'Maine','MD'=>'Maryland','MA'=>'Massachusetts','MI'=>'Michigan','MN'=>'Minnesota','MS'=>'Mississippi','MO'=>'Missouri','MT'=>'Montana','NE'=>'Nebraska','NV'=>'Nevada','NH'=>'New Hampshire','NJ'=>'New Jersey','NM'=>'New Mexico','NY'=>'New York','NC'=>'North Carolina','ND'=>'North Dakota','OH'=>'Ohio','OK'=>'Oklahoma','OR'=>'Oregon','PA'=>'Pennsylvania','RI'=>'Rhode Island','SC'=>'South Carolina','SD'=>'South Dakota','TN'=>'Tennessee','TX'=>'Texas','UT'=>'Utah','VT'=>'Vermont','VA'=>'Virginia','WA'=>'Washington','WV'=>'West Virginia','WI'=>'Wisconsin','WY'=>'Wyoming'];
+                                        $selectedCdlState = old('cdl_state', request('cdl_state', ''));
                                     @endphp
                                     @foreach($usStates as $abbr => $stName)
-                                        <option value="{{ $abbr }}">{{ $abbr }} - {{ $stName }}</option>
+                                        <option value="{{ $abbr }}" {{ $selectedCdlState === $abbr ? 'selected' : '' }}>{{ $abbr }} - {{ $stName }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -838,7 +859,7 @@
                             </div>
                             <div class="checkout-form-group">
                                 <label class="checkout-label" for="dot_other_id_number">DL Number, Full SSN, or Employer ID <span class="checkout-label-req">*</span></label>
-                                <input type="text" id="dot_other_id_number" class="checkout-input" placeholder="Driver's License #, 9-digit SSN, or Employer ID" oninput="document.getElementById('donor_id_number_nondot').value = this.value">
+                                <input type="text" id="dot_other_id_number" value="{{ old('donor_id_number', request('donor_id_number', '')) }}" class="checkout-input" placeholder="Driver's License #, 9-digit SSN, or Employer ID" oninput="document.getElementById('donor_id_number_nondot').value = this.value">
                                 <div class="checkout-hint">FAA, USCG, FTA, PHMSA &amp; FRA accept DL Number, Full SSN, or Employer ID.</div>
                             </div>
                         </div>

@@ -27,11 +27,34 @@ class CheckoutController extends Controller
         }
 
         if (!$product && $request->has('product')) {
-            $product = Product::where('slug', $request->input('product'))->where('is_active', true)->first();
+            $val = $request->input('product');
+            $slugNorm = strtolower(trim($val));
+            $product = Product::whereIn('slug', [
+                $slugNorm,
+                str_replace('non-dot', 'nondot', $slugNorm),
+                str_replace('nondot', 'non-dot', $slugNorm),
+            ])->where('is_active', true)->first();
         }
 
         if (!$product && $request->has('product_id')) {
-            $product = Product::where('id', $request->input('product_id'))->where('is_active', true)->first();
+            $val = $request->input('product_id');
+            if (is_numeric($val)) {
+                $product = Product::where('id', (int)$val)->where('is_active', true)->first();
+            } else {
+                $slugNorm = strtolower(trim($val));
+                $product = Product::whereIn('slug', [
+                    $slugNorm,
+                    str_replace('non-dot', 'nondot', $slugNorm),
+                    str_replace('nondot', 'non-dot', $slugNorm),
+                    str_replace('-urine', '', $slugNorm),
+                ])->where('is_active', true)->first();
+            }
+        }
+
+        if (!$product && $request->has('test_name')) {
+            $testName = trim($request->input('test_name'));
+            $product = Product::where('name', $testName)->where('is_active', true)->first()
+                ?? Product::where('name', 'LIKE', '%' . $testName . '%')->where('is_active', true)->first();
         }
 
         if (!$product) {

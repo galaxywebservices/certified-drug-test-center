@@ -12,7 +12,7 @@
         <div class="hero-split-left">
             <div class="hero-tagline-badge" style="background:#F0F5FA; border:1px solid #CBD5E1; color:#0B2545;">
                 <span style="color:#C1121F;">★</span>
-                {!! $homeSettings['hero_badge'] ?? 'Nationwide - All States - All CITIES' !!}
+                {!! (!empty($homeSettings['hero_badge']) && !str_contains($homeSettings['hero_badge'], 'Express Online Drug')) ? $homeSettings['hero_badge'] : 'Nationwide - All States - All CITIES' !!}
                 <span style="color:#C1121F;">★</span>
             </div>
 
@@ -59,7 +59,13 @@
                 <div class="estimator-header">
                     <h3>
                         <svg width="22" height="22" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 1a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm4-4a1 1 0 100 2h.01a1 1 0 100-2H13zM9 9a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zM7 8a1 1 0 100 2h.01a1 1 0 100-2H7z" clip-rule="evenodd"></path></svg>
-                        {{ $homeSettings['estimator_title'] ?? 'Express Online Order' }}
+                        @php
+                            $estHeading = $homeSettings['estimator_title'] ?? 'Express Online Order';
+                            if (str_contains($estHeading, 'Selector') || str_contains($estHeading, 'Estimator') || $estHeading === 'Online Test Order' || $estHeading === 'Express Online Scheduling') {
+                                $estHeading = 'Express Online Order';
+                            }
+                        @endphp
+                        {{ $estHeading }}
                     </h3>
                     <p>{{ $homeSettings['estimator_subtitle'] ?? 'Select your testing criteria to instantly view pricing and schedule online' }}</p>
                 </div>
@@ -124,7 +130,13 @@
                 </div>
 
                 <button type="button" class="btn btn-primary btn-lg" style="width:100%; margin-top:16px; background:#C1121F; color:#fff;" onclick="handleEstimatorOrder()">
-                    {{ $homeSettings['estimator_button'] ?? 'Schedule Online Now' }}
+                    @php
+                        $estBtnText = $homeSettings['estimator_button'] ?? 'Schedule Online Now';
+                        if (str_contains($estBtnText, 'Register & Obtain')) {
+                            $estBtnText = 'Schedule Online Now';
+                        }
+                    @endphp
+                    {{ $estBtnText }}
                 </button>
             </div>
         </div>
