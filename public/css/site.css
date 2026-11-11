@@ -1565,7 +1565,7 @@ button, input, select, textarea {
   padding: 32px;
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-md);
-  margin-bottom: 40px;
+  margin-bottom: 0;
 }
 
 .substance-search-input {
@@ -2120,21 +2120,102 @@ select.form-control {
 }
 
 @media (max-width: 768px) {
+  /* Section Spacing Tightened on Mobile (Removes large gaps) */
+  .section {
+    padding: 32px 0;
+  }
+  .section-header {
+    margin: 0 auto 20px;
+  }
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .section-eyebrow {
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    margin-bottom: 6px;
+  }
+  .section-desc {
+    font-size: 14.5px;
+    line-height: 1.5;
+  }
+
   .hero-title {
-    font-size: 32px;
+    font-size: 30px;
   }
   .hero-subtitle {
-    font-size: 16px;
+    font-size: 15px;
+  }
+  .hero-split {
+    padding: 24px 0 28px;
   }
   .hero-split-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
   .hero-split-left h1 {
-    font-size: 30px;
+    font-size: 26px;
+    line-height: 1.22;
+    margin-bottom: 12px;
+  }
+  .hero-split-left p {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+  .hero-split-checklist {
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .quick-estimator-card {
+    padding: 18px 16px;
+    border-radius: 12px;
+  }
+  .estimator-header {
+    padding-bottom: 10px;
+    margin-bottom: 14px;
+  }
+  .estimator-header h3 {
+    font-size: 17px;
+  }
+
+  /* Substance Checker section & box tightened */
+  #substance-checker.section {
+    padding: 20px 0;
+  }
+  .substance-checker-box {
+    padding: 20px 16px;
+    margin-bottom: 0;
+    border-radius: 12px;
+  }
+  .substance-pills-quick {
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .substance-quick-pill {
+    padding: 4px 10px;
+    font-size: 11.5px;
+  }
+
+  /* Product Catalog & Tabs */
+  .filter-tabs {
+    gap: 6px;
+    margin-bottom: 18px;
+  }
+  .filter-tab-btn {
+    padding: 7px 13px;
+    font-size: 12.5px;
   }
   .products-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
   }
+  .product-card {
+    padding: 18px 16px;
+    border-radius: 12px;
+  }
+
   .categories-grid {
     grid-template-columns: 1fr;
   }
@@ -2146,6 +2227,17 @@ select.form-control {
   }
   .states-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .state-search-bar {
+    margin: 0 auto 16px;
+  }
+  .faq-item {
+    margin-bottom: 10px;
+  }
+  .faq-summary {
+    padding: 14px 16px;
+    font-size: 14.5px;
   }
   .footer-grid {
     grid-template-columns: 1fr;
@@ -2155,6 +2247,121 @@ select.form-control {
   }
   .header-hours {
     display: none;
+  }
+
+  /* ==========================================================================
+     Mobile Stacked Matrix / Comparison Tables (No horizontal scrolling)
+     ========================================================================== */
+  .table-responsive,
+  .clinical-table-wrapper {
+    overflow-x: visible !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .comparison-table,
+  .comparison-table tbody,
+  .comparison-table tr,
+  .comparison-table td,
+  .clinical-spec-table,
+  .clinical-spec-table tbody,
+  .clinical-spec-table tr,
+  .clinical-spec-table td,
+  .substance-matrix-table,
+  .substance-matrix-table tbody,
+  .substance-matrix-table tr,
+  .substance-matrix-table td {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .comparison-table thead,
+  .clinical-spec-table thead,
+  .substance-matrix-table thead {
+    display: none !important;
+  }
+
+  .comparison-table tbody tr,
+  .clinical-spec-table tbody tr,
+  .substance-matrix-table tbody tr {
+    background: #FFFFFF !important;
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 12px !important;
+    margin-bottom: 12px !important;
+    padding: 14px 16px !important;
+    box-shadow: 0 2px 6px rgba(11, 37, 69, 0.04) !important;
+  }
+
+  .comparison-table td,
+  .clinical-spec-table td,
+  .substance-matrix-table td {
+    padding: 6px 0 !important;
+    border: none !important;
+    border-right: none !important;
+    background: transparent !important;
+  }
+
+  /* Drug Name / Substance Heading in Card */
+  .comparison-table td:first-child,
+  .clinical-spec-table td:first-child,
+  .substance-matrix-table td:first-child {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    color: #0B2545 !important;
+    padding: 0 0 4px 0 !important;
+    line-height: 1.3 !important;
+  }
+
+  /* Class / Category */
+  .comparison-table td:nth-child(2),
+  .clinical-spec-table td:nth-child(2) {
+    font-size: 12.5px !important;
+    color: #64748B !important;
+    font-weight: 600 !important;
+    padding: 0 0 10px 0 !important;
+    border-bottom: 1px solid #F1F5F9 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .comparison-table td:nth-child(2)::before,
+  .clinical-spec-table td:nth-child(2)::before {
+    content: "Class: ";
+    color: #94A3B8;
+    font-weight: 500;
+  }
+
+  /* Panel Row Cells */
+  .comparison-table td:nth-child(n+3),
+  .clinical-spec-table td:nth-child(n+3),
+  .substance-matrix-table td:nth-child(n+2) {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 7px 0 !important;
+    border-bottom: 1px dashed #F1F5F9 !important;
+    font-size: 13.5px !important;
+    text-align: right !important;
+  }
+
+  .comparison-table td:last-child,
+  .clinical-spec-table td:last-child,
+  .substance-matrix-table td:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+  }
+
+  .comparison-table td:nth-child(n+3)::before,
+  .clinical-spec-table td:nth-child(n+3)::before,
+  .substance-matrix-table td:nth-child(n+2)::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #0B2545;
+    text-align: left;
+    font-size: 13px;
+    flex: 1;
   }
 }
 
@@ -3696,10 +3903,14 @@ select.form-control {
 /* ===== Phone: everything stacks to one column ===== */
 @media (max-width:640px){
   .cdtc{font-size:16px}
-  .cdtc section{padding:40px 0}
-  .cdtc .hero{padding-bottom:40px}
+  .cdtc section{padding:26px 0}
+  .cdtc .hero{padding-bottom:24px}
   .cdtc ul.checks,.cdtc .steps,.cdtc .cards,.cdtc dl.gloss{grid-template-columns:minmax(0,1fr)}
-  .cdtc .facts{gap:10px}
+  .cdtc .facts{gap:8px;margin-top:14px}
+  .cdtc .steps{gap:12px;margin-top:16px}
+  .cdtc .cards{gap:12px;margin-top:16px}
+  .cdtc .table-wrap{margin-top:14px}
+  .cdtc .sources-section{padding:24px 0}
   .cdtc .fact{padding:14px 10px}
   .cdtc .fact strong{font-size:1.3rem}
   .cdtc .states{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -3740,8 +3951,8 @@ select.form-control {
 .cdtc .hero-cta .btn-ghost{border-color:var(--navy)}
 @media (max-width:960px){.cdtc ul.checks.checks-3{grid-template-columns:repeat(2,auto);gap:14px 40px}}
 @media (max-width:640px){
-  .cdtc .hero-bottom{margin-top:28px;padding-top:24px}
+  .cdtc .hero-bottom{margin-top:20px;padding-top:16px}
   .cdtc ul.checks.checks-3{grid-template-columns:minmax(0,1fr);justify-content:start}
-  .cdtc .hero-cta{flex-direction:column;gap:10px;margin-top:24px}
+  .cdtc .hero-cta{flex-direction:column;gap:10px;margin-top:16px}
   .cdtc .hero-cta .btn{flex:none;width:100%;min-height:56px;font-size:1.1rem}
 }

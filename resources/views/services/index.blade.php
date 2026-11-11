@@ -304,74 +304,74 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Marijuana (THC)</strong></td>
-                        <td>Cannabinoid</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
+                        <td data-label="Drug / Substance Class"><strong>Marijuana (THC)</strong></td>
+                        <td data-label="Clinical Class">Cannabinoid</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="5-Panel ($89.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="10-Panel ($109.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="12-Panel ($139.99)">✓ Yes</td>
                     </tr>
                     <tr>
-                        <td><strong>Cocaine (COC)</strong></td>
-                        <td>Stimulant</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
+                        <td data-label="Drug / Substance Class"><strong>Cocaine (COC)</strong></td>
+                        <td data-label="Clinical Class">Stimulant</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="5-Panel ($89.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="10-Panel ($109.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="12-Panel ($139.99)">✓ Yes</td>
                     </tr>
                     <tr>
-                        <td><strong>Opiates (Codeine, Morphine, Heroin)</strong></td>
-                        <td>Opioid Narcotic</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
+                        <td data-label="Drug / Substance Class"><strong>Opiates (Codeine, Morphine, Heroin)</strong></td>
+                        <td data-label="Clinical Class">Opioid Narcotic</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="5-Panel ($89.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="10-Panel ($109.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="12-Panel ($139.99)">✓ Yes</td>
                     </tr>
                     <tr>
-                        <td><strong>Amphetamines &amp; Methamphetamines</strong></td>
-                        <td>Stimulant</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
+                        <td data-label="Drug / Substance Class"><strong>Amphetamines &amp; Methamphetamines</strong></td>
+                        <td data-label="Clinical Class">Stimulant</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="5-Panel ($89.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="10-Panel ($109.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="12-Panel ($139.99)">✓ Yes</td>
                     </tr>
                     <tr>
-                        <td><strong>Phencyclidine (PCP)</strong></td>
-                        <td>Hallucinogen</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
+                        <td data-label="Drug / Substance Class"><strong>Phencyclidine (PCP)</strong></td>
+                        <td data-label="Clinical Class">Hallucinogen</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="5-Panel ($89.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="10-Panel ($109.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="12-Panel ($139.99)">✓ Yes</td>
                     </tr>
                     <tr>
-                        <td><strong>Benzodiazepines (Xanax, Valium)</strong></td>
-                        <td>Depressant</td>
-                        <td style="text-align:center; color:#94A3B8;">&mdash;</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
+                        <td data-label="Drug / Substance Class"><strong>Benzodiazepines (Xanax, Valium)</strong></td>
+                        <td data-label="Clinical Class">Depressant</td>
+                        <td style="text-align:center; color:#94A3B8;" data-label="5-Panel ($89.99)">&mdash;</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="10-Panel ($109.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="12-Panel ($139.99)">✓ Yes</td>
                     </tr>
                     <tr>
-                        <td><strong>Barbiturates</strong></td>
-                        <td>Sedative</td>
-                        <td style="text-align:center; color:#94A3B8;">&mdash;</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
+                        <td data-label="Drug / Substance Class"><strong>Barbiturates</strong></td>
+                        <td data-label="Clinical Class">Sedative</td>
+                        <td style="text-align:center; color:#94A3B8;" data-label="5-Panel ($89.99)">&mdash;</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="10-Panel ($109.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="12-Panel ($139.99)">✓ Yes</td>
                     </tr>
                     <tr>
-                        <td><strong>Methadone</strong></td>
-                        <td>Synthetic Opioid</td>
-                        <td style="text-align:center; color:#94A3B8;">&mdash;</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
+                        <td data-label="Drug / Substance Class"><strong>Methadone</strong></td>
+                        <td data-label="Clinical Class">Synthetic Opioid</td>
+                        <td style="text-align:center; color:#94A3B8;" data-label="5-Panel ($89.99)">&mdash;</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="10-Panel ($109.99)">✓ Yes</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="12-Panel ($139.99)">✓ Yes</td>
                     </tr>
                     <tr>
-                        <td><strong>Expanded Opioids (Oxycodone, Hydrocodone)</strong></td>
-                        <td>Semi-Synthetic</td>
-                        <td style="text-align:center; color:#94A3B8;">&mdash;</td>
-                        <td style="text-align:center; color:#94A3B8;">&mdash;</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
+                        <td data-label="Drug / Substance Class"><strong>Expanded Opioids (Oxycodone, Hydrocodone)</strong></td>
+                        <td data-label="Clinical Class">Semi-Synthetic</td>
+                        <td style="text-align:center; color:#94A3B8;" data-label="5-Panel ($89.99)">&mdash;</td>
+                        <td style="text-align:center; color:#94A3B8;" data-label="10-Panel ($109.99)">&mdash;</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="12-Panel ($139.99)">✓ Yes</td>
                     </tr>
                     <tr>
-                        <td><strong>Buprenorphine (Suboxone)</strong></td>
-                        <td>Opioid Partial</td>
-                        <td style="text-align:center; color:#94A3B8;">&mdash;</td>
-                        <td style="text-align:center; color:#94A3B8;">&mdash;</td>
-                        <td style="text-align:center; color:#15803D; font-weight:bold;">✓ Yes</td>
+                        <td data-label="Drug / Substance Class"><strong>Buprenorphine (Suboxone)</strong></td>
+                        <td data-label="Clinical Class">Opioid Partial</td>
+                        <td style="text-align:center; color:#94A3B8;" data-label="5-Panel ($89.99)">&mdash;</td>
+                        <td style="text-align:center; color:#94A3B8;" data-label="10-Panel ($109.99)">&mdash;</td>
+                        <td style="text-align:center; color:#15803D; font-weight:bold;" data-label="12-Panel ($139.99)">✓ Yes</td>
                     </tr>
                 </tbody>
             </table>

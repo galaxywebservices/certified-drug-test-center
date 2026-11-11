@@ -269,16 +269,16 @@
                 <tbody>
                     @foreach($comparisonPanels as $row)
                     <tr>
-                        <td><strong>{{ $row['substance'] }}</strong></td>
-                        <td style="color:#64748B;">{{ $row['category'] }}</td>
-                        <td style="text-align:center;">
+                        <td data-label="Drug Class / Substance"><strong>{{ $row['substance'] }}</strong></td>
+                        <td data-label="Class" style="color:#64748B;">{{ $row['category'] }}</td>
+                        <td style="text-align:center;" data-label="5 Panel ($89.99)">
                             @if($row['panel5'] === true)
                                 <span class="check-yes">✓ Included</span>
                             @else
                                 <span class="check-no">—</span>
                             @endif
                         </td>
-                        <td style="text-align:center;">
+                        <td style="text-align:center;" data-label="10 Panel ($109.99)">
                             @if($row['panel10'] === true)
                                 <span class="check-yes">✓ Included</span>
                             @elseif($row['panel10'] === 'Add-on')
@@ -287,7 +287,7 @@
                                 <span class="check-no">—</span>
                             @endif
                         </td>
-                        <td style="text-align:center;">
+                        <td style="text-align:center;" data-label="12 Panel ($139.99)">
                             @if($row['panel12'] === true)
                                 <span class="check-yes">✓ Included</span>
                             @else

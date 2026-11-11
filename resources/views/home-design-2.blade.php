@@ -235,6 +235,23 @@
     @media (max-width: 600px) {
         .process-grid-4-wrap {
             grid-template-columns: 1fr !important;
+            margin-top: 16px !important;
+            gap: 12px !important;
+        }
+        .process-card-step {
+            padding: 16px 18px !important;
+            border-radius: 10px !important;
+        }
+        .process-step-num {
+            font-size: 22px !important;
+            margin-bottom: 6px !important;
+        }
+        .process-card-step h3 {
+            font-size: 15.5px !important;
+            margin-bottom: 6px !important;
+        }
+        .process-card-step p {
+            font-size: 13px !important;
         }
     }
 </style>
@@ -363,16 +380,16 @@
                 <tbody>
                     @foreach($comparisonPanels as $row)
                     <tr>
-                        <td><strong>{{ $row['substance'] }}</strong></td>
-                        <td style="color:#64748B;">{{ $row['category'] }}</td>
-                        <td style="text-align:center;">
+                        <td data-label="Drug / Metabolite"><strong>{{ $row['substance'] }}</strong></td>
+                        <td data-label="Class">{{ $row['category'] }}</td>
+                        <td style="text-align:center;" data-label="5 Panel ($89.99)">
                             @if($row['panel5'] === true)
                                 <span class="check-yes">✓ Yes</span>
                             @else
                                 <span class="check-no">—</span>
                             @endif
                         </td>
-                        <td style="text-align:center;">
+                        <td style="text-align:center;" data-label="10 Panel ($109.99)">
                             @if($row['panel10'] === true)
                                 <span class="check-yes">✓ Yes</span>
                             @elseif($row['panel10'] === 'Add-on')
@@ -381,7 +398,7 @@
                                 <span class="check-no">—</span>
                             @endif
                         </td>
-                        <td style="text-align:center;">
+                        <td style="text-align:center;" data-label="12 Panel ($139.99)">
                             @if($row['panel12'] === true)
                                 <span class="check-yes">✓ Yes</span>
                             @else

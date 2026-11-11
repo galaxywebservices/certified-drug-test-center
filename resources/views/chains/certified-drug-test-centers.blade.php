@@ -160,10 +160,14 @@
 /* ===== Phone: everything stacks to one column ===== */
 @media (max-width:640px){
   .cdtc{font-size:16px}
-  .cdtc section{padding:40px 0}
-  .cdtc .hero{padding-bottom:40px}
+  .cdtc section{padding:26px 0}
+  .cdtc .hero{padding-bottom:24px}
   .cdtc ul.checks,.cdtc .steps,.cdtc .cards,.cdtc dl.gloss{grid-template-columns:minmax(0,1fr)}
-  .cdtc .facts{gap:10px}
+  .cdtc .facts{gap:8px;margin-top:14px}
+  .cdtc .steps{gap:12px;margin-top:16px}
+  .cdtc .cards{gap:12px;margin-top:16px}
+  .cdtc .table-wrap{margin-top:14px}
+  .cdtc .sources-section{padding:24px 0}
   .cdtc .fact{padding:14px 10px}
   .cdtc .fact strong{font-size:1.3rem}
   .cdtc .states{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -204,9 +208,9 @@
 .cdtc .hero-cta .btn-ghost{border-color:var(--navy)}
 @media (max-width:960px){.cdtc ul.checks.checks-3{grid-template-columns:repeat(2,auto);gap:14px 40px}}
 @media (max-width:640px){
-  .cdtc .hero-bottom{margin-top:28px;padding-top:24px}
+  .cdtc .hero-bottom{margin-top:20px;padding-top:16px}
   .cdtc ul.checks.checks-3{grid-template-columns:minmax(0,1fr);justify-content:start}
-  .cdtc .hero-cta{flex-direction:column;gap:10px;margin-top:24px}
+  .cdtc .hero-cta{flex-direction:column;gap:10px;margin-top:16px}
   .cdtc .hero-cta .btn{flex:none;width:100%;min-height:56px;font-size:1.1rem}
 }
 </style>
