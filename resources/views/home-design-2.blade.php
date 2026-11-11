@@ -82,18 +82,6 @@
                     </select>
                 </div>
 
-                <div class="estimator-field" id="estDotAgencyGroup" style="display:none;">
-                    <label class="estimator-label" for="estDotAgency">DOT Regulated Agency / Mode</label>
-                    <select id="estDotAgency" class="estimator-select" onchange="handleEstimatorAgencyChange(this.value)">
-                        <option value="FMCSA">FMCSA (Federal Motor Carrier Safety Administration)</option>
-                        <option value="FAA">FAA (Federal Aviation Administration)</option>
-                        <option value="USCG">USCG (United States Coast Guard)</option>
-                        <option value="FTA">FTA (Federal Transit Administration)</option>
-                        <option value="PHMSA">PHMSA (Pipeline &amp; Hazardous Materials Safety)</option>
-                        <option value="FRA">FRA (Federal Railroad Administration)</option>
-                    </select>
-                </div>
-
                 <div class="estimator-field">
                     <label class="estimator-label" for="estMethod">2. Select your Testing Method</label>
                     <select id="estMethod" class="estimator-select" onchange="handleEstimatorMethodChange(this.value)">
@@ -105,6 +93,18 @@
                         <option value="occupational">Occupational Tests</option>
                         <option value="clinical">Clinical Tests</option>
                         <option value="dna">DNA Tests</option>
+                    </select>
+                </div>
+
+                <div class="estimator-field" id="estDotAgencyGroup" style="display:none;">
+                    <label class="estimator-label" for="estDotAgency">DOT Regulated Agency / Mode</label>
+                    <select id="estDotAgency" class="estimator-select" onchange="handleEstimatorAgencyChange(this.value)">
+                        <option value="FMCSA">FMCSA (Federal Motor Carrier Safety Administration)</option>
+                        <option value="FAA">FAA (Federal Aviation Administration)</option>
+                        <option value="USCG">USCG (United States Coast Guard)</option>
+                        <option value="FTA">FTA (Federal Transit Administration)</option>
+                        <option value="PHMSA">PHMSA (Pipeline &amp; Hazardous Materials Safety)</option>
+                        <option value="FRA">FRA (Federal Railroad Administration)</option>
                     </select>
                 </div>
 

@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   window.handleEstimatorReasonChange = function (reason) {
-    // Preserves selected reason without overwriting testing method
+    // Reason selection is independent; never reset testing method or panel
   };
 
   window.handleEstimatorAgencyChange = function (agency) {
@@ -331,6 +331,12 @@ document.addEventListener('DOMContentLoaded', function () {
   window.handleEstimatorMethodChange = function (method) {
     const specimenSelect = document.getElementById('estSpecimen');
     const dotAgencyGroup = document.getElementById('estDotAgencyGroup');
+    const reasonSelect = document.getElementById('estReason');
+
+    // Never reset or clear reason. Ensure a valid option is always preserved.
+    if (reasonSelect && (!reasonSelect.value || reasonSelect.selectedIndex < 0)) {
+      reasonSelect.value = 'Pre-Employment';
+    }
 
     if (method === 'dot') {
       if (dotAgencyGroup) dotAgencyGroup.style.display = 'block';

@@ -1732,9 +1732,13 @@ button, input, select, textarea {
    Design 2 Specific Elements: Split Hero & Instant Price Estimator
    ========================================================================== */
 .hero-split {
-  padding: 50px 0 60px;
+  padding: 40px 0 30px;
   background: #FFFFFF;
   border-bottom: 1px solid var(--color-border);
+}
+
+#substance-checker {
+  padding: 30px 0 40px;
 }
 
 .hero-split-grid {
@@ -2149,11 +2153,11 @@ select.form-control {
     font-size: 15px;
   }
   .hero-split {
-    padding: 24px 0 28px;
+    padding: 20px 0 10px;
   }
   .hero-split-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 16px;
   }
   .hero-split-left h1 {
     font-size: 26px;
@@ -2169,7 +2173,7 @@ select.form-control {
     margin-bottom: 18px;
   }
   .quick-estimator-card {
-    padding: 18px 16px;
+    padding: 16px 14px;
     border-radius: 12px;
   }
   .estimator-header {
@@ -2180,12 +2184,12 @@ select.form-control {
     font-size: 17px;
   }
 
-  /* Substance Checker section & box tightened */
+  /* Substance Checker section & box tightened (lessen gap between boxes) */
   #substance-checker.section {
-    padding: 20px 0;
+    padding: 8px 0 16px;
   }
   .substance-checker-box {
-    padding: 20px 16px;
+    padding: 16px 14px;
     margin-bottom: 0;
     border-radius: 12px;
   }
