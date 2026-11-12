@@ -50,7 +50,7 @@ class AdminProductController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'nullable|string|max:150|unique:products,slug',
+            'slug' => 'nullable|string|max:150',
             'price' => 'required|numeric|min:0',
             'retail_price' => 'nullable|numeric|min:0',
             'subtitle' => 'nullable|string',
@@ -69,7 +69,14 @@ class AdminProductController extends Controller
             'canonical_url' => 'nullable|string',
         ]);
 
-        $slug = $validated['slug'] ? Str::slug($validated['slug']) : Str::slug($validated['name']);
+        $rawSlug = !empty($validated['slug']) ? $validated['slug'] : $validated['name'];
+        $baseSlug = Str::slug($rawSlug) ?: ('product-' . time());
+        $slug = $baseSlug;
+        $counter = 2;
+        while (Product::where('slug', $slug)->exists()) {
+            $slug = "{$baseSlug}-{$counter}";
+            $counter++;
+        }
 
         $panels = [];
         if (!empty($validated['included_panels'])) {
@@ -113,7 +120,7 @@ class AdminProductController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|max:150|unique:products,slug,' . $product->id,
+            'slug' => 'nullable|string|max:150',
             'price' => 'required|numeric|min:0',
             'retail_price' => 'nullable|numeric|min:0',
             'subtitle' => 'nullable|string',
@@ -132,6 +139,15 @@ class AdminProductController extends Controller
             'canonical_url' => 'nullable|string',
         ]);
 
+        $rawSlug = !empty($validated['slug']) ? $validated['slug'] : $validated['name'];
+        $baseSlug = Str::slug($rawSlug) ?: ('product-' . time());
+        $slug = $baseSlug;
+        $counter = 2;
+        while (Product::where('slug', $slug)->where('id', '!=', $product->id)->exists()) {
+            $slug = "{$baseSlug}-{$counter}";
+            $counter++;
+        }
+
         $panels = [];
         if (!empty($validated['included_panels'])) {
             $panels = array_filter(array_map('trim', explode(',', $validated['included_panels'])));
@@ -139,7 +155,7 @@ class AdminProductController extends Controller
 
         $product->update([
             'name' => $validated['name'],
-            'slug' => Str::slug($validated['slug']),
+            'slug' => $slug,
             'price' => $validated['price'],
             'retail_price' => $validated['retail_price'] ?: round($validated['price'] * 1.3, 2),
             'subtitle' => $validated['subtitle'],

@@ -26,9 +26,10 @@ class PayTraceService
      */
     public function processSale(array $orderData, array $paymentData): array
     {
-        $baseUrl = $this->testMode
-            ? 'https://api.sandbox.paytrace.com/v1'
-            : 'https://api.paytrace.com/v1';
+        $domain = $this->testMode ? 'api.sandbox.paytrace.com' : 'api.paytrace.com';
+        $tokenUrl = "https://{$domain}/oauth/token";
+        $v3TokenUrl = "https://{$domain}/v3/token";
+        $saleUrl = "https://{$domain}/v1/transactions/sale/keyed";
 
         // Check if sandbox / test simulation mode is enabled
         if ($this->testMode && ($this->username === 'demo123' || str_contains($this->username, 'test'))) {
@@ -50,15 +51,34 @@ class PayTraceService
         }
 
         try {
-            // Live PayTrace API authentication & sale request
-            $tokenResponse = Http::post("{$baseUrl}/oauth/token", [
+            // PayTrace OAuth token authentication:
+            // 1. Try standard v1/v2 endpoint with application/x-www-form-urlencoded
+            $tokenResponse = Http::asForm()->post($tokenUrl, [
                 'grant_type' => 'password',
                 'username' => $this->username,
                 'password' => $this->password,
             ]);
 
+            // 2. If initial token request failed, try v3 client_credentials endpoint
             if (!$tokenResponse->successful()) {
-                Log::error('PayTrace Auth Failed', ['response' => $tokenResponse->body()]);
+                $v3Response = Http::asForm()->post($v3TokenUrl, [
+                    'grant_type' => 'client_credentials',
+                    'client_id' => $this->username,
+                    'client_secret' => $this->password,
+                ]);
+
+                if ($v3Response->successful()) {
+                    $tokenResponse = $v3Response;
+                }
+            }
+
+            if (!$tokenResponse->successful()) {
+                Log::error('PayTrace Auth Failed', [
+                    'url' => $tokenUrl,
+                    'username' => $this->username,
+                    'status' => $tokenResponse->status(),
+                    'response' => $tokenResponse->body(),
+                ]);
                 return [
                     'success' => false,
                     'message' => 'Payment Gateway authentication failed. Please contact support.',
@@ -87,11 +107,16 @@ class PayTraceService
                 ],
             ];
 
+            if (!empty($paymentData['cvv'])) {
+                $salePayload['credit_card']['csc'] = preg_replace('/\D/', '', $paymentData['cvv']);
+                $salePayload['csc'] = preg_replace('/\D/', '', $paymentData['cvv']);
+            }
+
             if (!empty($this->integratorId)) {
                 $salePayload['integrator_id'] = $this->integratorId;
             }
 
-            $saleResponse = Http::withToken($token)->post("{$baseUrl}/transactions/sale", $salePayload);
+            $saleResponse = Http::withToken($token)->post($saleUrl, $salePayload);
 
             if ($saleResponse->successful() && $saleResponse->json('success') === true) {
                 return [
@@ -104,6 +129,11 @@ class PayTraceService
             }
 
             $errorMessage = $saleResponse->json('status_message') ?? 'Card declined or invalid payment details.';
+            Log::error('PayTrace Sale Declined', [
+                'status' => $saleResponse->status(),
+                'response' => $saleResponse->json(),
+            ]);
+
             return [
                 'success' => false,
                 'message' => $errorMessage,
