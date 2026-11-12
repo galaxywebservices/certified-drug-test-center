@@ -5,9 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $pageTitle ?? 'Certified Drug Test Centers | Nationwide Drug & Alcohol Testing' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers provides fast, confidential same-day drug testing, DOT compliance, urine, hair, alcohol, and DNA testing at 20,000+ certified local centers nationwide.' }}">
-    <meta name="keywords" content="{{ $metaKeywords ?? 'drug testing, drug test near me, DOT drug test, urine drug test, 5 panel drug test, 10 panel drug test, 12 panel drug test, hair follicle drug test, breath alcohol test, accredited drug testing, Quest Diagnostics drug test, Labcorp drug test' }}">
     @php
-        $canonicalUrl = $canonicalUrl ?? (str_starts_with(request()->getPathInfo(), '/services') ? url(rtrim(request()->getPathInfo(), '/')) : url()->current());
+        $rawPath = request()->getPathInfo();
+        if (!empty($canonicalUrl)) {
+            if (str_contains($canonicalUrl, 'localhost') || str_contains($canonicalUrl, '127.0.0.1')) {
+                $parsedPath = parse_url($canonicalUrl, PHP_URL_PATH);
+                $canonicalUrl = url($parsedPath ?: '/');
+            }
+        } else {
+            $canonicalUrl = $rawPath === '/' ? url('/') : url(rtrim($rawPath, '/'));
+        }
+
+        // Canonical & Trailing slash policy:
+        // Root domain ends with a trailing slash (e.g. https://certifieddrugtestingcenters.com/)
+        // All subpages have NO trailing slash (e.g. https://certifieddrugtestingcenters.com/category/hair)
+        if ($rawPath === '/' || $canonicalUrl === url('/')) {
+            $canonicalUrl = rtrim(url('/'), '/') . '/';
+        } else {
+            $canonicalUrl = rtrim($canonicalUrl, '/');
+        }
     @endphp
     <link rel="canonical" href="{{ $canonicalUrl }}">
     <meta name="robots" content="index, follow">
@@ -18,6 +34,8 @@
     <meta property="og:title" content="{{ $pageTitle ?? 'Certified Drug Test Centers' }}">
     <meta property="og:description" content="{{ $metaDescription ?? 'Same-day drug & alcohol testing at 20,000+ local certified collection centers nationwide.' }}">
     <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    <meta property="og:image:width" content="1774">
+    <meta property="og:image:height" content="887">
     <meta property="og:site_name" content="Certified Drug Test Centers">
 
     <!-- Twitter Card -->
@@ -26,8 +44,9 @@
     <meta name="twitter:description" content="{{ $metaDescription ?? 'Same-day drug & alcohol testing at 20,000+ local certified collection centers nationwide.' }}">
     <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
 
-    <!-- Favicon -->
+    <!-- Favicon & Preload Hero Logo Asset -->
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="preload" as="image" href="{{ asset('images/logo.png') }}" type="image/png">
 
     <!-- Google Fonts: Montserrat (American authoritative headlines) & Inter (ultra-readable body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,241 +60,6 @@
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/site.css') }}?v={{ time() }}">
-
-    <style>
-        /* Header Trust Badges & Alignment */
-        .header-inner {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: space-between !important;
-            gap: 16px !important;
-        }
-        .header-brand-wrap {
-            display: flex !important;
-            align-items: center !important;
-            gap: 16px !important;
-            flex-wrap: nowrap !important;
-            flex-shrink: 0 !important;
-        }
-        .header-trust-badges {
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 10px !important;
-            background: #F8FAFC !important;
-            border: 1px solid #E2E8F0 !important;
-            border-radius: 999px !important;
-            padding: 7px 16px !important;
-            font-size: 13px !important;
-            font-weight: 700 !important;
-            color: #0B2545 !important;
-            box-shadow: 0 1px 4px rgba(11,37,69,0.05) !important;
-            white-space: nowrap !important;
-            flex-shrink: 0 !important;
-            transition: all 0.2s ease !important;
-        }
-        .header-trust-badges:hover {
-            border-color: #CBD5E1 !important;
-            box-shadow: 0 2px 8px rgba(11,37,69,0.08) !important;
-        }
-        .header-review-link {
-            color: #0B2545 !important;
-            text-decoration: none !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 5px !important;
-            font-weight: 700 !important;
-        }
-        .header-review-link:hover {
-            color: #C1121F !important;
-        }
-        .header-espanol-tag {
-            color: #0284C7 !important;
-            font-weight: 700 !important;
-            font-size: 12.5px !important;
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 5px !important;
-        }
-        @media (max-width: 992px) {
-            .header-trust-badges {
-                display: none !important;
-            }
-        }
-
-        /* Accreditation & Partner Network Bar */
-        .partner-logo-bar {
-            background: #F8FAFC !important;
-            border-top: 1px solid #E2E8F0 !important;
-            border-bottom: 1px solid #E2E8F0 !important;
-            padding: 34px 0 !important;
-        }
-        .partner-logo-heading {
-            font-size: 11.5px !important;
-            font-weight: 800 !important;
-            letter-spacing: 1.5px !important;
-            text-transform: uppercase !important;
-            color: #64748B !important;
-            margin: 0 0 18px 0 !important;
-            text-align: center !important;
-        }
-        .partner-network-flex {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 14px !important;
-            flex-wrap: wrap !important;
-        }
-        .partner-network-hero-pill {
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 10px !important;
-            background: #0B2545 !important;
-            color: #FFFFFF !important;
-            padding: 10px 22px !important;
-            border-radius: 999px !important;
-            font-size: 13.5px !important;
-            font-weight: 800 !important;
-            letter-spacing: 0.2px !important;
-            box-shadow: 0 3px 10px rgba(11,37,69,0.15) !important;
-            border: 1px solid rgba(255,255,255,0.15) !important;
-            white-space: nowrap !important;
-        }
-        .partner-org-pills {
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 12px !important;
-            flex-wrap: wrap !important;
-            justify-content: center !important;
-        }
-        .partner-badge-item {
-            display: inline-flex !important;
-            align-items: center !important;
-            background: #FFFFFF !important;
-            border: 1px solid #CBD5E1 !important;
-            border-radius: 8px !important;
-            padding: 7px 16px !important;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04) !important;
-            transition: all 0.2s ease !important;
-            white-space: nowrap !important;
-        }
-        .partner-badge-item:hover {
-            transform: translateY(-2px) !important;
-            border-color: #0B2545 !important;
-            box-shadow: 0 4px 12px rgba(11,37,69,0.08) !important;
-        }
-        .partner-badge-name {
-            font-weight: 900 !important;
-            color: #0B2545 !important;
-            font-size: 13px !important;
-            letter-spacing: 0.5px !important;
-        }
-        .partner-badge-divider {
-            color: #CBD5E1 !important;
-            margin: 0 8px !important;
-            font-weight: 300 !important;
-        }
-        .partner-badge-sub {
-            font-size: 11px !important;
-            font-weight: 700 !important;
-            color: #64748B !important;
-            letter-spacing: 0.5px !important;
-        }
-
-        /* Mobile Section Spacing - Tightened & Unified across all pages & chain */
-        @media (max-width: 768px) {
-            .section {
-                padding: 16px 0 !important;
-            }
-            .section-header {
-                margin: 0 auto 12px !important;
-            }
-            .section-eyebrow {
-                font-size: 11px !important;
-                letter-spacing: 1.2px !important;
-                margin-bottom: 4px !important;
-            }
-            .section-title {
-                font-size: 22px !important;
-                margin-bottom: 6px !important;
-                line-height: 1.22 !important;
-            }
-            .section-desc {
-                font-size: 13.5px !important;
-                line-height: 1.4 !important;
-            }
-            .hero-split {
-                padding: 16px 0 8px !important;
-            }
-            .hero-split-grid {
-                gap: 12px !important;
-            }
-            .quick-estimator-card {
-                padding: 14px 14px !important;
-            }
-            #substance-checker.section {
-                padding: 4px 0 6px !important;
-            }
-            .substance-checker-box {
-                padding: 14px 14px 10px !important;
-                margin-bottom: 0 !important;
-            }
-            .process-grid-4-wrap {
-                margin-top: 10px !important;
-                gap: 10px !important;
-            }
-            .process-card-step {
-                padding: 14px 16px !important;
-            }
-            .filter-tabs {
-                margin-bottom: 14px !important;
-                gap: 6px !important;
-            }
-            .products-grid {
-                gap: 12px !important;
-                margin-top: 10px !important;
-            }
-            .state-search-bar {
-                margin-bottom: 12px !important;
-            }
-            .states-grid {
-                gap: 8px !important;
-            }
-            .faq-wrap {
-                gap: 8px !important;
-                margin-top: 10px !important;
-            }
-
-            /* Chain Pages (.cdtc) Mobile Spacing */
-            .cdtc section {
-                padding: 16px 0 !important;
-            }
-            .cdtc .hero {
-                padding: 14px 0 20px !important;
-            }
-            .cdtc .hero-grid {
-                gap: 16px !important;
-                margin-top: 12px !important;
-            }
-            .cdtc .steps {
-                gap: 10px !important;
-                margin-top: 12px !important;
-            }
-            .cdtc .cards {
-                gap: 10px !important;
-                margin-top: 12px !important;
-            }
-            .cdtc .facts {
-                gap: 8px !important;
-                margin-top: 10px !important;
-            }
-            .cdtc .table-wrap {
-                margin-top: 10px !important;
-            }
-            .cdtc .sources-section {
-                padding: 16px 0 !important;
-            }
-        }
-    </style>
 
     <!-- Structured Data (JSON-LD) for 100% SEO Dominance -->
     <!-- Structured Data (JSON-LD) for 100% SEO Dominance -->
@@ -318,6 +102,14 @@
                         'name' => 'United States',
                     ],
                     'description' => 'Nationwide provider of employer, DOT-regulated, court-ordered, and personal drug and alcohol testing services.',
+                    'aggregateRating' => [
+                        '@type' => 'AggregateRating',
+                        'ratingValue' => '4.9',
+                        'bestRating' => '5',
+                        'worstRating' => '1',
+                        'ratingCount' => '4850',
+                        'reviewCount' => '4850',
+                    ],
                 ],
                 [
                     '@type' => 'WebSite',
@@ -357,7 +149,7 @@
         <div class="container header-inner">
             <div class="header-brand-wrap">
                 <a href="{{ url('/') }}" class="brand-logo-link" title="Certified Drug Test Centers Home">
-                    <img src="{{ asset('images/logo.png') }}" alt="Certified Drug Test Centers - Local Convenient Confidential" class="brand-logo-img">
+                    <img src="{{ asset('images/logo.png') }}" alt="Certified Drug Test Centers - Local Convenient Confidential" class="brand-logo-img" width="210" height="105">
                 </a>
                 <div class="header-trust-badges">
                     <a href="{{ route('reviews.index') }}" class="header-review-link" title="Verified Customer Reviews">
@@ -549,7 +341,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <img src="{{ asset('images/logo.png') }}" alt="Certified Drug Test Centers" style="max-height:64px; margin-bottom:16px;">
+                    <img src="{{ asset('images/logo.png') }}" alt="Certified Drug Test Centers" width="128" height="64" style="max-height:64px; width:auto; margin-bottom:16px;">
                     <p style="margin-bottom:16px; line-height:1.6; color:#CBD5E1;">
                         Certified Drug Test Centers is a premier nationwide provider of drug, alcohol, DNA, and occupational health testing. Partnering with SAMHSA-certified laboratories and over 20,000 collection facilities across all 50 states.
                     </p>
@@ -713,7 +505,7 @@
                 </div>
 
                 <div class="modal-form-group">
-                    <label for="testingReason">1. Reason for Testing *</label>
+                    <label for="testingReason">Reason for Testing *</label>
                     <select id="testingReason" name="test_reason" onchange="handleModalReasonChange(this.value)" required>
                         <option value="Pre-Employment">Pre-Employment</option>
                         <option value="Random">Random</option>

@@ -30,6 +30,9 @@ class ProductController extends Controller
         $pageTitle = $product->meta_title ?: "{$product->name} | Certified Drug Test Center";
         $metaDescription = $product->meta_description ?: "Order {$product->name} online. Walk in today at over 20,000 certified collection sites nationwide. Fast, confidential, and legally defensible.";
         $canonicalUrl = $product->canonical_url ?: url('/product/' . $product->slug);
+        if (str_contains($canonicalUrl, 'localhost') || str_contains($canonicalUrl, '127.0.0.1')) {
+            $canonicalUrl = url('/product/' . $product->slug);
+        }
 
         return view('products.show', compact('product', 'category', 'relatedProducts', 'pageTitle', 'metaDescription', 'canonicalUrl'));
     }

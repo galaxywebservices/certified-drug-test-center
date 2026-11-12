@@ -26,6 +26,9 @@ class CategoryController extends Controller
         $pageTitle = $category->meta_title ?: "{$displayName} | Certified Drug Test Center";
         $metaDescription = $category->meta_description ?: "Explore accredited {$displayName} options. Walk-in same-day drug testing at certified collection sites nationwide.";
         $canonicalUrl = $category->canonical_url ?: url('/category/' . $category->slug);
+        if (str_contains($canonicalUrl, 'localhost') || str_contains($canonicalUrl, '127.0.0.1')) {
+            $canonicalUrl = url('/category/' . $category->slug);
+        }
 
         return view('categories.show', compact('category', 'products', 'allCategories', 'displayName', 'pageTitle', 'metaDescription', 'canonicalUrl'));
     }
