@@ -31,3 +31,4 @@ return new class extends Migration
             ->update(['is_active' => true]);
     }
 };
+
