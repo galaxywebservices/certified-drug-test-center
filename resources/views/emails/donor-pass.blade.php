@@ -180,7 +180,7 @@
                     <!-- Footer -->
                     <tr>
                         <td style="background:#F8FAFC; padding:20px 32px; border-top:1px solid #E2E8F0; text-align:center; font-size:12px; color:#64748B;">
-                            <div>Certified National Specimen Collection &amp; SAMHSA Accredited Laboratory Network</div>
+                            <div>Certified National Specimen Collection &amp; SAMHSA Certified Laboratory Network</div>
                             <div style="margin-top:6px;">Questions regarding this receipt? Call Toll-Free <strong>(800)-985-4339</strong> or email <strong>support@certifieddrugtestingcenters.com</strong></div>
                             <div style="margin-top:6px; color:#94A3B8;">&copy; {{ date('Y') }} Certified Drug Test Centers. All Rights Reserved.</div>
                         </td>

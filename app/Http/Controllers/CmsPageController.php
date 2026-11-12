@@ -22,7 +22,7 @@ class CmsPageController extends Controller
         }
 
         $pageTitle = $page->meta_title ?: "{$page->title} | Certified Drug Test Center";
-        $metaDescription = strip_tags($page->meta_description ?: "Accredited drug testing information and nationwide services for {$page->title}.");
+        $metaDescription = strip_tags($page->meta_description ?: "Certified drug testing information and nationwide services for {$page->title}.");
         $canonicalUrl = $page->canonical_url ?: url('/' . $page->slug);
         if (str_contains($canonicalUrl, 'localhost') || str_contains($canonicalUrl, '127.0.0.1')) {
             $canonicalUrl = url('/' . $page->slug);

@@ -14,7 +14,7 @@ class AdminSettingController extends Controller
             'site_name' => Setting::get('site_name', 'Certified Drug Test Center'),
             'site_phone' => Setting::get('site_phone', '(800)-985-4339'),
             'site_email' => Setting::get('site_email', 'support@certifieddrugtestingcenters.com'),
-            'site_tagline' => Setting::get('site_tagline', 'Accredited Drug Testing Made Fast, Simple & Confidential'),
+            'site_tagline' => Setting::get('site_tagline', 'Certified Drug Testing Made Fast, Simple & Confidential'),
             'online_orders_email' => Setting::get('online_orders_email', config('mail.online_orders.to', 'onlineorders@accrediteddrugtesting.com')),
             'online_orders_bcc' => Setting::get('online_orders_bcc', implode(', ', config('mail.online_orders.bcc', ['galaxywebservices@gmail.com', 'jacserafini@gmail.com']))),
             'paytrace_username' => Setting::get('paytrace_username', env('PAYTRACE_USERNAME', 'demo123')),

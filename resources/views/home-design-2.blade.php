@@ -34,7 +34,7 @@
             </div>
 
             <h1>
-                {!! $homeSettings['hero_title'] ?? 'Accredited Drug Testing Made <span class="highlight-red">Fast, Simple &amp; Confidential</span>' !!}
+                {!! $homeSettings['hero_title'] ?? 'Certified Drug Testing Made <span class="highlight-red">Fast, Simple &amp; Confidential</span>' !!}
             </h1>
 
             <p>

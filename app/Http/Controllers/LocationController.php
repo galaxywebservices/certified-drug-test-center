@@ -46,7 +46,7 @@ class LocationController extends Controller
             ->get();
 
         $pageTitle = "Nationwide Certified Drug Testing Locations | 20,000+ Quest & Labcorp Sites";
-        $metaDescription = "Find accredited drug testing centers in all 51 states. Walk-in same-day urine, hair, DOT, and alcohol testing at Quest Diagnostics and Labcorp facilities.";
+        $metaDescription = "Find Certified Drug testing centers in all 50 states. Walk-in same-day urine, hair, DOT, and alcohol testing at Quest Diagnostics and Labcorp facilities.";
 
         return view('locations.index', compact('states', 'pageTitle', 'metaDescription'));
     }
@@ -98,7 +98,7 @@ class LocationController extends Controller
             $metaDescription = "Find certified drug testing collection sites across {$state->name}. Walk in today at Quest Diagnostics and Labcorp partner facilities. Fast results in 24-48 hours.";
         } else {
             $pageTitle = $state->meta_title ?: "{$state->name} Drug Testing Locations & Walk-in Centers";
-            $metaDescription = $state->meta_description ?: "Accredited drug testing collection facilities in {$state->name}. Find local Quest & Labcorp centers for employment, court, and DOT testing.";
+            $metaDescription = $state->meta_description ?: "Certified drug testing collection facilities in {$state->name}. Find local Quest & Labcorp centers for employment, court, and DOT testing.";
         }
 
         $breadcrumbs = [

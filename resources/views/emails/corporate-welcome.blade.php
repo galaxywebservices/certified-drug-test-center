@@ -17,7 +17,7 @@
                                 <tr>
                                     <td>
                                         <div style="color:#94A3B8; font-size:11px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase;">
-                                            SAMHSA Accredited Laboratory Network
+                                            SAMHSA Certified Laboratory Network
                                         </div>
                                         <div style="color:#FFFFFF; font-size:24px; font-weight:900; margin-top:6px; letter-spacing:-0.5px;">
                                             Certified Drug Test Centers
@@ -131,7 +131,7 @@
                     <tr>
                         <td style="background:#F8FAFC; border-top:1px solid #E2E8F0; padding:24px 36px; text-align:center;">
                             <div style="font-size:12px; color:#64748B; line-height:1.5;">
-                                &copy; {{ date('Y') }} Certified Drug Test Centers. National Specimen Collection &amp; SAMHSA Accredited Laboratory Network.<br>
+                                &copy; {{ date('Y') }} Certified Drug Test Centers. National Specimen Collection &amp; SAMHSA Certified Laboratory Network.<br>
                                 201 N. Park Ave., Sanford, FL 32771 | Over 20,000 Certified Collection Facilities Nationwide.
                             </div>
                         </td>

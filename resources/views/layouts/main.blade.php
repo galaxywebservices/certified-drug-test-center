@@ -62,7 +62,6 @@
     <link rel="stylesheet" href="{{ asset('css/site.css') }}?v={{ time() }}">
 
     <!-- Structured Data (JSON-LD) for 100% SEO Dominance -->
-    <!-- Structured Data (JSON-LD) for 100% SEO Dominance -->
     @php
         $faqEntities = [];
         if (isset($faqs) && count($faqs)) {
@@ -304,11 +303,11 @@
         @yield('content')
     </main>
 
-    <!-- Accreditation & Partner Bar -->
-    <section class="partner-logo-bar" aria-label="Accreditation &amp; Certified Laboratory Network" style="background:#F8FAFC; border-top:1px solid #E2E8F0; border-bottom:1px solid #E2E8F0; padding:34px 0;">
+    <!-- Certified Partner Bar -->
+    <section class="partner-logo-bar" aria-label="Certified Laboratory Network" style="background:#F8FAFC; border-top:1px solid #E2E8F0; border-bottom:1px solid #E2E8F0; padding:34px 0;">
         <div class="container" style="text-align:center;">
             <p class="partner-logo-heading" style="font-size:11.5px; font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:#64748B; margin:0 0 18px 0; text-align:center;">
-                Certified National Specimen Collection &amp; SAMHSA Accredited Laboratory Network
+                Certified National Specimen Collection &amp; SAMHSA Certified Laboratory Network
             </p>
             <div class="partner-network-flex" style="display:flex; align-items:center; justify-content:center; gap:14px; flex-wrap:wrap;">
                 <div class="partner-network-hero-pill" style="display:inline-flex; align-items:center; gap:10px; background:#0B2545; color:#FFFFFF; padding:10px 22px; border-radius:999px; font-size:13.5px; font-weight:800; letter-spacing:0.2px; box-shadow:0 3px 10px rgba(11,37,69,0.15); border:1px solid rgba(255,255,255,0.15); white-space:nowrap;">

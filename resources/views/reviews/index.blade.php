@@ -69,7 +69,7 @@
                     <div class="trust-check-badge">
                         <span class="check-icon">✓</span>
                         <div>
-                            <strong>SAMHSA Accredited</strong>
+                            <strong>SAMHSA Certified</strong>
                             <p>All laboratory testing processed by certified reference labs.</p>
                         </div>
                     </div>

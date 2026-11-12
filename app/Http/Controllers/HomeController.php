@@ -516,10 +516,10 @@ class HomeController extends Controller
 
         return [
             'meta_title' => Setting::get('homepage_meta_title', 'Express Drug & Alcohol Testing | Certified Drug Test Centers'),
-            'meta_description' => Setting::get('homepage_meta_description', 'Order your drug test online in 2 minutes. Instant electronic donor pass, 20,000+ Quest & Labcorp collection centers, SAMHSA accredited labs, MRO verified results.'),
+            'meta_description' => Setting::get('homepage_meta_description', 'Order your drug test online in 2 minutes. Instant electronic donor pass, 20,000+ Quest & Labcorp collection centers, SAMHSA-certified labs, MRO verified results.'),
 
             'hero_badge' => $heroBadge,
-            'hero_title' => Setting::get('homepage_hero_title', 'Accredited Drug Testing Made <span class="highlight-red">Fast, Simple &amp; Confidential</span>'),
+            'hero_title' => Setting::get('homepage_hero_title', 'Certified Drug Testing Made <span class="highlight-red">Fast, Simple &amp; Confidential</span>'),
             'hero_subtitle' => Setting::get('homepage_hero_subtitle', 'Get your electronic donor pass in 2 minutes. Walk in today at over 20,000 Quest Diagnostics and Labcorp certified collection sites nationwide. No doctor order or appointment necessary.'),
             'hero_bullets' => $bullets ?? [
                 '20,000+ Quest & Labcorp Sites',

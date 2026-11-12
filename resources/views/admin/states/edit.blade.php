@@ -127,7 +127,7 @@
 
                 <div class="form-group">
                     <label class="form-label" for="meta_description">Meta Description</label>
-                    <textarea id="meta_description" name="meta_description" rows="3" class="form-control" placeholder="Accredited drug testing collection facilities in {{ $state->name }}...">{{ old('meta_description', $state->meta_description) }}</textarea>
+                    <textarea id="meta_description" name="meta_description" rows="3" class="form-control" placeholder="Certified drug testing collection facilities in {{ $state->name }}...">{{ old('meta_description', $state->meta_description) }}</textarea>
                     <div style="font-size:12px; color:var(--admin-slate-500); margin-top:4px;">
                         Appears in Google search snippets. Leave blank to use default template.
                     </div>
