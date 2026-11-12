@@ -6,6 +6,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Location;
+use App\Services\GeoLocationService;
 use App\Services\PayTraceService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -125,7 +126,8 @@ class CheckoutController extends Controller
             $location = Location::find($validated['location_id']);
         }
         if (!$location) {
-            $location = Location::where('zip', 'LIKE', substr($validated['zip'], 0, 3) . '%')->first()
+            $location = (new GeoLocationService())->findNearestLocationsByZip($validated['zip'], 1)->first()
+                ?? Location::where('zip', 'LIKE', substr($validated['zip'], 0, 3) . '%')->first()
                 ?? Location::first();
         }
 

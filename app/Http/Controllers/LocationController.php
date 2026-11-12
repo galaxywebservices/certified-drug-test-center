@@ -6,6 +6,7 @@ use App\Models\State;
 use App\Models\City;
 use App\Models\Location;
 use App\Models\Product;
+use App\Services\GeoLocationService;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
@@ -15,14 +16,13 @@ class LocationController extends Controller
     /**
      * Directory of all 51 US States
      */
-    public function index(Request $request)
+    public function index(Request $request, GeoLocationService $geo)
     {
         if ($request->filled('zip')) {
             $zip = trim($request->input('zip'));
             $cleanZip = preg_replace('/[^0-9]/', '', $zip);
             if (strlen($cleanZip) >= 3) {
-                $location = Location::where('zip', $cleanZip)->where('is_active', true)->first()
-                    ?? Location::where('zip', 'LIKE', substr($cleanZip, 0, 3) . '%')->where('is_active', true)->first();
+                $location = $geo->findNearestLocationsByZip($cleanZip, 1)->first();
                 if ($location) {
                     $state = State::where('abbr', strtoupper($location->state))->first();
                     if ($state) {
@@ -271,23 +271,14 @@ class LocationController extends Controller
     /**
      * Fast ZIP code locator API
      */
-    public function searchZip(Request $request): JsonResponse
+    public function searchZip(Request $request, GeoLocationService $geo): JsonResponse
     {
         $zip = trim($request->input('zip', ''));
         if (strlen($zip) < 3) {
             return response()->json(['success' => false, 'message' => 'Please enter at least 3 digits of a US ZIP code.']);
         }
 
-        $prefix = substr($zip, 0, 3);
-        $locations = Location::where('zip', 'LIKE', "{$prefix}%")
-            ->where('is_active', true)
-            ->limit(6)
-            ->get();
-
-        if ($locations->isEmpty()) {
-            // Fallback to first matching
-            $locations = Location::where('is_active', true)->limit(3)->get();
-        }
+        $locations = $geo->findNearestLocationsByZip($zip, 6);
 
         $formatted = $locations->map(function ($loc) {
             $hasCoords = !empty($loc->lat) && !empty($loc->lng);
@@ -304,8 +295,10 @@ class LocationController extends Controller
                 'zip' => $loc->zip,
                 'phone' => $loc->phone ?: '(800)-985-4339',
                 'hours' => $loc->hours ?: 'Monday - Friday 8:00 AM - 5:00 PM',
+                'distance_miles' => $loc->distance_miles ?? null,
+                'distance_label' => $loc->distance_label ?? null,
                 'profile_url' => route('locations.show', $loc->id),
-                'checkout_url' => route('checkout.index', ['location_id' => $loc->id]),
+                'checkout_url' => route('checkout.index', ['location_id' => $loc->id, 'zip' => $loc->zip]),
                 'directions_url' => "https://www.google.com/maps/dir/?api=1&destination={$dest}",
             ];
         });

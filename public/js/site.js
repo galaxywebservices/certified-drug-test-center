@@ -90,8 +90,9 @@ document.addEventListener('DOMContentLoaded', function () {
               locationsHtml += `
                 <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:8px; padding:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; box-shadow:0 1px 3px rgba(0,0,0,0.03);">
                   <div style="flex:1; min-width:220px;">
-                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:3px;">
+                    <div style="display:flex; align-items:center; gap:6px; margin-bottom:3px; flex-wrap:wrap;">
                       <span style="background:#E0F2FE; color:#0369A1; font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; text-transform:uppercase;">${loc.provider || 'Certified'}</span>
+                      ${loc.distance_label ? `<span style="background:#DCFCE7; color:#15803D; font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px;">📍 ${loc.distance_label}</span>` : ''}
                       <strong style="color:#0B2545; font-size:13.5px;">${loc.name}</strong>
                     </div>
                     <div style="font-size:12px; color:#475569;">${addrDisplay}</div>
@@ -773,8 +774,9 @@ function lookupZipModal() {
           html += `
             <div class="global-zip-item" style="display:flex; justify-content:space-between; align-items:flex-start; gap:16px; padding:14px; border-bottom:1px solid #E2E8F0;">
               <div>
-                <div class="global-zip-item-title" style="font-size:14.5px; font-weight:700; color:#0B2545;">
+                <div class="global-zip-item-title" style="font-size:14.5px; font-weight:700; color:#0B2545; display:flex; align-items:center; gap:6px; flex-wrap:wrap;">
                   <a href="${profileLink}" style="color:#0B2545; text-decoration:none;">${idx + 1}. ${loc.name}</a>
+                  ${loc.distance_label ? `<span style="background:#DCFCE7; color:#15803D; font-size:11px; font-weight:700; padding:2px 6px; border-radius:4px;">📍 ${loc.distance_label}</span>` : ''}
                 </div>
                 <div class="global-zip-item-address" style="font-size:13px; color:#475569; margin:2px 0;">${addressText}</div>
                 <div class="global-zip-item-hours" style="font-size:12px; color:#64748B;">● ${loc.hours || 'Mon-Fri 8:00 AM - 5:00 PM'}</div>
