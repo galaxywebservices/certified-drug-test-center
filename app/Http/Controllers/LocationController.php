@@ -297,6 +297,8 @@ class LocationController extends Controller
                 'name' => $loc->name,
                 'provider' => ucfirst($loc->provider),
                 'address' => $loc->address1 . ($loc->address2 ? ' ' . $loc->address2 : ''),
+                'address1' => $loc->address1 . ($loc->address2 ? ' ' . $loc->address2 : ''),
+                'address2' => $loc->address2,
                 'city' => $loc->city,
                 'state' => $loc->state,
                 'zip' => $loc->zip,

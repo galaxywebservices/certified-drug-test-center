@@ -79,6 +79,14 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
 
             data.locations.forEach((loc, idx) => {
+              const streetAddr = loc.address || loc.address1 || loc.street || '';
+              const locCity = loc.city || '';
+              const locState = loc.state || '';
+              const locZip = loc.zip || zipVal;
+              const addrDisplay = streetAddr 
+                ? `${streetAddr}, ${locCity}, ${locState} ${locZip}`
+                : `${locCity}, ${locState} ${locZip}`;
+
               locationsHtml += `
                 <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:8px; padding:12px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; box-shadow:0 1px 3px rgba(0,0,0,0.03);">
                   <div style="flex:1; min-width:220px;">
@@ -86,7 +94,8 @@ document.addEventListener('DOMContentLoaded', function () {
                       <span style="background:#E0F2FE; color:#0369A1; font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; text-transform:uppercase;">${loc.provider || 'Certified'}</span>
                       <strong style="color:#0B2545; font-size:13.5px;">${loc.name}</strong>
                     </div>
-                    <div style="font-size:12px; color:#475569;">${loc.address}, ${loc.city}, ${loc.state} ${loc.zip}</div>
+                    <div style="font-size:12px; color:#475569;">${addrDisplay}</div>
+                    <div style="font-size:11px; color:#16a34a; font-weight:700; margin-top:2px;">● Walk-Ins Accepted Today</div>
                     <div style="font-size:11px; color:#64748B; margin-top:2px;">🕒 ${loc.hours || 'Mon-Fri 8:00 AM - 5:00 PM'}</div>
                   </div>
                   <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
@@ -94,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       📞 Call Now
                     </a>
                     <a href="/checkout?location_id=${loc.id}&zip=${encodeURIComponent(loc.zip)}" class="btn btn-primary btn-sm" style="padding:6px 12px; font-size:12px;">
-                      Schedule at This Center &rarr;
+                      Register at This Center &rarr;
                     </a>
                   </div>
                 </div>
