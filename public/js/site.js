@@ -355,18 +355,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!specimenSelect) return;
 
-    const panels = estimatorMethodPanels[method] || estimatorMethodPanels['urine'];
-    specimenSelect.innerHTML = '';
+    if (!method) {
+      specimenSelect.innerHTML = '<option value="" disabled selected>-- Select Category First --</option>';
+      if (typeof updateEstimatorDisplay === 'function') updateEstimatorDisplay();
+      return;
+    }
 
-    panels.forEach(p => {
-      const opt = document.createElement('option');
-      opt.value = p.value;
-      opt.setAttribute('data-name', p.name);
-      opt.setAttribute('data-price', p.price);
-      opt.setAttribute('data-turnaround', p.turnaround);
-      opt.textContent = p.name;
-      specimenSelect.appendChild(opt);
-    });
+    specimenSelect.innerHTML = '<option value="" disabled selected>-- Select Testing Panel / Service --</option>';
+
+    if (window.allProductsData && Array.isArray(window.allProductsData) && window.allProductsData.length > 0) {
+      const matching = window.allProductsData.filter(p => p.categories && p.categories.includes(method));
+      matching.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.setAttribute('data-slug', p.slug);
+        opt.setAttribute('data-name', p.name);
+        opt.setAttribute('data-price', p.price);
+        opt.setAttribute('data-turnaround', p.turnaround);
+        opt.setAttribute('data-dot', p.dot ? '1' : '0');
+        opt.textContent = p.name + ' — $' + (p.priceFormatted || Number(p.price).toFixed(2)) + ' (' + p.turnaround + ')';
+        specimenSelect.appendChild(opt);
+      });
+    } else {
+      const panels = estimatorMethodPanels[method] || [];
+      panels.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.value;
+        opt.setAttribute('data-name', p.name);
+        opt.setAttribute('data-price', p.price);
+        opt.setAttribute('data-turnaround', p.turnaround);
+        opt.textContent = p.name + ' — $' + p.price;
+        specimenSelect.appendChild(opt);
+      });
+    }
 
     updateEstimatorDisplay();
   };

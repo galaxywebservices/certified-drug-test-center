@@ -105,5 +105,34 @@ class CheckoutAutoPopulateTest extends TestCase
         $response->assertSee('Please Select a Test Panel', false);
         $response->assertSee('$0.00', false);
     }
+
+    public function test_checkout_urine_category_excludes_alcohol_and_duplicates(): void
+    {
+        $response = $this->get('/checkout?category=urine');
+        $response->assertStatus(200);
+
+        // Pure urine products are rendered in the options
+        $response->assertSee('5 Panel NON-DOT', false);
+
+        // Alcohol and EtG tests must NOT be in urine option elements
+        $response->assertDontSee('<option value="29"', false); // ETG Urine
+        $response->assertDontSee('<option value="76"', false); // Alcohol Urine
+        $response->assertDontSee('<option value="32"', false); // 5-Panel + Alcohol
+        $response->assertDontSee('<option value="62"', false); // 10 panel + ETG Urine
+
+        // Duplicate DOT test (ID 4) must NOT be present
+        $response->assertDontSee('<option value="4"', false);
+    }
+
+    public function test_homepage_includes_all_products_data_matching_checkout(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+
+        // Verify window.allProductsData is passed to homepage
+        $response->assertSee('window.allProductsData =', false);
+        $response->assertSee('5 Panel NON-DOT', false);
+        $response->assertSee('handleEstimatorMethodChange', false);
+    }
 }
 

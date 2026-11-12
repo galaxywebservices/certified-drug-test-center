@@ -2,6 +2,23 @@
 
 @section('content')
 
+@php
+    $productsJson = ($allProducts ?? collect())->map(function($p) {
+        return [
+            'id' => $p->id,
+            'name' => $p->name,
+            'price' => (float) $p->price,
+            'priceFormatted' => number_format((float) $p->price, 2),
+            'retail' => (float) $p->retail_price,
+            'specimen' => ucfirst($p->specimen_type ?? 'Urine'),
+            'turnaround' => $p->turnaround_time,
+            'categories' => $p->filter_categories,
+            'dot' => (bool) $p->dot_required,
+            'slug' => $p->slug,
+        ];
+    });
+@endphp
+
 <!-- ==========================================================================
      Look 2: Corporate Clean Trust & Speed (Streamlined Direct-to-Test Focus)
      ========================================================================== -->
@@ -201,6 +218,8 @@
             ensureReasonValid();
         };
 
+        window.allProductsData = @json($productsJson);
+
         window.handleEstimatorMethodChange = function(method) {
             ensureReasonValid();
 
@@ -208,70 +227,23 @@
                 dotAgencyGroup.style.display = (method === 'dot') ? 'block' : 'none';
             }
 
-            var panels = {
-                urine: [
-                    { value: '5-panel-non-dot', name: '5 Panel Non-DOT Urine Test (Basic)', price: '89.99', turnaround: '24-48 hours' },
-                    { value: '10-panel', name: '10 Panel Comprehensive Urine Test', price: '109.99', turnaround: '24-48 hours' },
-                    { value: '12-panel-comprehensive', name: '12 Panel Maximum Coverage Urine Test', price: '139.99', turnaround: '24-48 hours' },
-                    { value: '5-panel-expanded-opiates', name: '5 Panel + Expanded Opiates Urine Test', price: '99.99', turnaround: '24-48 hours' },
-                    { value: '10-panel-expanded-opiates', name: '10 Panel + Expanded Opiates Urine Test', price: '119.99', turnaround: '24-48 hours' }
-                ],
-                dot: [
-                    { value: '5-panel-dot', name: '5 Panel DOT Federal Urine Screen', price: '99.99', turnaround: '24-48 hours' },
-                    { value: 'dot-breath-alcohol', name: 'Breath Alcohol Test (BAT / EBT)', price: '89.99', turnaround: 'Instant Reading' },
-                    { value: '5-panel-dot-breath-alcohol', name: '5 Panel DOT & Breath Alcohol Combo', price: '169.99', turnaround: 'Same-Day / 24-48 hrs' },
-                    { value: 'dot-physical', name: 'DOT Physical Exam (NRCME Doctor)', price: '159.99', turnaround: 'Same-Day Card' },
-                    { value: 'dot-drug-test-physical', name: 'DOT Drug Test & Physical Exam Combo', price: '239.99', turnaround: 'Complete DOT Clearance' },
-                    { value: '5-panel-return-to-duty', name: '5 Panel Return to Duty (RTD) Test', price: '99.99', turnaround: 'Directly Observed / 24-48 hrs' },
-                    { value: 'dot-uscg-drug-test', name: 'DOT USCG Merchant Mariner Drug Test', price: '99.99', turnaround: 'Coast Guard Form 719P' },
-                    { value: '1-year-enrollment', name: '1-Year DOT Consortium Enrollment', price: '99.99', turnaround: 'Instant Certificate' },
-                    { value: '1-year-consortium-membership-dot-drug-test', name: '1-Year Consortium + DOT Drug Test', price: '249.99', turnaround: 'Instant Certificate & Pass' },
-                    { value: 'fmcsa-clearinghouse-accucheck', name: 'FMCSA Clearinghouse Services', price: '199.99', turnaround: 'Full Query & Violation Support' }
-                ],
-                hair: [
-                    { value: 'hair-follicle-5-panel', name: 'Hair Follicle 5-Panel (90-Day History)', price: '169.99', turnaround: '2-3 Business Days' },
-                    { value: 'hair-follicle-10-panel', name: 'Hair Follicle 10-Panel Comprehensive', price: '249.99', turnaround: '2-3 Business Days' },
-                    { value: 'hair-follicle-etg', name: 'Hair Follicle Alcohol EtG (3-Month History)', price: '199.99', turnaround: '3-5 Business Days' }
-                ],
-                alcohol: [
-                    { value: 'dot-breath-alcohol', name: 'Breath Alcohol Test (BAT / EBT)', price: '89.99', turnaround: 'Instant Reading' },
-                    { value: 'etg-urine-alcohol', name: '80-Hour EtG Urine Alcohol Test', price: '89.99', turnaround: '24-48 hours' },
-                    { value: 'hair-follicle-etg', name: 'Hair Follicle Alcohol EtG (90-Day)', price: '199.99', turnaround: '3-5 Business Days' }
-                ],
-                oral: [
-                    { value: 'oral-fluid-6-panel', name: 'Oral Fluid 6-Panel Saliva Drug Test', price: '109.99', turnaround: '24-48 hours' },
-                    { value: 'oral-fluid-10-panel', name: 'Oral Fluid 10-Panel Saliva Drug Test', price: '129.99', turnaround: '24-48 hours' }
-                ],
-                occupational: [
-                    { value: 'fit-for-duty', name: 'Fit-For-Duty Medical Examination', price: '179.99', turnaround: 'Comprehensive Report' },
-                    { value: 'tb-skin-test', name: 'TB Skin Test (Mantoux PPD)', price: '79.99', turnaround: '48-72 Hour Read' },
-                    { value: 'respirator-clearance', name: 'OSHA Respirator Clearance Exam', price: '99.99', turnaround: 'Same-Day Clearance' }
-                ],
-                clinical: [
-                    { value: 'comprehensive-health-profile', name: 'Comprehensive Health Profile (CBC & CMP)', price: '99.99', turnaround: '24-48 hours' },
-                    { value: 'heavy-metals-blood-panel', name: 'Heavy Metals Comprehensive Blood Panel', price: '149.99', turnaround: '2-3 Business Days' },
-                    { value: 'hepatitis-b-c-panel', name: 'Hepatitis B & C Antibody Blood Panel', price: '89.99', turnaround: '24-48 hours' }
-                ],
-                dna: [
-                    { value: 'legal-paternity-dna-test', name: 'Legal Paternity DNA Test (Court Admissible)', price: '289.99', turnaround: '2-3 Business Days' },
-                    { value: 'non-invasive-prenatal-paternity-nipp', name: 'Non-Invasive Prenatal Paternity (NIPP)', price: '999.00', turnaround: '5-7 Business Days' },
-                    { value: 'informational-paternity-kit', name: 'Informational At-Home Paternity Kit', price: '179.99', turnaround: '3-5 Business Days' }
-                ]
-            };
-
             if (sSelect) {
                 if (!method) {
                     sSelect.innerHTML = '<option value="" disabled selected>-- Select Category First --</option>';
                 } else {
-                    var methodPanels = panels[method] || [];
                     sSelect.innerHTML = '<option value="" disabled selected>-- Select Testing Panel / Service --</option>';
-                    methodPanels.forEach(function(p) {
+                    var matching = (window.allProductsData || []).filter(function(p) {
+                        return p.categories && p.categories.includes(method);
+                    });
+                    matching.forEach(function(p) {
                         var opt = document.createElement('option');
-                        opt.value = p.value;
+                        opt.value = p.id;
+                        opt.setAttribute('data-slug', p.slug);
                         opt.setAttribute('data-name', p.name);
                         opt.setAttribute('data-price', p.price);
                         opt.setAttribute('data-turnaround', p.turnaround);
-                        opt.textContent = p.name + ' — $' + p.price;
+                        opt.setAttribute('data-dot', p.dot ? '1' : '0');
+                        opt.textContent = p.name + ' — $' + (p.priceFormatted || Number(p.price).toFixed(2)) + ' (' + p.turnaround + ')';
                         sSelect.appendChild(opt);
                     });
                 }

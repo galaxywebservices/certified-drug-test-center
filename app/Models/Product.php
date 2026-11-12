@@ -107,8 +107,8 @@ class Product extends Model
         }
 
         // Urine Drug Tests:
-        // Must NOT be a pure background check, pure occupational health exam/physical/vision/respirator, pure consortium, hair, oral, DNA, or blood/clinical test.
-        if (!$isBg && !$isOcc && !$isConsortium && !$isHair && !$isOral && !$isDna && !$isBlood) {
+        // Must NOT be alcohol/EtG, background check, occupational health exam/physical/vision/respirator, consortium, hair, oral, DNA, or blood/clinical test.
+        if (!$isAlcohol && !$isBg && !$isOcc && !$isConsortium && !$isHair && !$isOral && !$isDna && !$isBlood) {
             if (in_array('urine', $cats) || str_contains($name, 'urine') || str_contains($name, 'panel') || str_contains($name, 'nursing') || str_contains($name, 'sports') || str_contains($name, 'observed') || $this->specimen_type === 'urine') {
                 $filterCats[] = 'urine';
             }

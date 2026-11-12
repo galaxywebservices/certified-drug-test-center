@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Setting;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -476,7 +477,9 @@ class HomeController extends Controller
             }
         }
 
-        return compact('products', 'categories', 'comparisonPanels', 'states', 'faqs');
+        $allProducts = Product::where('is_active', true)->with('categories')->orderBy('position')->get();
+
+        return compact('products', 'categories', 'comparisonPanels', 'states', 'faqs', 'allProducts');
     }
 
     /**
