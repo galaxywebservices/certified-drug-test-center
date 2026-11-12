@@ -57,10 +57,6 @@ class CheckoutController extends Controller
                 ?? Product::where('name', 'LIKE', '%' . $testName . '%')->where('is_active', true)->first();
         }
 
-        if (!$product) {
-            $product = Product::where('is_popular', true)->first() ?? Product::first();
-        }
-
         $allProducts = Product::where('is_active', true)->with('categories')->orderBy('position')->get();
 
         $selectedLocation = null;

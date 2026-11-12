@@ -58,5 +58,21 @@ class CheckoutAutoPopulateTest extends TestCase
         $response->assertSee('Confidential Results Email', false);
         $response->assertSee('name="results_email"', false);
     }
+
+    public function test_checkout_defaults_to_unselected_category_and_zero_price(): void
+    {
+        $response = $this->get('/checkout');
+        $response->assertStatus(200);
+
+        // Category dropdown defaults to "Select Type / Category of Test"
+        $response->assertSee('Select Type / Category of Test', false);
+
+        // Panel dropdown defaults to "-- Select Category First --"
+        $response->assertSee('-- Select Category First --', false);
+
+        // Price preview shows $0.00 until product is chosen
+        $response->assertSee('$0.00', false);
+        $response->assertSee('Please Select a Test Panel', false);
+    }
 }
 

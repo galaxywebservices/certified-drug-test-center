@@ -548,8 +548,8 @@
                 if ($product && $product->dot_required) $initialCats[] = 'dot';
                 if ($product && !empty($product->specimen_type)) $initialCats[] = $product->specimen_type;
                 $initialCat = request('category', '');
-                if (empty($initialCat)) {
-                    if ($product && $product->dot_required) $initialCat = 'dot';
+                if (empty($initialCat) && $product) {
+                    if ($product->dot_required) $initialCat = 'dot';
                     elseif (in_array('urine', $initialCats)) $initialCat = 'urine';
                     elseif (in_array('hair', $initialCats)) $initialCat = 'hair';
                     elseif (in_array('alcohol', $initialCats)) $initialCat = 'alcohol';
@@ -558,7 +558,6 @@
                     elseif (in_array('blood', $initialCats) || in_array('lab-blood', $initialCats)) $initialCat = 'clinical';
                     elseif (in_array('occupational-health', $initialCats)) $initialCat = 'occupational';
                     elseif (in_array('dot', $initialCats)) $initialCat = 'dot';
-                    else $initialCat = 'urine';
                 }
             @endphp
 
@@ -585,7 +584,8 @@
                                 <span style="font-size:12px; color:#64748B; font-weight:500;">Filter panels below</span>
                             </label>
                             <div class="checkout-input-wrap">
-                                <select id="category_filter" class="checkout-input checkout-select" onchange="filterProductsByCategory(this.value)">
+                                <select id="category_filter" class="checkout-input checkout-select" onchange="filterProductsByCategory(this.value, true)">
+                                    <option value="" {{ empty($initialCat) ? 'selected' : '' }} disabled>Select Type / Category of Test</option>
                                     <option value="urine" {{ $initialCat === 'urine' ? 'selected' : '' }}>Urine Drug Tests</option>
                                     <option value="dot" {{ $initialCat === 'dot' ? 'selected' : '' }}>DOT Regulated Tests</option>
                                     <option value="hair" {{ $initialCat === 'hair' ? 'selected' : '' }}>Hair Follicle Tests</option>
@@ -605,6 +605,9 @@
                             </label>
                             <div class="checkout-input-wrap">
                                 <select id="product_id" name="product_id" class="checkout-input checkout-select" onchange="updateSelectedProduct(this)" required>
+                                    <option value="" disabled {{ !$product ? 'selected' : '' }} id="product_placeholder">
+                                        {{ empty($initialCat) ? '-- Select Category First --' : '-- Select Testing Panel / Service --' }}
+                                    </option>
                                     @foreach($allProducts as $p)
                                         @php
                                             $pCats = $p->categories->pluck('slug')->toArray();
@@ -614,6 +617,7 @@
                                             if (in_array('blood', $pCats) && !in_array('clinical', $pCats)) $pCats[] = 'clinical';
                                             if (in_array('lab-blood', $pCats) && !in_array('clinical', $pCats)) $pCats[] = 'clinical';
                                             if (in_array('dna-testing', $pCats) && !in_array('dna', $pCats)) $pCats[] = 'dna';
+                                            if ((in_array('occupational-health', $pCats) || in_array('occupational', $pCats)) && !in_array('occupational', $pCats)) $pCats[] = 'occupational';
                                             $pCatStr = implode(' ', array_unique($pCats));
                                         @endphp
                                         <option value="{{ $p->id }}" 
@@ -631,18 +635,22 @@
                                 </select>
                             </div>
 
-                            <div class="selected-product-box">
+                            <div class="selected-product-box" id="selectedProductBox" style="{{ !$product ? 'display:none;' : '' }}">
                                 <div>
-                                    <strong style="color:#0B2545; font-size:15px;" id="highlightProdName">{{ $product->name ?? 'Drug Test' }}</strong>
+                                    <strong style="color:#0B2545; font-size:15px;" id="highlightProdName">{{ $product->name ?? '' }}</strong>
                                     <div class="selected-product-meta">
-                                        <span class="badge" style="background:#DCFCE7; color:#15803D; font-size:11px;" id="highlightSpecimen">{{ ucfirst($product->specimen_type ?? 'Urine') }} Specimen</span>
-                                        <span id="highlightTurnaround">● {{ $product->turnaround_time ?? '24-48 Hours' }}</span>
+                                        <span class="badge" style="background:#DCFCE7; color:#15803D; font-size:11px;" id="highlightSpecimen">{{ $product ? ucfirst($product->specimen_type) . ' Specimen' : '' }}</span>
+                                        <span id="highlightTurnaround">{{ $product ? '● ' . $product->turnaround_time : '' }}</span>
                                     </div>
                                 </div>
                                 <div style="text-align:right;">
-                                    <div style="font-size:22px; font-weight:900; color:#C1121F;" id="highlightPrice">${{ number_format($product->price ?? 89.99, 2) }}</div>
+                                    <div style="font-size:22px; font-weight:900; color:#C1121F;" id="highlightPrice">${{ $product ? number_format($product->price, 2) : '0.00' }}</div>
                                     <small style="color:#16A34A; font-weight:700; font-size:11px;">Online Discount Applied</small>
                                 </div>
+                            </div>
+
+                            <div id="noProductSelectedPrompt" style="{{ $product ? 'display:none;' : '' }}; margin-top:12px; padding:16px 18px; background:#F8FAFC; border:1.5px dashed #CBD5E1; border-radius:8px; text-align:center; color:#64748B; font-size:13.5px; font-weight:500;">
+                                <span>👈 Select a test category and specific panel above to view pricing and turnaround details.</span>
                             </div>
                         </div>
                     </div>
@@ -936,7 +944,7 @@
                         </button>
 
                         <div style="text-align:center; margin-top:12px; font-size:12px; color:#64748B;">
-                            🔒 Your card will be securely processed for <strong id="btnPricePreview">${{ number_format($product->price ?? 89.99, 2) }}</strong>. No further fees at the testing center.
+                            🔒 Your card will be securely processed for <strong id="btnPricePreview">${{ $product ? number_format($product->price, 2) : '0.00' }}</strong>. No further fees at the testing center.
                         </div>
                     </div>
                 </div>
@@ -950,17 +958,17 @@
                         </div>
 
                         <div class="order-item-hero">
-                            <div class="order-item-name" id="summaryTestTitle">{{ $product->name ?? '5 Panel NON-DOT Drug Test' }}</div>
-                            <div class="order-item-badges">
-                                <span class="badge badge-neutral" id="summarySpecimenBadge">{{ ucfirst($product->specimen_type ?? 'Urine') }}</span>
-                                <span style="color:#64748B;" id="summaryTurnaroundBadge">• {{ $product->turnaround_time ?? '24-48 Hours' }}</span>
+                            <div class="order-item-name" id="summaryTestTitle">{{ $product ? $product->name : 'Please Select a Test Panel' }}</div>
+                            <div class="order-item-badges" id="summaryBadgesWrap" style="{{ !$product ? 'display:none;' : '' }}">
+                                <span class="badge badge-neutral" id="summarySpecimenBadge">{{ $product ? ucfirst($product->specimen_type) : '' }}</span>
+                                <span style="color:#64748B;" id="summaryTurnaroundBadge">{{ $product ? '• ' . $product->turnaround_time : '' }}</span>
                             </div>
                         </div>
 
                         <ul class="order-breakdown-list">
                             <li class="order-breakdown-row">
                                 <span>Test/Service Selected</span>
-                                <strong id="summaryBasePrice">${{ number_format($product->price ?? 89.99, 2) }}</strong>
+                                <strong id="summaryBasePrice">${{ $product ? number_format($product->price, 2) : '0.00' }}</strong>
                             </li>
                             <li class="order-breakdown-row">
                                 <span>Certified Laboratory Analysis</span>
@@ -978,7 +986,7 @@
 
                         <div class="order-total-block">
                             <span class="order-total-label">Total Amount Due:</span>
-                            <div class="order-total-amount" id="summaryTotalDue">${{ number_format($product->price ?? 89.99, 2) }}</div>
+                            <div class="order-total-amount" id="summaryTotalDue">${{ $product ? number_format($product->price, 2) : '0.00' }}</div>
                         </div>
 
                         <ul class="trust-guarantee-bullets">
@@ -1011,33 +1019,95 @@
 <script>
     function updateSelectedProduct(selectElem) {
         const option = selectElem.options[selectElem.selectedIndex];
-        if (!option) return;
+        const placeholderPrompt = document.getElementById('noProductSelectedPrompt');
+        const productBox = document.getElementById('selectedProductBox');
+        const badgesWrap = document.getElementById('summaryBadgesWrap');
+
+        if (!option || !option.value) {
+            if (placeholderPrompt) placeholderPrompt.style.display = 'block';
+            if (productBox) productBox.style.display = 'none';
+            if (badgesWrap) badgesWrap.style.display = 'none';
+
+            const highlightName = document.getElementById('highlightProdName');
+            const highlightPrice = document.getElementById('highlightPrice');
+            const summaryTitle = document.getElementById('summaryTestTitle');
+            const summaryBase = document.getElementById('summaryBasePrice');
+            const summaryTotal = document.getElementById('summaryTotalDue');
+            const btnPrice = document.getElementById('btnPricePreview');
+
+            if (highlightName) highlightName.textContent = '';
+            if (highlightPrice) highlightPrice.textContent = '$0.00';
+            if (summaryTitle) summaryTitle.textContent = 'Please Select a Test Panel';
+            if (summaryBase) summaryBase.textContent = '$0.00';
+            if (summaryTotal) summaryTotal.textContent = '$0.00';
+            if (btnPrice) btnPrice.textContent = '$0.00';
+
+            checkAndToggleDotRequirements();
+            return;
+        }
+
         const price = parseFloat(option.getAttribute('data-price')).toFixed(2);
         const name = option.getAttribute('data-name');
         const specimen = option.getAttribute('data-specimen');
         const turnaround = option.getAttribute('data-turnaround');
 
+        if (placeholderPrompt) placeholderPrompt.style.display = 'none';
+        if (productBox) productBox.style.display = 'flex';
+        if (badgesWrap) badgesWrap.style.display = 'flex';
+
         // Update highlight box in step 1
-        document.getElementById('highlightProdName').textContent = name;
-        document.getElementById('highlightPrice').textContent = '$' + price;
-        document.getElementById('highlightSpecimen').textContent = specimen + ' Specimen';
-        document.getElementById('highlightTurnaround').textContent = '● ' + turnaround;
+        const highlightName = document.getElementById('highlightProdName');
+        const highlightPrice = document.getElementById('highlightPrice');
+        const highlightSpec = document.getElementById('highlightSpecimen');
+        const highlightTurn = document.getElementById('highlightTurnaround');
+
+        if (highlightName) highlightName.textContent = name;
+        if (highlightPrice) highlightPrice.textContent = '$' + price;
+        if (highlightSpec) highlightSpec.textContent = specimen + ' Specimen';
+        if (highlightTurn) highlightTurn.textContent = '● ' + turnaround;
 
         // Update order summary card
-        document.getElementById('summaryTestTitle').textContent = name;
-        document.getElementById('summarySpecimenBadge').textContent = specimen;
-        document.getElementById('summaryTurnaroundBadge').textContent = '• ' + turnaround;
-        document.getElementById('summaryBasePrice').textContent = '$' + price;
-        document.getElementById('summaryTotalDue').textContent = '$' + price;
-        document.getElementById('btnPricePreview').textContent = '$' + price;
+        const summaryTitle = document.getElementById('summaryTestTitle');
+        const summarySpec = document.getElementById('summarySpecimenBadge');
+        const summaryTurn = document.getElementById('summaryTurnaroundBadge');
+        const summaryBase = document.getElementById('summaryBasePrice');
+        const summaryTotal = document.getElementById('summaryTotalDue');
+        const btnPrice = document.getElementById('btnPricePreview');
+
+        if (summaryTitle) summaryTitle.textContent = name;
+        if (summarySpec) summarySpec.textContent = specimen;
+        if (summaryTurn) summaryTurn.textContent = '• ' + turnaround;
+        if (summaryBase) summaryBase.textContent = '$' + price;
+        if (summaryTotal) summaryTotal.textContent = '$' + price;
+        if (btnPrice) btnPrice.textContent = '$' + price;
 
         checkAndToggleDotRequirements();
     }
 
-    function filterProductsByCategory(cat) {
+    function filterProductsByCategory(cat, userTriggered = false) {
         const select = document.getElementById('product_id');
+        const placeholder = document.getElementById('product_placeholder');
         if (!select) return;
-        const options = select.querySelectorAll('option');
+
+        const options = select.querySelectorAll('option:not(#product_placeholder)');
+
+        if (!cat) {
+            if (placeholder) {
+                placeholder.textContent = '-- Select Category First --';
+            }
+            options.forEach(opt => {
+                opt.hidden = true;
+                opt.style.display = 'none';
+            });
+            select.value = "";
+            updateSelectedProduct(select);
+            return;
+        }
+
+        if (placeholder) {
+            placeholder.textContent = '-- Select Testing Panel / Service --';
+        }
+
         let firstVisible = null;
         let currentSelectedVisible = false;
 
@@ -1067,9 +1137,18 @@
             }
         });
 
-        if (!currentSelectedVisible && firstVisible) {
-            select.value = firstVisible.value;
+        if (userTriggered) {
+            // When user changes category, reset to the placeholder "-- Select Testing Panel / Service --"
+            select.value = "";
             updateSelectedProduct(select);
+        } else {
+            // Initial page load: if a product was already pre-selected in URL and matches this category, keep it; otherwise stay at placeholder
+            if (!currentSelectedVisible || !select.value) {
+                select.value = "";
+                updateSelectedProduct(select);
+            } else {
+                updateSelectedProduct(select);
+            }
         }
 
         checkAndToggleDotRequirements();
@@ -1079,7 +1158,7 @@
         const prodSelect = document.getElementById('product_id');
         const selectedOpt = prodSelect ? prodSelect.options[prodSelect.selectedIndex] : null;
         const catFilter = document.getElementById('category_filter')?.value;
-        const isDotProduct = selectedOpt ? (selectedOpt.getAttribute('data-dot') === '1') : false;
+        const isDotProduct = (selectedOpt && selectedOpt.value) ? (selectedOpt.getAttribute('data-dot') === '1') : false;
         const isDot = (catFilter === 'dot' || isDotProduct);
 
         const dotRow = document.getElementById('checkoutDotAgencyRow');
@@ -1152,9 +1231,28 @@
     document.addEventListener('DOMContentLoaded', function () {
         const catFilter = document.getElementById('category_filter');
         if (catFilter) {
-            filterProductsByCategory(catFilter.value);
+            filterProductsByCategory(catFilter.value, false);
         } else {
             checkAndToggleDotRequirements();
+        }
+
+        // Validate panel selection on form submission
+        const form = document.getElementById('checkoutForm');
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                const prodSelect = document.getElementById('product_id');
+                if (!prodSelect || !prodSelect.value) {
+                    e.preventDefault();
+                    alert('Please select a Type / Category of Test and choose a specific Testing Panel before completing your order.');
+                    const catSelect = document.getElementById('category_filter');
+                    if (catSelect && !catSelect.value) {
+                        catSelect.focus();
+                    } else if (prodSelect) {
+                        prodSelect.focus();
+                    }
+                    return false;
+                }
+            });
         }
     });
 </script>
