@@ -103,12 +103,11 @@ class PayTraceService
                 ],
                 'billing_address' => [
                     'name' => $orderData['donor_name'] ?? 'Donor',
-                    'postal_code' => $paymentData['billing_zip'] ?? '10001',
+                    'zip' => $paymentData['billing_zip'] ?? '10001',
                 ],
             ];
 
             if (!empty($paymentData['cvv'])) {
-                $salePayload['credit_card']['csc'] = preg_replace('/\D/', '', $paymentData['cvv']);
                 $salePayload['csc'] = preg_replace('/\D/', '', $paymentData['cvv']);
             }
 
@@ -129,6 +128,25 @@ class PayTraceService
             }
 
             $errorMessage = $saleResponse->json('status_message') ?? 'Card declined or invalid payment details.';
+            
+            // Extract detailed validation / decline error messages if provided by PayTrace
+            $errors = $saleResponse->json('errors');
+            if (is_array($errors) && !empty($errors)) {
+                $detailedMessages = [];
+                foreach ($errors as $code => $errList) {
+                    if (is_array($errList)) {
+                        foreach ($errList as $subErr) {
+                            $detailedMessages[] = is_string($subErr) ? $subErr : json_encode($subErr);
+                        }
+                    } elseif (is_string($errList)) {
+                        $detailedMessages[] = $errList;
+                    }
+                }
+                if (!empty($detailedMessages)) {
+                    $errorMessage = implode(' ', $detailedMessages);
+                }
+            }
+
             Log::error('PayTrace Sale Declined', [
                 'status' => $saleResponse->status(),
                 'response' => $saleResponse->json(),
