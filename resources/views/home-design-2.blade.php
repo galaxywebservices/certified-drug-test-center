@@ -83,16 +83,17 @@
                 </div>
 
                 <div class="estimator-field">
-                    <label class="estimator-label" for="estMethod">2. Select your Testing Method</label>
+                    <label class="estimator-label" for="estMethod">2. Select Type / Category of Test</label>
                     <select id="estMethod" class="estimator-select" onchange="handleEstimatorMethodChange(this.value)">
-                        <option value="urine">Urine Tests</option>
-                        <option value="dot">DOT Tests/Services</option>
-                        <option value="hair">Hair Tests</option>
-                        <option value="alcohol">Alcohol/EtG Tests</option>
-                        <option value="oral">Oral Fluid Tests</option>
-                        <option value="occupational">Occupational Tests (OCC Health)</option>
-                        <option value="clinical">Clinical Tests</option>
-                        <option value="dna">DNA Tests</option>
+                        <option value="" disabled selected>Select Type / Category of Test</option>
+                        <option value="urine">Urine Drug Tests</option>
+                        <option value="dot">DOT Regulated Tests</option>
+                        <option value="hair">Hair Follicle Tests</option>
+                        <option value="alcohol">Alcohol &amp; EtG Tests</option>
+                        <option value="oral">Oral Fluid / Saliva Tests</option>
+                        <option value="occupational">Occupational Health Tests (OCC Health)</option>
+                        <option value="clinical">Clinical Blood Tests</option>
+                        <option value="dna">DNA Testing</option>
                     </select>
                 </div>
 
@@ -109,23 +110,19 @@
                 </div>
 
                 <div class="estimator-field">
-                    <label class="estimator-label" for="estSpecimen">3. Select Specimen or Test Panel</label>
+                    <label class="estimator-label" for="estSpecimen">3. Testing Panel / Service</label>
                     <select id="estSpecimen" class="estimator-select" onchange="updateEstimatorDisplay()">
-                        <option value="5-panel-non-dot" data-name="5 Panel Non-DOT Urine Test (Basic)" data-price="89.99" data-turnaround="24-48 hours">5 Panel Non-DOT Urine Test (Basic)</option>
-                        <option value="10-panel" data-name="10 Panel Comprehensive Urine Test" data-price="109.99" data-turnaround="24-48 hours">10 Panel Comprehensive Urine Test</option>
-                        <option value="12-panel-comprehensive" data-name="12 Panel Maximum Coverage Urine Test" data-price="139.99" data-turnaround="24-48 hours">12 Panel Maximum Coverage Urine Test</option>
-                        <option value="5-panel-expanded-opiates" data-name="5 Panel + Expanded Opiates Urine Test" data-price="99.99" data-turnaround="24-48 hours">5 Panel + Expanded Opiates Urine Test</option>
-                        <option value="10-panel-expanded-opiates" data-name="10 Panel + Expanded Opiates Urine Test" data-price="119.99" data-turnaround="24-48 hours">10 Panel + Expanded Opiates Urine Test</option>
+                        <option value="" disabled selected>-- Select Category First --</option>
                     </select>
                 </div>
 
                 <div class="estimator-price-display">
                     <div style="font-size:15px; font-weight:800; color:var(--color-primary); line-height:1.2;" id="estPanelName">
-                        5 Panel Non-DOT Urine Test (Basic)
+                        Please Select a Test Panel
                     </div>
-                    <div class="estimator-price-val" id="estPriceVal">$89.99</div>
-                    <div class="estimator-features-preview" id="estTurnaround" style="font-size:12.5px; color:#166534; font-weight:600; margin-top:4px;">
-                        Includes: Laboratory Analysis, MRO/Physician Verified, Results 24-48 hours
+                    <div class="estimator-price-val" id="estPriceVal">$0.00</div>
+                    <div class="estimator-features-preview" id="estTurnaround" style="font-size:12.5px; color:#64748B; font-weight:600; margin-top:4px;">
+                        Select category and test panel to view instant online pricing
                     </div>
                 </div>
 
@@ -263,17 +260,21 @@
             };
 
             if (sSelect) {
-                var methodPanels = panels[method] || panels['urine'];
-                sSelect.innerHTML = '';
-                methodPanels.forEach(function(p) {
-                    var opt = document.createElement('option');
-                    opt.value = p.value;
-                    opt.setAttribute('data-name', p.name);
-                    opt.setAttribute('data-price', p.price);
-                    opt.setAttribute('data-turnaround', p.turnaround);
-                    opt.textContent = p.name;
-                    sSelect.appendChild(opt);
-                });
+                if (!method) {
+                    sSelect.innerHTML = '<option value="" disabled selected>-- Select Category First --</option>';
+                } else {
+                    var methodPanels = panels[method] || [];
+                    sSelect.innerHTML = '<option value="" disabled selected>-- Select Testing Panel / Service --</option>';
+                    methodPanels.forEach(function(p) {
+                        var opt = document.createElement('option');
+                        opt.value = p.value;
+                        opt.setAttribute('data-name', p.name);
+                        opt.setAttribute('data-price', p.price);
+                        opt.setAttribute('data-turnaround', p.turnaround);
+                        opt.textContent = p.name + ' — $' + p.price;
+                        sSelect.appendChild(opt);
+                    });
+                }
             }
 
             if (typeof updateEstimatorDisplay === 'function') {

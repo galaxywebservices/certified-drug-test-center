@@ -379,7 +379,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!specimenSelect) return;
     const selectedOpt = specimenSelect.options[specimenSelect.selectedIndex];
-    if (!selectedOpt) return;
+    if (!selectedOpt || !selectedOpt.value || selectedOpt.disabled) {
+      if (priceDisplay) priceDisplay.textContent = '$0.00';
+      if (nameDisplay) nameDisplay.textContent = 'Please Select a Test Panel';
+      if (turnaroundDisplay) {
+        turnaroundDisplay.innerHTML = 'Select category and test panel to view instant online pricing';
+      }
+      return;
+    }
 
     const price = selectedOpt.getAttribute('data-price') || '89.99';
     const name = selectedOpt.getAttribute('data-name') || selectedOpt.text;
@@ -393,17 +400,29 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   window.handleEstimatorOrder = function () {
+    const methodSelect = document.getElementById('estMethod');
     const specimenSelect = document.getElementById('estSpecimen');
     const reasonSelect = document.getElementById('estReason');
     const dotAgencySelect = document.getElementById('estDotAgency');
 
+    if (!methodSelect || !methodSelect.value) {
+      alert('Please select a Type / Category of Test first.');
+      if (methodSelect) methodSelect.focus();
+      return;
+    }
+
     const selectedOpt = specimenSelect ? specimenSelect.options[specimenSelect.selectedIndex] : null;
-    const panelKey = specimenSelect?.value || '5-panel-non-dot';
-    const panelName = selectedOpt ? (selectedOpt.getAttribute('data-name') || selectedOpt.text) : '5 Panel Non-DOT Urine Test';
-    const panelPrice = selectedOpt ? (selectedOpt.getAttribute('data-price') || '89.99') : '89.99';
+    if (!selectedOpt || !selectedOpt.value || selectedOpt.disabled) {
+      alert('Please select a specific Testing Panel / Service.');
+      if (specimenSelect) specimenSelect.focus();
+      return;
+    }
+
+    const panelKey = specimenSelect.value;
+    const panelName = selectedOpt.getAttribute('data-name') || selectedOpt.text;
+    const panelPrice = selectedOpt.getAttribute('data-price') || '89.99';
     const reason = reasonSelect ? reasonSelect.value : 'Pre-Employment';
-    const methodSelect = document.getElementById('estMethod');
-    const isDot = (methodSelect?.value === 'dot' || (panelKey.toLowerCase().includes('dot') && !panelKey.toLowerCase().includes('non-dot') && !panelKey.toLowerCase().includes('nondot')));
+    const isDot = (methodSelect.value === 'dot' || (panelKey.toLowerCase().includes('dot') && !panelKey.toLowerCase().includes('non-dot') && !panelKey.toLowerCase().includes('nondot')));
     const dotAgency = (isDot && dotAgencySelect) ? dotAgencySelect.value : 'FMCSA';
 
     openOrderModal(panelKey, panelName, panelPrice);

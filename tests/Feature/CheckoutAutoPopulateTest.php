@@ -74,5 +74,36 @@ class CheckoutAutoPopulateTest extends TestCase
         $response->assertSee('$0.00', false);
         $response->assertSee('Please Select a Test Panel', false);
     }
+
+    public function test_checkout_urine_category_excludes_background_checks_and_physicals(): void
+    {
+        $response = $this->get('/checkout?category=urine');
+        $response->assertStatus(200);
+
+        // When urine is selected, urine panel is present in the select options
+        $response->assertSee('5 Panel NON-DOT', false);
+
+        // Non-urine products must NOT be rendered in the select options
+        $response->assertDontSee('<option value="25"', false); // Basic Level Background Check
+        $response->assertDontSee('<option value="43"', false); // Non-DOT Physical
+        $response->assertDontSee('<option value="53"', false); // Respirator Fit
+        $response->assertDontSee('<option value="56"', false); // Vision Test Snellen
+    }
+
+    public function test_homepage_express_checkout_defaults_to_blank_category_and_zero_price(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+
+        // Express Online Order category dropdown defaults to blank placeholder
+        $response->assertSee('Select Type / Category of Test</option>', false);
+
+        // Panel dropdown defaults to category first placeholder
+        $response->assertSee('-- Select Category First --</option>', false);
+
+        // Price display shows $0.00 and prompt
+        $response->assertSee('Please Select a Test Panel', false);
+        $response->assertSee('$0.00', false);
+    }
 }
 

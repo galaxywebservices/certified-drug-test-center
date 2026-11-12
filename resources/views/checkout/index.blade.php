@@ -544,21 +544,34 @@
             @csrf
 
             @php
-                $initialCats = $product ? $product->categories->pluck('slug')->toArray() : [];
-                if ($product && $product->dot_required) $initialCats[] = 'dot';
-                if ($product && !empty($product->specimen_type)) $initialCats[] = $product->specimen_type;
                 $initialCat = request('category', '');
                 if (empty($initialCat) && $product) {
-                    if ($product->dot_required) $initialCat = 'dot';
-                    elseif (in_array('urine', $initialCats)) $initialCat = 'urine';
-                    elseif (in_array('hair', $initialCats)) $initialCat = 'hair';
-                    elseif (in_array('alcohol', $initialCats)) $initialCat = 'alcohol';
-                    elseif (in_array('saliva', $initialCats) || in_array('oral', $initialCats)) $initialCat = 'oral';
-                    elseif (in_array('dna', $initialCats) || in_array('dna-testing', $initialCats)) $initialCat = 'dna';
-                    elseif (in_array('blood', $initialCats) || in_array('lab-blood', $initialCats)) $initialCat = 'clinical';
-                    elseif (in_array('occupational-health', $initialCats)) $initialCat = 'occupational';
-                    elseif (in_array('dot', $initialCats)) $initialCat = 'dot';
+                    $prodFilterCats = $product->filter_categories;
+                    if ($product->dot_required && in_array('dot', $prodFilterCats)) $initialCat = 'dot';
+                    elseif (in_array('urine', $prodFilterCats)) $initialCat = 'urine';
+                    elseif (in_array('hair', $prodFilterCats)) $initialCat = 'hair';
+                    elseif (in_array('alcohol', $prodFilterCats)) $initialCat = 'alcohol';
+                    elseif (in_array('oral', $prodFilterCats)) $initialCat = 'oral';
+                    elseif (in_array('occupational', $prodFilterCats)) $initialCat = 'occupational';
+                    elseif (in_array('clinical', $prodFilterCats)) $initialCat = 'clinical';
+                    elseif (in_array('dna', $prodFilterCats)) $initialCat = 'dna';
+                    elseif (in_array('dot', $prodFilterCats)) $initialCat = 'dot';
+                    else $initialCat = $prodFilterCats[0] ?? '';
                 }
+
+                $productsJson = $allProducts->map(function($p) {
+                    return [
+                        'id' => $p->id,
+                        'name' => $p->name,
+                        'price' => (float) $p->price,
+                        'priceFormatted' => number_format((float) $p->price, 2),
+                        'retail' => (float) $p->retail_price,
+                        'specimen' => ucfirst($p->specimen_type ?? 'Urine'),
+                        'turnaround' => $p->turnaround_time,
+                        'categories' => $p->filter_categories,
+                        'dot' => (bool) $p->dot_required,
+                    ];
+                })->values();
             @endphp
 
             <div class="checkout-grid">
@@ -608,30 +621,23 @@
                                     <option value="" disabled {{ !$product ? 'selected' : '' }} id="product_placeholder">
                                         {{ empty($initialCat) ? '-- Select Category First --' : '-- Select Testing Panel / Service --' }}
                                     </option>
-                                    @foreach($allProducts as $p)
-                                        @php
-                                            $pCats = $p->categories->pluck('slug')->toArray();
-                                            if ($p->dot_required && !in_array('dot', $pCats)) $pCats[] = 'dot';
-                                            if (!empty($p->specimen_type) && !in_array($p->specimen_type, $pCats)) $pCats[] = $p->specimen_type;
-                                            if (in_array('saliva', $pCats) && !in_array('oral', $pCats)) $pCats[] = 'oral';
-                                            if (in_array('blood', $pCats) && !in_array('clinical', $pCats)) $pCats[] = 'clinical';
-                                            if (in_array('lab-blood', $pCats) && !in_array('clinical', $pCats)) $pCats[] = 'clinical';
-                                            if (in_array('dna-testing', $pCats) && !in_array('dna', $pCats)) $pCats[] = 'dna';
-                                            if ((in_array('occupational-health', $pCats) || in_array('occupational', $pCats)) && !in_array('occupational', $pCats)) $pCats[] = 'occupational';
-                                            $pCatStr = implode(' ', array_unique($pCats));
-                                        @endphp
-                                        <option value="{{ $p->id }}" 
-                                                data-price="{{ $p->price }}" 
-                                                data-retail="{{ $p->retail_price }}"
-                                                data-name="{{ $p->name }}" 
-                                                data-specimen="{{ ucfirst($p->specimen_type) }}"
-                                                data-turnaround="{{ $p->turnaround_time }}"
-                                                data-categories="{{ $pCatStr }}"
-                                                data-dot="{{ $p->dot_required ? '1' : '0' }}"
-                                                {{ ($product && $product->id == $p->id) ? 'selected' : '' }}>
-                                            {{ $p->name }} — ${{ number_format($p->price, 2) }} ({{ $p->turnaround_time }})
-                                        </option>
-                                    @endforeach
+                                    @if(!empty($initialCat))
+                                        @foreach($allProducts as $p)
+                                            @if(in_array($initialCat, $p->filter_categories))
+                                                <option value="{{ $p->id }}" 
+                                                        data-price="{{ $p->price }}" 
+                                                        data-retail="{{ $p->retail_price }}"
+                                                        data-name="{{ $p->name }}" 
+                                                        data-specimen="{{ ucfirst($p->specimen_type ?? 'Urine') }}"
+                                                        data-turnaround="{{ $p->turnaround_time }}"
+                                                        data-categories="{{ implode(' ', $p->filter_categories) }}"
+                                                        data-dot="{{ $p->dot_required ? '1' : '0' }}"
+                                                        {{ ($product && $product->id == $p->id) ? 'selected' : '' }}>
+                                                    {{ $p->name }} — ${{ number_format($p->price, 2) }} ({{ $p->turnaround_time }})
+                                                </option>
+                                            @endif
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
 
@@ -639,10 +645,15 @@
                                 <div>
                                     <strong style="color:#0B2545; font-size:15px;" id="highlightProdName">{{ $product->name ?? '' }}</strong>
                                     <div class="selected-product-meta">
-                                        <span class="badge" style="background:#DCFCE7; color:#15803D; font-size:11px;" id="highlightSpecimen">{{ $product ? ucfirst($product->specimen_type) . ' Specimen' : '' }}</span>
+                                        <span class="badge" style="background:#DCFCE7; color:#15803D; font-size:11px;" id="highlightSpecimen">{{ $product ? ucfirst($product->specimen_type ?? 'Urine') . ' Specimen' : '' }}</span>
                                         <span id="highlightTurnaround">{{ $product ? '● ' . $product->turnaround_time : '' }}</span>
                                     </div>
                                 </div>
+                                <div style="text-align:right;">
+                                    <div style="font-size:22px; font-weight:900; color:#C1121F;" id="highlightPrice">${{ $product ? number_format($product->price, 2) : '0.00' }}</div>
+                                    <small style="color:#16A34A; font-weight:700; font-size:11px;">Online Discount Applied</small>
+                                </div>
+                            </div>
                                 <div style="text-align:right;">
                                     <div style="font-size:22px; font-weight:900; color:#C1121F;" id="highlightPrice">${{ $product ? number_format($product->price, 2) : '0.00' }}</div>
                                     <small style="color:#16A34A; font-weight:700; font-size:11px;">Online Discount Applied</small>
@@ -1063,7 +1074,7 @@
 
         if (highlightName) highlightName.textContent = name;
         if (highlightPrice) highlightPrice.textContent = '$' + price;
-        if (highlightSpec) highlightSpec.textContent = specimen + ' Specimen';
+        if (highlightSpec) highlightSpec.textContent = (specimen && specimen.includes('Specimen')) ? specimen : (specimen + ' Specimen');
         if (highlightTurn) highlightTurn.textContent = '● ' + turnaround;
 
         // Update order summary card
@@ -1075,7 +1086,7 @@
         const btnPrice = document.getElementById('btnPricePreview');
 
         if (summaryTitle) summaryTitle.textContent = name;
-        if (summarySpec) summarySpec.textContent = specimen;
+        if (summarySpec) summarySpec.textContent = specimen ? specimen.replace(' Specimen', '') : '';
         if (summaryTurn) summaryTurn.textContent = '• ' + turnaround;
         if (summaryBase) summaryBase.textContent = '$' + price;
         if (summaryTotal) summaryTotal.textContent = '$' + price;
@@ -1084,73 +1095,60 @@
         checkAndToggleDotRequirements();
     }
 
+    const allProductsData = @json($productsJson);
+    let preSelectedProductId = {{ $product ? $product->id : 'null' }};
+
     function filterProductsByCategory(cat, userTriggered = false) {
         const select = document.getElementById('product_id');
-        const placeholder = document.getElementById('product_placeholder');
         if (!select) return;
 
-        const options = select.querySelectorAll('option:not(#product_placeholder)');
+        select.innerHTML = '';
 
         if (!cat) {
-            if (placeholder) {
-                placeholder.textContent = '-- Select Category First --';
-            }
-            options.forEach(opt => {
-                opt.hidden = true;
-                opt.style.display = 'none';
-            });
-            select.value = "";
+            const defaultOpt = document.createElement('option');
+            defaultOpt.value = '';
+            defaultOpt.id = 'product_placeholder';
+            defaultOpt.textContent = '-- Select Category First --';
+            defaultOpt.disabled = true;
+            defaultOpt.selected = true;
+            select.appendChild(defaultOpt);
             updateSelectedProduct(select);
+            checkAndToggleDotRequirements();
             return;
         }
 
-        if (placeholder) {
-            placeholder.textContent = '-- Select Testing Panel / Service --';
-        }
+        const placeholderOpt = document.createElement('option');
+        placeholderOpt.value = '';
+        placeholderOpt.id = 'product_placeholder';
+        placeholderOpt.textContent = '-- Select Testing Panel / Service --';
+        placeholderOpt.disabled = true;
+        placeholderOpt.selected = true;
+        select.appendChild(placeholderOpt);
 
-        let firstVisible = null;
-        let currentSelectedVisible = false;
+        const matching = allProductsData.filter(p => p.categories && p.categories.includes(cat));
 
-        options.forEach(opt => {
-            const cats = (opt.getAttribute('data-categories') || '').split(' ');
-            let matches = (cat === 'all');
-            if (!matches) {
-                if (cat === 'urine') matches = cats.includes('urine');
-                else if (cat === 'dot') matches = cats.includes('dot');
-                else if (cat === 'hair') matches = cats.includes('hair');
-                else if (cat === 'alcohol') matches = cats.includes('alcohol');
-                else if (cat === 'oral') matches = cats.includes('saliva') || cats.includes('oral') || cats.includes('oral-fluid-testing');
-                else if (cat === 'occupational') matches = cats.includes('occupational-health') || cats.includes('occupational');
-                else if (cat === 'clinical') matches = cats.includes('blood') || cats.includes('lab-blood') || cats.includes('labblood-testing') || cats.includes('clinical');
-                else if (cat === 'dna') matches = cats.includes('dna') || cats.includes('dna-testing');
-                else matches = cats.includes(cat);
-            }
-
-            if (matches) {
-                opt.hidden = false;
-                opt.style.display = '';
-                if (!firstVisible) firstVisible = opt;
-                if (opt.selected) currentSelectedVisible = true;
-            } else {
-                opt.hidden = true;
-                opt.style.display = 'none';
-            }
+        matching.forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.id;
+            opt.setAttribute('data-price', p.price);
+            opt.setAttribute('data-retail', p.retail);
+            opt.setAttribute('data-name', p.name);
+            opt.setAttribute('data-specimen', p.specimen);
+            opt.setAttribute('data-turnaround', p.turnaround);
+            opt.setAttribute('data-categories', p.categories.join(' '));
+            opt.setAttribute('data-dot', p.dot ? '1' : '0');
+            opt.textContent = `${p.name} — $${p.priceFormatted} (${p.turnaround})`;
+            select.appendChild(opt);
         });
 
-        if (userTriggered) {
-            // When user changes category, reset to the placeholder "-- Select Testing Panel / Service --"
-            select.value = "";
-            updateSelectedProduct(select);
-        } else {
-            // Initial page load: if a product was already pre-selected in URL and matches this category, keep it; otherwise stay at placeholder
-            if (!currentSelectedVisible || !select.value) {
-                select.value = "";
-                updateSelectedProduct(select);
-            } else {
-                updateSelectedProduct(select);
+        if (!userTriggered && preSelectedProductId) {
+            const matched = matching.find(p => p.id == preSelectedProductId);
+            if (matched) {
+                select.value = matched.id;
             }
         }
 
+        updateSelectedProduct(select);
         checkAndToggleDotRequirements();
     }
 
