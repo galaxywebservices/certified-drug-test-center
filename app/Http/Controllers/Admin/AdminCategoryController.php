@@ -53,6 +53,11 @@ class AdminCategoryController extends Controller
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
     }
 
+    public function show(Category $category)
+    {
+        return redirect()->route('admin.categories.edit', $category);
+    }
+
     public function edit(Category $category)
     {
         return view('admin.categories.edit', compact('category'));

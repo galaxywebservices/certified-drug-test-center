@@ -110,6 +110,11 @@ class AdminProductController extends Controller
         return redirect()->route('admin.products.index')->with('success', 'Product created successfully.');
     }
 
+    public function show(Product $product)
+    {
+        return redirect()->route('admin.products.edit', $product);
+    }
+
     public function edit(Product $product)
     {
         $categories = Category::orderBy('name')->get();

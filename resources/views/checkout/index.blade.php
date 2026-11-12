@@ -654,11 +654,6 @@
                                     <small style="color:#16A34A; font-weight:700; font-size:11px;">Online Discount Applied</small>
                                 </div>
                             </div>
-                                <div style="text-align:right;">
-                                    <div style="font-size:22px; font-weight:900; color:#C1121F;" id="highlightPrice">${{ $product ? number_format($product->price, 2) : '0.00' }}</div>
-                                    <small style="color:#16A34A; font-weight:700; font-size:11px;">Online Discount Applied</small>
-                                </div>
-                            </div>
 
                             <div id="noProductSelectedPrompt" style="{{ $product ? 'display:none;' : '' }}; margin-top:12px; padding:16px 18px; background:#F8FAFC; border:1.5px dashed #CBD5E1; border-radius:8px; text-align:center; color:#64748B; font-size:13.5px; font-weight:500;">
                                 <span>👈 Select a test category and specific panel above to view pricing and turnaround details.</span>

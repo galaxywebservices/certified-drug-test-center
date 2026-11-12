@@ -134,5 +134,44 @@ class CheckoutAutoPopulateTest extends TestCase
         $response->assertSee('5 Panel NON-DOT', false);
         $response->assertSee('handleEstimatorMethodChange', false);
     }
+
+    public function test_admin_products_show_redirects_to_edit(): void
+    {
+        $admin = \App\Models\User::first() ?? \App\Models\User::create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
+            'role' => 'admin',
+            'is_super_admin' => true,
+        ]);
+
+        $product = \App\Models\Product::first();
+
+        $response = $this->actingAs($admin)->get("/admin/products/{$product->id}");
+        $response->assertRedirect(route('admin.products.edit', $product));
+    }
+
+    public function test_checkout_layout_structure_has_steps_inside_left_column(): void
+    {
+        $response = $this->get('/checkout/etg-alcohol');
+        $response->assertStatus(200);
+
+        $content = $response->getContent();
+
+        // Step 1, Step 2, and Step 3 must appear sequentially before the Right Column (order-summary-sidebar)
+        $posStep1 = strpos($content, 'Select Testing Package');
+        $posStep2 = strpos($content, 'Donor Information (Person Being Tested)');
+        $posStep3 = strpos($content, 'Secure Payment (PayTrace Gateway)');
+        $posSummary = strpos($content, '<aside class="order-summary-sidebar">');
+
+        $this->assertNotFalse($posStep1);
+        $this->assertNotFalse($posStep2);
+        $this->assertNotFalse($posStep3);
+        $this->assertNotFalse($posSummary);
+
+        $this->assertTrue($posStep1 < $posStep2, 'Step 1 should appear before Step 2');
+        $this->assertTrue($posStep2 < $posStep3, 'Step 2 should appear before Step 3');
+        $this->assertTrue($posStep3 < $posSummary, 'Step 3 should appear before Order Summary in the left column');
+    }
 }
 
