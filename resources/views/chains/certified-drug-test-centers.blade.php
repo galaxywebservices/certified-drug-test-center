@@ -2,29 +2,6 @@
 
 @section('content')
 <style>
-.cms-hero-bar {
-    background: linear-gradient(135deg, #0B2545 0%, #133E6E 100%);
-    color: #fff;
-    padding: 40px 0;
-    border-bottom: 3px solid #C1121F;
-}
-.cms-hero-bar .breadcrumbs {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-    color: #94A3B8;
-    margin-bottom: 12px;
-}
-.cms-hero-bar .breadcrumbs a {
-    color: #CBD5E1;
-    text-decoration: none;
-}
-.cms-hero-bar .breadcrumbs a:hover {
-    color: #fff;
-    text-decoration: underline;
-}
-
 .cdtc{--navy:#0b3d6e;--navy-dk:#072a4d;--blue:#1565c0;--teal:#0f8b7d;--teal-lt:#e6f5f3;--ink:#1b2430;--muted:#5b6675;--line:#dde3ea;--soft:#f4f7fa;--accent:#e8532b;--accent-dk:#c7411d;--ok:#1b8a3a;--r:12px;--shadow:0 4px 18px rgba(11,61,110,.08);
   color:var(--ink);background:#fff;line-height:1.6;font-size:17px;overflow-x:hidden}
 .cdtc *,.cdtc *::before,.cdtc *::after{box-sizing:border-box}
@@ -215,21 +192,6 @@
 }
 </style>
 
-<!-- Top CMS Bar matching sample structure -->
-<div class="cms-hero-bar">
-    <div class="container">
-        <nav class="breadcrumbs" aria-label="Breadcrumb" style="display:flex; gap:8px; font-size:13px; color:#94A3B8; margin-bottom:12px;">
-            <a href="{{ url('/') }}" style="color:#CBD5E1; text-decoration:none;">Home</a>
-            <span>&rsaquo;</span>
-            <span style="color:#fff;">Certified Drug Test Centers</span>
-        </nav>
-
-        <h1 style="font-size:32px; font-weight:800; color:#fff; line-height:1.2; margin:0;">
-            Certified Drug Test Centers
-        </h1>
-    </div>
-</div>
-
 <div class="cdtc">
 <!-- ===== HERO ===== -->
   <div class="hero">
@@ -309,7 +271,7 @@
     <div class="wrap">
       <span class="eyebrow">How it works</span>
       <h2 id="how-h">How to schedule a drug test in 4 easy steps</h2>
-      <p class="lead">If you're searching for drug testing near me, the process is simple. Ordering takes just minutes, most people get a same-day drug test at a location near them, after receiveing the donor/registration form via email or text</p>
+      <p class="lead">If you're searching for drug testing near me, the process is simple. Ordering takes just minutes, most people get a same-day drug test at a location near them, after receiving the donor/registration form via email or text.</p>
       <ol class="steps">
         <li><h3>Choose your test &amp; register</h3><p>Select your test online or call (800) 985-4339. Enter the donor's details and ZIP code to pick the closest site. You're registered within minutes.</p></li>
         <li><h3>Get your donor pass instantly</h3><p>Your electronic donor registration pass &#x2014; with the site address, hours and instructions &#x2014; arrives by email and text right away.</p></li>
@@ -345,7 +307,7 @@
             <tr><th scope="row" data-label="Test"><a href="{{ url('/product/etg-alcohol') }}">EtG Alcohol Test (80-Hour)</a></th><td class="price" data-label="Price">$89.99</td><td data-label="Specimen">Urine</td><td data-label="Detection window">Up to ~80 hours</td><td data-label="Results">1&#x2013;2 business days</td><td data-label="Best for">Court, probation, sobriety programs</td></tr>
             <tr><th scope="row" data-label="Test"><a href="{{ url('/product/dot-physical') }}">DOT Physical Exam</a></th><td class="price" data-label="Price">$159.99</td><td data-label="Specimen">In-clinic exam</td><td data-label="Detection window">&#x2014;</td><td data-label="Results">Same-day medical card</td><td data-label="Best for">CDL drivers (NRCME examiner)</td></tr>
             <tr><th scope="row" data-label="Test"><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}">DOT Random Consortium</a></th><td class="price" data-label="Price">$99.99</td><td data-label="Specimen">Multi Year Enrollment Available</td><td data-label="Detection window">&#x2014;</td><td data-label="Results">Instant certificate</td><td data-label="Best for">Owner-operators, small fleets</td></tr>
-            <tr><th scope="row" data-label="Test"><a href="{{ url('/category/dna-testing') }}">Legal DNA Paternity (AABB)</a></th><td class="price" data-label="Price">$499.99</td><td data-label="Specimen">Cheek swab</td><td data-label="Detection window">&#x2014;</td><td data-label="Results">2&#x2013;3 business days</td><td data-label="Best for">Court, USCIS, child support</td></tr>
+            <tr><th scope="row" data-label="Test"><a href="{{ url('/category/dna-testing') }}">Legal DNA Paternity (AABB)</a></th><td class="price" data-label="Price">$299.99</td><td data-label="Specimen">Cheek swab</td><td data-label="Detection window">&#x2014;</td><td data-label="Results">2&#x2013;3 business days</td><td data-label="Best for">Court, USCIS, child support</td></tr>
           </tbody>
         </table>
       </div>
@@ -436,7 +398,7 @@
         <h2 id="dot-h">DOT drug and alcohol testing nationwide</h2>
         <p>DOT drug testing is federally mandated testing for safety-sensitive transportation employees under <strong>49 CFR Part 40</strong>. A DOT test must be collected on a Federal Custody and Control Form (CCF), analyzed by an HHS/SAMHSA-certified laboratory, and verified by a Medical Review Officer.</p>
         <p>The DOT 5-panel urine test screens for marijuana metabolites, cocaine metabolites, amphetamines (amphetamine, methamphetamine, MDMA, MDA), opioids (codeine, morphine, 6-acetylmorphine, hydrocodone, hydromorphone, oxycodone, oxymorphone) and PCP.</p>
-        <p>Whether you need a DOT drug test near you for a new CDL job or a random selection, we support all six DOT agencies: <strong>FMCSA</strong> (trucking), <strong>FAA</strong> (aviation), <strong>FRA</strong> (rail), <strong>FTA</strong> (transit), <strong>PHMSA</strong> (pipeline) and <strong>USCG</strong> (maritime).</p><p>DOT oral fluid drug testing is now authorized; inquire if now available at a certified drug testing center</p>
+        <p>Whether you need a DOT drug test near you for a new CDL job or a random selection, we support all six DOT agencies: <strong>FMCSA</strong> (trucking), <strong>FAA</strong> (aviation), <strong>FRA</strong> (rail), <strong>FTA</strong> (transit), <strong>PHMSA</strong> (pipeline) and <strong>USCG</strong> (maritime).</p><p>DOT oral fluid drug testing is now authorized; inquire if now available at a certified drug testing center.</p>
         <a class="btn btn-primary" href="{{ url('/category/dot') }}">View DOT services</a>
       </div>
       <div>
@@ -447,9 +409,9 @@
           <li><a href="{{ url('/product/5-panel-dot') }}">DOT 5-panel oral fluid drug test</a> &#x2014; $99.99</li>
           <li><a href="{{ url('/product/dot-breath-alcohol') }}">DOT breath alcohol test</a> by certified BATs &#x2014; $89.99</li>
           <li><a href="{{ url('/product/dot-physical') }}">DOT physical exam</a> by NRCME-certified examiners &#x2014; $159.99</li>
-          <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}">DOT random testing consortium</a>&#x2014; $99.99/yr</li>
-          <li><a href="{{ url('/product/5-panel-return-to-duty') }}">DOT Return to Duty(RTD)</a> testing&#x2014; $119.99</li>
-          <li><a href="{{ url('/product/fmcsa-clearinghouse-accucheck') }}">FMCSA RTD Drug Test & Drug &amp; Alcohol Clearinghouse</a> Clear Step 5</a>&#x2014; $299.99</li>
+          <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}">DOT random testing consortium</a> &#x2014; $99.99/yr</li>
+          <li><a href="{{ url('/product/5-panel-return-to-duty') }}">DOT Return to Duty (RTD)</a> testing &#x2014; $119.99</li>
+          <li><a href="{{ url('/product/fmcsa-clearinghouse-accucheck') }}">FMCSA RTD Drug Test &amp; Drug &amp; Alcohol Clearinghouse Clear Step 5</a> &#x2014; $299.99</li>
         </ul>
       </div>
     </div>
@@ -629,11 +591,4 @@
     <a href="{{ url('/checkout') }}">Order Test Online</a>
   </nav>
 </div>
-
-<!-- Structured Data (JSON-LD) for 100% SEO Dominance -->
-@if(!empty($schemaGraph))
-<script type="application/ld+json">
-{!! json_encode($schemaGraph, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
-</script>
-@endif
 @endsection

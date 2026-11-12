@@ -2,7 +2,10 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "MedicalOrganization",
+      "@type": [
+        "MedicalOrganization",
+        "MedicalBusiness"
+      ],
       "@id": "https://certifieddrugtestingcenters.com/#organization",
       "name": "Certified Drug Test Centers",
       "alternateName": [
@@ -62,12 +65,14 @@
           }
         ]
       },
-      "sameAs": [
-        "REPLACE_WITH_GOOGLE_BUSINESS_PROFILE_URL",
-        "REPLACE_WITH_FACEBOOK_URL",
-        "REPLACE_WITH_LINKEDIN_URL",
-        "REPLACE_WITH_BBB_URL"
-      ]
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "4850",
+        "reviewCount": "4850"
+      }
     },
     {
       "@type": "WebSite",

@@ -78,62 +78,67 @@
             }
         }
 
-        $schemaGraph = [
-            '@context' => 'https://schema.org',
-            '@graph' => [
-                [
-                    '@type' => 'MedicalBusiness',
-                    '@id' => url('/') . '#organization',
-                    'name' => 'Certified Drug Test Centers',
-                    'url' => url('/'),
-                    'logo' => asset('images/logo.png'),
-                    'image' => asset('images/logo.png'),
-                    'telephone' => '+1-800-985-4339',
-                    'priceRange' => '$$',
-                    'currenciesAccepted' => 'USD',
-                    'paymentAccepted' => 'Credit Card, Paytrace, Debit Card',
-                    'address' => [
-                        '@type' => 'PostalAddress',
-                        'streetAddress' => 'National Scheduling Operations Center',
-                        'addressCountry' => 'US',
-                    ],
-                    'areaServed' => [
-                        '@type' => 'Country',
-                        'name' => 'United States',
-                    ],
-                    'description' => 'Nationwide provider of employer, DOT-regulated, court-ordered, and personal drug and alcohol testing services.',
-                    'aggregateRating' => [
-                        '@type' => 'AggregateRating',
-                        'ratingValue' => '4.9',
-                        'bestRating' => '5',
-                        'worstRating' => '1',
-                        'ratingCount' => '4850',
-                        'reviewCount' => '4850',
-                    ],
-                ],
-                [
-                    '@type' => 'WebSite',
-                    '@id' => url('/') . '#website',
-                    'url' => url('/'),
-                    'name' => 'Certified Drug Test Centers',
-                    'publisher' => [
-                        '@id' => url('/') . '#organization',
-                    ],
-                    'potentialAction' => [
-                        '@type' => 'SearchAction',
-                        'target' => url('/') . '?zip={search_term_string}',
-                        'query-input' => 'required name=search_term_string',
-                    ],
-                ],
-            ],
-        ];
+        $baseOrgUrl = rtrim(url('/'), '/') . '/#organization';
+        $baseSiteUrl = rtrim(url('/'), '/') . '/#website';
 
-        if (count($faqEntities)) {
-            $schemaGraph['@graph'][] = [
-                '@type' => 'FAQPage',
-                '@id' => url()->current() . '#faq',
-                'mainEntity' => $faqEntities,
+        if (empty($schemaGraph)) {
+            $schemaGraph = [
+                '@context' => 'https://schema.org',
+                '@graph' => [
+                    [
+                        '@type' => ['MedicalBusiness', 'MedicalOrganization'],
+                        '@id' => $baseOrgUrl,
+                        'name' => 'Certified Drug Test Centers',
+                        'url' => rtrim(url('/'), '/') . '/',
+                        'logo' => asset('images/logo.png'),
+                        'image' => asset('images/logo.png'),
+                        'telephone' => '+1-800-985-4339',
+                        'priceRange' => '$$',
+                        'currenciesAccepted' => 'USD',
+                        'paymentAccepted' => 'Credit Card, Paytrace, Debit Card',
+                        'address' => [
+                            '@type' => 'PostalAddress',
+                            'streetAddress' => 'National Scheduling Operations Center',
+                            'addressCountry' => 'US',
+                        ],
+                        'areaServed' => [
+                            '@type' => 'Country',
+                            'name' => 'United States',
+                        ],
+                        'description' => 'Nationwide provider of employer, DOT-regulated, court-ordered, and personal drug and alcohol testing services.',
+                        'aggregateRating' => [
+                            '@type' => 'AggregateRating',
+                            'ratingValue' => '4.9',
+                            'bestRating' => '5',
+                            'worstRating' => '1',
+                            'ratingCount' => '4850',
+                            'reviewCount' => '4850',
+                        ],
+                    ],
+                    [
+                        '@type' => 'WebSite',
+                        '@id' => $baseSiteUrl,
+                        'url' => rtrim(url('/'), '/') . '/',
+                        'name' => 'Certified Drug Test Centers',
+                        'publisher' => [
+                            '@id' => $baseOrgUrl,
+                        ],
+                        'potentialAction' => [
+                            '@type' => 'SearchAction',
+                            'target' => url('/') . '?zip={search_term_string}',
+                            'query-input' => 'required name=search_term_string',
+                        ],
+                    ],
+                ],
             ];
+
+            if (count($faqEntities)) {
+                $schemaGraph['@graph'][] = [
+                    '@type' => 'FAQPage',
+                    '@id' => url()->current() . '#faq',
+                    'mainEntity' => $faqEntities,
+                ];
+            }
         }
     @endphp
     <script type="application/ld+json">
