@@ -11,7 +11,7 @@
     📄 View Official MRO Certificate
 </a>
 <a href="{{ route('checkout.confirmation', $order->donor_pass_token) }}" target="_blank" class="btn btn-primary btn-sm">
-    Print Electronic Donor Pass
+    View Order Receipt
 </a>
 <a href="{{ route('admin.orders.index') }}" class="btn btn-outline btn-sm">
     &larr; Back to Orders

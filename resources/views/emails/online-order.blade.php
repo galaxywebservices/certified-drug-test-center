@@ -190,44 +190,6 @@
                         </td>
                     </tr>
 
-                    <!-- Barcode & Authorization CCF -->
-                    <tr>
-                        <td style="padding:10px 32px 24px;">
-                            <div style="background:#F8FAFC; border:1px dashed #CBD5E1; border-radius:8px; padding:18px; text-align:center;">
-                                <div style="font-size:11px; font-weight:800; text-transform:uppercase; color:#64748B; letter-spacing:1px;">Electronic Chain of Custody &amp; Authorization Barcode</div>
-                                <div style="font-family:'Courier New', monospace; font-size:30px; font-weight:bold; letter-spacing:6px; color:#0B2545; margin:8px 0 4px;">
-                                    ||| | |||| || ||| |||| | |||
-                                </div>
-                                <div style="font-size:14px; font-weight:800; color:#0B2545; letter-spacing:2px; font-family:'Courier New', monospace;">
-                                    *{{ $order->order_number }}*
-                                </div>
-                                @if(!empty($order->ccf_number))
-                                <div style="font-size:12px; color:#64748B; margin-top:6px;">
-                                    CCF Tracking: <strong>{{ $order->ccf_number }}</strong>
-                                </div>
-                                @endif
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- Action Buttons -->
-                    <tr>
-                        <td style="padding:0 32px 30px; text-align:center;">
-                            <table width="100%" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td align="center">
-                                        <a href="{{ url('/admin/orders/' . $order->id) }}" style="display:inline-block; background:#0B2545; color:#ffffff; font-size:14px; font-weight:800; padding:12px 24px; border-radius:6px; text-decoration:none; margin:0 6px 8px 6px;">
-                                            Open Order in Admin Panel &rarr;
-                                        </a>
-                                        <a href="{{ route('checkout.confirmation', $order->donor_pass_token) }}" style="display:inline-block; background:#C1121F; color:#ffffff; font-size:14px; font-weight:800; padding:12px 24px; border-radius:6px; text-decoration:none; margin:0 6px 8px 6px;">
-                                            View Electronic Donor Pass &rarr;
-                                        </a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
                     <!-- Footer -->
                     <tr>
                         <td style="background:#F8FAFC; padding:20px 32px; border-top:1px solid #E2E8F0; text-align:center; font-size:12px; color:#64748B;">

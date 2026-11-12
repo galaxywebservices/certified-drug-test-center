@@ -206,7 +206,7 @@ class CheckoutController extends Controller
             ->where('donor_pass_token', $token)
             ->firstOrFail();
 
-        $pageTitle = "Electronic Donor Pass - Order #{$order->order_number} | Certified Drug Test Center";
+        $pageTitle = "Order Receipt - Order #{$order->order_number} | Certified Drug Test Center";
 
         return view('checkout.confirmation', compact('order', 'pageTitle'));
     }

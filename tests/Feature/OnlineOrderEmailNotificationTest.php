@@ -111,6 +111,55 @@ class OnlineOrderEmailNotificationTest extends TestCase
         $this->assertStringContainsString('CDL999888', $rendered);
         $this->assertStringContainsString('$99.99', $rendered);
         $this->assertStringContainsString('onlineorders@accrediteddrugtesting.com', $rendered);
+
+        // Barcode and action buttons must be removed
+        $this->assertStringNotContainsString('Authorization Barcode', $rendered);
+        $this->assertStringNotContainsString('Open Order in Admin Panel', $rendered);
+        $this->assertStringNotContainsString('View Electronic Donor Pass', $rendered);
+    }
+
+    public function test_donor_receipt_email_and_confirmation_page_have_no_donor_pass_or_buttons(): void
+    {
+        $uniqueOrderNumber = 'CDTC-TEST-' . strtoupper(substr(md5(uniqid()), 0, 8));
+        $token = 'receipt-token-' . uniqid();
+        $order = Order::create([
+            'order_number' => $uniqueOrderNumber,
+            'donor_first_name' => 'Michael',
+            'donor_last_name' => 'Brown',
+            'donor_email' => 'michael@example.com',
+            'donor_phone' => '(555) 444-3322',
+            'donor_dob' => '1992-05-15',
+            'test_reason' => 'Pre-Employment',
+            'subtotal' => 89.99,
+            'total' => 89.99,
+            'payment_status' => 'paid',
+            'paytrace_transaction_id' => 'PT-555444',
+            'paytrace_approval_code' => 'AP555444',
+            'donor_pass_token' => $token,
+            'status' => 'registered',
+            'refund_policy_agreed' => true,
+        ]);
+
+        // 1. Check Donor Receipt Email
+        $mailable = new DonorPassMail($order);
+        $emailRendered = $mailable->render();
+
+        $this->assertStringContainsString('Payment &amp; Order Receipt', $emailRendered);
+        $this->assertStringContainsString($uniqueOrderNumber, $emailRendered);
+        $this->assertStringContainsString('$89.99', $emailRendered);
+        $this->assertStringNotContainsString('Official Electronic Donor Pass', $emailRendered);
+        $this->assertStringNotContainsString('Authorization Barcode', $emailRendered);
+        $this->assertStringNotContainsString('View &amp; Print Official Pass Online', $emailRendered);
+
+        // 2. Check Confirmation / Receipt Page
+        $response = $this->get(route('checkout.confirmation', ['token' => $token]));
+        $response->assertStatus(200);
+        $response->assertSee('Payment &amp; Order Receipt', false);
+        $response->assertSee($uniqueOrderNumber, false);
+        $response->assertSee('$89.99', false);
+        $response->assertDontSee('Official Electronic Donor Pass', false);
+        $response->assertDontSee('Print Donor Pass', false);
+        $response->assertDontSee('Authorization Barcode', false);
     }
 
     public function test_admin_can_update_online_order_email_settings(): void

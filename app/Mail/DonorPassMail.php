@@ -20,7 +20,7 @@ class DonorPassMail extends Mailable
 
     public function build()
     {
-        return $this->subject('Your Electronic Donor Pass - Order #' . $this->order->order_number)
+        return $this->subject('Order & Payment Receipt - Order #' . $this->order->order_number)
                     ->view('emails.donor-pass');
     }
 }
