@@ -12,42 +12,26 @@ return new class extends Migration
      */
     public function up(): void
     {
+        @ini_set('memory_limit', '512M');
+
         $baseUrl = rtrim(config('app.url') ?: 'https://certifieddrugtestingcenters.com', '/');
 
-        // Fix categories
-        $categories = DB::table('categories')
-            ->where('canonical_url', 'LIKE', '%localhost%')
-            ->orWhere('canonical_url', 'LIKE', '%127.0.0.1%')
-            ->get();
+        // Execute direct SQL queries without loading large blobs into PHP memory
+        DB::statement(
+            "UPDATE categories SET canonical_url = CONCAT(?, '/category/', slug) WHERE canonical_url LIKE '%localhost%' OR canonical_url LIKE '%127.0.0.1%'",
+            [$baseUrl]
+        );
 
-        foreach ($categories as $cat) {
-            $newCanonical = $baseUrl . '/category/' . $cat->slug;
-            DB::table('categories')->where('id', $cat->id)->update(['canonical_url' => $newCanonical]);
-        }
+        DB::statement(
+            "UPDATE products SET canonical_url = CONCAT(?, '/product/', slug) WHERE canonical_url LIKE '%localhost%' OR canonical_url LIKE '%127.0.0.1%'",
+            [$baseUrl]
+        );
 
-        // Fix products
-        $products = DB::table('products')
-            ->where('canonical_url', 'LIKE', '%localhost%')
-            ->orWhere('canonical_url', 'LIKE', '%127.0.0.1%')
-            ->get();
-
-        foreach ($products as $prod) {
-            $newCanonical = $baseUrl . '/product/' . $prod->slug;
-            DB::table('products')->where('id', $prod->id)->update(['canonical_url' => $newCanonical]);
-        }
-
-        // Fix CMS pages
         if (Schema::hasTable('pages')) {
-            $pages = DB::table('pages')
-                ->where('canonical_url', 'LIKE', '%localhost%')
-                ->orWhere('canonical_url', 'LIKE', '%127.0.0.1%')
-                ->get();
-
-            foreach ($pages as $p) {
-                $slug = ltrim($p->slug, '/');
-                $newCanonical = $baseUrl . '/' . $slug;
-                DB::table('pages')->where('id', $p->id)->update(['canonical_url' => $newCanonical]);
-            }
+            DB::statement(
+                "UPDATE pages SET canonical_url = CONCAT(?, '/', TRIM(LEADING '/' FROM slug)) WHERE canonical_url LIKE '%localhost%' OR canonical_url LIKE '%127.0.0.1%'",
+                [$baseUrl]
+            );
         }
     }
 
