@@ -195,7 +195,7 @@
             <button type="button" class="filter-tab-btn" data-filter="dot">DOT Mandated</button>
             <button type="button" class="filter-tab-btn" data-filter="hair">Hair Follicle (90 Days)</button>
             <button type="button" class="filter-tab-btn" data-filter="alcohol">Alcohol &amp; EtG</button>
-            <button type="button" class="filter-tab-btn" data-filter="occupational">Occupational Health</button>
+            <button type="button" class="filter-tab-btn" data-filter="occupational">Occupational Health (OCC)</button>
         </div>
 
         <!-- Product Cards Grid -->

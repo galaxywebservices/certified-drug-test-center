@@ -439,7 +439,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ url('/category/occupational-health') }}" class="nav-link">
-                        Occupational Tests
+                        Occupational (OCC) Tests
                     </a>
                 </li>
                 <li class="nav-item">

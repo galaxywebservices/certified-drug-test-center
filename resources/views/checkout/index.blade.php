@@ -591,7 +591,7 @@
                                     <option value="hair" {{ $initialCat === 'hair' ? 'selected' : '' }}>Hair Follicle Tests</option>
                                     <option value="alcohol" {{ $initialCat === 'alcohol' ? 'selected' : '' }}>Alcohol &amp; EtG Tests</option>
                                     <option value="oral" {{ $initialCat === 'oral' ? 'selected' : '' }}>Oral Fluid / Saliva Tests</option>
-                                    <option value="occupational" {{ $initialCat === 'occupational' ? 'selected' : '' }}>Occupational Health Tests</option>
+                                    <option value="occupational" {{ $initialCat === 'occupational' ? 'selected' : '' }}>Occupational Health Tests (OCC Health)</option>
                                     <option value="clinical" {{ $initialCat === 'clinical' ? 'selected' : '' }}>Clinical Blood Tests</option>
                                     <option value="dna" {{ $initialCat === 'dna' ? 'selected' : '' }}>DNA Testing</option>
                                 </select>

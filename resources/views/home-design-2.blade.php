@@ -90,7 +90,7 @@
                         <option value="hair">Hair Tests</option>
                         <option value="alcohol">Alcohol/EtG Tests</option>
                         <option value="oral">Oral Fluid Tests</option>
-                        <option value="occupational">Occupational Tests</option>
+                        <option value="occupational">Occupational Tests (OCC Health)</option>
                         <option value="clinical">Clinical Tests</option>
                         <option value="dna">DNA Tests</option>
                     </select>
@@ -509,7 +509,7 @@
             <button type="button" class="filter-tab-btn" data-filter="hair">Hair Follicle</button>
             <button type="button" class="filter-tab-btn" data-filter="alcohol">Alcohol &amp; EtG</button>
             <button type="button" class="filter-tab-btn" data-filter="oral">Oral Fluid</button>
-            <button type="button" class="filter-tab-btn" data-filter="occupational">Occupational</button>
+            <button type="button" class="filter-tab-btn" data-filter="occupational">Occupational (OCC Health)</button>
             <button type="button" class="filter-tab-btn" data-filter="clinical">Clinical Blood</button>
             <button type="button" class="filter-tab-btn" data-filter="dna">DNA Testing</button>
         </div>
