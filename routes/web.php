@@ -55,7 +55,7 @@ Route::get('/llms-full.txt', function () {
     ]);
 });
 Route::get('/robots.txt', function () {
-    return response()->file(public_path('robots.txt'), [
+    return response(file_get_contents(public_path('robots.txt')), 200, [
         'Content-Type' => 'text/plain; charset=UTF-8',
     ]);
 });

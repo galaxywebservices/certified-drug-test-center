@@ -126,5 +126,22 @@ class SitemapArchitectureTest extends TestCase
         $this->assertStringNotContainsString('/drug-testing-', $locContent);
         $this->assertStringContainsString('/locations/new-york/new-york', $locContent);
     }
+
+    /**
+     * Verify clean robots.txt directives and canonical sitemap.
+     */
+    public function test_robots_txt_content_and_clean_sitemap_directive(): void
+    {
+        $response = $this->get('/robots.txt');
+        $response->assertStatus(200);
+
+        $content = $response->getContent();
+        $this->assertStringNotContainsString('127.0.0.1', $content);
+        $this->assertStringNotContainsString('8001', $content);
+        $this->assertStringContainsString('Sitemap: https://certifieddrugtestingcenters.com/sitemap.xml', $content);
+        $this->assertStringContainsString('Disallow: /checkout', $content);
+        $this->assertStringContainsString('Disallow: /track-order', $content);
+        $this->assertStringContainsString('Disallow: /*?zip=', $content);
+    }
 }
 

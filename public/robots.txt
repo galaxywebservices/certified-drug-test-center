@@ -4,41 +4,14 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
-Disallow: /checkout/process
+Disallow: /checkout
+Disallow: /track-order
 Disallow: /api/
 Disallow: /_debugbar/
-
-# AI Answer Engines & Generative Search Bots (AEO / GEO Permissions)
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: Claude-Web
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: cohere-ai
-Allow: /
-
-User-agent: Meta-ExternalAgent
-Allow: /
+Disallow: /*?zip=
 
 # XML Sitemap
 Sitemap: https://certifieddrugtestingcenters.com/sitemap.xml
-Sitemap: https://certifieddrugtestingcenters.com/sitemap-chain1.xml
 
 # LLM & AI Answer Engine Context (llmstxt.org standard)
 # Clean summary: /llms.txt
