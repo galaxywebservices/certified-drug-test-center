@@ -26,7 +26,7 @@
         }
     @endphp
     <link rel="canonical" href="{{ $canonicalUrl }}">
-    <meta name="robots" content="index, follow">
+    <meta name="robots" content="{{ $metaRobots ?? 'index, follow' }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -239,7 +239,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('/category/labblood-testing') }}" class="nav-link">
+                    <a href="{{ url('/category/lab-blood') }}" class="nav-link">
                         Clinical Tests
                     </a>
                 </li>

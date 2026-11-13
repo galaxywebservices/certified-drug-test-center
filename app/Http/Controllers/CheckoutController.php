@@ -69,8 +69,9 @@ class CheckoutController extends Controller
 
         $pageTitle = "Secure Checkout & Test Registration | Certified Drug Test Center";
         $metaDescription = "Register online for your drug or alcohol test in 2 minutes. Walk in today at over 20,000 certified collection centers.";
+        $metaRobots = "noindex, follow";
 
-        return view('checkout.index', compact('product', 'allProducts', 'selectedLocation', 'pageTitle', 'metaDescription'));
+        return view('checkout.index', compact('product', 'allProducts', 'selectedLocation', 'pageTitle', 'metaDescription', 'metaRobots'));
     }
 
     public function process(Request $request)
@@ -209,7 +210,8 @@ class CheckoutController extends Controller
             ->firstOrFail();
 
         $pageTitle = "Order Receipt - Order #{$order->order_number} | Certified Drug Test Center";
+        $metaRobots = "noindex, follow";
 
-        return view('checkout.confirmation', compact('order', 'pageTitle'));
+        return view('checkout.confirmation', compact('order', 'pageTitle', 'metaRobots'));
     }
 }

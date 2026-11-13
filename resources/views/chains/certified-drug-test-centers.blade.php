@@ -306,7 +306,7 @@
             <tr><th scope="row" data-label="Test"><a href="{{ url('/product/dot-breath-alcohol') }}">DOT Breath Alcohol Test</a></th><td class="price" data-label="Price">$89.99</td><td data-label="Specimen">Breath (EBT)</td><td data-label="Detection window">Current impairment</td><td data-label="Results">Immediate</td><td data-label="Best for">DOT, post-accident, workplace</td></tr>
             <tr><th scope="row" data-label="Test"><a href="{{ url('/product/etg-alcohol') }}">EtG Alcohol Test (80-Hour)</a></th><td class="price" data-label="Price">$89.99</td><td data-label="Specimen">Urine</td><td data-label="Detection window">Up to ~80 hours</td><td data-label="Results">1&#x2013;2 business days</td><td data-label="Best for">Court, probation, sobriety programs</td></tr>
             <tr><th scope="row" data-label="Test"><a href="{{ url('/product/dot-physical') }}">DOT Physical Exam</a></th><td class="price" data-label="Price">$159.99</td><td data-label="Specimen">In-clinic exam</td><td data-label="Detection window">&#x2014;</td><td data-label="Results">Same-day medical card</td><td data-label="Best for">CDL drivers (NRCME examiner)</td></tr>
-            <tr><th scope="row" data-label="Test"><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}">DOT Random Consortium</a></th><td class="price" data-label="Price">$99.99</td><td data-label="Specimen">Multi Year Enrollment Available</td><td data-label="Detection window">&#x2014;</td><td data-label="Results">Instant certificate</td><td data-label="Best for">Owner-operators, small fleets</td></tr>
+            <tr><th scope="row" data-label="Test"><a href="{{ url('/product/1-year-enrollment') }}">DOT Random Consortium</a></th><td class="price" data-label="Price">$99.99</td><td data-label="Specimen">Multi Year Enrollment Available</td><td data-label="Detection window">&#x2014;</td><td data-label="Results">Instant certificate</td><td data-label="Best for">Owner-operators, small fleets</td></tr>
             <tr><th scope="row" data-label="Test"><a href="{{ url('/category/dna-testing') }}">Legal DNA Paternity (AABB)</a></th><td class="price" data-label="Price">$299.99</td><td data-label="Specimen">Cheek swab</td><td data-label="Detection window">&#x2014;</td><td data-label="Results">2&#x2013;3 business days</td><td data-label="Best for">Court, USCIS, child support</td></tr>
           </tbody>
         </table>
@@ -409,7 +409,7 @@
           <li><a href="{{ url('/product/5-panel-dot') }}">DOT 5-panel oral fluid drug test</a> &#x2014; $99.99</li>
           <li><a href="{{ url('/product/dot-breath-alcohol') }}">DOT breath alcohol test</a> by certified BATs &#x2014; $89.99</li>
           <li><a href="{{ url('/product/dot-physical') }}">DOT physical exam</a> by NRCME-certified examiners &#x2014; $159.99</li>
-          <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}">DOT random testing consortium</a> &#x2014; $99.99/yr</li>
+          <li><a href="{{ url('/product/1-year-enrollment') }}">DOT random testing consortium</a> &#x2014; $99.99/yr</li>
           <li><a href="{{ url('/product/5-panel-return-to-duty') }}">DOT Return to Duty (RTD)</a> testing &#x2014; $119.99</li>
           <li><a href="{{ url('/product/fmcsa-clearinghouse-accucheck') }}">FMCSA RTD Drug Test &amp; Drug &amp; Alcohol Clearinghouse Clear Step 5</a> &#x2014; $299.99</li>
         </ul>

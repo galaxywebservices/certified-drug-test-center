@@ -212,7 +212,7 @@ class HomeController extends Controller
                 'is_featured' => false,
             ],
             [
-                'id' => 'legal-dna-paternity',
+                'id' => 'legal-dna',
                 'name' => 'Legal AABB-Certified DNA Paternity Test',
                 'category' => 'dna',
                 'category_label' => 'DNA Testing',

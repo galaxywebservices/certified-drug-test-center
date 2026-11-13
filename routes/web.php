@@ -37,6 +37,9 @@ Route::get('/design-1', [HomeController::class, 'design1'])->name('home.design1'
 
 // XML Dynamic Sitemap for SEO
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+Route::get('/sitemap-core.xml', [SitemapController::class, 'core'])->name('sitemap.core');
+Route::get('/sitemap-products.xml', [SitemapController::class, 'products'])->name('sitemap.products');
+Route::get('/sitemap-locations.xml', [SitemapController::class, 'locations'])->name('sitemap.locations');
 Route::get('/sitemap-chain{id}.xml', [\App\Http\Controllers\PseoSitemapController::class, 'chain'])->where('id', '[1-9]')->name('sitemap.chain');
 Route::get('/sitemap-index.xml', [\App\Http\Controllers\PseoSitemapController::class, 'index'])->name('sitemap.index');
 
@@ -56,6 +59,18 @@ Route::get('/robots.txt', function () {
         'Content-Type' => 'text/plain; charset=UTF-8',
     ]);
 });
+
+// Canonical Category & Product 301 Redirects (Legacy, Duplicate & Placeholder Slugs)
+Route::redirect('/category/labblood-testing', '/category/lab-blood', 301);
+Route::redirect('/product/legal-dna-paternity', '/product/legal-dna', 301);
+Route::redirect('/product/5-panel-oral-fluid-2', '/product/5-panel-oral-fluid', 301);
+Route::redirect('/product/respirator-fit', '/product/respirator-fit-test', 301);
+Route::redirect('/product/1-year-consortium-membership-dot-drug-test', '/product/1-year-enrollment', 301);
+Route::redirect('/product/background-check-49', '/product/entry-level-background-check', 301);
+Route::redirect('/product/background-check-standard', '/product/premium-level-background-check', 301);
+Route::redirect('/product/background-checkbasic-drug-test', '/product/background-check-basic-drug-test', 301);
+Route::redirect('/product/name-of-test-herpes-hsv-types-1-2-blood', '/find-my-test', 301);
+Route::redirect('/product/name-of-test-hiv-agab-with-reflex', '/find-my-test', 301);
 
 // Canonical Legal Aliases & Chain Aliases
 Route::redirect('/certified-drug-test-centers-sample', '/certified-drug-test-centers', 301);
@@ -154,7 +169,7 @@ Route::get('/{state_name}-drug-testing', function(string $stateName) {
         ->orWhere('name', str_replace('-', ' ', $stateName))
         ->first();
     if ($state) {
-        return app(\App\Http\Controllers\LocationController::class)->state($state->slug);
+        return redirect()->to('/locations/' . $state->slug, 301);
     }
     abort(404);
 })->where('state_name', '[a-zA-Z\-]+');

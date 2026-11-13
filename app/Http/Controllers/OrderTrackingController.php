@@ -28,8 +28,9 @@ class OrderTrackingController extends Controller
 
         $pageTitle = "Track Order & Electronic Donor Pass Lookup | Certified Drug Test Centers";
         $metaDescription = "Lookup your electronic Donor Pass, check laboratory testing status, or resend your authorization barcode for Quest Diagnostics and Labcorp collection centers.";
+        $metaRobots = "noindex, follow";
 
-        return view('orders.track', compact('order', 'orderNumber', 'email', 'pageTitle', 'metaDescription'));
+        return view('orders.track', compact('order', 'orderNumber', 'email', 'pageTitle', 'metaDescription', 'metaRobots'));
     }
 
     /**
@@ -67,6 +68,7 @@ class OrderTrackingController extends Controller
             'email' => $order->donor_email,
             'pageTitle' => $pageTitle,
             'metaDescription' => $metaDescription,
+            'metaRobots' => 'noindex, follow',
         ]);
     }
 

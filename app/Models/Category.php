@@ -20,6 +20,7 @@ class Category extends Model
         'description',
         'position',
         'is_active',
+        'is_canonical',
         'meta_title',
         'meta_description',
         'canonical_url',
@@ -27,6 +28,7 @@ class Category extends Model
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_canonical' => 'boolean',
         'position' => 'integer',
     ];
 

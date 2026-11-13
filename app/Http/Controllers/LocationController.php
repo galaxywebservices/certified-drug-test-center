@@ -40,15 +40,7 @@ class LocationController extends Controller
             }
         }
 
-        $states = State::where('is_active', true)
-            ->withCount('cities')
-            ->orderBy('name')
-            ->get();
-
-        $pageTitle = "Nationwide Certified Drug Testing Locations | 20,000+ Quest & Labcorp Sites";
-        $metaDescription = "Find Certified Drug testing centers in all 50 states. Walk-in same-day urine, hair, DOT, and alcohol testing at Quest Diagnostics and Labcorp facilities.";
-
-        return view('locations.index', compact('states', 'pageTitle', 'metaDescription'));
+        return redirect()->to('/certified-drug-test-centers', 301);
     }
 
     /**
@@ -400,7 +392,7 @@ class LocationController extends Controller
 
             $state = State::where('abbr', $stateAbbr)->where('is_active', true)->first();
             if ($state) {
-                return $this->city($state->slug, $citySlug);
+                return redirect()->to("/locations/{$state->slug}/{$citySlug}", 301);
             }
         }
 
