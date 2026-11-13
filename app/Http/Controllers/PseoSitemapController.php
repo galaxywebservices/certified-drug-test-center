@@ -97,7 +97,6 @@ class PseoSitemapController extends Controller
         return response($xml, 200, [
             'Content-Type' => 'application/xml; charset=UTF-8',
             'Cache-Control' => 'public, max-age=86400',
-            'X-Robots-Tag' => 'noindex, follow', // Sitemaps should not be indexed as HTML documents
         ]);
     }
 

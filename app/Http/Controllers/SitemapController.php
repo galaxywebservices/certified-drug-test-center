@@ -25,7 +25,6 @@ class SitemapController extends Controller
         return response($content, 200, [
             'Content-Type' => 'application/xml; charset=UTF-8',
             'Cache-Control' => 'public, max-age=86400',
-            'X-Robots-Tag' => 'noindex, follow',
         ]);
     }
 
@@ -48,7 +47,6 @@ class SitemapController extends Controller
         return response($content, 200, [
             'Content-Type' => 'application/xml; charset=UTF-8',
             'Cache-Control' => 'public, max-age=86400',
-            'X-Robots-Tag' => 'noindex, follow',
         ]);
     }
 
@@ -73,7 +71,6 @@ class SitemapController extends Controller
         return response($content, 200, [
             'Content-Type' => 'application/xml; charset=UTF-8',
             'Cache-Control' => 'public, max-age=86400',
-            'X-Robots-Tag' => 'noindex, follow',
         ]);
     }
 
@@ -107,7 +104,6 @@ class SitemapController extends Controller
         return response($content, 200, [
             'Content-Type' => 'application/xml; charset=UTF-8',
             'Cache-Control' => 'public, max-age=86400',
-            'X-Robots-Tag' => 'noindex, follow',
         ]);
     }
 }

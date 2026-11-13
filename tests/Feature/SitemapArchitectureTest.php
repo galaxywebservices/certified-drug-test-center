@@ -14,6 +14,7 @@ class SitemapArchitectureTest extends TestCase
         $response = $this->get('/sitemap.xml');
         $response->assertStatus(200);
         $response->assertHeader('Content-Type', 'application/xml; charset=UTF-8');
+        $this->assertFalse($response->headers->has('X-Robots-Tag'), 'Sitemaps must NOT have X-Robots-Tag header');
 
         $content = $response->getContent();
         $this->assertStringContainsString('<sitemapindex', $content);
