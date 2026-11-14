@@ -11,7 +11,7 @@ class CertifiedDrugTestCentersChainTest extends TestCase
     {
         $response = $this->get('/certified-drug-test-centers');
         $response->assertStatus(200);
-        $response->assertSee('<title>Certified Drug Test Centers Near You | 800-985-4339</title>', false);
+        $response->assertSee('<title>Certified Drug Test Centers - (800) 985-4339</title>', false);
         $response->assertSee('Certified Drug Test Centers are located in all cities and in most cases within minutes', false);
         $response->assertSee('Drug Test near me, DOT Drug Test near me', false);
         $response->assertSee('Certified Drug Test Centers Near You');
@@ -61,8 +61,8 @@ class CertifiedDrugTestCentersChainTest extends TestCase
     public function test_chain_city_slug_alias_resolves_with_200(): void
     {
         $response = $this->get('/certified-drug-test-centers-orlando-fl');
-        $response->assertStatus(200);
-        $response->assertSee('Orlando');
+        $response->assertStatus(301);
+        $response->assertRedirect('/locations/florida/orlando');
     }
 
     public function test_zip_search_from_finder_redirects_to_target_location(): void

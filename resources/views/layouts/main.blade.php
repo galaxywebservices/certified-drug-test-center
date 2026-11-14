@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $pageTitle ?? 'Certified Drug Test Centers | Nationwide Drug & Alcohol Testing' }}</title>
-    <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers provides fast, confidential same-day drug testing, DOT compliance, urine, hair, alcohol, and DNA testing at 20,000+ certified local centers nationwide.' }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>{{ $pageTitle ?? 'Certified Drug Test Centers - (800) 985-4339' }}</title>
+    <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers are located in all cities and in most cases within minutes of your home or office. Order a drug or alcohol test online or call (800) 985-4339 and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.' }}">
+    <meta name="keywords" content="{{ $metaKeywords ?? 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test' }}">
     @php
         $rawPath = request()->getPathInfo();
         if (!empty($canonicalUrl)) {
@@ -60,6 +61,37 @@
 
     <!-- Core Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/site.css') }}?v={{ time() }}">
+
+    <style>
+        /* Mobile Lock-in: Prevent Horizontal Jumps, Side-Scrolling & Overflow */
+        html, body {
+            max-width: 100% !important;
+            overflow-x: clip !important;
+            position: relative;
+            -webkit-text-size-adjust: 100%;
+        }
+        @supports not (overflow-x: clip) {
+            html, body {
+                overflow-x: hidden !important;
+            }
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        img, svg, video, canvas, audio, iframe, embed, object {
+            max-width: 100%;
+            height: auto;
+        }
+        input, select, textarea {
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        .container, .container-fluid {
+            width: 100%;
+            max-width: 1240px;
+            box-sizing: border-box;
+        }
+    </style>
 
     <!-- Structured Data (JSON-LD) for 100% SEO Dominance -->
     @php
@@ -389,11 +421,11 @@
                 </div>
 
                 <div class="footer-col">
-                    <h4>National Headquarters</h4>
+                    <h4>National Scheduling Center</h4>
                     <p style="margin-bottom:12px; color:#CBD5E1;">
-                        National Scheduling & Operations<br>
-                        201 N. Park Ave.<br>
-                        Sanford, FL 32771
+                        National Scheduling &amp; Donor Support<br>
+                        Toll-Free: (800) 985-4339<br>
+                        Electronic Donor Passes Issued 24/7
                     </p>
                     <p style="color:#C1121F; font-weight:700; margin-bottom:16px;">
                         Over 20,000 Certified Testing Locations in All 50 States

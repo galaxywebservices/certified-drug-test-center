@@ -85,13 +85,11 @@ class LocationController extends Controller
         $baseTitle = $isChainRoute ? 'Certified Drug Test Centers' : 'Locations';
         $canonicalUrl = rtrim(url($baseRoutePrefix . '/' . $state->slug), '/');
 
-        if ($isChainRoute) {
-            $pageTitle = "Certified Drug Test Centers in {$state->name} | 800-985-4339";
-            $metaDescription = "Find certified drug testing collection sites across {$state->name}. Walk in today at Quest Diagnostics and Labcorp partner facilities. Fast results in 24-48 hours.";
-        } else {
-            $pageTitle = $state->meta_title ?: "{$state->name} Drug Testing Locations & Walk-in Centers";
-            $metaDescription = $state->meta_description ?: "Certified drug testing collection facilities in {$state->name}. Find local Quest & Labcorp centers for employment, court, and DOT testing.";
-        }
+        $defaultKeywords = 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
+
+        $pageTitle = $state->meta_title ?: "{$state->name} Drug Testing Centers - (800) 985-4339";
+        $metaDescription = $state->meta_description ?: "Certified Drug Test Centers are located in {$state->name} and in most cases within minutes of your home or office. Order a drug or alcohol test online or call (800) 985-4339 and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.";
+        $metaKeywords = $defaultKeywords;
 
         $breadcrumbs = [
             ['name' => 'Home', 'url' => url('/')],
@@ -106,6 +104,7 @@ class LocationController extends Controller
             'popularTests',
             'pageTitle',
             'metaDescription',
+            'metaKeywords',
             'isChainRoute',
             'baseRoutePrefix',
             'baseTitle',
@@ -157,13 +156,11 @@ class LocationController extends Controller
             ->limit(10)
             ->get(['id', 'name', 'slug', 'state_id']);
 
-        if ($isChainRoute) {
-            $pageTitle = "Certified Drug Test Centers in {$cityName}, {$state->abbr} | Same Day Testing";
-            $metaDescription = "Certified drug and alcohol testing in {$cityName}, {$state->abbr}. Walk in today at 20,000+ Quest Diagnostics and Labcorp certified collection sites.";
-        } else {
-            $pageTitle = $city?->meta_title ?: "{$cityName}, {$state->abbr} Drug Testing Centers & Walk-in Labs";
-            $metaDescription = $city?->meta_description ?: "Fast, certified drug and alcohol testing in {$cityName}, {$state->abbr}. Walk in today at Quest Diagnostics and Labcorp certified collection facilities.";
-        }
+        $defaultKeywords = 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
+
+        $pageTitle = $city?->meta_title ?: "{$cityName}, {$state->abbr} Drug Testing Centers - (800) 985-4339";
+        $metaDescription = $city?->meta_description ?: "Certified Drug Test Centers are located in {$cityName}, {$state->abbr} and in most cases within minutes of your home or office. Order a drug or alcohol test online or call (800) 985-4339 and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.";
+        $metaKeywords = $defaultKeywords;
 
         $breadcrumbs = [
             ['name' => 'Home', 'url' => url('/')],
@@ -180,6 +177,7 @@ class LocationController extends Controller
             'popularTests',
             'pageTitle',
             'metaDescription',
+            'metaKeywords',
             'siblingCities',
             'isChainRoute',
             'baseRoutePrefix',

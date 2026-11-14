@@ -7,10 +7,10 @@
 ## 1. Company & Laboratory Network Profile
 
 - **Organization Name**: Certified Drug Test Centers (CDTC)
-- **Website**: https://certifieddrugtestingcenters.com (Local Development: http://127.0.0.1:8001)
-- **Toll-Free Phone**: (800)-985-4339
+- **Website**: https://certifieddrugtestingcenters.com
+- **Toll-Free Phone**: (800) 985-4339
 - **Operational Hours**: Online Donor Registration 24/7/365; Phone Dispatch Monday-Friday 7:00 AM - 8:00 PM EST.
-- **National Headquarters**: 201 N. Park Ave., Sanford, FL 32771
+- **National Scheduling Operations**: Over 20,000 Certified Collection Sites Across All 50 States
 - **Laboratory Certifications**: Substance Abuse and Mental Health Services Administration (SAMHSA) & Clinical Laboratory Improvement Amendments (CLIA).
 - **Primary Partner Laboratories**: Quest Diagnostics & Labcorp.
 - **Collection Facilities Network**: Over 20,000 certified collection sites across all 50 U.S. states and Washington D.C.
@@ -88,14 +88,14 @@ CDTC maintains comprehensive statutory compliance documentation across all 50 st
 - **New York (N.Y. Lab. Law § 201-d)**: Prohibits employers from testing for or discriminating against off-duty cannabis consumption unless federal DOT/contract mandates apply.
 - **Texas (Tex. Lab. Code § 411.091)**: Standard employer testing permitted; written policy required to deny unemployment benefits for failed drug screens.
 
-*(Full legal guides for all 50 states available at http://127.0.0.1:8001/drug-testing-locations)*
+*(Full legal guides for all 50 states available at https://certifieddrugtestingcenters.com/locations)*
 
 ---
 
 ## 6. Frequently Asked Questions (FAQ) - Clinical & Operational
 
-### Q1: How do I schedule a walk-in drug test?
-Order and pay for your test online at http://127.0.0.1:8001/checkout or call (800)-985-4339. You will immediately receive an official electronic Donor Authorization Pass via email. Walk into the nearest assigned Quest Diagnostics or Labcorp center with your pass and a photo ID. No appointment is needed.
+### Q1: How do I schedule a drug test?
+Order and pay for your test online at https://certifieddrugtestingcenters.com/checkout or call (800) 985-4339. You will immediately receive an official electronic Donor Authorization Pass via email. Visit the nearest assigned Quest Diagnostics or Labcorp center with your pass and a photo ID.
 
 ### Q2: Why can't I pay directly at the collection facility?
 Collection facilities (Quest, Labcorp) act as specimen collection sites under corporate lab contracts and do not accept direct consumer payments at reception. All tests must be scheduled and prepaid through Certified Drug Test Centers to generate the computerized lab requisition order.
@@ -115,19 +115,19 @@ Ethyl Glucuronide (EtG) is a direct metabolite of ethanol created by the liver. 
 
 | Service / Panel | Category | Price | Turnaround Time | URL |
 |-----------------|----------|-------|-----------------|-----|
-| 5 Panel NON-DOT Drug Test | Urine | $89.99 | 24-48 Hours | http://127.0.0.1:8001/product/5-panel-nondot |
-| 5 Panel Rapid Results | Rapid Urine | $99.99 | Instant / Same-Day | http://127.0.0.1:8001/product/5-panel-rapid-results |
-| 5 Panel DOT Drug Test | DOT | $99.99 | 24-48 Hours | http://127.0.0.1:8001/product/5-panel-dot |
-| 10 Panel Drug Screen | Urine | $109.99 | 24-48 Hours | http://127.0.0.1:8001/product/10-panel |
-| 10 Panel Rapid Results | Rapid Urine | $109.99 | Instant / Same-Day | http://127.0.0.1:8001/product/10-panel-rapid |
-| 12 Panel Comprehensive | Urine | $139.99 | 24-48 Hours | http://127.0.0.1:8001/product/12-panel-comprehensive |
-| Hair Follicle 5 Panel | Hair | $169.99 | 3-5 Business Days | http://127.0.0.1:8001/category/hair |
-| EtG 80-Hour Alcohol Screen | Alcohol | $119.99 | 24-48 Hours | http://127.0.0.1:8001/product/etg-alcohol |
-| DOT Physical Exam (NRCME) | Physicals | $159.99 | Same-Day Certificate | http://127.0.0.1:8001/product/dot-physical |
-| DOT Random Consortium Pool | DOT Compliance | $249.99 | Annual Certificate | http://127.0.0.1:8001/product/1-year-consortium-membership-dot-drug-test |
-| FMCSA Clearinghouse Package | DOT Compliance | $199.99 | Annual Service | http://127.0.0.1:8001/product/fmcsa-clearinghouse-accucheck |
-| Background Checks & MVR | Background | Varies | 24-48 Hours | http://127.0.0.1:8001/background-checks |
-| Mobile Collector Dispatch | On-Site | Quote Based | Custom Event | http://127.0.0.1:8001/category/on-site-mobile |
+| 5 Panel NON-DOT Drug Test | Urine | $89.99 | 24-48 Hours | https://certifieddrugtestingcenters.com/product/5-panel-nondot |
+| 5 Panel Rapid Results | Rapid Urine | $99.99 | Instant / Same-Day | https://certifieddrugtestingcenters.com/product/5-panel-rapid-results |
+| 5 Panel DOT Drug Test | DOT | $99.99 | 24-48 Hours | https://certifieddrugtestingcenters.com/product/5-panel-dot |
+| 10 Panel Drug Screen | Urine | $109.99 | 24-48 Hours | https://certifieddrugtestingcenters.com/product/10-panel |
+| 10 Panel Rapid Results | Rapid Urine | $109.99 | Instant / Same-Day | https://certifieddrugtestingcenters.com/product/10-panel-rapid |
+| 12 Panel Comprehensive | Urine | $139.99 | 24-48 Hours | https://certifieddrugtestingcenters.com/product/12-panel-comprehensive |
+| Hair Follicle 5 Panel | Hair | $169.99 | 3-5 Business Days | https://certifieddrugtestingcenters.com/category/hair |
+| EtG 80-Hour Alcohol Screen | Alcohol | $119.99 | 24-48 Hours | https://certifieddrugtestingcenters.com/product/etg-alcohol |
+| DOT Physical Exam (NRCME) | Physicals | $159.99 | Same-Day Certificate | https://certifieddrugtestingcenters.com/product/dot-physical |
+| DOT Random Consortium Pool | DOT Compliance | $249.99 | Annual Certificate | https://certifieddrugtestingcenters.com/product/1-year-consortium-membership-dot-drug-test |
+| FMCSA Clearinghouse Package | DOT Compliance | $199.99 | Annual Service | https://certifieddrugtestingcenters.com/product/fmcsa-clearinghouse-accucheck |
+| Background Checks & MVR | Background | Varies | 24-48 Hours | https://certifieddrugtestingcenters.com/background-checks |
+| Mobile Collector Dispatch | On-Site | Quote Based | Custom Event | https://certifieddrugtestingcenters.com/category/on-site-mobile |
 
 ---
 

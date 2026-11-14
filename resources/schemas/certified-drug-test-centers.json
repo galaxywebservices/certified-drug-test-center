@@ -21,10 +21,6 @@
       "telephone": "+1-800-985-4339",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "201 N. Park Ave.",
-        "addressLocality": "Sanford",
-        "addressRegion": "FL",
-        "postalCode": "32771",
         "addressCountry": "US"
       },
       "areaServed": {

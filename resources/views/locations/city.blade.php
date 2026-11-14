@@ -355,6 +355,24 @@
         color: #334155;
         font-size: 14px;
     }
+    .breadcrumbs {
+        flex-wrap: wrap;
+    }
+    .city-content-body {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+    .city-content-body table {
+        display: block;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .city-content-body img {
+        max-width: 100%;
+        height: auto;
+    }
 </style>
 
 <div class="city-hero-bar">
@@ -370,10 +388,10 @@
         </nav>
 
         <h1 style="font-size:32px; font-weight:800; color:#fff; margin-bottom:8px;">
-            {{ $cityName }}, {{ $state->abbr }} Drug Testing Centers &amp; Walk-In Labs
+            {{ $cityName }}, {{ $state->abbr }} Drug Testing Centers
         </h1>
         <p style="font-size:16px; color:#E2E8F0; max-width:800px;">
-            Fast, confidential same-day drug and alcohol testing in {{ $cityName }}, {{ $state->abbr }}. Electronic donor pass delivered immediately. Walk in today at Quest Diagnostics and Labcorp certified collection facilities.
+            Certified Drug Test Centers in {{ $cityName }}, {{ $state->abbr }}. Order online or call (800) 985-4339 for an electronic donor pass. Same-day testing at Quest Diagnostics, Labcorp and affiliated certified collection facilities.
         </p>
     </div>
 </div>
@@ -498,20 +516,20 @@
     <!-- Standard 3-Step Walkthrough for locations without custom content -->
     <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:28px; margin-top:20px; margin-bottom:40px;">
         <h3 style="font-size:18px; font-weight:800; color:#0B2545; margin-bottom:14px;">
-            How Walk-In Drug Testing Works in {{ $cityName }}
+            How Drug Testing Works in {{ $cityName }}
         </h3>
-        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; font-size:13px; color:#334155; line-height:1.6;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; font-size:13px; color:#334155; line-height:1.6;">
             <div>
-                <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 1: Order Online (2 Mins)</strong>
-                Choose your test and register online. Testing centers do not take payment on-site.
+                <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 1: Order Online or Call</strong>
+                Choose your test and register online or call (800) 985-4339. Testing centers do not take payment on-site.
             </div>
             <div>
-                <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 2: Complete Registration</strong>
-                Receive your electronic Donor Registration Pass via email with barcode and directions.
+                <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 2: Receive Donor Pass</strong>
+                Receive your electronic Donor Registration Pass immediately via email or text with barcode and facility directions.
             </div>
             <div>
-                <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 3: Walk-In &amp; Test</strong>
-                Walk in during collection hours with your pass and a photo ID — no appointment necessary! Receive results securely via email within 24-48 business hours.
+                <strong style="color:#C1121F; display:block; margin-bottom:4px;">Step 3: Complete Testing</strong>
+                Visit the certified collection center with your donor pass and photo ID. Negative results are typically available within 24–48 hours.
             </div>
         </div>
     </div>
