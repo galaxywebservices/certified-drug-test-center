@@ -28,6 +28,21 @@ class CityGuideFormatter
             $content
         );
 
+        // Replace unlinked "Click Here" / legacy employer account CTAs with canonical anchor
+        $canonicalEmployerLink = 'Looking to create a no-fee employer account? <a href="' . url('/employers') . '">Open your employer drug testing account today</a> to streamline testing and reduce costs.';
+
+        $content = preg_replace(
+            '/<p>[^<]*?(?:no-fee|no fee|fee-free|Click Here|Click here)[^<]*?(?:account|employer)[^<]*?<\/p>/is',
+            '<p>' . $canonicalEmployerLink . '</p>',
+            $content
+        );
+
+        $content = preg_replace(
+            '/<p>.*?Click [Hh]ere.*?<\/p>/is',
+            '<p>' . $canonicalEmployerLink . '</p>',
+            $content
+        );
+
         // Split into sections by <p><strong>
         $sections = explode('<p><strong>', $content);
         $output = '';

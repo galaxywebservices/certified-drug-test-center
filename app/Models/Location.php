@@ -52,6 +52,7 @@ class Location extends Model
                 $s = preg_replace('/^F\b/i', 'Fri:', $s);
                 $s = preg_replace('/^Su\b/i', 'Sun:', $s);
                 $s = preg_replace('/(\d(?:AM|PM))-(\d)/i', '$1 – $2', $s);
+                $s = str_replace(':,', ', ', $s);
                 $result[] = $s;
             }
             return $result;
@@ -119,6 +120,6 @@ class Location extends Model
      */
     public function getFormattedHoursAttribute(): string
     {
-        return implode(' • ', $this->formatted_hours_lines);
+        return str_replace(':,', ', ', implode(' • ', $this->formatted_hours_lines));
     }
 }

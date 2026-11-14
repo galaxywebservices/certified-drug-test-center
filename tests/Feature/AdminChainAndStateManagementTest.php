@@ -138,7 +138,7 @@ class AdminChainAndStateManagementTest extends TestCase
             'abbr' => 'FL',
             'is_active' => '1',
             'meta_title' => 'Florida Drug Testing Centers - (800) 985-4339',
-            'meta_description' => 'Certified Drug Test Centers are located in Florida and in most cases within minutes of your home or office. Order a drug or alcohol test online or call (800) 985-4339 and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.',
+            'meta_description' => 'Certified Drug Test Centers in Florida (FL). Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp walk-in clinics.',
             'content' => '<p>Custom Florida state regulatory guide text.</p>',
             'statute_code' => $customStatute,
             'medical_marijuana_status' => 'Legalized Medical',

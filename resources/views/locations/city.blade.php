@@ -425,7 +425,7 @@
                 <div style="font-size:14px; color:#334155; line-height:1.6; margin-bottom:16px;">
                     <strong>Address:</strong> {{ $loc->address1 }} {{ $loc->address2 }}<br>
                     <strong>City/State:</strong> {{ $loc->city }}, {{ $loc->state }} {{ $loc->zip }}<br>
-                    <strong>Operating Hours:</strong> {{ str_replace('|', ' • ', $loc->hours ?: 'Monday - Friday 8:00 AM - 5:00 PM') }}
+                    <strong>Operating Hours:</strong> {{ str_replace(':,', ', ', $loc->formatted_hours) }}
                 </div>
 
                 <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
@@ -512,7 +512,7 @@
         <div class="city-metrics-bar" style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:18px 20px; margin-bottom:24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
             <div>
                 <div style="font-size:11px; text-transform:uppercase; color:#64748B; font-weight:800; letter-spacing:0.5px;">Certified Facilities</div>
-                <div style="font-size:18px; font-weight:900; color:#0B2545;">{{ $locations->count() }} Collection Sites</div>
+                <div style="font-size:18px; font-weight:900; color:#0B2545;">{{ $locations->count() }} {{ \Illuminate\Support\Str::plural('Collection Site', $locations->count()) }}</div>
                 <small style="color:#15803D; font-weight:700;">Quest &amp; Labcorp in {{ $cityName }}</small>
             </div>
             <div>

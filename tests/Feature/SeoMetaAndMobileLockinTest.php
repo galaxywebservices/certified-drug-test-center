@@ -223,6 +223,48 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $this->assertStringContainsString('Quest Diagnostics', $cityContent);
     }
 
+    public function test_alabama_state_and_madison_city_template_polish_audit(): void
+    {
+        // 1. Test Alabama State Hub (/locations/alabama)
+        $stateResponse = $this->get('/locations/alabama');
+        $stateResponse->assertStatus(200);
+
+        $stateContent = $stateResponse->getContent();
+
+        // FAQ #3 grammar: state statute does (not statutes does)
+        $this->assertStringNotContainsString('statutes does', $stateContent);
+        $this->assertStringContainsString('state statute does not require', $stateContent);
+
+        // Raw hours formatting: no "Sat:,Su" artifact, correctly rendered as "Sat, Su"
+        $this->assertStringNotContainsString('Sat:,Su', $stateContent);
+        $this->assertStringContainsString('Sat, Su', $stateContent);
+
+        // State page has visible FAQ accordion, so FAQPage is present in schema
+        $this->assertStringContainsString('"@type": "FAQPage"', $stateContent);
+
+        // 2. Test Madison City Leaf Template (/locations/alabama/madison)
+        $cityResponse = $this->get('/locations/alabama/madison');
+        $cityResponse->assertStatus(200);
+
+        $cityContent = $cityResponse->getContent();
+
+        // No invisible FAQPage schema on city page (Google rich-result spam prevention)
+        $this->assertStringNotContainsString('"@type": "FAQPage"', $cityContent);
+
+        // Metrics bar singular pluralization: "1 Collection Site" (not "1 Collection Sites")
+        $this->assertStringContainsString('1 Collection Site', $cityContent);
+        $this->assertStringNotContainsString('1 Collection Sites', $cityContent);
+
+        // Employer call to action has canonical anchor link and no unlinked "Click Here"
+        $this->assertStringContainsString('Open your employer drug testing account today', $cityContent);
+        $this->assertStringContainsString('href="' . url('/employers') . '"', $cityContent);
+        $this->assertStringNotContainsString('Click Here to establish', $cityContent);
+        $this->assertStringNotContainsString('Click Here to set up', $cityContent);
+
+        // Schema GeoCoordinates clean output without floating-point artifacts
+        $this->assertDoesNotMatchRegularExpression('/\d+\.\d{10,}/', $cityContent);
+    }
+
     public function test_individual_facility_page_is_noindex_follow(): void
     {
         $facility = \App\Models\Location::where('is_active', true)->firstOrFail();

@@ -94,6 +94,7 @@
 
     <!-- Structured Data (JSON-LD) for 100% SEO Dominance -->
     @php
+        ini_set('serialize_precision', -1);
         $faqEntities = [];
         if (isset($faqs) && count($faqs)) {
             foreach ($faqs as $f) {
@@ -199,9 +200,9 @@
                 ];
             }
 
-            // 3. FAQPage Schema Entity
+            // 3. FAQPage Schema Entity (Strictly on state hubs where visible FAQ accordion exists)
             $effectiveFaqs = !empty($faqEntities) ? $faqEntities : [];
-            if (empty($effectiveFaqs) && !empty($state->faqs_json) && is_array($state->faqs_json)) {
+            if (empty($effectiveFaqs) && empty($cityName) && !empty($state->faqs_json) && is_array($state->faqs_json)) {
                 foreach ($state->faqs_json as $f) {
                     if (!empty($f['question']) && !empty($f['answer'])) {
                         $effectiveFaqs[] = [
