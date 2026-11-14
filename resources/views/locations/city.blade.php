@@ -380,7 +380,7 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb" style="display:flex; gap:8px; font-size:13px; color:#94A3B8; margin-bottom:12px;">
             <a href="{{ url('/') }}" style="color:#CBD5E1; text-decoration:none;">Home</a>
             <span>&rsaquo;</span>
-            <a href="{{ url($baseRoutePrefix ?? '/locations') }}" style="color:#CBD5E1; text-decoration:none;">{{ $baseTitle ?? 'Locations' }}</a>
+            <a href="{{ $breadcrumbs[1]['url'] ?? url('/certified-drug-test-centers') }}" style="color:#CBD5E1; text-decoration:none;">{{ $baseTitle ?? 'Locations' }}</a>
             <span>&rsaquo;</span>
             <a href="{{ url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug) }}" style="color:#CBD5E1; text-decoration:none;">{{ $state->name }}</a>
             <span>&rsaquo;</span>
@@ -425,7 +425,7 @@
                 <div style="font-size:14px; color:#334155; line-height:1.6; margin-bottom:16px;">
                     <strong>Address:</strong> {{ $loc->address1 }} {{ $loc->address2 }}<br>
                     <strong>City/State:</strong> {{ $loc->city }}, {{ $loc->state }} {{ $loc->zip }}<br>
-                    <strong>Operating Hours:</strong> {{ $loc->hours ?: 'Monday - Friday 8:00 AM - 5:00 PM' }}
+                    <strong>Operating Hours:</strong> {{ str_replace('|', ' • ', $loc->hours ?: 'Monday - Friday 8:00 AM - 5:00 PM') }}
                 </div>
 
                 <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
@@ -508,6 +508,32 @@
             </span>
         </div>
 
+        <!-- Dynamic Real Local Clinic Metrics for AEO, GEO & Uniqueness -->
+        <div class="city-metrics-bar" style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:18px 20px; margin-bottom:24px; display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
+            <div>
+                <div style="font-size:11px; text-transform:uppercase; color:#64748B; font-weight:800; letter-spacing:0.5px;">Certified Facilities</div>
+                <div style="font-size:18px; font-weight:900; color:#0B2545;">{{ $locations->count() }} Collection Sites</div>
+                <small style="color:#15803D; font-weight:700;">Quest &amp; Labcorp in {{ $cityName }}</small>
+            </div>
+            <div>
+                <div style="font-size:11px; text-transform:uppercase; color:#64748B; font-weight:800; letter-spacing:0.5px;">Earliest Opening</div>
+                <div style="font-size:18px; font-weight:900; color:#0B2545;">{{ $earliestOpen ?? '7:00 AM' }}</div>
+                <small style="color:#64748B; font-weight:600;">Same-day pass accepted</small>
+            </div>
+            <div>
+                <div style="font-size:11px; text-transform:uppercase; color:#64748B; font-weight:800; letter-spacing:0.5px;">Schedule Options</div>
+                <div style="font-size:18px; font-weight:900; color:#0B2545;">{{ !empty($weekendOr24Count) && $weekendOr24Count > 0 ? "{$weekendOr24Count} Extended/Sat Sites" : "Mon–Fri Business Hours" }}</div>
+                <small style="color:#64748B; font-weight:600;">{{ !empty($has24Hrs) ? '1 facility open 24/7' : 'Walk-ins with electronic pass' }}</small>
+            </div>
+            <div>
+                <div style="font-size:11px; text-transform:uppercase; color:#64748B; font-weight:800; letter-spacing:0.5px;">Covered ZIP Codes</div>
+                <div style="font-size:12.5px; font-weight:700; color:#0B2545; line-height:1.4; word-break:break-word;">
+                    {{ $coveredZipsString ?? '' }}
+                </div>
+                <small style="color:#64748B; font-weight:600;">{{ $state->name }} Metro Network</small>
+            </div>
+        </div>
+
         <div class="city-content-body">
             {!! \App\Services\CityGuideFormatter::format($city->content, $cityName, $state->abbr) !!}
         </div>
@@ -567,74 +593,4 @@
     @endif
 </div>
 
-@php
-$breadcrumbSchema = [
-    '@context' => 'https://schema.org',
-    '@type' => 'BreadcrumbList',
-    'itemListElement' => [
-        [
-            '@type' => 'ListItem',
-            'position' => 1,
-            'name' => 'Home',
-            'item' => url('/'),
-        ],
-        [
-            '@type' => 'ListItem',
-            'position' => 2,
-            'name' => $baseTitle ?? 'Locations',
-            'item' => url($baseRoutePrefix ?? '/locations'),
-        ],
-        [
-            '@type' => 'ListItem',
-            'position' => 3,
-            'name' => $state->name,
-            'item' => url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug),
-        ],
-        [
-            '@type' => 'ListItem',
-            'position' => 4,
-            'name' => $cityName . ' Drug Testing',
-            'item' => $canonicalUrl ?? url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug . '/' . ($city?->slug ?? \Illuminate\Support\Str::slug($cityName))),
-        ],
-    ],
-];
-@endphp
-<script type="application/ld+json">
-{!! json_encode($breadcrumbSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
-</script>
-
-@if($locations->isNotEmpty())
-@php
-$itemListSchema = [
-    '@context' => 'https://schema.org',
-    '@type' => 'ItemList',
-    'name' => "{$cityName}, {$state->abbr} Certified Drug Testing Centers",
-    'itemListElement' => $locations->values()->map(function($loc, $index) {
-        return [
-            '@type' => 'ListItem',
-            'position' => $index + 1,
-            'item' => [
-                '@type' => 'MedicalBusiness',
-                'name' => $loc->name,
-                'medicalSpecialty' => 'SubstanceAbuseScreening',
-                'address' => [
-                    '@type' => 'PostalAddress',
-                    'streetAddress' => $loc->address1,
-                    'addressLocality' => $loc->city,
-                    'addressRegion' => $loc->state,
-                    'postalCode' => $loc->zip,
-                    'addressCountry' => 'US',
-                ],
-                'telephone' => '+1-800-985-4339',
-                'openingHours' => 'Mo-Fr 08:00-17:00',
-                'url' => url()->current(),
-            ],
-        ];
-    })->all(),
-];
-@endphp
-<script type="application/ld+json">
-{!! json_encode($itemListSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
-</script>
-@endif
 @endsection

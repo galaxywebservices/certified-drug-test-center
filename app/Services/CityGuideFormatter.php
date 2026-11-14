@@ -13,11 +13,19 @@ class CityGuideFormatter
             return '';
         }
 
-        // Clean legacy company names
+        // Clean legacy company names & ensure plural brand name
         $content = str_replace(
-            ['Accredited Drug Testing', 'accrediteddrugtesting.com', 'ADT'],
-            ['Certified Drug Test Center', 'certifieddrugtestcenter.com', 'CDTC'],
+            ['Accredited Drug Testing', 'accrediteddrugtesting.com', 'ADT', 'Certified Drug Test Center offers', 'Certified Drug Test Center provides', 'Certified Drug Test Center is', 'Certified Drug Test Center has', 'Certified Drug Test Center'],
+            ['Certified Drug Test Centers', 'certifieddrugtestingcenters.com', 'CDTC', 'Certified Drug Test Centers offer', 'Certified Drug Test Centers provide', 'Certified Drug Test Centers are', 'Certified Drug Test Centers have', 'Certified Drug Test Centers'],
             $html
+        );
+        $content = str_replace('Certified Drug Test Centerss', 'Certified Drug Test Centers', $content);
+
+        // Fix broken # links in employer sections
+        $content = str_replace(
+            ['<a href="#">Open your account today</a>', '<a href="#">', 'href="#"'],
+            ['<a href="' . url('/employers') . '">Open your account today</a>', '<a href="' . url('/employers') . '">', 'href="' . url('/employers') . '"'],
+            $content
         );
 
         // Split into sections by <p><strong>
@@ -38,6 +46,7 @@ class CityGuideFormatter
 
             $parts = explode('</strong></p>', $sec, 2);
             $heading = trim($parts[0]);
+            $heading = str_replace(['Certified Drug Test Center', 'Certified Drug Test Centerss'], ['Certified Drug Test Centers', 'Certified Drug Test Centers'], $heading);
             $body = isset($parts[1]) ? trim($parts[1]) : '';
 
             // Clean any trailing telephone numbers in body into clickable links (safely avoiding existing tags)
@@ -88,13 +97,31 @@ class CityGuideFormatter
                     <div class="guide-step-card">
                         <div class="guide-step-header">
                             <span class="guide-step-num">Step 3</span>
-                            <span class="guide-step-badge">Walk In Today</span>
+                            <span class="guide-step-badge">Electronic Donor Pass</span>
                         </div>
                         <h4 class="guide-step-title">Instant Donor Pass Issued</h4>
-                        <p class="guide-step-text">Receive your official donor authorization pass with barcode and facility hours via email immediately. Bring this pass with a photo ID to the collection site — no appointment necessary! Receive results securely via email within 24-48 business hours.</p>
+                        <p class="guide-step-text">Receive your official electronic donor authorization pass with barcode and facility hours via email or text immediately. Bring your pass and a photo ID to the certified testing center. Negative results are typically available within 24–48 hours.</p>
                     </div>
                 </div>';
                 continue;
+            }
+
+            // 1.1 Unique Anti-Duplicate Content Variations for Diagnostic FAQs
+            if (str_contains($lower, 'passive smoke') || str_contains($lower, 'false positive')) {
+                $heading = "Does Secondhand Smoke Inhalation Cause Marijuana False Positives?";
+                $body = "<p>Standard laboratory cutoff concentrations established by federal SAMHSA and HHS regulations are calibrated to prevent passive, casual secondhand cannabis exposure from triggering a non-negative result. Initial immunoassay screening thresholds (50 ng/mL) and confirmatory GC/MS or LC/MS testing (15 ng/mL) require active consumption. All laboratory specimens also undergo specimen validity testing (monitoring creatinine levels, specific gravity, and pH) to ensure sample integrity.</p>";
+            } elseif (str_contains($lower, 'detection') || str_contains($lower, 'remain detectable')) {
+                $heading = "Drug Detection Windows by Testing Methodology in {$cityName}, {$stateAbbr}";
+                $body = "<p>Detection windows depend on the biological specimen matrix, drug class, metabolism, and frequency of exposure:</p>
+                <div class=\"guide-feature-list-wrap\"><ul class=\"guide-feature-list\">
+                    <li class=\"guide-feature-item\"><span class=\"guide-check-icon\">✓</span><span><strong>Urine Drug Testing:</strong> 1 to 5 days for most substances (up to 30 days for habitual cannabis use).</span></li>
+                    <li class=\"guide-feature-item\"><span class=\"guide-check-icon\">✓</span><span><strong>Hair Follicle Testing:</strong> Up to 90 days of substance history using standard 1.5-inch specimens.</span></li>
+                    <li class=\"guide-feature-item\"><span class=\"guide-check-icon\">✓</span><span><strong>EtG Alcohol Urine Testing:</strong> Up to 80 hours following alcohol consumption.</span></li>
+                    <li class=\"guide-feature-item\"><span class=\"guide-check-icon\">✓</span><span><strong>Breath Alcohol Testing:</strong> Immediate blood alcohol concentration (BAC) measurement.</span></li>
+                </ul></div>";
+            } elseif (str_contains($lower, 'options for drug testing methods') || str_contains($lower, 'common drug tests')) {
+                $heading = "Diagnostic Drug Testing Panels in {$cityName}, {$stateAbbr}";
+                $body = "<p>Certified Drug Test Centers offers nationwide lab screening solutions tailored to corporate employers, DOT regulations, legal proceedings, and personal requirements. Standard 5-panel and 10-panel urine tests provide rapid turnaround within 24 to 48 hours, while comprehensive 12-panel, hair follicle, and specialty EtG screens accommodate extended forensic and safety-sensitive testing protocols across {$cityName}.</p>";
             }
 
             // Guard against empty bodies causing blank cards/sections

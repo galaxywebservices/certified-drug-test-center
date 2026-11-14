@@ -424,7 +424,7 @@
         <nav class="breadcrumbs" aria-label="Breadcrumb" style="display:flex; gap:8px; font-size:13px; color:#94A3B8; margin-bottom:12px;">
             <a href="{{ url('/') }}" style="color:#CBD5E1; text-decoration:none;">Home</a>
             <span>&rsaquo;</span>
-            <a href="{{ url($baseRoutePrefix ?? '/locations') }}" style="color:#CBD5E1; text-decoration:none;">{{ $baseTitle ?? 'Locations' }}</a>
+            <a href="{{ $breadcrumbs[1]['url'] ?? url('/certified-drug-test-centers') }}" style="color:#CBD5E1; text-decoration:none;">{{ $baseTitle ?? 'Locations' }}</a>
             <span>&rsaquo;</span>
             <span style="color:#fff;">{{ $state->name }}</span>
         </nav>
@@ -658,55 +658,4 @@
     </div>
 </div>
 
-@if(!empty($state->faqs_json) && is_array($state->faqs_json))
-@php
-$faqPageSchema = [
-    '@context' => 'https://schema.org',
-    '@type' => 'FAQPage',
-    'mainEntity' => array_map(function($f) {
-        return [
-            '@type' => 'Question',
-            'name' => $f['question'],
-            'acceptedAnswer' => [
-                '@type' => 'Answer',
-                'text' => $f['answer'],
-            ],
-        ];
-    }, $state->faqs_json),
-];
-@endphp
-<script type="application/ld+json">
-{!! json_encode($faqPageSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
-</script>
-@endif
-
-@php
-$breadcrumbSchema = [
-    '@context' => 'https://schema.org',
-    '@type' => 'BreadcrumbList',
-    'itemListElement' => [
-        [
-            '@type' => 'ListItem',
-            'position' => 1,
-            'name' => 'Home',
-            'item' => url('/'),
-        ],
-        [
-            '@type' => 'ListItem',
-            'position' => 2,
-            'name' => $baseTitle ?? 'Locations',
-            'item' => url($baseRoutePrefix ?? '/locations'),
-        ],
-        [
-            '@type' => 'ListItem',
-            'position' => 3,
-            'name' => $state->name . ' Drug Testing',
-            'item' => $canonicalUrl ?? url(($baseRoutePrefix ?? '/locations') . '/' . $state->slug),
-        ],
-    ],
-];
-@endphp
-<script type="application/ld+json">
-{!! json_encode($breadcrumbSchema, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) !!}
-</script>
 @endsection

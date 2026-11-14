@@ -34,7 +34,7 @@ class ImportStateComplianceCommand extends Command
                 'question' => trim($f->question),
                 'answer' => str_replace(
                     ['Accredited Drug Testing', 'accrediteddrugtesting.com', 'ADT'],
-                    ['Certified Drug Test Center', 'certifieddrugtestcenter.com', 'CDTC'],
+                    ['Certified Drug Test Centers', 'certifieddrugtestingcenters.com', 'CDTC'],
                     trim($f->answer)
                 ),
             ];
@@ -59,10 +59,11 @@ class ImportStateComplianceCommand extends Command
                     $faq['question'] ?? ''
                 );
                 $a = str_replace(
-                    ['Accredited Drug Testing', 'accrediteddrugtesting.com', 'ADT', '{{City_Name}}, {{State_Abbr}}', '{{City_Name}}', '{{State_Abbr}}', '{{State_Name}}', '{{Active_Lab_Count}}'],
-                    ['Certified Drug Test Center', 'certifieddrugtestcenter.com', 'CDTC', "{$stateName} ({$abbr})", $stateName, $abbr, $stateName, $countFormatted],
+                    ['Accredited Drug Testing', 'accrediteddrugtesting.com', 'ADT', '{{City_Name}}, {{State_Abbr}}', '{{City_Name}}', '{{State_Abbr}}', '{{State_Name}}', '{{Active_Lab_Count}}', 'et seq..', 'statutes protects'],
+                    ['Certified Drug Test Centers', 'certifieddrugtestingcenters.com', 'CDTC', "{$stateName} ({$abbr})", $stateName, $abbr, $stateName, $countFormatted, 'et seq.', 'statutes protect'],
                     $faq['answer'] ?? ''
                 );
+                $a = str_replace(['Certified Drug Test Center provides', 'Certified Drug Test Center offers'], ['Certified Drug Test Centers provide', 'Certified Drug Test Centers offer'], $a);
                 $a = str_replace("in the {$stateName} area", "across {$stateName}", $a);
 
                 $cleanedFaqs[] = [

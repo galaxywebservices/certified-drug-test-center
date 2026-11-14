@@ -42,6 +42,38 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $response->assertDontSee('Sanford, FL 32771');
     }
 
+    public function test_state_page_faqs_grammar_sidebar_price_and_single_jsonld_block(): void
+    {
+        $response = $this->get('/locations/arizona');
+        $response->assertStatus(200);
+
+        $content = $response->getContent();
+
+        // Exactly one consolidated JSON-LD script block in <head>
+        $this->assertSame(1, substr_count($content, 'type="application/ld+json"'));
+        $this->assertStringContainsString('"@type": "FAQPage"', $content);
+        $this->assertStringContainsString('"@type": "BreadcrumbList"', $content);
+        $this->assertStringContainsString('"@type": "ItemList"', $content);
+
+        // Grammar & punctuation fixes in Arizona state FAQs
+        $this->assertStringNotContainsString('et seq..', $content);
+        $this->assertStringNotContainsString('statutes protects', $content);
+        $this->assertStringContainsString('statutes protect', $content);
+        $this->assertStringContainsString('Certified Drug Test Centers provide access to', $content);
+
+        // Sidebar 5 Panel Hair Follicle test price aligned to $169.99
+        $response->assertSee('5 Panel Hair Follicle Test');
+        $response->assertSee('$169.99');
+        $this->assertStringNotContainsString('$189.99', $content);
+
+        // Filter out county names from major cities
+        $this->assertStringNotContainsString('Coconino Drug Testing', $content);
+        $this->assertStringNotContainsString('North Pinal Drug Testing', $content);
+
+        // Breadcrumb position 2 links to /certified-drug-test-centers
+        $this->assertStringContainsString('/certified-drug-test-centers', $content);
+    }
+
     public function test_city_page_has_exact_title_keywords_and_clean_h1(): void
     {
         $response = $this->get('/locations/florida/miami');
@@ -64,6 +96,58 @@ class SeoMetaAndMobileLockinTest extends TestCase
 
         // Mobile lock-in CSS present
         $response->assertSee('overflow-x: clip !important;', false);
+    }
+
+    public function test_city_page_phoenix_has_clean_hours_geo_no_dead_links_and_sidebar_price(): void
+    {
+        $response = $this->get('/locations/arizona/phoenix');
+        $response->assertStatus(200);
+
+        $content = $response->getContent();
+
+        // Exactly one consolidated JSON-LD script block in <head>
+        $this->assertSame(1, substr_count($content, 'type="application/ld+json"'));
+        $this->assertStringContainsString('"@type": "GeoCoordinates"', $content);
+        $this->assertStringContainsString('"latitude":', $content);
+        $this->assertStringContainsString('"longitude":', $content);
+
+        // Clean up raw pipe characters in visible operating hours
+        $this->assertStringNotContainsString('pm|Sa', $content);
+        $this->assertStringContainsString('• Sa', $content);
+
+        // No leading asterisk in product names
+        $this->assertStringNotContainsString('*10 Panel Rapid Results', $content);
+        $this->assertStringContainsString('10 Panel Rapid Results', $content);
+
+        // Sidebar 5 Panel Hair Follicle price aligned to $169.99
+        $response->assertSee('$169.99');
+        $this->assertStringNotContainsString('$189.99', $content);
+
+        // No broken "#" placeholder link in employer section
+        $this->assertStringNotContainsString('href="#"', $content);
+        $this->assertStringContainsString('href="/employers"', $content);
+
+        // Brand pluralization
+        $this->assertStringContainsString('Certified Drug Test Centers', $content);
+        $this->assertStringNotContainsString('Certified Drug Test Centerss', $content);
+
+        // Dynamic local clinic metrics present
+        $this->assertStringContainsString('Collection Sites', $content);
+        $this->assertStringContainsString('Earliest Opening', $content);
+        $this->assertStringContainsString('Covered ZIP Codes', $content);
+
+        // Sibling cities sorted by distance (Scottsdale, Glendale, Tempe, etc.) and no counties
+        $this->assertStringContainsString('Scottsdale Drug Testing', $content);
+        $this->assertStringNotContainsString('Coconino Drug Testing', $content);
+        $this->assertStringNotContainsString('North Pinal Drug Testing', $content);
+    }
+
+    public function test_individual_facility_page_is_noindex_follow(): void
+    {
+        $facility = \App\Models\Location::where('is_active', true)->firstOrFail();
+        $response = $this->get("/location/{$facility->id}");
+        $response->assertStatus(200);
+        $response->assertSee('content="noindex, follow"', false);
     }
 
     public function test_checkout_has_mobile_lockin_styles_and_noindex(): void

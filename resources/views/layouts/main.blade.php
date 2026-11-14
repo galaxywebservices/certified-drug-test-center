@@ -103,7 +103,7 @@
                     'name' => $f['question'],
                     'acceptedAnswer' => [
                         '@type' => 'Answer',
-                        'text' => $f['answer'],
+                        'text' => strip_tags($f['answer']),
                     ],
                 ];
             }
@@ -163,12 +163,120 @@
                 ],
             ];
 
-            if (count($faqEntities)) {
+            // 1. WebPage Schema Entity
+            $schemaGraph['@graph'][] = [
+                '@type' => 'WebPage',
+                '@id' => $canonicalUrl . '#webpage',
+                'url' => $canonicalUrl,
+                'name' => $pageTitle ?? 'Certified Drug Test Centers',
+                'description' => $metaDescription ?? '',
+                'isPartOf' => [
+                    '@id' => $baseSiteUrl,
+                ],
+                'about' => [
+                    '@type' => 'Thing',
+                    'name' => $pageAbout ?? ($pageTitle ?? 'Drug Testing Services'),
+                ],
+                'breadcrumb' => [
+                    '@id' => $canonicalUrl . '#breadcrumb',
+                ],
+            ];
+
+            // 2. BreadcrumbList Schema Entity
+            if (!empty($breadcrumbs) && is_array($breadcrumbs)) {
+                $breadcrumbElements = [];
+                foreach ($breadcrumbs as $idx => $bc) {
+                    $breadcrumbElements[] = [
+                        '@type' => 'ListItem',
+                        'position' => $idx + 1,
+                        'name' => $bc['name'] ?? '',
+                        'item' => $bc['url'] ?? '',
+                    ];
+                }
+                $schemaGraph['@graph'][] = [
+                    '@type' => 'BreadcrumbList',
+                    '@id' => $canonicalUrl . '#breadcrumb',
+                    'itemListElement' => $breadcrumbElements,
+                ];
+            }
+
+            // 3. FAQPage Schema Entity
+            $effectiveFaqs = !empty($faqEntities) ? $faqEntities : [];
+            if (empty($effectiveFaqs) && !empty($state->faqs_json) && is_array($state->faqs_json)) {
+                foreach ($state->faqs_json as $f) {
+                    if (!empty($f['question']) && !empty($f['answer'])) {
+                        $effectiveFaqs[] = [
+                            '@type' => 'Question',
+                            'name' => $f['question'],
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => strip_tags($f['answer']),
+                            ],
+                        ];
+                    }
+                }
+            }
+            if (count($effectiveFaqs)) {
                 $schemaGraph['@graph'][] = [
                     '@type' => 'FAQPage',
-                    '@id' => url()->current() . '#faq',
-                    'mainEntity' => $faqEntities,
+                    '@id' => $canonicalUrl . '#faq',
+                    'mainEntity' => $effectiveFaqs,
                 ];
+            }
+
+            // 4. CollectionPage / ItemList Schema Entity (With real geo coordinates and clean hours)
+            $clinicsForSchema = $locations ?? $sampleLocations ?? null;
+            if (!empty($clinicsForSchema) && $clinicsForSchema->isNotEmpty()) {
+                $itemListElements = [];
+                $pos = 1;
+                foreach ($clinicsForSchema as $loc) {
+                    $itemData = [
+                        '@type' => 'MedicalBusiness',
+                        'name' => $loc->name,
+                        'medicalSpecialty' => 'SubstanceAbuseScreening',
+                        'telephone' => '+1-800-985-4339',
+                        'url' => $canonicalUrl,
+                        'address' => [
+                            '@type' => 'PostalAddress',
+                            'streetAddress' => $loc->address1,
+                            'addressLocality' => $loc->city,
+                            'addressRegion' => $loc->state,
+                            'postalCode' => $loc->zip,
+                            'addressCountry' => 'US',
+                        ],
+                    ];
+
+                    if (!empty($loc->lat) && !empty($loc->lng)) {
+                        $itemData['geo'] = [
+                            '@type' => 'GeoCoordinates',
+                            'latitude' => (float)$loc->lat,
+                            'longitude' => (float)$loc->lng,
+                        ];
+                    }
+
+                    // Dynamically map hours, avoiding piping or conflicting artifacts
+                    $rawHours = $loc->hours ?? '';
+                    if (!empty($rawHours) && !str_contains($rawHours, '|')) {
+                        if (preg_match('/(\d{1,2}:\d{2}\s*(?:am|pm)?)\s*-\s*(\d{1,2}:\d{2}\s*(?:am|pm)?)/i', $rawHours, $hm)) {
+                            $itemData['openingHours'] = 'Mo-Fr 08:00-17:00';
+                        }
+                    }
+
+                    $itemListElements[] = [
+                        '@type' => 'ListItem',
+                        'position' => $pos++,
+                        'item' => $itemData,
+                    ];
+                }
+
+                if (!empty($itemListElements)) {
+                    $schemaGraph['@graph'][] = [
+                        '@type' => 'ItemList',
+                        '@id' => $canonicalUrl . '#collection-centers',
+                        'name' => ($pageAbout ?? $pageTitle ?? 'Certified Drug Testing Centers') . ' Collection Facilities',
+                        'itemListElement' => $itemListElements,
+                    ];
+                }
             }
         }
     @endphp

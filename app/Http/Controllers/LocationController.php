@@ -52,9 +52,14 @@ class LocationController extends Controller
             ->where('is_active', true)
             ->firstOrFail();
 
-        $cities = City::where('state_id', $state->id)
-            ->where('is_active', true)
-            ->orderBy('name')
+        $cities = City::join('pseo_eligible_cities', 'cities.id', '=', 'pseo_eligible_cities.city_id')
+            ->where('cities.state_id', $state->id)
+            ->where('cities.is_active', true)
+            ->where('pseo_eligible_cities.is_eligible', true)
+            ->where('cities.name', 'NOT LIKE', '%County%')
+            ->whereNotIn('cities.slug', ['coconino', 'north-pinal'])
+            ->orderBy('cities.name')
+            ->select('cities.*')
             ->get();
 
         $questLocations = Location::where('state', $state->abbr)
@@ -90,10 +95,11 @@ class LocationController extends Controller
         $pageTitle = $state->meta_title ?: "{$state->name} Drug Testing Centers - (800) 985-4339";
         $metaDescription = $state->meta_description ?: "Certified Drug Test Centers are located in {$state->name} and in most cases within minutes of your home or office. Order a drug or alcohol test online or call (800) 985-4339 and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.";
         $metaKeywords = $defaultKeywords;
+        $pageAbout = "{$state->name} Drug Testing";
 
         $breadcrumbs = [
             ['name' => 'Home', 'url' => url('/')],
-            ['name' => $baseTitle, 'url' => url($baseRoutePrefix)],
+            ['name' => 'Locations', 'url' => url('/certified-drug-test-centers')],
             ['name' => $state->name, 'url' => $canonicalUrl],
         ];
 
@@ -105,6 +111,7 @@ class LocationController extends Controller
             'pageTitle',
             'metaDescription',
             'metaKeywords',
+            'pageAbout',
             'isChainRoute',
             'baseRoutePrefix',
             'baseTitle',
@@ -147,25 +154,86 @@ class LocationController extends Controller
         $baseTitle = $isChainRoute ? 'Certified Drug Test Centers' : 'Locations';
         $canonicalUrl = rtrim(url($baseRoutePrefix . '/' . $state->slug . '/' . $citySlug), '/');
 
-        // Automate Sibling Linking: 10 other cities within the same state for horizontal crawl paths
-        $siblingCities = City::where('state_id', $state->id)
-            ->where('is_active', true)
-            ->when($city, fn($q) => $q->where('id', '!=', $city->id))
-            ->orderByRaw("CASE WHEN content IS NOT NULL AND content != '' THEN 0 ELSE 1 END")
-            ->orderBy('name')
-            ->limit(10)
-            ->get(['id', 'name', 'slug', 'state_id']);
+        // Automate Sibling Linking: Filter out county records and sort eligible sibling cities by Haversine distance
+        $candidateSiblings = City::join('pseo_eligible_cities', 'cities.id', '=', 'pseo_eligible_cities.city_id')
+            ->where('cities.state_id', $state->id)
+            ->where('cities.is_active', true)
+            ->where('pseo_eligible_cities.is_eligible', true)
+            ->where('cities.name', 'NOT LIKE', '%County%')
+            ->whereNotIn('cities.slug', ['coconino', 'north-pinal'])
+            ->when($city, fn($q) => $q->where('cities.id', '!=', $city->id))
+            ->select('cities.id', 'cities.name', 'cities.slug', 'cities.state_id')
+            ->get();
+
+        $refLoc = $locations->first(fn($l) => !empty($l->lat) && !empty($l->lng));
+        if ($refLoc && $candidateSiblings->isNotEmpty()) {
+            $lat1 = (float)$refLoc->lat;
+            $lon1 = (float)$refLoc->lng;
+
+            $siblingNames = $candidateSiblings->pluck('name')->toArray();
+            $siblingLocations = Location::where('state', $state->abbr)
+                ->whereIn('city', $siblingNames)
+                ->whereNotNull('lat')
+                ->whereNotNull('lng')
+                ->get(['city', 'lat', 'lng'])
+                ->groupBy(fn($l) => strtolower($l->city));
+
+            $siblingCities = $candidateSiblings->map(function ($sib) use ($lat1, $lon1, $siblingLocations) {
+                $cLoc = $siblingLocations->get(strtolower($sib->name))?->first();
+                if ($cLoc) {
+                    $lat2 = (float)$cLoc->lat;
+                    $lon2 = (float)$cLoc->lng;
+                    $d = 3959 * acos(min(1.0, max(-1.0, cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($lon2) - deg2rad($lon1)) + sin(deg2rad($lat1)) * sin(deg2rad($lat2)))));
+                    $sib->distance_miles = round($d, 1);
+                } else {
+                    $sib->distance_miles = 9999;
+                }
+                return $sib;
+            })->sortBy('distance_miles')->take(10)->values();
+        } else {
+            $siblingCities = $candidateSiblings->sortBy('name')->take(10)->values();
+        }
+
+        // Dynamic City Metrics for genuine local value & AEO uniqueness
+        $coveredZips = $locations->pluck('zip')->filter()->unique()->values();
+        $coveredZipsString = $coveredZips->take(12)->implode(', ') . ($coveredZips->count() > 12 ? ' +' . ($coveredZips->count() - 12) . ' more' : '');
+
+        $has24Hrs = false;
+        $weekendOr24Count = 0;
+        $earliestOpen = '8:00 AM';
+
+        foreach ($locations as $loc) {
+            $h = strtolower($loc->hours ?? '');
+            if (str_contains($h, '24 hr') || str_contains($h, '24/7') || str_contains($h, '24 hour')) {
+                $has24Hrs = true;
+                $weekendOr24Count++;
+            } elseif (str_contains($h, 'sa') || str_contains($h, 'sat') || str_contains($h, 'saturday') || str_contains($h, 'su ') || str_contains($h, 'sun')) {
+                $weekendOr24Count++;
+            }
+
+            if (preg_match('/(\b(?:6|7|8|9)(?::\d{2})?\s*(?:am|pm)?)/i', $loc->hours, $m)) {
+                $timeStr = strtoupper(trim($m[1]));
+                if (str_starts_with($timeStr, '6:')) {
+                    $earliestOpen = '6:30 AM';
+                } elseif (str_starts_with($timeStr, '7:')) {
+                    if ($earliestOpen !== '6:30 AM') {
+                        $earliestOpen = '7:00 AM';
+                    }
+                }
+            }
+        }
 
         $defaultKeywords = 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
 
         $pageTitle = $city?->meta_title ?: "{$cityName}, {$state->abbr} Drug Testing Centers - (800) 985-4339";
         $metaDescription = $city?->meta_description ?: "Certified Drug Test Centers are located in {$cityName}, {$state->abbr} and in most cases within minutes of your home or office. Order a drug or alcohol test online or call (800) 985-4339 and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.";
         $metaKeywords = $defaultKeywords;
+        $pageAbout = "{$cityName}, {$state->abbr} Drug Testing";
 
         $breadcrumbs = [
             ['name' => 'Home', 'url' => url('/')],
-            ['name' => $baseTitle, 'url' => url($baseRoutePrefix)],
-            ['name' => $state->name, 'url' => url($baseRoutePrefix . '/' . $state->slug)],
+            ['name' => 'Locations', 'url' => url('/certified-drug-test-centers')],
+            ['name' => $state->name, 'url' => url('/locations/' . $state->slug)],
             ['name' => $cityName, 'url' => $canonicalUrl],
         ];
 
@@ -178,6 +246,11 @@ class LocationController extends Controller
             'pageTitle',
             'metaDescription',
             'metaKeywords',
+            'pageAbout',
+            'coveredZipsString',
+            'earliestOpen',
+            'weekendOr24Count',
+            'has24Hrs',
             'siblingCities',
             'isChainRoute',
             'baseRoutePrefix',
@@ -241,6 +314,7 @@ class LocationController extends Controller
         $providerName = ucfirst($location->provider ?: 'Quest / Labcorp');
         $pageTitle = "{$location->name} - {$location->address1}, {$location->city}, {$location->state} {$location->zip} | Certified Drug Test Centers";
         $metaDescription = "Walk-in drug and alcohol testing at {$location->name} in {$location->city}, {$location->state}. Same-day testing, DOT urine screening, hair testing, and fast MRO lab results.";
+        $metaRobots = 'noindex, follow';
 
         return view('locations.show', compact(
             'location',
@@ -254,7 +328,8 @@ class LocationController extends Controller
             'parsedHours',
             'providerName',
             'pageTitle',
-            'metaDescription'
+            'metaDescription',
+            'metaRobots'
         ));
     }
 
