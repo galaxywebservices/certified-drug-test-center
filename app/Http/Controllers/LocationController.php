@@ -93,7 +93,7 @@ class LocationController extends Controller
         $defaultKeywords = 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
 
         $pageTitle = $state->meta_title ?: "{$state->name} Drug Testing Centers - (800) 985-4339";
-        $metaDescription = $state->meta_description ?: "Certified Drug Test Centers are located in {$state->name} and in most cases within minutes of your home or office. Order a drug or alcohol test online or call (800) 985-4339 and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.";
+        $metaDescription = $state->meta_description ?: "Certified Drug Test Centers in {$state->name} ({$state->abbr}). Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp walk-in clinics.";
         $metaKeywords = $defaultKeywords;
         $pageAbout = "{$state->name} Drug Testing";
 
@@ -226,7 +226,7 @@ class LocationController extends Controller
         $defaultKeywords = 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
 
         $pageTitle = $city?->meta_title ?: "{$cityName}, {$state->abbr} Drug Testing Centers - (800) 985-4339";
-        $metaDescription = $city?->meta_description ?: "Certified Drug Test Centers are located in {$cityName}, {$state->abbr} and in most cases within minutes of your home or office. Order a drug or alcohol test online or call (800) 985-4339 and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.";
+        $metaDescription = $city?->meta_description ?: "Certified Drug Test Centers in {$cityName}, {$state->abbr}. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp walk-in clinics.";
         $metaKeywords = $defaultKeywords;
         $pageAbout = "{$cityName}, {$state->abbr} Drug Testing";
 

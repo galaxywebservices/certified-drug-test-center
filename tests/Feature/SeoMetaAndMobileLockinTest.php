@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class SeoMetaAndMobileLockinTest extends TestCase
 {
-    public function test_national_chain_page_has_exact_title_description_and_keywords(): void
+    public function test_national_chain_page_has_exact_title_description_and_clean_head(): void
     {
         $response = $this->get('/certified-drug-test-centers');
         $response->assertStatus(200);
@@ -19,8 +19,12 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $response->assertSee('Certified Drug Test Centers are located in all cities and in most cases within minutes of your home or office.', false);
         $response->assertSee('Negative results are typically available within 24–48 hours.', false);
 
-        // Exact keywords
-        $response->assertSee('name="keywords" content="Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test"', false);
+        // Viewport is clean without maximum-scale=5.0
+        $response->assertSee('<meta name="viewport" content="width=device-width, initial-scale=1.0">', false);
+        $this->assertStringNotContainsString('maximum-scale=5.0', $response->getContent());
+
+        // Deprecated meta keywords removed
+        $this->assertStringNotContainsString('name="keywords"', $response->getContent());
 
         // No Sanford address in footer
         $response->assertDontSee('201 N. Park Ave.');
@@ -29,14 +33,19 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $response->assertSee('Toll-Free: (800) 985-4339');
     }
 
-    public function test_state_page_has_exact_title_keywords_and_no_sanford_footer(): void
+    public function test_state_page_has_exact_title_trimmed_description_and_no_sanford_footer(): void
     {
         $response = $this->get('/locations/florida');
         $response->assertStatus(200);
 
         $response->assertSee('<title>Florida Drug Testing Centers - (800) 985-4339</title>', false);
         $this->assertStringNotContainsString('Walk-ins Welcome', $response->getContent());
-        $response->assertSee('name="keywords" content="Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test"', false);
+
+        // Trimmed meta description ~150 chars
+        $response->assertSee('name="description" content="Certified Drug Test Centers in Florida (FL). Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp walk-in clinics."', false);
+
+        // Deprecated meta keywords removed
+        $this->assertStringNotContainsString('name="keywords"', $response->getContent());
 
         $response->assertDontSee('201 N. Park Ave.');
         $response->assertDontSee('Sanford, FL 32771');
@@ -74,7 +83,7 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $this->assertStringContainsString('/certified-drug-test-centers', $content);
     }
 
-    public function test_city_page_has_exact_title_keywords_and_clean_h1(): void
+    public function test_city_page_has_exact_title_trimmed_description_and_clean_h1(): void
     {
         $response = $this->get('/locations/florida/miami');
         $response->assertStatus(200);
@@ -83,8 +92,11 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $response->assertSee('<title>Miami, FL Drug Testing Centers - (800) 985-4339</title>', false);
         $this->assertStringNotContainsString('Walk-ins Welcome', $response->getContent());
 
-        // Keywords present in page source
-        $response->assertSee('name="keywords" content="Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test"', false);
+        // Trimmed meta description ~150 chars
+        $response->assertSee('name="description" content="Certified Drug Test Centers in Miami, FL. Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp walk-in clinics."', false);
+
+        // Deprecated meta keywords removed
+        $this->assertStringNotContainsString('name="keywords"', $response->getContent());
 
         // H1 header has clean title without & Walk-In Labs
         $response->assertSee('Miami, FL Drug Testing Centers');
@@ -140,6 +152,75 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $this->assertStringContainsString('Scottsdale Drug Testing', $content);
         $this->assertStringNotContainsString('Coconino Drug Testing', $content);
         $this->assertStringNotContainsString('North Pinal Drug Testing', $content);
+    }
+
+    public function test_alaska_state_and_city_pages_comprehensive_seo_audit(): void
+    {
+        // 1. Test Alaska State Page (/locations/alaska)
+        $response = $this->get('/locations/alaska');
+        $response->assertStatus(200);
+
+        $content = $response->getContent();
+
+        // Single consolidated JSON-LD script block
+        $this->assertSame(1, substr_count($content, 'type="application/ld+json"'));
+
+        // Viewport and meta cleanup
+        $response->assertSee('<meta name="viewport" content="width=device-width, initial-scale=1.0">', false);
+        $this->assertStringNotContainsString('maximum-scale=5.0', $content);
+        $this->assertStringNotContainsString('name="keywords"', $content);
+
+        // Trimmed meta description (~147 chars)
+        $response->assertSee('name="description" content="Certified Drug Test Centers in Alaska (AK). Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp walk-in clinics."', false);
+
+        // Grammar bugs fixed in FAQs
+        $this->assertStringNotContainsString('a employer rights under', $content);
+        $this->assertStringContainsString('employer rights under AS 23.10.600', $content);
+        $this->assertStringNotContainsString('statutes allows', $content);
+        $this->assertStringContainsString('statutes allow', $content);
+
+        // openingHours omitted from JSON-LD ItemList schema to avoid contradicting visible hours
+        $this->assertStringNotContainsString('"openingHours"', $content);
+
+        // Lat/lng rounded to 6 decimal places (no 50-digit float artifacts)
+        $this->assertMatchesRegularExpression('/"latitude":\s*61\.\d{1,6}/', $content);
+        $this->assertMatchesRegularExpression('/"longitude":\s*-149\.\d{1,6}/', $content);
+        $this->assertDoesNotMatchRegularExpression('/\d+\.\d{10,}/', $content);
+
+        // Major Cities in Alaska grid contains Anchorage, Fairbanks, Wasilla, Juneau
+        $this->assertStringContainsString('/locations/alaska/anchorage', $content);
+        $this->assertStringContainsString('/locations/alaska/fairbanks', $content);
+        $this->assertStringContainsString('/locations/alaska/wasilla', $content);
+        $this->assertStringContainsString('/locations/alaska/juneau', $content);
+
+        // Breadcrumb position 2 links to /certified-drug-test-centers
+        $this->assertStringContainsString('/certified-drug-test-centers', $content);
+
+        // 2. Test City Leaf Page (/locations/alaska/fairbanks) Parity
+        $cityResponse = $this->get('/locations/alaska/fairbanks');
+        $cityResponse->assertStatus(200);
+
+        $cityContent = $cityResponse->getContent();
+
+        // Exactly one consolidated JSON-LD graph
+        $this->assertSame(1, substr_count($cityContent, 'type="application/ld+json"'));
+
+        // Title has 800 number and clean branding
+        $cityResponse->assertSee('<title>Fairbanks, AK Drug Testing Centers - (800) 985-4339</title>', false);
+        $this->assertStringNotContainsString('Walk-ins Welcome', $cityContent);
+
+        // Trimmed meta description ~150 chars
+        $cityResponse->assertSee('name="description" content="Certified Drug Test Centers in Fairbanks, AK. Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp walk-in clinics."', false);
+
+        // Hair follicle price aligned to $169.99
+        $cityResponse->assertSee('$169.99');
+        $this->assertStringNotContainsString('$189.99', $cityContent);
+
+        // Breadcrumb position 2 links to /certified-drug-test-centers
+        $this->assertStringContainsString('/certified-drug-test-centers', $cityContent);
+
+        // Local facilities in Fairbanks listed
+        $this->assertStringContainsString('Quest Diagnostics', $cityContent);
     }
 
     public function test_individual_facility_page_is_noindex_follow(): void

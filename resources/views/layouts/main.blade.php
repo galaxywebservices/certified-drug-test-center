@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $pageTitle ?? 'Certified Drug Test Centers - (800) 985-4339' }}</title>
-    <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers are located in all cities and in most cases within minutes of your home or office. Order a drug or alcohol test online or call (800) 985-4339 and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.' }}">
-    <meta name="keywords" content="{{ $metaKeywords ?? 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test' }}">
+    <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers nationwide. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp walk-in clinics.' }}">
     @php
         $rawPath = request()->getPathInfo();
         if (!empty($canonicalUrl)) {
@@ -249,17 +248,9 @@
                     if (!empty($loc->lat) && !empty($loc->lng)) {
                         $itemData['geo'] = [
                             '@type' => 'GeoCoordinates',
-                            'latitude' => (float)$loc->lat,
-                            'longitude' => (float)$loc->lng,
+                            'latitude' => round((float)$loc->lat, 6),
+                            'longitude' => round((float)$loc->lng, 6),
                         ];
-                    }
-
-                    // Dynamically map hours, avoiding piping or conflicting artifacts
-                    $rawHours = $loc->hours ?? '';
-                    if (!empty($rawHours) && !str_contains($rawHours, '|')) {
-                        if (preg_match('/(\d{1,2}:\d{2}\s*(?:am|pm)?)\s*-\s*(\d{1,2}:\d{2}\s*(?:am|pm)?)/i', $rawHours, $hm)) {
-                            $itemData['openingHours'] = 'Mo-Fr 08:00-17:00';
-                        }
                     }
 
                     $itemListElements[] = [
