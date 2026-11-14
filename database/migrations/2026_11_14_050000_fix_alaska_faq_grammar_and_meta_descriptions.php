@@ -138,3 +138,4 @@ return new class extends Migration
         // Safe reversible migration
     }
 };
+
