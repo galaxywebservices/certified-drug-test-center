@@ -286,4 +286,41 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $response->assertSee('text-overflow: ellipsis;', false);
         $response->assertSee('.selected-product-box {', false);
     }
+
+    public function test_favicon_and_icons_are_present_and_google_compliant(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+
+        // Google Search & Browser Favicon link tags
+        $response->assertSee('<link rel="icon" type="image/png" sizes="48x48"', false);
+        $response->assertSee('<link rel="icon" type="image/png" sizes="96x96"', false);
+        $response->assertSee('<link rel="icon" type="image/png" sizes="32x32"', false);
+        $response->assertSee('<link rel="icon" type="image/png" sizes="16x16"', false);
+        $response->assertSee('<link rel="shortcut icon"', false);
+        $response->assertSee('<link rel="apple-touch-icon" sizes="180x180"', false);
+        $response->assertSee('<link rel="manifest"', false);
+
+        // Verify physical files exist and are non-empty
+        $this->assertFileExists(public_path('favicon.ico'));
+        $this->assertGreaterThan(0, filesize(public_path('favicon.ico')));
+
+        $this->assertFileExists(public_path('favicon.png'));
+        $this->assertGreaterThan(0, filesize(public_path('favicon.png')));
+
+        $this->assertFileExists(public_path('favicon-48x48.png'));
+        $this->assertGreaterThan(0, filesize(public_path('favicon-48x48.png')));
+
+        $this->assertFileExists(public_path('favicon-96x96.png'));
+        $this->assertGreaterThan(0, filesize(public_path('favicon-96x96.png')));
+
+        $this->assertFileExists(public_path('apple-touch-icon.png'));
+        $this->assertGreaterThan(0, filesize(public_path('apple-touch-icon.png')));
+
+        $this->assertFileExists(public_path('android-chrome-192x192.png'));
+        $this->assertGreaterThan(0, filesize(public_path('android-chrome-192x192.png')));
+
+        $this->assertFileExists(public_path('site.webmanifest'));
+        $this->assertGreaterThan(0, filesize(public_path('site.webmanifest')));
+    }
 }
