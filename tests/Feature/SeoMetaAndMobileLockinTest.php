@@ -42,7 +42,7 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $this->assertStringNotContainsString('Walk-ins Welcome', $response->getContent());
 
         // Trimmed meta description ~150 chars
-        $response->assertSee('name="description" content="Certified Drug Test Centers in Florida (FL). Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp walk-in clinics."', false);
+        $response->assertSee('name="description" content="Certified Drug Test Centers in Florida (FL). Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp certified clinics."', false);
 
         // Deprecated meta keywords removed
         $this->assertStringNotContainsString('name="keywords"', $response->getContent());
@@ -93,7 +93,7 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $this->assertStringNotContainsString('Walk-ins Welcome', $response->getContent());
 
         // Trimmed meta description ~150 chars
-        $response->assertSee('name="description" content="Certified Drug Test Centers in Miami, FL. Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp walk-in clinics."', false);
+        $response->assertSee('name="description" content="Certified Drug Test Centers in Miami, FL. Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp certified clinics."', false);
 
         // Deprecated meta keywords removed
         $this->assertStringNotContainsString('name="keywords"', $response->getContent());
@@ -171,7 +171,7 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $this->assertStringNotContainsString('name="keywords"', $content);
 
         // Trimmed meta description (~147 chars)
-        $response->assertSee('name="description" content="Certified Drug Test Centers in Alaska (AK). Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp walk-in clinics."', false);
+        $response->assertSee('name="description" content="Certified Drug Test Centers in Alaska (AK). Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp certified clinics."', false);
 
         // Grammar bugs fixed in FAQs
         $this->assertStringNotContainsString('a employer rights under', $content);
@@ -210,7 +210,7 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $this->assertStringNotContainsString('Walk-ins Welcome', $cityContent);
 
         // Trimmed meta description ~150 chars
-        $cityResponse->assertSee('name="description" content="Certified Drug Test Centers in Fairbanks, AK. Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp walk-in clinics."', false);
+        $cityResponse->assertSee('name="description" content="Certified Drug Test Centers in Fairbanks, AK. Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp certified clinics."', false);
 
         // Hair follicle price aligned to $169.99
         $cityResponse->assertSee('$169.99');
@@ -322,5 +322,57 @@ class SeoMetaAndMobileLockinTest extends TestCase
 
         $this->assertFileExists(public_path('site.webmanifest'));
         $this->assertGreaterThan(0, filesize(public_path('site.webmanifest')));
+    }
+
+    public function test_products_chains_and_categories_have_800_number_and_no_walkins(): void
+    {
+        // 1. Product Pages (5-panel, 10-panel, hair follicle)
+        $resp5 = $this->get('/product/5-panel-nondot');
+        $resp5->assertStatus(200);
+        $resp5->assertSee('<title>5 Panel NON-DOT - (800) 985-4339</title>', false);
+        $resp5->assertSee('(800) 985-4339');
+        $this->assertStringNotContainsString('Walk-ins Welcome', $resp5->getContent());
+        $this->assertStringNotContainsString('Walk in today', $resp5->getContent());
+
+        $resp10 = $this->get('/product/10-panel');
+        $resp10->assertStatus(200);
+        $resp10->assertSee('<title>10 Panel - (800) 985-4339</title>', false);
+        $resp10->assertSee('(800) 985-4339');
+        $this->assertStringNotContainsString('Walk-ins Welcome', $resp10->getContent());
+
+        $respHair = $this->get('/product/5-panel-hair-follicle');
+        $respHair->assertStatus(200);
+        $respHair->assertSee('<title>5 Panel Hair Follicle Test - (800) 985-4339</title>', false);
+        $respHair->assertSee('(800) 985-4339');
+        $this->assertStringNotContainsString('Walk-ins Welcome', $respHair->getContent());
+
+        // 2. Category Page
+        $respCat = $this->get('/category/urine');
+        $respCat->assertStatus(200);
+        $respCat->assertSee('<title>Urine Drug Testing Options - (800) 985-4339</title>', false);
+        $this->assertStringNotContainsString('Walk-ins Welcome', $respCat->getContent());
+
+        // 3. PSEO Chain Pages (City, State, National)
+        $respChainCity = $this->get('/services/5-panel-drug-test/florida/jacksonville');
+        $respChainCity->assertStatus(200);
+        $respChainCity->assertSee('<title>5-Panel Drug Test in Jacksonville, FL - (800) 985-4339</title>', false);
+        $this->assertStringNotContainsString('Walk-in Local Centers', $respChainCity->getContent());
+        $this->assertStringNotContainsString('Walk-ins Welcome Today', $respChainCity->getContent());
+
+        $respChainState = $this->get('/services/5-panel-drug-test/florida');
+        $respChainState->assertStatus(200);
+        $respChainState->assertSee('<title>5-Panel Drug Test in Florida (FL) - (800) 985-4339</title>', false);
+        $this->assertStringNotContainsString('Certified Walk-in Labs', $respChainState->getContent());
+
+        $respChainNational = $this->get('/services/5-panel-drug-test');
+        $respChainNational->assertStatus(200);
+        $respChainNational->assertSee('<title>Nationwide 5-Panel Urine Drug Test - (800) 985-4339</title>', false);
+        $this->assertStringNotContainsString('Same-Day Certified Walk-in Centers', $respChainNational->getContent());
+
+        // 4. City leaf page Jacksonville
+        $respJax = $this->get('/locations/florida/jacksonville');
+        $respJax->assertStatus(200);
+        $respJax->assertSee('<title>Jacksonville, FL Drug Testing Centers - (800) 985-4339</title>', false);
+        $this->assertStringNotContainsString('Walk-ins Welcome', $respJax->getContent());
     }
 }

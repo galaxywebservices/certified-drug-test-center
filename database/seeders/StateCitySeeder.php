@@ -50,8 +50,8 @@ class StateCitySeeder extends Seeder
                     [
                         'name' => $c['city_name'],
                         'is_active' => true,
-                        'meta_title' => "{$c['city_name']}, {$abbr} Drug Testing Centers | Walk-ins Welcome",
-                        'meta_description' => "Find certified drug testing collection centers in {$c['city_name']}, {$abbr}. Same-day walk-in testing at Quest & Labcorp certified sites.",
+                        'meta_title' => "{$c['city_name']}, {$abbr} Drug Testing Centers - (800) 985-4339",
+                        'meta_description' => "Certified Drug Test Centers in {$c['city_name']}, {$abbr}. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.",
                         'content' => $c['content'],
                     ]
                 );

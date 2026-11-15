@@ -177,8 +177,8 @@ class ImportAdtFullNationwideCities extends Command
                 sub.lng,
                 sub.content,
                 1 as is_active,
-                CONCAT(sub.city_name, ', ', s.abbr, ' Drug Testing Centers | Walk-ins Welcome') as meta_title,
-                CONCAT('Find certified drug testing collection centers in ', sub.city_name, ', ', s.abbr, '. Same-day walk-in testing at Quest & Labcorp certified sites.') as meta_description,
+                CONCAT(sub.city_name, ', ', s.abbr, ' Drug Testing Centers - (800) 985-4339') as meta_title,
+                CONCAT('Certified Drug Test Centers in ', sub.city_name, ', ', s.abbr, '. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.') as meta_description,
                 NOW() as created_at,
                 NOW() as updated_at
             FROM (
@@ -223,8 +223,8 @@ class ImportAdtFullNationwideCities extends Command
                 sub.lat,
                 sub.lon as lng,
                 1 as is_active,
-                CONCAT(sub.city, ', ', s.abbr, ' Drug Testing Centers | Walk-ins Welcome') as meta_title,
-                CONCAT('Find certified drug testing collection centers in ', sub.city, ', ', s.abbr, '. Same-day walk-in testing at Quest & Labcorp certified sites.') as meta_description,
+                CONCAT(sub.city, ', ', s.abbr, ' Drug Testing Centers - (800) 985-4339') as meta_title,
+                CONCAT('Certified Drug Test Centers in ', sub.city, ', ', s.abbr, '. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.') as meta_description,
                 NOW() as created_at,
                 NOW() as updated_at
             FROM (

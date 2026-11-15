@@ -27,8 +27,14 @@ class ProductController extends Controller
             ->limit(4)
             ->get();
 
-        $pageTitle = $product->meta_title ?: "{$product->name} | Certified Drug Test Center";
-        $metaDescription = $product->meta_description ?: "Order {$product->name} online. Walk in today at over 20,000 certified collection sites nationwide. Fast, confidential, and legally defensible.";
+        $cleanName = trim(ltrim($product->name, '* '));
+        $pageTitle = $product->meta_title ?: "{$cleanName} - (800) 985-4339";
+        if (str_contains($pageTitle, 'Walk-ins Welcome') || str_contains($pageTitle, 'Walk-in') || !str_contains($pageTitle, '800')) {
+            $pageTitle = "{$cleanName} - (800) 985-4339";
+        }
+        $metaDescription = $product->meta_description ?: "Order {$cleanName} online or call (800) 985-4339 for an instant donor pass at over 20,000 certified collection sites nationwide. Fast, confidential, and legally defensible.";
+        $metaDescription = preg_replace('/walk[- ]?in\s*today\s*at/i', 'order online or call (800) 985-4339 for an instant donor pass at', $metaDescription);
+        $metaDescription = preg_replace('/walk[- ]?in\'?s?\s*welcome/i', 'call (800) 985-4339', $metaDescription);
         $canonicalUrl = $product->canonical_url ?: url('/product/' . $product->slug);
         if (str_contains($canonicalUrl, 'localhost') || str_contains($canonicalUrl, '127.0.0.1')) {
             $canonicalUrl = url('/product/' . $product->slug);

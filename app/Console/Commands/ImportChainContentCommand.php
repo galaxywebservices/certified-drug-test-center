@@ -62,8 +62,8 @@ class ImportChainContentCommand extends Command
                     'name' => $cityName,
                     'slug' => $slug,
                     'is_active' => true,
-                    'meta_title' => "{$cityName}, {$abbr} Drug Testing Centers | Walk-ins Welcome",
-                    'meta_description' => "Find certified drug testing collection centers in {$cityName}, {$abbr}. Same-day walk-in testing at Quest & Labcorp certified sites.",
+                    'meta_title' => "{$cityName}, {$abbr} Drug Testing Centers - (800) 985-4339",
+                    'meta_description' => "Certified Drug Test Centers in {$cityName}, {$abbr}. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.",
                     'content' => $content,
                 ]);
                 $created++;

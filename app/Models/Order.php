@@ -54,6 +54,7 @@ class Order extends Model
         'donor_dob' => 'date',
         'specimen_collected_at' => 'datetime',
         'mro_verified_at' => 'datetime',
+        'refund_policy_agreed_at' => 'datetime',
         'subtotal' => 'decimal:2',
         'discount' => 'decimal:2',
         'total' => 'decimal:2',

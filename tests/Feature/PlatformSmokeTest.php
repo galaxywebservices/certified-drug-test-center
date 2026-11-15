@@ -28,11 +28,11 @@ class PlatformSmokeTest extends TestCase
         $response->assertSee('Urine');
     }
 
-    public function test_pseo_locations_directory_loads()
+    public function test_pseo_locations_directory_redirects_to_national_hub()
     {
         $response = $this->get('/locations');
-        $response->assertStatus(200);
-        $response->assertSee('Collection Locations');
+        $response->assertRedirect('/certified-drug-test-centers');
+        $response->assertStatus(301);
     }
 
     public function test_pseo_city_guide_loads_with_locations()
@@ -105,7 +105,7 @@ class PlatformSmokeTest extends TestCase
     {
         $response = $this->get('/sitemap.xml');
         $response->assertStatus(200);
-        $response->assertHeader('Content-Type', 'application/xml');
+        $this->assertStringStartsWith('application/xml', $response->headers->get('Content-Type'));
     }
 
     public function test_aeo_and_geo_files_return_200()

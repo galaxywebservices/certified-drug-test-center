@@ -258,7 +258,7 @@
                                 </div>
                                 <div class="rec-trust-box">
                                     <div style="font-size:12.5px; color:#065F46; line-height:1.5;">
-                                        ✓ <strong>Walk-Ins Welcome:</strong> Valid at all 7,382+ Quest &amp; Labcorp sites nationwide.<br>
+                                        ✓ <strong>Instant Electronic Pass:</strong> Valid at all 7,382+ Quest &amp; Labcorp sites nationwide • (800) 985-4339.<br>
                                         ✓ <strong>Electronic Donor Pass:</strong> Dispatched instantly to your phone &amp; email upon registration.
                                     </div>
                                 </div>

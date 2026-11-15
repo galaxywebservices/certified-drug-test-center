@@ -250,7 +250,7 @@
                                         @endforeach
                                     </div>
                                     <div style="margin-top:8px; display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-weight:700; color:#15803D; background:#F0FDF4; border:1px solid #BBF7D0; padding:3px 8px; border-radius:4px;">
-                                        ✓ Walk-Ins Welcome Today
+                                        ✓ Instant Electronic Pass • (800) 985-4339
                                     </div>
                                 </div>
                             </div>

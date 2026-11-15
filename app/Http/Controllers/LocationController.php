@@ -93,7 +93,11 @@ class LocationController extends Controller
         $defaultKeywords = 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
 
         $pageTitle = $state->meta_title ?: "{$state->name} Drug Testing Centers - (800) 985-4339";
-        $metaDescription = $state->meta_description ?: "Certified Drug Test Centers in {$state->name} ({$state->abbr}). Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp walk-in clinics.";
+        if (str_contains($pageTitle, 'Walk-ins Welcome') || str_contains($pageTitle, 'Walk-in') || !str_contains($pageTitle, '800')) {
+            $pageTitle = "{$state->name} Drug Testing Centers - (800) 985-4339";
+        }
+        $metaDescription = $state->meta_description ?: "Certified Drug Test Centers in {$state->name} ({$state->abbr}). Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.";
+        $metaDescription = str_ireplace('walk-in clinics', 'certified clinics', $metaDescription);
         $metaKeywords = $defaultKeywords;
         $pageAbout = "{$state->name} Drug Testing";
 
@@ -226,7 +230,11 @@ class LocationController extends Controller
         $defaultKeywords = 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
 
         $pageTitle = $city?->meta_title ?: "{$cityName}, {$state->abbr} Drug Testing Centers - (800) 985-4339";
-        $metaDescription = $city?->meta_description ?: "Certified Drug Test Centers in {$cityName}, {$state->abbr}. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp walk-in clinics.";
+        if (str_contains($pageTitle, 'Walk-ins Welcome') || str_contains($pageTitle, 'Walk-in') || !str_contains($pageTitle, '800')) {
+            $pageTitle = "{$cityName}, {$state->abbr} Drug Testing Centers - (800) 985-4339";
+        }
+        $metaDescription = $city?->meta_description ?: "Certified Drug Test Centers in {$cityName}, {$state->abbr}. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.";
+        $metaDescription = str_ireplace('walk-in clinics', 'certified clinics', $metaDescription);
         $metaKeywords = $defaultKeywords;
         $pageAbout = "{$cityName}, {$state->abbr} Drug Testing";
 

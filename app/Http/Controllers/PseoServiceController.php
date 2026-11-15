@@ -35,7 +35,7 @@ class PseoServiceController extends Controller
                 'Amphetamines (d-Amphetamine, Methamphetamine, MDMA/Ecstasy)',
                 'Phencyclidine (PCP)',
             ],
-            'meta_description_template' => 'Same-day 5-panel drug testing in :city, :state. Walk into local Quest Diagnostics and Labcorp certified collection facilities. Fast, SAMHSA-certified, MRO-reviewed results.',
+            'meta_description_template' => 'Same-day 5-panel drug testing in :city, :state. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics. Fast, SAMHSA-certified, MRO-reviewed results.',
             'headline_template' => '5-Panel Drug Testing Centers in :city, :state',
             'description' => 'The 5-panel urine drug test is the gold standard for employment, court compliance, and personal verification. Processed at SAMHSA-certified laboratories with GC/MS and LC/MS confirmation testing, supervised by a licensed Medical Review Officer (MRO).',
         ],
@@ -61,7 +61,7 @@ class PseoServiceController extends Controller
                 'Propoxyphene',
                 'Methaqualone (Quaaludes)',
             ],
-            'meta_description_template' => 'Accredited 10-panel drug test in :city, :state. Walk-in same-day urine collection at certified Quest & Labcorp sites. MRO-reviewed laboratory results in 24–48 hours.',
+            'meta_description_template' => 'Accredited 10-panel drug test in :city, :state. Order online or call (800) 985-4339 for an instant donor pass at certified Quest & Labcorp sites. MRO-reviewed laboratory results in 24–48 hours.',
             'headline_template' => '10-Panel Drug Screening in :city, :state',
             'description' => 'Comprehensive 10-panel drug screening detecting standard recreational drugs plus prescription narcotics, sedatives, and opioids. Frequently mandated for healthcare personnel, law enforcement, corporate hiring, and legal proceedings.',
         ],
@@ -89,7 +89,7 @@ class PseoServiceController extends Controller
                 'Buprenorphine (Suboxone)',
                 'MDMA / Ecstasy',
             ],
-            'meta_description_template' => 'Get an expanded 12-panel drug test in :city, :state. Walk in today at Quest Diagnostics & Labcorp collection centers. Includes Oxycodone, Suboxone & prescription narcotics.',
+            'meta_description_template' => 'Get an expanded 12-panel drug test in :city, :state. Order online or call (800) 985-4339 for an instant donor pass at Quest Diagnostics & Labcorp collection centers. Includes Oxycodone, Suboxone & prescription narcotics.',
             'headline_template' => '12-Panel Comprehensive Drug Testing in :city, :state',
             'description' => 'The ultimate comprehensive screening panel. Evaluates illicit substances alongside semi-synthetic prescription opioids (Oxycodone, Oxymorphone, Hydrocodone) and Buprenorphine. Ideal for medical licensing, executive screening, and rigorous legal oversight.',
         ],
@@ -110,7 +110,7 @@ class PseoServiceController extends Controller
                 'Amphetamines (Methamphetamine, MDMA, MDA)',
                 'Phencyclidine (PCP)',
             ],
-            'meta_description_template' => 'DOT drug testing in :city, :state for FMCSA, FAA, FRA, FTA, PHMSA & USCG. Federal CCF, split specimen testing & certified MRO review at local Quest & Labcorp sites.',
+            'meta_description_template' => 'DOT drug testing in :city, :state for FMCSA, FAA, FRA, FTA, PHMSA & USCG. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp sites.',
             'headline_template' => 'DOT Drug Testing & Compliance in :city, :state',
             'description' => '49 CFR Part 40 compliant federal drug screening for commercial motor carriers (FMCSA), maritime captains (USCG), aviation crew (FAA), and transit workers. Includes Federal Custody and Control Form (CCF) handling and instant Clearinghouse reporting.',
         ],
@@ -131,7 +131,7 @@ class PseoServiceController extends Controller
                 'Amphetamines (Methamphetamine, MDMA/MDA)',
                 'Phencyclidine (PCP)',
             ],
-            'meta_description_template' => 'Accredited 90-day hair follicle drug testing in :city, :state. Long-term substance detection with tamper-resistant collection at certified local facilities.',
+            'meta_description_template' => 'Accredited 90-day hair follicle drug testing in :city, :state. Order online or call (800) 985-4339 for an instant donor pass at certified local facilities.',
             'headline_template' => 'Hair Follicle Drug Testing in :city, :state',
             'description' => 'Unsurpassed 90-day detection window. Hair follicle testing cannot be cleansed, masked, or diluted by external detox shampoos or temporary abstinence. Mandated for child custody battles, court orders, and transportation executives.',
         ],
@@ -149,7 +149,7 @@ class PseoServiceController extends Controller
                 'Blood Alcohol Concentration (BAC)',
                 'Ethanol Detection (0.02 and 0.04 confirmation thresholds)',
             ],
-            'meta_description_template' => 'Certified breath alcohol testing (BAT) in :city, :state. Same-day walk-in Evidential Breath Testing (EBT) for DOT compliance, post-accident, or employer protocol.',
+            'meta_description_template' => 'Certified breath alcohol testing (BAT) in :city, :state. Order online or call (800) 985-4339 for an instant donor pass for DOT compliance, post-accident, or employer protocol.',
             'headline_template' => 'Breath Alcohol Testing in :city, :state',
             'description' => 'Evidential Breath Testing (EBT) conducted by certified Breath Alcohol Technicians (BAT). Provides immediate quantitative Blood Alcohol Concentration (BAC) results with printed tape verification for DOT Part 40 and workplace protocols.',
         ],
@@ -170,7 +170,7 @@ class PseoServiceController extends Controller
                 'Amphetamines (AMP)',
                 'Phencyclidine (PCP)',
             ],
-            'meta_description_template' => 'Rapid 15-minute instant drug test in :city, :state. Walk in today for immediate point-of-collection screening with official lab certification.',
+            'meta_description_template' => 'Rapid 15-minute instant drug test in :city, :state. Order online or call (800) 985-4339 for an instant donor pass for immediate point-of-collection screening with official lab certification.',
             'headline_template' => 'Instant Rapid Drug Testing in :city, :state',
             'description' => 'Point-of-Care testing providing negative screening results within 15 minutes of specimen donation. Non-negative specimens reflex immediately to GC/MS laboratory confirmation for absolute legal certainty.',
         ],
@@ -193,7 +193,7 @@ class PseoServiceController extends Controller
                 'Barbiturates',
                 'Alcohol Metabolites (EtG)',
             ],
-            'meta_description_template' => 'Legally admissible court-ordered drug testing in :city, :state. Strict chain of custody, probation, custody hearings & certified MRO signed documentation.',
+            'meta_description_template' => 'Legally admissible court-ordered drug testing in :city, :state. Order online or call (800) 985-4339 for an instant donor pass for probation, custody hearings & certified MRO signed documentation.',
             'headline_template' => 'Court-Ordered Drug Testing in :city, :state',
             'description' => 'Strict forensic chain of custody testing engineered for municipal courts, family law hearings, probation mandates, and custody evaluations. Includes verifiable donor ID verification, tamper-evident seals, and judge-ready medical documentation.',
         ],
@@ -212,7 +212,7 @@ class PseoServiceController extends Controller
                 'Computerized Random Selection Pool',
                 'FMCSA Clearinghouse Management',
             ],
-            'meta_description_template' => 'Complete workplace and DOT random drug testing programs in :city, :state. Automated computer pools, consortium enrollment & employer compliance certificates.',
+            'meta_description_template' => 'Complete workplace and DOT random drug testing programs in :city, :state. Automated computer pools, consortium enrollment & employer compliance certificates. Call (800) 985-4339.',
             'headline_template' => 'Random Drug Testing Programs in :city, :state',
             'description' => 'Automated, mathematically randomized employee pool selection for DOT fleets and private enterprise. Protects your business from discriminatory selection allegations while meeting strict federal annual selection percentage mandates.',
         ],
@@ -345,7 +345,7 @@ class PseoServiceController extends Controller
         $stateName = $state->name;
         $stateAbbr = $state->abbr;
 
-        $pageTitle = "{$chain['name']} in {$cityName}, {$stateAbbr} | Walk-in Local Centers";
+        $pageTitle = "{$chain['name']} in {$cityName}, {$stateAbbr} - (800) 985-4339";
         $metaDescription = str_replace(
             [':city', ':state'],
             [$cityName, "{$stateName} ({$stateAbbr})"],
@@ -417,8 +417,8 @@ class PseoServiceController extends Controller
             ->limit(8)
             ->get();
 
-        $pageTitle = "{$chain['name']} in {$state->name} ({$state->abbr}) | Certified Walk-in Labs";
-        $metaDescription = "Find certified {$chain['name']} collection locations across {$state->name}. Walk in today at Quest Diagnostics & Labcorp partner facilities. Fast MRO-reviewed results.";
+        $pageTitle = "{$chain['name']} in {$state->name} ({$state->abbr}) - (800) 985-4339";
+        $metaDescription = "Find certified {$chain['name']} collection locations across {$state->name}. Order online or call (800) 985-4339 for an instant donor pass at Quest Diagnostics & Labcorp partner facilities. Fast MRO-reviewed results.";
         $canonicalUrl = rtrim(url("/services/{$serviceSlug}/{$state->slug}"), '/');
 
         $breadcrumbs = [
@@ -465,8 +465,8 @@ class PseoServiceController extends Controller
 
         $allChains = self::CHAINS;
 
-        $pageTitle = "Nationwide {$chain['full_title']} | Same-Day Certified Walk-in Centers";
-        $metaDescription = "Order a {$chain['name']} online and walk into any of 20,000+ Quest & Labcorp certified partner facilities across all 50 states. Confidential MRO results.";
+        $pageTitle = "Nationwide {$chain['full_title']} - (800) 985-4339";
+        $metaDescription = "Order {$chain['name']} online or call (800) 985-4339 for an instant donor pass at over 20,000 Quest & Labcorp certified partner facilities across all 50 states. Confidential MRO results.";
         $canonicalUrl = rtrim(url("/services/{$serviceSlug}"), '/');
 
         $breadcrumbs = [

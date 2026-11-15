@@ -21,8 +21,14 @@ class CmsPageController extends Controller
             abort(404);
         }
 
-        $pageTitle = $page->meta_title ?: "{$page->title} | Certified Drug Test Center";
-        $metaDescription = strip_tags($page->meta_description ?: "Certified drug testing information and nationwide services for {$page->title}.");
+        $pageTitle = $page->meta_title ?: "{$page->title} - (800) 985-4339";
+        if (str_contains($pageTitle, 'Walk-ins Welcome') || str_contains($pageTitle, 'Walk-in') || !str_contains($pageTitle, '800')) {
+            $cleaned = preg_replace('/\|\s*Walk-ins?\s*Welcome/i', '', $pageTitle);
+            $cleaned = preg_replace('/\s*[-|]\s*Certified Drug Test Centers?$/i', '', $cleaned);
+            $pageTitle = rtrim($cleaned) . ' - (800) 985-4339';
+        }
+        $metaDescription = strip_tags($page->meta_description ?: "Certified drug testing services for {$page->title}. Order online or call (800) 985-4339 for an instant donor pass.");
+        $metaDescription = preg_replace('/walk[- ]?in\'?s?\s*welcome/i', 'same-day testing, call (800) 985-4339', $metaDescription);
         $canonicalUrl = $page->canonical_url ?: url('/' . $page->slug);
         if (str_contains($canonicalUrl, 'localhost') || str_contains($canonicalUrl, '127.0.0.1')) {
             $canonicalUrl = url('/' . $page->slug);

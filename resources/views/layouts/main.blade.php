@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $pageTitle ?? 'Certified Drug Test Centers - (800) 985-4339' }}</title>
-    <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers nationwide. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp walk-in clinics.' }}">
+    <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers nationwide. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.' }}">
     @php
         $rawPath = request()->getPathInfo();
         if (!empty($canonicalUrl)) {
@@ -818,7 +818,7 @@
         <div class="modal-header">
             <div>
                 <h2 class="modal-title" id="globalZipTitle" style="font-size:18px;">Find Certified Collection Centers Near You</h2>
-                <div style="font-size:12.5px; color:#64748B; margin-top:2px;">Over 20,000 Quest & Labcorp sites nationwide • Same-day walk-ins welcome</div>
+                <div style="font-size:12.5px; color:#64748B; margin-top:2px;">Over 20,000 Quest & Labcorp sites nationwide • Call (800) 985-4339</div>
             </div>
             <button type="button" class="modal-close-btn" onclick="closeZipModal()" aria-label="Close dialog">×</button>
         </div>

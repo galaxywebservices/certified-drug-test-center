@@ -279,8 +279,8 @@ class ImportAdtDataCommand extends Command
                 'slug' => $slug,
                 'is_active' => true,
                 'content' => "Certified drug and alcohol testing collection facilities in {$name}. Fully compliant with state laws and DOT regulations.",
-                'meta_title' => "{$name} Drug Testing Centers | Certified Drug Test Center",
-                'meta_description' => "Find certified drug testing collection sites in {$name}. Walk-ins welcome for employment, court, and DOT testing.",
+                'meta_title' => "{$name} Drug Testing Centers - (800) 985-4339",
+                'meta_description' => "Certified Drug Test Centers in {$name} ({$abbr}). Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.",
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
@@ -358,8 +358,8 @@ class ImportAdtDataCommand extends Command
                     sub.avg_lat as lat,
                     sub.avg_lng as lng,
                     1,
-                    CONCAT(sub.city, ', ', s.abbr, ' Drug Testing Centers | Walk-ins Welcome'),
-                    CONCAT('Find certified drug testing collection centers in ', sub.city, ', ', s.abbr, '. Same-day walk-in testing at Quest & Labcorp certified sites.'),
+                    CONCAT(sub.city, ', ', s.abbr, ' Drug Testing Centers - (800) 985-4339'),
+                    CONCAT('Certified Drug Test Centers in ', sub.city, ', ', s.abbr, '. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.'),
                     NOW(),
                     NOW()
                 FROM (
