@@ -12,120 +12,94 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // 1. Update Products Table: Standardize Title with 800 number, remove asterisk, remove walk-in from meta description
-        $products = DB::table('products')->get();
-        foreach ($products as $p) {
-            $cleanName = trim(ltrim($p->name, '* '));
-            $updates = [];
+        // Prevent memory exhaustion on memory-constrained CLI environments (e.g. cPanel default 128M)
+        @ini_set('memory_limit', '512M');
 
-            if ($p->name !== $cleanName) {
-                $updates['name'] = $cleanName;
-            }
+        // 1. Update Products Table: Standardize Title with 800 number, remove asterisk, clean meta description
+        DB::table('products')->select('id', 'name', 'meta_title', 'meta_description')->chunkById(50, function ($products) {
+            foreach ($products as $p) {
+                $cleanName = trim(ltrim($p->name, '* '));
+                $newTitle = "{$cleanName} - (800) 985-4339";
+                $newDesc = "Order {$cleanName} online or call (800) 985-4339 for an instant donor pass at over 20,000 certified collection sites nationwide. Fast, confidential, and legally defensible.";
 
-            $newTitle = "{$cleanName} - (800) 985-4339";
-            if ($p->meta_title !== $newTitle) {
-                $updates['meta_title'] = $newTitle;
+                DB::table('products')->where('id', $p->id)->update([
+                    'name' => $cleanName,
+                    'meta_title' => $newTitle,
+                    'meta_description' => $newDesc,
+                    'updated_at' => now(),
+                ]);
             }
-
-            $newDesc = "Order {$cleanName} online or call (800) 985-4339 for an instant donor pass at over 20,000 certified collection sites nationwide. Fast, confidential, and legally defensible.";
-            if ($p->meta_description !== $newDesc) {
-                $updates['meta_description'] = $newDesc;
-            }
-
-            if (!empty($updates)) {
-                $updates['updated_at'] = now();
-                DB::table('products')->where('id', $p->id)->update($updates);
-            }
-        }
+        });
 
         // 2. Update Categories Table: Standardize Title with 800 number, clean meta description
-        $categories = DB::table('categories')->get();
-        foreach ($categories as $c) {
-            $displayName = $c->display_name ?: $c->name;
-            $updates = [
-                'meta_title' => "{$displayName} - (800) 985-4339",
-                'meta_description' => "Explore certified {$displayName} options. Order online or call (800) 985-4339 for an instant donor pass at 20,000+ certified collection sites nationwide.",
-                'updated_at' => now(),
-            ];
-            DB::table('categories')->where('id', $c->id)->update($updates);
-        }
-
-        // 3. Update States Table: Ensure title ends with 800 number and meta description uses 'certified clinics' instead of 'walk-in clinics'
-        $states = DB::table('states')->get();
-        foreach ($states as $s) {
-            $newTitle = "{$s->name} Drug Testing Centers - (800) 985-4339";
-            $newDesc = "Certified Drug Test Centers in {$s->name} ({$s->abbr}). Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.";
-            DB::table('states')->where('id', $s->id)->update([
-                'meta_title' => $newTitle,
-                'meta_description' => $newDesc,
-                'updated_at' => now(),
-            ]);
-        }
-
-        // 4. Update Cities Table: Remove any Walk-ins Welcome, ensure 800 number format, update description to certified clinics
-        $cities = DB::table('cities')->join('states', 'cities.state_id', '=', 'states.id')
-            ->select('cities.id', 'cities.name as city_name', 'states.abbr as state_abbr', 'cities.meta_title', 'cities.meta_description')
-            ->get();
-
-        foreach ($cities as $c) {
-            $correctTitle = "{$c->city_name}, {$c->state_abbr} Drug Testing Centers - (800) 985-4339";
-            $correctDesc = "Certified Drug Test Centers in {$c->city_name}, {$c->state_abbr}. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.";
-
-            $updates = [];
-            if ($c->meta_title !== $correctTitle) {
-                $updates['meta_title'] = $correctTitle;
+        DB::table('categories')->select('id', 'name', 'display_name')->chunkById(25, function ($categories) {
+            foreach ($categories as $c) {
+                $displayName = !empty($c->display_name) ? $c->display_name : $c->name;
+                DB::table('categories')->where('id', $c->id)->update([
+                    'meta_title' => "{$displayName} - (800) 985-4339",
+                    'meta_description' => "Explore certified {$displayName} options. Order online or call (800) 985-4339 for an instant donor pass at 20,000+ certified collection sites nationwide.",
+                    'updated_at' => now(),
+                ]);
             }
-            if ($c->meta_description !== $correctDesc) {
-                $updates['meta_description'] = $correctDesc;
-            }
+        });
 
-            if (!empty($updates)) {
-                $updates['updated_at'] = now();
-                DB::table('cities')->where('id', $c->id)->update($updates);
-            }
-        }
+        // 3. Update States Table via Direct SQL (Zero PHP Memory Overhead)
+        DB::statement("
+            UPDATE states
+            SET 
+                meta_title = CONCAT(name, ' Drug Testing Centers - (800) 985-4339'),
+                meta_description = CONCAT('Certified Drug Test Centers in ', name, ' (', abbr, '). Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.'),
+                updated_at = NOW()
+        ");
 
-        // 5. Update Pages Table: Remove walk-in phrasing, insert 800 number in meta titles & descriptions
-        $pages = DB::table('pages')->get();
-        foreach ($pages as $pg) {
-            $updates = [];
+        // 4. Update Cities Table via Direct SQL Join (Zero PHP Memory Overhead across all 977 cities)
+        DB::statement("
+            UPDATE cities c
+            JOIN states s ON c.state_id = s.id
+            SET 
+                c.meta_title = CONCAT(c.name, ', ', s.abbr, ' Drug Testing Centers - (800) 985-4339'),
+                c.meta_description = CONCAT('Certified Drug Test Centers in ', c.name, ', ', s.abbr, '. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.'),
+                c.updated_at = NOW()
+        ");
 
-            // Clean meta_title
-            $currentTitle = $pg->meta_title ?: $pg->title;
-            $newTitle = preg_replace('/\|\s*Walk-ins?\s*Welcome/i', '- (800) 985-4339', $currentTitle);
-            $newTitle = preg_replace('/\|\s*Walk-in[s]?/i', '- (800) 985-4339', $newTitle);
-            $newTitle = preg_replace('/\s*[-|]\s*Certified Drug Test Centers?$/i', ' - (800) 985-4339', $newTitle);
-            if (!str_contains($newTitle, '800')) {
-                $newTitle = rtrim($newTitle) . ' - (800) 985-4339';
-            }
-            if ($pg->meta_title !== $newTitle) {
-                $updates['meta_title'] = $newTitle;
-            }
+        // 5. Update Pages Table: Split into small chunks and NEVER load heavy 'content' column into memory
+        // 5a. Meta Title and Meta Description (only loads short string columns in 50-row chunks)
+        DB::table('pages')->select('id', 'title', 'meta_title', 'meta_description')->chunkById(50, function ($pages) {
+            foreach ($pages as $pg) {
+                $currentTitle = $pg->meta_title ?: $pg->title;
+                $newTitle = preg_replace('/\|\s*Walk-ins?\s*Welcome/i', '- (800) 985-4339', $currentTitle);
+                $newTitle = preg_replace('/\|\s*Walk-in[s]?/i', '- (800) 985-4339', $newTitle);
+                $newTitle = preg_replace('/\s*[-|]\s*Certified Drug Test Centers?$/i', ' - (800) 985-4339', $newTitle);
+                if (!str_contains($newTitle, '800')) {
+                    $newTitle = rtrim($newTitle) . ' - (800) 985-4339';
+                }
 
-            // Clean meta_description
-            if ($pg->meta_description) {
                 $desc = $pg->meta_description;
-                $desc = preg_replace('/walk[- ]?in\'?s?\s*welcome/i', 'same-day testing, call (800) 985-4339', $desc);
-                $desc = preg_replace('/walk[- ]?in/i', 'same-day', $desc);
-                if ($desc !== $pg->meta_description) {
-                    $updates['meta_description'] = $desc;
+                if ($desc) {
+                    $desc = preg_replace('/walk[- ]?in\'?s?\s*welcome/i', 'same-day testing, call (800) 985-4339', $desc);
+                    $desc = preg_replace('/walk[- ]?in/i', 'same-day', $desc);
                 }
-            }
 
-            // Clean content
-            if ($pg->content) {
-                $cnt = $pg->content;
-                $cnt = preg_replace('/walk[- ]?in\'?s?\s*welcome/i', 'call (800) 985-4339 for same-day donor pass', $cnt);
+                DB::table('pages')->where('id', $pg->id)->update([
+                    'meta_title' => $newTitle,
+                    'meta_description' => $desc,
+                    'updated_at' => now(),
+                ]);
+            }
+        });
+
+        // 5b. Content cleanup ONLY for the few rows that actually contain 'walk' (chunks of 10 to protect memory)
+        DB::table('pages')->where('content', 'LIKE', '%walk%')->select('id', 'content')->chunkById(10, function ($pages) {
+            foreach ($pages as $pg) {
+                $cnt = preg_replace('/walk[- ]?in\'?s?\s*welcome/i', 'call (800) 985-4339 for same-day donor pass', $pg->content);
                 if ($cnt !== $pg->content) {
-                    $updates['content'] = $cnt;
+                    DB::table('pages')->where('id', $pg->id)->update([
+                        'content' => $cnt,
+                        'updated_at' => now(),
+                    ]);
                 }
             }
-
-            if (!empty($updates)) {
-                $updates['updated_at'] = now();
-                DB::table('pages')->where('id', $pg->id)->update($updates);
-            }
-        }
+        });
     }
 
     /**
@@ -136,4 +110,3 @@ return new class extends Migration
         // No-op rollback for content/meta updates
     }
 };
-
