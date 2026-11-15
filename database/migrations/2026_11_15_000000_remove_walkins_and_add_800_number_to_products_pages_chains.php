@@ -136,3 +136,4 @@ return new class extends Migration
         // No-op rollback for content/meta updates
     }
 };
+
