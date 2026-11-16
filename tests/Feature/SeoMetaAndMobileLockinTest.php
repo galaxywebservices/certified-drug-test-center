@@ -12,7 +12,7 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $response->assertStatus(200);
 
         // Exact title with 800 number and no "walk-ins welcome"
-        $response->assertSee('<title>Certified Drug Test Centers - (800) 985-4339</title>', false);
+        $response->assertSee('<title>Certified Drug Testing Centers Nationwide | 800-985-4339</title>', false);
         $this->assertStringNotContainsString('Walk-ins Welcome', $response->getContent());
 
         // Exact meta description requested by client

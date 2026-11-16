@@ -128,7 +128,7 @@ class ChainController extends Controller
 
         return [
             // SEO Meta
-            'meta_title' => Setting::get('chain_national_meta_title', 'Certified Drug Test Centers - (800) 985-4339'),
+            'meta_title' => Setting::get('chain_national_meta_title', 'Certified Drug Testing Centers Nationwide | 800-985-4339'),
             'meta_description' => Setting::get('chain_national_meta_description', 'Certified Drug Test Centers are located in all cities and in most cases within minutes of your home or office. Order a drug or alcohol test online or call and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.'),
             'meta_keywords' => Setting::get('chain_national_meta_keywords', 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test'),
 
@@ -254,7 +254,7 @@ class ChainController extends Controller
                 ];
             });
 
-        $pageTitle = $chainSettings['meta_title'] ?? 'Certified Drug Test Centers - (800) 985-4339';
+        $pageTitle = $chainSettings['meta_title'] ?? 'Certified Drug Testing Centers Nationwide | 800-985-4339';
         $metaDescription = $chainSettings['meta_description'] ?? 'Certified Drug Test Centers are located in all cities and in most cases within minutes of your home or office. Order a drug or alcohol test online or call and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.';
         $metaKeywords = $chainSettings['meta_keywords'] ?? 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
         $canonicalUrl = rtrim(url('/certified-drug-test-centers'), '/');
