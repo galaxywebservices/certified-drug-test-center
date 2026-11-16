@@ -22,3 +22,4 @@ return new class extends Migration
         Setting::set('chain_national_meta_title', 'Certified Drug Test Centers - (800) 985-4339');
     }
 };
+
