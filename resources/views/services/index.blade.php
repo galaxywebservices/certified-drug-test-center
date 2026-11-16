@@ -269,7 +269,7 @@
                     </div>
 
                     <div style="display:flex; flex-direction:column; gap:8px;">
-                        <a href="{{ rtrim(url('/services/' . $slug), '/') . '/' }}" class="btn btn-navy" style="width:100%; font-size:13.5px; padding:11px 16px;">
+                        <a href="{{ url('/services/' . $slug) }}" class="btn btn-navy" style="width:100%; font-size:13.5px; padding:11px 16px;">
                             Browse State &amp; City Centers &rarr;
                         </a>
                         <a href="{{ route('checkout.index', ['slug' => $chain['product_slug']]) }}" class="btn btn-primary" style="width:100%; font-size:13.5px; padding:10px 16px;">
@@ -398,7 +398,7 @@
 
         <div class="states-grid-enhanced" id="servicesStatesGrid">
             @foreach($states as $st)
-                <a href="{{ rtrim(url('/services/5-panel-drug-test/' . $st->slug), '/') . '/' }}" class="state-card-v2" data-state="{{ strtolower($st->name) }}">
+                <a href="{{ url('/services/5-panel-drug-test/' . $st->slug) }}" class="state-card-v2" data-state="{{ strtolower($st->name) }}">
                     <div class="state-card-v2-left">
                         <div class="state-abbr-badge">{{ $st->abbr }}</div>
                         <div class="state-card-v2-info">

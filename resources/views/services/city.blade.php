@@ -22,7 +22,7 @@
         <div class="hero-split-left">
             <div class="hero-tagline-badge" style="background:#F0F5FA; border:1px solid #CBD5E1; color:#0B2545;">
                 <span style="color:#C1121F;">★</span>
-                SAMHSA Certified &bull; Same-Day Walk-Ins in {{ $city->name }}
+                SAMHSA Certified &bull; Same-Day Testing in {{ $city->name }}
                 <span style="color:#C1121F;">★</span>
             </div>
 
@@ -31,7 +31,7 @@
             </h1>
 
             <p>
-                {{ $chain['description'] }} Walk into verified Quest Diagnostics &amp; Labcorp partner collection facilities today in {{ $city->name }}. Instant electronic donor pass sent to your phone and email in 2 minutes. No doctor referral or appointment required.
+                {{ $chain['description'] }} Verified Quest Diagnostics &amp; Labcorp partner collection facilities available today in {{ $city->name }}. Instant electronic donor pass sent to your phone and email in 2 minutes. No doctor referral or appointment required.
             </p>
 
             <ul class="hero-split-checklist">
@@ -110,7 +110,7 @@
                 </ul>
 
                 <a href="{{ route('checkout.index', ['slug' => $product?->slug ?? $chain['product_slug']]) }}" class="btn btn-primary btn-lg" style="width:100%; text-align:center; box-shadow:0 4px 14px rgba(193, 18, 31, 0.35);">
-                    Order Pass &amp; Walk In Today &rarr;
+                    Order Pass Online &bull; (800) 985-4339 &rarr;
                 </a>
 
                 <div style="font-size:11.5px; color:#64748B; text-align:center; margin-top:10px;">
@@ -150,8 +150,8 @@
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
                 <div>
-                    <div class="service-trust-title">Same-Day Walk-Ins</div>
-                    <div class="service-trust-sub">Electronic Donor Pass in 2 Min</div>
+                    <div class="service-trust-title">Same-Day Testing</div>
+                    <div class="service-trust-sub">Instant Donor Pass in 2 Min</div>
                 </div>
             </div>
 
@@ -242,7 +242,7 @@
                                 <div>
                                     <div style="font-size:12px; font-weight:700; text-transform:uppercase; color:#0B2545; margin-bottom:4px; display:flex; align-items:center; gap:6px;">
                                         <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                                        Operating Hours &amp; Walk-In
+                                        Operating Hours &amp; Collection Schedule
                                     </div>
                                     <div style="font-size:12px; color:#475569; line-height:1.4;">
                                         @foreach($location->formatted_hours_lines as $hLine)
@@ -278,11 +278,11 @@
                 </div>
             @endif
 
-            <!-- 3-Step Walk-In Guide -->
+            <!-- 3-Step Testing Guide -->
             <div class="pseo-section-card">
                 <div style="padding-bottom:12px; border-bottom:1px solid #F1F5F9; margin-bottom:18px;">
                     <h2 style="margin:0; font-size:18px;">How to Take Your {{ $chain['name'] }} in {{ $city->name }}</h2>
-                    <p style="margin:0; font-size:12px; color:#64748B;">Follow these 3 quick steps for same-day walk-in testing:</p>
+                    <p style="margin:0; font-size:12px; color:#64748B;">Follow these 3 quick steps for same-day certified testing:</p>
                 </div>
 
                 <div class="process-grid-4-wrap" style="grid-template-columns: repeat(3, 1fr) !important; margin-top:0 !important;">
@@ -293,8 +293,8 @@
                     </div>
                     <div class="process-card-step">
                         <div class="process-step-num">02.</div>
-                        <h3>Walk In With Barcode</h3>
-                        <p>Walk into any verified {{ $city->name }} partner facility with your digital donor pass barcode and photo ID.</p>
+                        <h3>Present Donor Pass</h3>
+                        <p>Check in at any verified {{ $city->name }} partner facility with your digital donor pass barcode and photo ID.</p>
                     </div>
                     <div class="process-card-step">
                         <div class="process-step-num">03.</div>
@@ -320,6 +320,58 @@
                     @endforeach
                 </div>
             </div>
+
+            <!-- Clinical Testing Protocols & Screening Thresholds -->
+            @if(!empty($chain['cutoffs']) || !empty($chain['detection_window']))
+                <div class="pseo-section-card">
+                    <div style="padding-bottom:12px; border-bottom:1px solid #F1F5F9; margin-bottom:16px;">
+                        <h2 style="margin:0 0 4px 0; font-size:18px;">Clinical Testing Protocols &amp; Regulatory Cut-Off Levels</h2>
+                        <p style="margin:0; font-size:12.5px; color:#64748B;">SAMHSA &amp; HHS forensic standards, specimen validity, and confirmation thresholds for {{ $city->name }}.</p>
+                    </div>
+
+                    <!-- Clinical Specs Summary Grid -->
+                    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-bottom:18px;">
+                        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px 14px;">
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; color:#64748B;">Detection Window</div>
+                            <div style="font-weight:800; color:#0B2545; margin-top:2px; font-size:13.5px;">{{ $chain['detection_window'] ?? '1 to 5 Days' }}</div>
+                        </div>
+                        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px 14px;">
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; color:#64748B;">Specimen Type</div>
+                            <div style="font-weight:800; color:#0B2545; margin-top:2px; font-size:13.5px;">{{ $chain['specimen'] }}</div>
+                        </div>
+                        <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px 14px;">
+                            <div style="font-size:11px; font-weight:700; text-transform:uppercase; color:#64748B;">Confirmation Method</div>
+                            <div style="font-weight:800; color:#0B2545; margin-top:2px; font-size:13.5px;">GC/MS or LC/MS</div>
+                        </div>
+                    </div>
+
+                    @if(!empty($chain['specimen_requirements']))
+                        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:8px; padding:12px 14px; margin-bottom:18px; font-size:12.5px; color:#1E40AF; line-height:1.5;">
+                            <strong>Specimen Collection Protocol:</strong> {{ $chain['specimen_requirements'] }}
+                        </div>
+                    @endif
+
+                    @if(!empty($chain['cutoffs']))
+                        <div style="margin-bottom:16px;">
+                            <h3 style="font-size:14px; font-weight:800; color:#0B2545; margin:0 0 10px 0;">Analytical Cutoff Concentrations</h3>
+                            <div style="border:1px solid #E2E8F0; border-radius:8px; overflow:hidden;">
+                                @foreach($chain['cutoffs'] as $sub => $threshold)
+                                    <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; font-size:12.5px; {{ !$loop->last ? 'border-bottom:1px solid #F1F5F9;' : '' }} {{ $loop->odd ? 'background:#FFFFFF;' : 'background:#F8FAFC;' }}">
+                                        <span style="font-weight:700; color:#0B2545;">{{ $sub }}</span>
+                                        <span style="font-family:monospace; font-size:11.5px; color:#475569; font-weight:600; text-align:right;">{{ $threshold }}</span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+
+                    @if(!empty($chain['compliance_scope']))
+                        <div style="font-size:12.5px; color:#475569; line-height:1.5; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:12px 14px;">
+                            <strong style="color:#0B2545;">Regulatory &amp; Legal Applicability:</strong> {{ $chain['compliance_scope'] }}
+                        </div>
+                    @endif
+                </div>
+            @endif
 
             <!-- State Legal & Compliance Overview -->
             <div class="pseo-section-card">

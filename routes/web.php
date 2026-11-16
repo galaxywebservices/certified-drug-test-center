@@ -40,8 +40,9 @@ Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap')
 Route::get('/sitemap-core.xml', [SitemapController::class, 'core'])->name('sitemap.core');
 Route::get('/sitemap-products.xml', [SitemapController::class, 'products'])->name('sitemap.products');
 Route::get('/sitemap-locations.xml', [SitemapController::class, 'locations'])->name('sitemap.locations');
-Route::get('/sitemap-chain{id}.xml', [\App\Http\Controllers\PseoSitemapController::class, 'chain'])->where('id', '[1-9]')->name('sitemap.chain');
-Route::get('/sitemap-index.xml', [\App\Http\Controllers\PseoSitemapController::class, 'index'])->name('sitemap.index');
+// Hold programmatic chain sitemaps out of XML sitemaps for now; 301-redirect legacy crawlers to main sitemap
+Route::get('/sitemap-chain{id}.xml', fn() => redirect('/sitemap.xml', 301))->where('id', '[1-9]')->name('sitemap.chain');
+Route::get('/sitemap-index.xml', fn() => redirect('/sitemap.xml', 301))->name('sitemap.index');
 
 // AEO & GEO Standards: llms.txt, llms-full.txt, robots.txt
 Route::get('/llms.txt', function () {
@@ -198,11 +199,6 @@ Route::middleware(['pseo_cache'])->prefix('services')->group(function () {
     Route::get('/{service_slug}', [\App\Http\Controllers\PseoServiceController::class, 'service'])
         ->where('service_slug', '[a-z0-9\-]+')
         ->name('services.service');
-
-    // Trailing slash fallbacks
-    Route::get('/{service_slug}/{state_slug}/{city_slug}/', [\App\Http\Controllers\PseoServiceController::class, 'city']);
-    Route::get('/{service_slug}/{state_slug}/', [\App\Http\Controllers\PseoServiceController::class, 'state']);
-    Route::get('/{service_slug}/', [\App\Http\Controllers\PseoServiceController::class, 'service']);
 });
 
 /*

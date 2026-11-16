@@ -12,6 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->trustProxies(at: '*');
+        $middleware->prepend(\App\Http\Middleware\CanonicalRedirectMiddleware::class);
         $middleware->append(\App\Http\Middleware\SecurityHeadersMiddleware::class);
         $middleware->append(\App\Http\Middleware\DecodeBase64InputsMiddleware::class);
         $middleware->append(\App\Http\Middleware\RetiredRouteMiddleware::class);

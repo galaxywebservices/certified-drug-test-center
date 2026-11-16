@@ -28,6 +28,16 @@ class PseoServiceController extends Controller
             'turnaround' => '24–48 Business Hours',
             'default_price' => 89.99,
             'product_slug' => '5-panel-nondot',
+            'detection_window' => '1 to 5 Days',
+            'specimen_requirements' => 'Minimum 30–45 mL fresh unadulterated urine specimen collected in tamper-evident split specimen cup at 90°F–100°F (32°C–38°C).',
+            'cutoffs' => [
+                'Marijuana (THC metabolites)' => 'Screen: 50 ng/mL | Confirmation (GC/MS): 15 ng/mL',
+                'Cocaine (Benzoylecgonine)' => 'Screen: 150 ng/mL | Confirmation (GC/MS): 100 ng/mL',
+                'Basic Opiates (Codeine, Morphine, 6-AM)' => 'Screen: 2,000 ng/mL | Confirmation (GC/MS): 2,000 ng/mL',
+                'Amphetamines (Meth/MDMA)' => 'Screen: 500 ng/mL | Confirmation (GC/MS): 250 ng/mL',
+                'Phencyclidine (PCP)' => 'Screen: 25 ng/mL | Confirmation (GC/MS): 25 ng/mL',
+            ],
+            'compliance_scope' => 'Standard corporate pre-employment, post-accident, and routine random drug testing criteria. Validated by SAMHSA-certified laboratories and independent licensed MRO.',
             'substances' => [
                 'Marijuana (THC metabolites)',
                 'Cocaine (Benzoylecgonine)',
@@ -49,6 +59,21 @@ class PseoServiceController extends Controller
             'turnaround' => '24–48 Business Hours',
             'default_price' => 109.99,
             'product_slug' => '10-panel',
+            'detection_window' => '2 to 7 Days (extended detection for prescription sedatives)',
+            'specimen_requirements' => 'Minimum 45 mL fresh urine specimen collected with temperature validation strip and strict chain of custody protocols.',
+            'cutoffs' => [
+                'Marijuana (THC)' => 'Screen: 50 ng/mL | Confirmation: 15 ng/mL',
+                'Cocaine (COC)' => 'Screen: 150 ng/mL | Confirmation: 100 ng/mL',
+                'Opiates (Codeine, Morphine, Heroin)' => 'Screen: 2,000 ng/mL | Confirmation: 2,000 ng/mL',
+                'Amphetamines & Methamphetamines' => 'Screen: 500 ng/mL | Confirmation: 250 ng/mL',
+                'Phencyclidine (PCP)' => 'Screen: 25 ng/mL | Confirmation: 25 ng/mL',
+                'Benzodiazepines (Xanax, Valium)' => 'Screen: 300 ng/mL | Confirmation: 200 ng/mL',
+                'Barbiturates' => 'Screen: 300 ng/mL | Confirmation: 200 ng/mL',
+                'Methadone' => 'Screen: 300 ng/mL | Confirmation: 200 ng/mL',
+                'Propoxyphene' => 'Screen: 300 ng/mL | Confirmation: 200 ng/mL',
+                'Methaqualone (Quaaludes)' => 'Screen: 300 ng/mL | Confirmation: 200 ng/mL',
+            ],
+            'compliance_scope' => 'Mandated for healthcare personnel, law enforcement, executive hiring, licensing boards, and judicial probation oversight.',
             'substances' => [
                 'Marijuana (THC)',
                 'Cocaine (COC)',
@@ -75,6 +100,17 @@ class PseoServiceController extends Controller
             'turnaround' => '24–48 Business Hours',
             'default_price' => 139.99,
             'product_slug' => '12-panel-comprehensive',
+            'detection_window' => '2 to 7 Days (expanded semi-synthetic opioid coverage)',
+            'specimen_requirements' => 'Minimum 45 mL urine split specimen with creatinine, pH, and specific gravity adulteration testing.',
+            'cutoffs' => [
+                'Standard 5 Illicit Classes' => 'Standard SAMHSA/CLIA Initial & Confirmation Thresholds',
+                'Oxycodone / Oxymorphone' => 'Screen: 100 ng/mL | Confirmation (LC/MS): 100 ng/mL',
+                'Buprenorphine (Suboxone)' => 'Screen: 10 ng/mL | Confirmation (LC/MS): 5 ng/mL',
+                'MDMA / Ecstasy' => 'Screen: 500 ng/mL | Confirmation (GC/MS): 250 ng/mL',
+                'Benzodiazepines & Barbiturates' => 'Screen: 300 ng/mL | Confirmation: 200 ng/mL',
+                'Methadone & Propoxyphene' => 'Screen: 300 ng/mL | Confirmation: 200 ng/mL',
+            ],
+            'compliance_scope' => 'Medical licensing boards, pain management monitoring, executive screening, clinical rotations, and intensive probation programs.',
             'substances' => [
                 'Marijuana (THC)',
                 'Cocaine',
@@ -103,6 +139,16 @@ class PseoServiceController extends Controller
             'turnaround' => '24–48 Business Hours',
             'default_price' => 99.99,
             'product_slug' => '5-panel-dot',
+            'detection_window' => '1 to 5 Days',
+            'specimen_requirements' => 'Federal Split Specimen collection (45 mL total: 30 mL primary Bottle A, 15 mL split Bottle B) strictly adhering to 49 CFR Part 40 procedures.',
+            'cutoffs' => [
+                'Marijuana Metabolites (THC-COOH)' => 'Federal Screen: 50 ng/mL | Federal Confirmation: 15 ng/mL',
+                'Cocaine Metabolites (BZE)' => 'Federal Screen: 150 ng/mL | Federal Confirmation: 100 ng/mL',
+                'Semi-Synthetic Opioids' => 'Codeine/Morphine: 2,000 ng/mL | Hydrocodone/Hydromorphone: 300/100 ng/mL | Oxycodone/Oxymorphone: 100/100 ng/mL | 6-AM: 10 ng/mL',
+                'Amphetamines (Meth/MDMA/MDA)' => 'Federal Screen: 500 ng/mL | Federal Confirmation: 250 ng/mL',
+                'Phencyclidine (PCP)' => 'Federal Screen: 25 ng/mL | Federal Confirmation: 25 ng/mL',
+            ],
+            'compliance_scope' => 'Mandatory for commercial motor carriers (FMCSA), maritime captains (USCG), aviation flight crews (FAA), transit workers (FTA), railroad crews (FRA), and pipeline operators (PHMSA). Includes Federal CCF and instant Clearinghouse reporting.',
             'substances' => [
                 'Marijuana Metabolites (THC-COOH)',
                 'Cocaine Metabolites',
@@ -124,6 +170,16 @@ class PseoServiceController extends Controller
             'turnaround' => '3–5 Business Days',
             'default_price' => 189.99,
             'product_slug' => '5-panel-hair-follicle',
+            'detection_window' => 'Approximately 90 Days (Long-Term Drug History)',
+            'specimen_requirements' => 'Approximately 90–120 hair strands cut at scalp level from vertex posterior (1.5 inches in length closest to scalp representing ~90 days).',
+            'cutoffs' => [
+                'Marijuana (THC Metabolite)' => 'Screen: 1.0 pg/mg | Confirmation: 0.1 pg/mg (Carboxy-THC)',
+                'Cocaine (Cocaine & Benzoylecgonine)' => 'Screen: 500 pg/mg | Confirmation: 500 pg/mg',
+                'Opiates (Codeine, Morphine, 6-MAM)' => 'Screen: 500 pg/mg | Confirmation: 500 pg/mg',
+                'Amphetamines (Meth, MDMA/MDA)' => 'Screen: 500 pg/mg | Confirmation: 500 pg/mg',
+                'Phencyclidine (PCP)' => 'Screen: 300 pg/mg | Confirmation: 300 pg/mg',
+            ],
+            'compliance_scope' => 'Cannot be washed, bleached, or diluted by temporary abstinence or detox shampoos. Mandated for family court custody proceedings, probation, and transportation executive oversight.',
             'substances' => [
                 'Marijuana (THC metabolite)',
                 'Cocaine (Cocaine & Benzoylecgonine)',
@@ -145,6 +201,14 @@ class PseoServiceController extends Controller
             'turnaround' => 'Immediate / Instant Results',
             'default_price' => 89.99,
             'product_slug' => 'breath-alcohol',
+            'detection_window' => 'Real-Time / Immediate Blood Alcohol Concentration (BAC)',
+            'specimen_requirements' => 'Evidential Breath Testing (EBT) device on NHTSA Conforming Products List operated by a factory-certified Breath Alcohol Technician (BAT).',
+            'cutoffs' => [
+                'Negative / Cleared Threshold' => '< 0.020 BAC (Permitted to resume safety-sensitive work)',
+                'DOT Safety Stand-Down' => '0.020 – 0.039 BAC (Mandatory 8 to 24 hour work removal)',
+                'DOT Positive Violation' => '>= 0.040 BAC (Requires 15-minute confirmation breath test & SAP referral)',
+            ],
+            'compliance_scope' => 'DOT Part 40 compliant evidential breath testing with immediate printed calibration strip and official employer verification.',
             'substances' => [
                 'Blood Alcohol Concentration (BAC)',
                 'Ethanol Detection (0.02 and 0.04 confirmation thresholds)',
@@ -163,6 +227,13 @@ class PseoServiceController extends Controller
             'turnaround' => 'Instant / Same-Day Results (15 Minutes)',
             'default_price' => 95.99,
             'product_slug' => '5-panel-rapid',
+            'detection_window' => '1 to 5 Days',
+            'specimen_requirements' => 'Point-of-Care Testing (POCT) urine specimen collected in FDA-cleared multi-panel rapid cup with built-in adulteration strips.',
+            'cutoffs' => [
+                'Negative Rapid Screening' => 'Visual negative immunoassay line visible within 5–15 minutes of collection',
+                'Presumptive Non-Negative' => 'Reflexes automatically to SAMHSA lab for GC/MS or LC/MS confirmation',
+            ],
+            'compliance_scope' => 'Urgent workplace staffing, same-day job site deployment, temporary labor clearance, and emergency return-to-duty.',
             'substances' => [
                 'Marijuana (THC)',
                 'Cocaine (COC)',
@@ -184,6 +255,14 @@ class PseoServiceController extends Controller
             'turnaround' => '24–48 Business Hours',
             'default_price' => 109.99,
             'product_slug' => '10-panel',
+            'detection_window' => 'Urine (1–5 Days), EtG Alcohol (Up to 80 Hours), Hair (90 Days)',
+            'specimen_requirements' => 'Monitored/observed specimen collection, verified government photo ID inspection, and unbroken forensic chain of custody seals.',
+            'cutoffs' => [
+                'Forensic 10/12 Drug Panel' => 'Full SAMHSA/CLIA Initial & Confirmation Thresholds',
+                'EtG Alcohol Metabolite' => 'Screen: 500 ng/mL | Confirmation: 250 ng/mL (up to 80-hour detection)',
+                'Forensic Chain of Custody' => 'Strict tamper-evident seals and judge-ready medical documentation',
+            ],
+            'compliance_scope' => 'Legally admissible for municipal courts, family law custody evaluations, criminal probation, and DUI diversion compliance.',
             'substances' => [
                 'Marijuana (THC)',
                 'Cocaine',
@@ -207,6 +286,14 @@ class PseoServiceController extends Controller
             'turnaround' => '24–48 Business Hours',
             'default_price' => 99.99,
             'product_slug' => '1-year-enrollment',
+            'detection_window' => 'Unannounced randomized selection throughout the year',
+            'specimen_requirements' => 'Computerized random pool selection adhering to annual federal percentage minimums.',
+            'cutoffs' => [
+                'FMCSA Random Pool Rate' => '50% Annual Drug Testing / 10% Annual Alcohol Testing',
+                'FAA Random Pool Rate' => '25% Annual Drug Testing / 10% Annual Alcohol Testing',
+                'Compliance Verification' => 'Official Certificate of Enrollment & Management Information System (MIS) reports',
+            ],
+            'compliance_scope' => 'Turnkey consortium management for owner-operators, commercial fleets, and private employers seeking drug-free workplace insurance discounts.',
             'substances' => [
                 'Comprehensive 5-Panel or 10-Panel Panels',
                 'Computerized Random Selection Pool',
@@ -230,8 +317,8 @@ class PseoServiceController extends Controller
         $allChains = self::CHAINS;
         $states = State::where('is_active', true)->orderBy('name')->get();
 
-        $pageTitle = 'Nationwide Drug & Alcohol Testing Services Directory | Certified Drug Test Centers';
-        $metaDescription = 'Explore our complete directory of certified drug, alcohol, DOT, and specialized testing services. Walk in today at over 20,000 Quest & Labcorp collection centers nationwide.';
+        $pageTitle = 'Nationwide Drug & Alcohol Testing Services Directory - (800) 985-4339';
+        $metaDescription = 'Explore our complete directory of certified drug, alcohol, DOT, and specialized testing services. Order online or call (800) 985-4339 for an instant donor pass at over 20,000 collection centers nationwide.';
         $canonicalUrl = rtrim(url('/services'), '/');
 
         $breadcrumbs = [
@@ -335,7 +422,7 @@ class PseoServiceController extends Controller
                     'name' => $otherChain['name'],
                     'short_name' => $otherChain['short_name'],
                     'price' => $otherChain['default_price'],
-                    'url' => rtrim(url("/services/{$key}/{$state->slug}/{$city->slug}"), '/') . '/',
+                    'url' => rtrim(url("/services/{$key}/{$state->slug}/{$city->slug}"), '/'),
                 ];
             }
         }

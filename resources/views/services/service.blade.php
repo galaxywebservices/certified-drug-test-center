@@ -117,7 +117,7 @@
                     <select id="heroStateJump" class="service-state-jump-select" onchange="if(this.value) window.location.href=this.value;">
                         <option value="">-- Choose Your State --</option>
                         @foreach($states as $st)
-                            <option value="{{ rtrim(url('/services/' . $chain['slug'] . '/' . $st->slug), '/') . '/' }}">
+                            <option value="{{ url('/services/' . $chain['slug'] . '/' . $st->slug) }}">
                                 {{ $st->name }} ({{ number_format($st->eligible_cities_count) }} Cities)
                             </option>
                         @endforeach
@@ -241,7 +241,7 @@
             @endphp
             @foreach($states as $st)
                 @if(in_array($st->slug, $popularStateSlugs))
-                    <a href="{{ rtrim(url('/services/' . $chain['slug'] . '/' . $st->slug), '/') . '/' }}" class="popular-state-chip">
+                    <a href="{{ url('/services/' . $chain['slug'] . '/' . $st->slug) }}" class="popular-state-chip">
                         {{ $st->name }}
                     </a>
                 @endif
@@ -259,7 +259,7 @@
         <!-- Enhanced States Grid -->
         <div class="states-grid-enhanced" id="statesGrid">
             @foreach($states as $st)
-                <a href="{{ rtrim(url('/services/' . $chain['slug'] . '/' . $st->slug), '/') . '/' }}" class="state-card-v2" data-state="{{ strtolower($st->name) }}">
+                <a href="{{ url('/services/' . $chain['slug'] . '/' . $st->slug) }}" class="state-card-v2" data-state="{{ strtolower($st->name) }}">
                     <div class="state-card-v2-left">
                         <div class="state-abbr-badge">{{ $st->abbr }}</div>
                         <div class="state-card-v2-info">
@@ -382,7 +382,7 @@
                         </div>
 
                         <div style="display:flex; flex-direction:column; gap:8px;">
-                            <a href="{{ rtrim(url('/services/' . $slug), '/') . '/' }}" class="btn btn-navy" style="width:100%; font-size:13.5px; padding:11px 16px;">
+                            <a href="{{ url('/services/' . $slug) }}" class="btn btn-navy" style="width:100%; font-size:13.5px; padding:11px 16px;">
                                 View State Centers &rarr;
                             </a>
                             <a href="{{ route('checkout.index', ['slug' => $other['product_slug']]) }}" class="btn btn-primary" style="width:100%; font-size:13.5px; padding:10px 16px;">

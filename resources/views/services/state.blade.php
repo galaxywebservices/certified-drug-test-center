@@ -193,7 +193,7 @@
 
         <div class="states-grid-enhanced" id="citiesGrid">
             @foreach($eligibleCities as $eligibleCity)
-                <a href="{{ rtrim(url('/services/' . $chain['slug'] . '/' . $state->slug . '/' . $eligibleCity->slug), '/') . '/' }}" class="state-card-v2" data-city="{{ strtolower($eligibleCity->name) }}">
+                <a href="{{ url('/services/' . $chain['slug'] . '/' . $state->slug . '/' . $eligibleCity->slug) }}" class="state-card-v2" data-city="{{ strtolower($eligibleCity->name) }}">
                     <div class="state-card-v2-left">
                         <div class="state-abbr-badge">{{ $state->abbr }}</div>
                         <div class="state-card-v2-info">
