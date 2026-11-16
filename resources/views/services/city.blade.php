@@ -37,7 +37,7 @@
             <ul class="hero-split-checklist">
                 <li>
                     <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                    {{ $locations->count() }} Collection Centers in Radius
+                    {{ $locations->count() }} {{ \Illuminate\Support\Str::plural('Collection Center', $locations->count()) }} in Radius
                 </li>
                 <li>
                     <svg width="18" height="18" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
@@ -186,7 +186,7 @@
                     </div>
                     <span style="display:inline-flex; align-items:center; gap:6px; background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; padding:5px 12px; border-radius:9999px; font-size:12.5px; font-weight:700;">
                         <span style="width:8px; height:8px; border-radius:50%; background:#2563EB;"></span>
-                        {{ $locations->count() }} Centers Available
+                        {{ $locations->count() }} {{ \Illuminate\Support\Str::plural('Center', $locations->count()) }} Available
                     </span>
                 </div>
 
@@ -481,13 +481,4 @@
         </div>
     </div>
 </div>
-
-<!-- Structured Data: JSON-LD -->
-<script type="application/ld+json">
-{!! json_encode($schemaBreadcrumbs, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
-</script>
-
-<script type="application/ld+json">
-{!! json_encode($schemaMedicalBusiness, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
-</script>
 @endsection

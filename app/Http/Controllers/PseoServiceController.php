@@ -390,7 +390,7 @@ class PseoServiceController extends Controller
 
         $price = $product ? (float) $product->price : $chain['default_price'];
 
-        // 8. Resolve Unique Localized City Content (from live GPT dataset)
+        // 8. Resolve Unique Localized City Content (from live GPT dataset with dynamic canonical matching)
         $pseoContent = $city->pseoContent;
         $uniqueLocalText = null;
         if ($pseoContent) {
@@ -405,12 +405,32 @@ class PseoServiceController extends Controller
             };
 
             if (!empty($rawText)) {
-                $uniqueLocalText = str_replace(
+                $text = str_replace(
                     ['<CITY>', '<STATE>', '1-1-800-985-4339', '18009854339'],
                     [$city->name, $state->name, '1-800-985-4339', '1-800-985-4339'],
                     $rawText
                 );
+
+                // Guardrail: Dynamically replace any foreign/hardcoded city/state (e.g. Manchester, CT or Keokuk, IA)
+                // with active city and state ($city->name, $state->abbr)
+                $usStatesRegex = 'AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY';
+                $text = preg_replace_callback(
+                    "/\b(In\s+|in\s+|Across\s+|across\s+|Throughout\s+|throughout\s+|Around\s+|around\s+|Near\s+|near\s+|For\s+|for\s+)?([A-Z][a-zA-Z\.\x27-]+(?:\s+[A-Z][a-zA-Z\.\x27-]+){0,2}),\s*({$usStatesRegex})\b/u",
+                    function ($m) use ($city, $state) {
+                        $prefix = $m[1] ?? '';
+                        return $prefix . $city->name . ', ' . $state->abbr;
+                    },
+                    $text
+                );
+
+                $uniqueLocalText = $text;
             }
+        }
+
+        // Fallback: If no localized text or empty, generate high-quality localized overview for this city & service
+        if (empty($uniqueLocalText)) {
+            $chainTitle = $chain['name'];
+            $uniqueLocalText = "<p>{$chainTitle} services in {$city->name}, {$state->abbr} provide rapid, certified specimen collection and laboratory analysis for employers, individuals, and judicial authorities. All screenings adhere to strict SAMHSA collection protocols and federal standards.</p><p>Collection sites across {$city->name} and neighboring {$state->name} communities offer convenient scheduling with immediate electronic donor passes. Testing is processed through certified reference laboratories with Medical Review Officer (MRO) verification to ensure legally defensible results.</p>";
         }
 
         // 9. Generate Cross-Service Links for all other 8 chains in this exact city

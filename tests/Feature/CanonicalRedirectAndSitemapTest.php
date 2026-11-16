@@ -157,5 +157,98 @@ class CanonicalRedirectAndSitemapTest extends TestCase
         $this->assertMatchesRegularExpression('#href="https?://[^"]*/services/[a-z0-9-]+/[a-z0-9-]+/[a-z0-9-]+(?<!/)"#', $content);
         $this->assertDoesNotMatchRegularExpression('#href="https?://[^"]*/services/[a-z0-9-]+/[a-z0-9-]+/[a-z0-9-]+/"#', $content);
     }
+
+    /**
+     * Verify all 4 XML sitemaps return direct HTTP 200 OK (no redirect) with correct XML content-type.
+     */
+    public function test_xml_sitemaps_return_direct_200_ok_with_correct_xml_content_type(): void
+    {
+        $sitemaps = [
+            '/sitemap.xml',
+            '/sitemap-core.xml',
+            '/sitemap-products.xml',
+            '/sitemap-locations.xml',
+        ];
+
+        foreach ($sitemaps as $url) {
+            $response = $this->get($url);
+            $response->assertStatus(200);
+            $contentType = $response->headers->get('Content-Type');
+            $this->assertTrue(
+                str_starts_with($contentType, 'application/xml') || str_starts_with($contentType, 'text/xml'),
+                "Sitemap {$url} must return XML content type, got: {$contentType}"
+            );
+        }
+    }
+
+    /**
+     * Verify /services/5-panel-drug-test/oregon/bend editorial copy dynamically injects Bend, OR and eliminates Manchester, CT.
+     */
+    public function test_city_service_template_does_not_contain_manchester_ct_on_bend_or(): void
+    {
+        $city = City::where('slug', 'bend')->first();
+        if ($city) {
+            // Seed a pseo_city_contents row with foreign city "Manchester, CT" to simulate legacy production state
+            \App\Models\PseoCityContent::updateOrCreate(
+                ['city_id' => $city->id],
+                [
+                    'gpt_5panel' => '<p>A 5-panel drug test in Manchester, CT is popular for workplaces. In Manchester, CT, these categories include substances.</p>',
+                ]
+            );
+        }
+
+        $response = $this->get('/services/5-panel-drug-test/oregon/bend');
+        $response->assertStatus(200);
+
+        $content = $response->getContent();
+
+        // Must output active matching city and state
+        $this->assertStringContainsString('Local Drug Testing Overview for Bend, OR', $content);
+        $this->assertStringContainsString('Bend, OR', $content);
+
+        // Must NEVER contain hardcoded foreign city
+        $this->assertStringNotContainsString('Manchester, CT', $content);
+        $this->assertStringContainsString('A 5-panel drug test in Bend, OR is popular for workplaces.', $content);
+    }
+
+    /**
+     * Verify duplicate JSON-LD script blocks are removed from the bottom of <main> on city and state templates.
+     */
+    public function test_city_service_template_removes_duplicate_jsonld_blocks_at_bottom_of_main(): void
+    {
+        $response = $this->get('/services/5-panel-drug-test/oregon/bend');
+        $response->assertStatus(200);
+
+        $content = $response->getContent();
+
+        // Exactly 1 JSON-LD block in <head> (@graph) and zero standalone script blocks inside <body>
+        $jsonLdCount = substr_count($content, '<script type="application/ld+json">');
+        $this->assertSame(1, $jsonLdCount, "There must be exactly 1 unified @graph JSON-LD block on the page, found: {$jsonLdCount}");
+    }
+
+    /**
+     * Verify FAQ #1 grammar in Oregon and singular/plural count on hero badge & directory pill.
+     */
+    public function test_faq_grammar_and_singular_plural_center_counts(): void
+    {
+        // 1. Oregon FAQ #1 grammar in JSON-LD and state view
+        $orResponse = $this->get('/locations/oregon');
+        $orResponse->assertStatus(200);
+        $orContent = $orResponse->getContent();
+        $this->assertStringContainsString('operate under the Oregon Revised Statutes', $orContent);
+        $this->assertStringNotContainsString('operate under a Oregon', $orContent);
+
+        // 2. City service template count pluralization
+        $cityResponse = $this->get('/services/5-panel-drug-test/oregon/bend');
+        $cityResponse->assertStatus(200);
+        $cityContent = $cityResponse->getContent();
+
+        // Hero badge and directory pill plural checks
+        $this->assertMatchesRegularExpression('/\d+\s+Collection Centers?\s+in Radius/', $cityContent);
+        $this->assertMatchesRegularExpression('/\d+\s+Centers?\s+Available/', $cityContent);
+        // Ensure no "1 Collection Centers" or "1 Centers Available" exists
+        $this->assertDoesNotMatchRegularExpression('/(?<!\d)1\s+Collection Centers\s+in Radius/', $cityContent);
+        $this->assertDoesNotMatchRegularExpression('/(?<!\d)1\s+Centers Available/', $cityContent);
+    }
 }
 

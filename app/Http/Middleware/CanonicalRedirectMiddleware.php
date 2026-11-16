@@ -40,10 +40,18 @@ class CanonicalRedirectMiddleware
             $needsRedirect = true;
         }
 
+        // 3. Detect insecure HTTP scheme (upgrade to https in production or behind reverse proxies)
+        $scheme = $request->getScheme();
+        if (!app()->environment('local', 'testing')) {
+            $isHttps = $request->isSecure() || $request->header('X-Forwarded-Proto') === 'https';
+            if (!$isHttps) {
+                $scheme = 'https';
+                $needsRedirect = true;
+            }
+        }
+
         if ($needsRedirect) {
-            $scheme = $request->getScheme();
-            // In production or on live host, always enforce https
-            if (!app()->environment('local', 'testing') || $request->isSecure()) {
+            if ($request->isSecure() || (!app()->environment('local', 'testing') && $request->header('X-Forwarded-Proto') === 'https')) {
                 $scheme = 'https';
             }
 

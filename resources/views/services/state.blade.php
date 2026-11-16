@@ -266,9 +266,4 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
-
-<!-- Structured Data -->
-<script type="application/ld+json">
-{!! json_encode($schemaBreadcrumbs, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
-</script>
 @endsection
