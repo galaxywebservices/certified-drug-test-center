@@ -18,7 +18,8 @@ class SitemapController extends Controller
     public function index(): Response
     {
         $content = Cache::remember('sitemap_index_xml', 86400, function () {
-            $lastmod = now()->format('Y-m-d');
+            $latestUpdate = Category::where('is_active', true)->where('is_canonical', true)->max('updated_at');
+            $lastmod = $latestUpdate ? \Illuminate\Support\Carbon::parse($latestUpdate)->format('Y-m-d') : '2026-11-16';
             return view('sitemaps.index', compact('lastmod'))->render();
         });
 
@@ -41,7 +42,10 @@ class SitemapController extends Controller
                 ->orderBy('position')
                 ->get();
 
-            return view('sitemaps.core', compact('categories'))->render();
+            $latestUpdate = $categories->max('updated_at');
+            $coreLastmod = $latestUpdate ? $latestUpdate->toAtomString() : '2026-11-16T19:00:00+00:00';
+
+            return view('sitemaps.core', compact('categories', 'coreLastmod'))->render();
         });
 
         return response($content, 200, [

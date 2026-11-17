@@ -49,3 +49,12 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+
+<IfModule mod_headers.c>
+    # XML Sitemaps: Clean Cache Headers for Search Engine Crawlers
+    <FilesMatch "\.xml$">
+        Header unset Pragma
+        Header unset Expires
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+</IfModule>
