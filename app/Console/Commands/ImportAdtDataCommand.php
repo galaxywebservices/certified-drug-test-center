@@ -307,8 +307,8 @@ class ImportAdtDataCommand extends Command
                     [
                         'name' => $cityName,
                         'is_active' => true,
-                        'meta_title' => "{$cityName}, {$abbr} Drug Testing Locations & Walk-in Centers",
-                        'meta_description' => "Fast walk-in drug and alcohol testing in {$cityName}, {$abbr}. Order online in 2 minutes.",
+                        'meta_title' => "{$cityName}, {$abbr} Drug Testing Centers - (800) 985-4339",
+                        'meta_description' => "Certified drug testing collection facilities in {$cityName}, {$abbr}. Order online or call (800) 985-4339.",
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]

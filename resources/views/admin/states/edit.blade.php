@@ -119,9 +119,9 @@
 
                 <div class="form-group" style="margin-top:10px;">
                     <label class="form-label" for="meta_title">Meta Title (Browser Tab Title)</label>
-                    <input type="text" id="meta_title" name="meta_title" value="{{ old('meta_title', $state->meta_title) }}" class="form-control" placeholder="e.g. {{ $state->name }} Drug Testing Locations & Walk-in Centers">
+                    <input type="text" id="meta_title" name="meta_title" value="{{ old('meta_title', $state->meta_title) }}" class="form-control" placeholder="e.g. {{ $state->name }} Drug Testing Centers - (800) 985-4339">
                     <div style="font-size:12px; color:var(--admin-slate-500); margin-top:4px;">
-                        Leave blank to automatically default to: <em>"{{ $state->name }} Drug Testing Locations & Walk-in Centers"</em>
+                        Leave blank to automatically default to: <em>"{{ $state->name }} Drug Testing Centers - (800) 985-4339"</em>
                     </div>
                 </div>
 
