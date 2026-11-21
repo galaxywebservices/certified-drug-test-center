@@ -13,6 +13,7 @@ class CertifiedDrugTestCentersChainTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('<title>Certified Drug Testing Centers Nationwide | 800-985-4339</title>', false);
         $response->assertSee('Certified Drug Test Centers are located in all cities and in most cases within minutes', false);
+        $response->assertSee('<meta name="keywords" content="Drug Test near me, DOT Drug Test near me, Alcohol test near me', false);
         $response->assertSee('Certified Drug Test Centers Near You');
         $response->assertSee('Find a drug testing center near you');
         $response->assertSee('Quick answer: how to get a drug or alcohol test near you today');
@@ -49,6 +50,8 @@ class CertifiedDrugTestCentersChainTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('California');
         $response->assertSee('<title>Certified Drug Testing Centers CA | 800-985-4339</title>', false);
+        $response->assertSee('Certified Drug Test Centers are located in California and in most cases within minutes', false);
+        $response->assertSee('<meta name="keywords" content="Drug Test in California, DOT Drug Test in California', false);
     }
 
     public function test_city_route_for_chain_loads_with_200(): void
@@ -57,6 +60,8 @@ class CertifiedDrugTestCentersChainTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee('Orlando');
         $response->assertSee('<title>Certified Drug Testing Centers Orlando, FL | 800-985-4339</title>', false);
+        $response->assertSee('Certified Drug Test Centers are located in Orlando, FL and in most cases within minutes', false);
+        $response->assertSee('<meta name="keywords" content="Drug Test in Orlando FL, DOT Drug Test in Orlando FL', false);
     }
 
     public function test_chain_city_slug_alias_resolves_with_200(): void
@@ -71,5 +76,12 @@ class CertifiedDrugTestCentersChainTest extends TestCase
         $response = $this->get('/locations?zip=32771');
         $response->assertStatus(302);
         $this->assertStringContainsString('/locations/florida/', $response->headers->get('Location'));
+    }
+
+    public function test_zip_search_34711_redirects_to_clermont(): void
+    {
+        $response = $this->get('/locations?zip=34711');
+        $response->assertStatus(302);
+        $response->assertRedirect('/locations/florida/clermont');
     }
 }

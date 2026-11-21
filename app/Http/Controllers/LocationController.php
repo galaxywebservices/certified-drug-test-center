@@ -31,10 +31,29 @@ class LocationController extends Controller
                             ->where(function ($q) use ($location, $citySlug) {
                                 $q->where('slug', $citySlug)->orWhere('name', $location->city);
                             })->first();
-                        if ($city) {
-                            return redirect()->to("/locations/{$state->slug}/{$city->slug}");
+
+                        if (!$city && $location->lat && $location->lng) {
+                            $nearestLoc = Location::where('is_active', true)
+                                ->where('state', $state->abbr)
+                                ->whereNotNull('lat')
+                                ->whereNotNull('lng')
+                                ->selectRaw('city, (3959 * acos(least(1.0, greatest(-1.0, cos(radians(?)) * cos(radians(lat)) * cos(radians(lng) - radians(?)) + sin(radians(?)) * sin(radians(lat)))))) AS distance', [$location->lat, $location->lng, $location->lat])
+                                ->whereIn('city', City::where('state_id', $state->id)->pluck('name'))
+                                ->orderBy('distance')
+                                ->first();
+
+                            if ($nearestLoc) {
+                                $city = City::where('state_id', $state->id)
+                                    ->where('name', $nearestLoc->city)
+                                    ->first();
+                            }
                         }
-                        return redirect()->to("/locations/{$state->slug}");
+
+                        $prefix = request()->is('certified-drug-test-centers*') ? '/certified-drug-test-centers' : '/locations';
+                        if ($city) {
+                            return redirect()->to("{$prefix}/{$state->slug}/{$city->slug}");
+                        }
+                        return redirect()->to("{$prefix}/{$state->slug}");
                     }
                 }
             }
@@ -94,15 +113,17 @@ class LocationController extends Controller
 
         if ($isChainRoute) {
             $pageTitle = "Certified Drug Testing Centers {$state->abbr} | 800-985-4339";
+            $metaDescription = "Certified Drug Test Centers are located in {$state->name} and in most cases within minutes of your home or office. Order a drug or alcohol test online or call and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.";
+            $metaKeywords = "Drug Test in {$state->name}, DOT Drug Test in {$state->name}, Alcohol test in {$state->name}, Drug Testing {$state->name}, Drug testing center in {$state->name}, employer drug testing programs in {$state->name}, 5 panel urine test in {$state->name}, 5 panel drug test in {$state->name}, 10 panel drug test in {$state->name}, DOT consortium Enrollment in {$state->name}, where can i get a drug test in {$state->name}, Hair drug test in {$state->name}, Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, {$state->abbr} drug testing";
         } else {
             $pageTitle = $state->meta_title ?: "{$state->name} Drug Testing Centers - (800) 985-4339";
             if (str_contains($pageTitle, 'Walk-ins Welcome') || str_contains($pageTitle, 'Walk-in') || !str_contains($pageTitle, '800')) {
                 $pageTitle = "{$state->name} Drug Testing Centers - (800) 985-4339";
             }
+            $metaDescription = $state->meta_description ?: "Certified Drug Test Centers in {$state->name} ({$state->abbr}). Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.";
+            $metaDescription = str_ireplace('walk-in clinics', 'certified clinics', $metaDescription);
+            $metaKeywords = null;
         }
-        $metaDescription = $state->meta_description ?: "Certified Drug Test Centers in {$state->name} ({$state->abbr}). Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.";
-        $metaDescription = str_ireplace('walk-in clinics', 'certified clinics', $metaDescription);
-        $metaKeywords = $defaultKeywords;
         $pageAbout = "{$state->name} Drug Testing";
 
         $breadcrumbs = [
@@ -235,15 +256,17 @@ class LocationController extends Controller
 
         if ($isChainRoute) {
             $pageTitle = "Certified Drug Testing Centers {$cityName}, {$state->abbr} | 800-985-4339";
+            $metaDescription = "Certified Drug Test Centers are located in {$cityName}, {$state->abbr} and in most cases within minutes of your home or office. Order a drug or alcohol test online or call and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.";
+            $metaKeywords = "Drug Test in {$cityName} {$state->abbr}, DOT Drug Test in {$cityName} {$state->abbr}, Alcohol test in {$cityName} {$state->abbr}, Drug Testing {$cityName} {$state->abbr}, Drug testing center in {$cityName} {$state->abbr}, employer drug testing programs in {$cityName} {$state->abbr}, 5 panel urine test in {$cityName} {$state->abbr}, 5 panel drug test in {$cityName} {$state->abbr}, 10 panel drug test in {$cityName} {$state->abbr}, DOT consortium Enrollment in {$cityName} {$state->abbr}, where can i get a drug test in {$cityName} {$state->abbr}, Hair drug test in {$cityName} {$state->abbr}, Drug Test near me, Drug testing center near me";
         } else {
             $pageTitle = $city?->meta_title ?: "{$cityName}, {$state->abbr} Drug Testing Centers - (800) 985-4339";
             if (str_contains($pageTitle, 'Walk-ins Welcome') || str_contains($pageTitle, 'Walk-in') || !str_contains($pageTitle, '800')) {
                 $pageTitle = "{$cityName}, {$state->abbr} Drug Testing Centers - (800) 985-4339";
             }
+            $metaDescription = $city?->meta_description ?: "Certified Drug Test Centers in {$cityName}, {$state->abbr}. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.";
+            $metaDescription = str_ireplace('walk-in clinics', 'certified clinics', $metaDescription);
+            $metaKeywords = null;
         }
-        $metaDescription = $city?->meta_description ?: "Certified Drug Test Centers in {$cityName}, {$state->abbr}. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.";
-        $metaDescription = str_ireplace('walk-in clinics', 'certified clinics', $metaDescription);
-        $metaKeywords = $defaultKeywords;
         $pageAbout = "{$cityName}, {$state->abbr} Drug Testing";
 
         $breadcrumbs = [

@@ -211,14 +211,15 @@
 
         <aside class="finder" aria-labelledby="finder-h">
           <h2 id="finder-h">Find a drug testing center near you</h2>
-          <form action="{{ url('/locations') }}" method="get" role="search">
+          <form class="zip-search-form" action="{{ url('/locations') }}" method="get" role="search">
             <label for="zip">Enter your ZIP code</label>
             <div class="row">
-              <input id="zip" name="zip" type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" placeholder="e.g. 32771" required>
+              <input id="zip" name="zip" class="zip-input" type="text" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" autocomplete="postal-code" placeholder="e.g. 34711" required>
               <button class="btn btn-primary" type="submit">Search</button>
             </div>
             <small>Select and order your test at a nearby certified drug test center. Pre-registration is required, testing centers do not accept payment on site.</small>
           </form>
+          <div class="zip-feedback-banner" style="margin-top:14px;"></div>
           <div class="rating" aria-label="Customer rating">
             <span class="stars" aria-hidden="true">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span>
             <a href="{{ url('/reviews') }}">4.9 out of 5 from 4,800+ verified reviews</a>

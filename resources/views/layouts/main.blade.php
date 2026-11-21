@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $pageTitle ?? 'Certified Drug Test Centers - (800) 985-4339' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers nationwide. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.' }}">
+    @if(!empty($metaKeywords))
+    <meta name="keywords" content="{{ $metaKeywords }}">
+    @endif
     @php
         $rawPath = request()->getPathInfo();
         if (!empty($canonicalUrl)) {

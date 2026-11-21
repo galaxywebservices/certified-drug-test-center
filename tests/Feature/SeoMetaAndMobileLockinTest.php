@@ -23,9 +23,8 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $response->assertSee('<meta name="viewport" content="width=device-width, initial-scale=1.0">', false);
         $this->assertStringNotContainsString('maximum-scale=5.0', $response->getContent());
 
-        // Deprecated meta keywords removed
-        $this->assertStringNotContainsString('name="keywords"', $response->getContent());
-
+        // Meta keywords present on Certified National page per client spec
+        $response->assertSee('<meta name="keywords" content="Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing', false);
         // No Sanford address in footer
         $response->assertDontSee('201 N. Park Ave.');
         $response->assertDontSee('Sanford, FL 32771');
@@ -44,9 +43,8 @@ class SeoMetaAndMobileLockinTest extends TestCase
         // Trimmed meta description ~150 chars
         $response->assertSee('name="description" content="Certified Drug Test Centers in Florida (FL). Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp certified clinics."', false);
 
-        // Deprecated meta keywords removed
+        // Clean head without keywords on /locations/ directory
         $this->assertStringNotContainsString('name="keywords"', $response->getContent());
-
         $response->assertDontSee('201 N. Park Ave.');
         $response->assertDontSee('Sanford, FL 32771');
     }
@@ -95,9 +93,8 @@ class SeoMetaAndMobileLockinTest extends TestCase
         // Trimmed meta description ~150 chars
         $response->assertSee('name="description" content="Certified Drug Test Centers in Miami, FL. Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp certified clinics."', false);
 
-        // Deprecated meta keywords removed
+        // Clean head without keywords on /locations/ directory
         $this->assertStringNotContainsString('name="keywords"', $response->getContent());
-
         // H1 header has clean title without & Walk-In Labs
         $response->assertSee('Miami, FL Drug Testing Centers');
         $response->assertDontSee('Miami, FL Drug Testing Centers &amp; Walk-In Labs', false);

@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       const input = form.querySelector('.zip-input');
-      const feedback = form.closest('.hero-zip-card, .zip-search-wrapper')?.querySelector('.zip-feedback-banner');
+      const feedback = form.closest('.hero-zip-card, .zip-search-wrapper, .finder')?.querySelector('.zip-feedback-banner');
       if (!input || !feedback) return;
 
       const zipVal = input.value.trim();
