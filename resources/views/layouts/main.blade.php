@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $pageTitle ?? 'Certified Drug Test Centers - (800) 985-4339' }}</title>
     <meta name="description" content="{{ $metaDescription ?? 'Certified Drug Test Centers nationwide. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.' }}">
-    @if(!empty($metaKeywords))
-    <meta name="keywords" content="{{ $metaKeywords }}">
-    @endif
+    @php
+        $defaultSiteKeywords = 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
+        $activeMetaKeywords = !empty($metaKeywords) ? $metaKeywords : $defaultSiteKeywords;
+    @endphp
+    <meta name="keywords" content="{{ $activeMetaKeywords }}">
     @php
         $rawPath = request()->getPathInfo();
         if (!empty($canonicalUrl)) {

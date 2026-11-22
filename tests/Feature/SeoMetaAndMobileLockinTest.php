@@ -43,8 +43,8 @@ class SeoMetaAndMobileLockinTest extends TestCase
         // Trimmed meta description ~150 chars
         $response->assertSee('name="description" content="Certified Drug Test Centers in Florida (FL). Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp certified clinics."', false);
 
-        // Clean head without keywords on /locations/ directory
-        $this->assertStringNotContainsString('name="keywords"', $response->getContent());
+        // Dynamic state keywords present on /locations/ directory
+        $response->assertSee('<meta name="keywords" content="Drug Test in Florida, DOT Drug Test in Florida', false);
         $response->assertDontSee('201 N. Park Ave.');
         $response->assertDontSee('Sanford, FL 32771');
     }
@@ -93,8 +93,8 @@ class SeoMetaAndMobileLockinTest extends TestCase
         // Trimmed meta description ~150 chars
         $response->assertSee('name="description" content="Certified Drug Test Centers in Miami, FL. Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp certified clinics."', false);
 
-        // Clean head without keywords on /locations/ directory
-        $this->assertStringNotContainsString('name="keywords"', $response->getContent());
+        // Dynamic city keywords present on /locations/ directory
+        $response->assertSee('<meta name="keywords" content="Drug Test in Miami FL, DOT Drug Test in Miami FL', false);
         // H1 header has clean title without & Walk-In Labs
         $response->assertSee('Miami, FL Drug Testing Centers');
         $response->assertDontSee('Miami, FL Drug Testing Centers &amp; Walk-In Labs', false);
@@ -165,7 +165,7 @@ class SeoMetaAndMobileLockinTest extends TestCase
         // Viewport and meta cleanup
         $response->assertSee('<meta name="viewport" content="width=device-width, initial-scale=1.0">', false);
         $this->assertStringNotContainsString('maximum-scale=5.0', $content);
-        $this->assertStringNotContainsString('name="keywords"', $content);
+        $response->assertSee('<meta name="keywords" content="Drug Test in Alaska, DOT Drug Test in Alaska', false);
 
         // Trimmed meta description (~147 chars)
         $response->assertSee('name="description" content="Certified Drug Test Centers in Alaska (AK). Order online or call (800) 985-4339 for an instant donor pass at local Quest &amp; Labcorp certified clinics."', false);
@@ -371,5 +371,12 @@ class SeoMetaAndMobileLockinTest extends TestCase
         $respJax->assertStatus(200);
         $respJax->assertSee('<title>Jacksonville, FL Drug Testing Centers - (800) 985-4339</title>', false);
         $this->assertStringNotContainsString('Walk-ins Welcome', $respJax->getContent());
+    }
+
+    public function test_homepage_and_all_pages_have_meta_keywords(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+        $response->assertSee('<meta name="keywords" content="Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test">', false);
     }
 }

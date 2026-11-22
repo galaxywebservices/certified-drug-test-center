@@ -111,10 +111,11 @@ class LocationController extends Controller
 
         $defaultKeywords = 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
 
+        $metaKeywords = "Drug Test in {$state->name}, DOT Drug Test in {$state->name}, Alcohol test in {$state->name}, Drug Testing {$state->name}, Drug testing center in {$state->name}, employer drug testing programs in {$state->name}, 5 panel urine test in {$state->name}, 5 panel drug test in {$state->name}, 10 panel drug test in {$state->name}, DOT consortium Enrollment in {$state->name}, where can i get a drug test in {$state->name}, Hair drug test in {$state->name}, Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, {$state->abbr} drug testing";
+
         if ($isChainRoute) {
             $pageTitle = "Certified Drug Testing Centers {$state->abbr} | 800-985-4339";
             $metaDescription = "Certified Drug Test Centers are located in {$state->name} and in most cases within minutes of your home or office. Order a drug or alcohol test online or call and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.";
-            $metaKeywords = "Drug Test in {$state->name}, DOT Drug Test in {$state->name}, Alcohol test in {$state->name}, Drug Testing {$state->name}, Drug testing center in {$state->name}, employer drug testing programs in {$state->name}, 5 panel urine test in {$state->name}, 5 panel drug test in {$state->name}, 10 panel drug test in {$state->name}, DOT consortium Enrollment in {$state->name}, where can i get a drug test in {$state->name}, Hair drug test in {$state->name}, Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, {$state->abbr} drug testing";
         } else {
             $pageTitle = $state->meta_title ?: "{$state->name} Drug Testing Centers - (800) 985-4339";
             if (str_contains($pageTitle, 'Walk-ins Welcome') || str_contains($pageTitle, 'Walk-in') || !str_contains($pageTitle, '800')) {
@@ -122,7 +123,6 @@ class LocationController extends Controller
             }
             $metaDescription = $state->meta_description ?: "Certified Drug Test Centers in {$state->name} ({$state->abbr}). Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.";
             $metaDescription = str_ireplace('walk-in clinics', 'certified clinics', $metaDescription);
-            $metaKeywords = null;
         }
         $pageAbout = "{$state->name} Drug Testing";
 
@@ -254,10 +254,11 @@ class LocationController extends Controller
 
         $defaultKeywords = 'Drug Test near me, DOT Drug Test near me, Alcohol test near me, Drug Testing, Drug testing center near me, employer drug testing programs, 5 panel urine test, 5 panel drug test, 10 panel drug test, DOT consortium Enrollment, where can i get a drug test, Hair drug test';
 
+        $metaKeywords = "Drug Test in {$cityName} {$state->abbr}, DOT Drug Test in {$cityName} {$state->abbr}, Alcohol test in {$cityName} {$state->abbr}, Drug Testing {$cityName} {$state->abbr}, Drug testing center in {$cityName} {$state->abbr}, employer drug testing programs in {$cityName} {$state->abbr}, 5 panel urine test in {$cityName} {$state->abbr}, 5 panel drug test in {$cityName} {$state->abbr}, 10 panel drug test in {$cityName} {$state->abbr}, DOT consortium Enrollment in {$cityName} {$state->abbr}, where can i get a drug test in {$cityName} {$state->abbr}, Hair drug test in {$cityName} {$state->abbr}, Drug Test near me, Drug testing center near me";
+
         if ($isChainRoute) {
             $pageTitle = "Certified Drug Testing Centers {$cityName}, {$state->abbr} | 800-985-4339";
             $metaDescription = "Certified Drug Test Centers are located in {$cityName}, {$state->abbr} and in most cases within minutes of your home or office. Order a drug or alcohol test online or call and receive an electronic donor pass via email or text immediately. Same-day testing available for employment, DOT, probation and personal purposes at more than 20,000 certified drug testing centers — including Quest Diagnostics, Labcorp and affiliated locations. Negative results are typically available within 24–48 hours.";
-            $metaKeywords = "Drug Test in {$cityName} {$state->abbr}, DOT Drug Test in {$cityName} {$state->abbr}, Alcohol test in {$cityName} {$state->abbr}, Drug Testing {$cityName} {$state->abbr}, Drug testing center in {$cityName} {$state->abbr}, employer drug testing programs in {$cityName} {$state->abbr}, 5 panel urine test in {$cityName} {$state->abbr}, 5 panel drug test in {$cityName} {$state->abbr}, 10 panel drug test in {$cityName} {$state->abbr}, DOT consortium Enrollment in {$cityName} {$state->abbr}, where can i get a drug test in {$cityName} {$state->abbr}, Hair drug test in {$cityName} {$state->abbr}, Drug Test near me, Drug testing center near me";
         } else {
             $pageTitle = $city?->meta_title ?: "{$cityName}, {$state->abbr} Drug Testing Centers - (800) 985-4339";
             if (str_contains($pageTitle, 'Walk-ins Welcome') || str_contains($pageTitle, 'Walk-in') || !str_contains($pageTitle, '800')) {
@@ -265,7 +266,6 @@ class LocationController extends Controller
             }
             $metaDescription = $city?->meta_description ?: "Certified Drug Test Centers in {$cityName}, {$state->abbr}. Order online or call (800) 985-4339 for an instant donor pass at local Quest & Labcorp certified clinics.";
             $metaDescription = str_ireplace('walk-in clinics', 'certified clinics', $metaDescription);
-            $metaKeywords = null;
         }
         $pageAbout = "{$cityName}, {$state->abbr} Drug Testing";
 
