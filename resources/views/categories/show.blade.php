@@ -68,7 +68,7 @@
 
         <h1 style="font-size:32px; font-weight:800; color:#fff; margin-bottom:8px;">{{ $displayName }}</h1>
         <p style="font-size:16px; color:#E2E8F0; max-width:750px;">
-            {{ $category->subtitle ?: 'Select a test below to order online with same-day walk-in testing at over 20,000 certified collection facilities nationwide.' }}
+            {{ $category->subtitle ?: 'Select a test below to order online with same-day testing at over 20,000 certified collection facilities nationwide.' }}
         </p>
     </div>
 </div>

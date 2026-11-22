@@ -444,7 +444,7 @@ class HomeController extends Controller
         $faqs = [
             [
                 'question' => 'How does the test scheduling process work?',
-                'answer' => 'Scheduling is simple and takes less than 2 minutes. First, select and purchase your test online or over the phone at (800)-985-4339. Second, enter the donor zip code to locate the nearest testing center. You will instantly receive an electronic Donor Registration Pass by email with the testing center address, operating hours, and instructions. Third, walk into the facility with your pass and a photo ID—no appointment is necessary!',
+                'answer' => 'Scheduling is simple and takes less than 2 minutes. First, select and purchase your test online or over the phone at (800)-985-4339. Second, enter the donor zip code to locate the nearest testing center. You will instantly receive an electronic Donor Registration Pass by email with the testing center address, operating hours, and instructions. Third, arrive at the facility with your pass and a photo ID—no appointment is necessary!',
             ],
             [
                 'question' => 'How fast do I get drug test results?',
@@ -452,7 +452,7 @@ class HomeController extends Controller
             ],
             [
                 'question' => 'Do I need an appointment at the testing center?',
-                'answer' => 'No appointment is needed in 95% of locations! Once you register and purchase your test online or by phone, you can walk in during standard collection hours at your convenience. Testing centers do not accept payment directly on-site; all tests must be registered prior to walking in.',
+                'answer' => 'No appointment is needed in 95% of locations! Once you register and purchase your test online or by phone, you can test during standard collection hours at your convenience. Testing centers do not accept payment directly on-site; all tests must be registered online or by phone prior to arrival.',
             ],
             [
                 'question' => 'What is the difference between a 5-panel and 10-panel drug test?',

@@ -31,7 +31,7 @@
             </h1>
 
             <p>
-                {{ $chain['description'] }} Find certified walk-in testing facilities across {{ $state->name }} with Quest Diagnostics &amp; Labcorp partner collection sites. Same-day electronic donor pass, strict chain of custody, and official physician MRO results delivered in {{ $chain['turnaround'] }}.
+                {{ $chain['description'] }} Find certified testing facilities across {{ $state->name }} with Quest Diagnostics &amp; Labcorp partner collection sites. Same-day electronic donor pass, strict chain of custody, and official physician MRO results delivered in {{ $chain['turnaround'] }}.
             </p>
 
             <ul class="hero-split-checklist">
@@ -150,7 +150,7 @@
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
                 <div>
-                    <div class="service-trust-title">Immediate Walk-Ins</div>
+                    <div class="service-trust-title">Same-Day Testing</div>
                     <div class="service-trust-sub">Electronic Donor Pass via Email/SMS</div>
                 </div>
             </div>
@@ -180,7 +180,7 @@
         </div>
 
         <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:10px; padding:14px 20px; margin-bottom:24px; text-align:center; color:#991B1B; font-size:13.5px; font-weight:600;">
-            <span style="color:#16A34A; font-weight:800;">✓ Walk-Ins Accepted Today</span> &bull; <strong style="color:#C1121F;">Pre-Registration Required:</strong> All testing requires an electronic donor pass issued prior to arrival at the collection center.
+            <span style="color:#16A34A; font-weight:800;">✓ Same-Day Testing Available</span> &bull; <strong style="color:#C1121F;">Pre-Registration Required:</strong> All testing requires an electronic donor pass issued prior to arrival at the collection center.
         </div>
 
         <!-- Filter Search Bar -->

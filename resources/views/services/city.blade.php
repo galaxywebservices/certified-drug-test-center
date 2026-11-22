@@ -439,7 +439,7 @@
                 </ul>
 
                 <a href="{{ route('checkout.index', ['slug' => $product?->slug ?? $chain['product_slug']]) }}" class="btn btn-primary btn-lg" style="width:100%; text-align:center; box-shadow:0 4px 14px rgba(193, 18, 31, 0.35); margin-bottom:10px;">
-                    Order Online &amp; Walk In &rarr;
+                    Order Online &amp; Test Today &rarr;
                 </a>
 
                 <a href="tel:18009854339" class="btn btn-navy" style="width:100%; text-align:center; font-size:13px; padding:10px;">

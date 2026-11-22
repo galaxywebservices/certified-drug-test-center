@@ -20,7 +20,7 @@
         </h1>
 
         <p class="hero-subtitle">
-            Same-day walk-in testing at over 20,000 certified Quest Diagnostics &amp; Labcorp collection sites nationwide. Fast, confidential, and court-admissible results.
+            Same-day testing at over 20,000 certified Quest Diagnostics &amp; Labcorp collection sites nationwide. Fast, confidential, and court-admissible results.
         </p>
 
         <!-- Interactive ZIP Locator Widget -->
@@ -119,7 +119,7 @@
                 <div class="process-stars">★</div>
                 <h3>Schedule Your Test</h3>
                 <p>
-                    Select and purchase your drug or alcohol test online in under 2 minutes, or call our scheduling team at <strong>(800)-985-4339</strong>. Same-day walk-in service is readily available.
+                    Select and purchase your drug or alcohol test online in under 2 minutes, or call our scheduling team at <strong>(800)-985-4339</strong>. Same-day testing service is readily available.
                 </p>
             </div>
 
@@ -135,9 +135,9 @@
             <div class="process-card">
                 <div class="process-step-badge">3</div>
                 <div class="process-stars">★★★</div>
-                <h3>Walk-In &amp; Test</h3>
+                <h3>Proceed to Collection Site</h3>
                 <p>
-                    Take your electronic donor pass on your smartphone or print it out. Walk in to the testing center during collection hours—<strong>no appointment necessary</strong>. Results are emailed confidentially.
+                    Take your electronic donor pass on your smartphone or print it out. Arrive at the testing center during collection hours—<strong>no appointment necessary</strong>. Results are emailed confidentially.
                 </p>
             </div>
         </div>

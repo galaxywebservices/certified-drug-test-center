@@ -301,7 +301,7 @@ class PlatformSmokeTest extends TestCase
         $response->assertSee('Apple Maps');
         $response->assertSee('Waze');
         $response->assertSee('Urine Drug Screening');
-        $response->assertSee('Order Test &amp; Walk-In Here', false);
+        $response->assertSee('Order Test &amp; Get Donor Pass', false);
         $response->assertSee('"@type": "MedicalBusiness"', false);
 
         // Verify alias route /locations/site/1

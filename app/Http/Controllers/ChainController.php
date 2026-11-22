@@ -16,7 +16,7 @@ class ChainController extends Controller
         return [
             [
                 'question' => 'Where can I get a drug test near me?',
-                'answer' => 'Certified Drug Test Centers schedules drug and alcohol tests at more than 20,000 certified collection sites in all 50 states, including Quest Diagnostics and Labcorp patient service centers. Enter your ZIP code online or call (800) 985-4339 to find the closest site, register within minutes, and walk in the same day.',
+                'answer' => 'Certified Drug Test Centers schedules drug and alcohol tests at more than 20,000 certified collection sites in all 50 states, including Quest Diagnostics and Labcorp patient service centers. Enter your ZIP code online or call (800) 985-4339 to find the closest site, register within minutes, and test the same day.',
             ],
             [
                 'question' => 'How much does a drug test cost?',
@@ -24,11 +24,11 @@ class ChainController extends Controller
             ],
             [
                 'question' => 'Can I get a same-day drug test?',
-                'answer' => 'Yes. Most people order and test on the same day. Once you register online or by phone, your electronic donor pass arrives within minutes, and you can walk in to a nearby certified drug testing center that day during its collection hours. No appointment is needed at most locations.',
+                'answer' => 'Yes. Most people order and test on the same day. Once you register online or by phone, your electronic donor pass arrives within minutes, and you can go to a nearby certified drug testing center that day during its collection hours. No appointment is needed at most locations.',
             ],
             [
                 'question' => 'Where can I get a pre-employment drug test near me?',
-                'answer' => "You can get a pre-employment drug test at any of 20,000+ certified collection sites nationwide, including Quest Diagnostics and Labcorp locations. Order the panel your employer requested (usually a 5-panel or 10-panel urine test), get your donor pass within minutes, and walk in with a photo ID.",
+                'answer' => "You can get a pre-employment drug test at any of 20,000+ certified collection sites nationwide, including Quest Diagnostics and Labcorp locations. Order the panel your employer requested (usually a 5-panel or 10-panel urine test), get your donor pass within minutes, and arrive with a photo ID.",
             ],
             [
                 'question' => 'Can I get a drug test at Quest Diagnostics or Labcorp?',
@@ -47,8 +47,8 @@ class ChainController extends Controller
                 'answer' => 'Ordering online is usually the most affordable way to get a certified drug test. A 5-panel urine drug test costs $89.99 all-inclusive — collection, SAMHSA-certified lab analysis and MRO review — with no extra fees at the testing site.',
             ],
             [
-                'question' => 'Can I walk in for a drug test without an appointment?',
-                'answer' => "Yes. Most collection sites accept walk-ins, but you must register and pay before you go. After you order, you receive an electronic donor pass that you show at the site along with a photo ID. Testing sites do not accept payment on site.",
+                'question' => 'Do I need an appointment for a drug test?',
+                'answer' => "No appointment is needed at most collection sites, but you must register and pay before you go. After you order, you receive an electronic donor pass that you show at the site along with a photo ID. Testing sites do not accept payment on site.",
             ],
             [
                 'question' => 'How long do drug test results take?',
@@ -147,7 +147,7 @@ class ChainController extends Controller
 
             // Quick Answer & Key Facts
             'quick_answer_title' => Setting::get('chain_national_quick_answer_title', 'Quick answer: how to get a drug or alcohol test near you today'),
-            'quick_answer_text' => Setting::get('chain_national_quick_answer_text', 'To get a drug or alcohol test near you, order the test online or by phone and within minutes receive your electronic donor pass by email and text, then walk in with a photo ID to the nearest certified collection site. Certified Drug Test Centers schedules same-day urine, hair follicle, saliva, breath alcohol, EtG and DOT drug tests at 20,000+ drug testing centers in all 50 states, with prices from $89.99 and results in 24–48 hours for most negative urine tests.'),
+            'quick_answer_text' => Setting::get('chain_national_quick_answer_text', 'To get a drug or alcohol test near you, order the test online or by phone and within minutes receive your electronic donor pass by email and text, then proceed with a photo ID to the nearest certified collection site. Certified Drug Test Centers schedules same-day urine, hair follicle, saliva, breath alcohol, EtG and DOT drug tests at 20,000+ drug testing centers in all 50 states, with prices from $89.99 and results in 24–48 hours for most negative urine tests.'),
             'fact_sites' => Setting::get('chain_national_fact_sites', '20,000+'),
             'fact_sites_label' => Setting::get('chain_national_fact_sites_label', 'certified collection sites'),
             'fact_states' => Setting::get('chain_national_fact_states', '50'),
@@ -160,7 +160,7 @@ class ChainController extends Controller
             // National Directory Heading
             'directory_eyebrow' => Setting::get('chain_national_directory_eyebrow', 'National directory'),
             'directory_title' => Setting::get('chain_national_directory_title', 'Find drug and alcohol testing centers by State'),
-            'directory_lead' => Setting::get('chain_national_directory_lead', 'Certified Drug Test Centers has collection sites in all 50 states, from major metro areas to rural communities. Choose your state to see drug testing locations by city, including Quest Diagnostics and Labcorp drug test sites, or search by ZIP code. Walk-ins are accepted at most sites once you\'ve registered.'),
+            'directory_lead' => Setting::get('chain_national_directory_lead', 'Certified Drug Test Centers has collection sites in all 50 states, from major metro areas to rural communities. Choose your state to see drug testing locations by city, including Quest Diagnostics and Labcorp drug test sites, or search by ZIP code. Same-day testing is available at most sites once you\'ve registered.'),
 
             // Employer & On-Site Mobile Section
             'onsite_eyebrow' => Setting::get('chain_national_onsite_eyebrow', 'For employers'),

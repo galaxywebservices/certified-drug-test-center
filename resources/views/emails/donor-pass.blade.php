@@ -167,7 +167,7 @@
                                     @endif
                                 @else
                                     <div style="font-size:14.5px; font-weight:700; color:#0B2545;">
-                                        Quest Diagnostics &amp; Labcorp Nationwide Walk-in Network
+                                        Quest Diagnostics &amp; Labcorp Nationwide Certified Network
                                     </div>
                                     <div style="font-size:13px; color:#64748B; margin-top:4px;">
                                         Assigned to nearest certified collection facility by donor ZIP.

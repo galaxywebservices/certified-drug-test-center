@@ -536,7 +536,7 @@
                                     {{ $partnerLabel }}
                                 </span>
                                 <span class="badge-walkin">
-                                    <span class="badge-walkin-dot"></span>Walk-Ins Accepted Today
+                                    <span class="badge-walkin-dot"></span>Same-Day Testing Available
                                 </span>
                             </div>
 

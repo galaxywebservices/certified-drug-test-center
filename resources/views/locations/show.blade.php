@@ -408,7 +408,7 @@
                         {{ $parsedHours['today_status'] }}
                     </span>
                     <span style="font-size:12px; color:#4ADE80; font-weight:700;">
-                        ● Walk-Ins Accepted Today
+                        ● Same-Day Testing Available
                     </span>
                 </div>
 
@@ -431,7 +431,7 @@
             <!-- Top Right Fast Action Box -->
             <div class="fast-action-card">
                 <a href="{{ route('checkout.index', ['location_id' => $location->id]) }}" class="btn-schedule">
-                    <span>Order Test &amp; Walk-In Here &rarr;</span>
+                    <span>Order Test &amp; Get Donor Pass &rarr;</span>
                 </a>
                 <div class="directions-btn-group">
                     <a href="{{ $googleMapsUrl }}" target="_blank" rel="noopener" class="btn-subaction">

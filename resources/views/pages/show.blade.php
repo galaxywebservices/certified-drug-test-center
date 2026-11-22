@@ -552,7 +552,7 @@
                         @elseif(($block['type'] ?? '') === 'cta')
                             <div class="cms-cta-callout" style="background:linear-gradient(135deg, #0B2545, #133E6E); color:#fff; border-radius:10px; padding:32px 24px; margin-top:36px; text-align:center;">
                                 <h3 style="font-size:22px; font-weight:800; color:#fff; margin-bottom:8px;">{{ $block['title'] ?? 'Need Testing Assistance?' }}</h3>
-                                <p style="color:#CBD5E1; font-size:14px; max-width:600px; margin:0 auto 18px;">{{ $block['subtitle'] ?? 'Our nationwide drug testing specialists are available 24/7 to assist with walk-in registrations.' }}</p>
+                                <p style="color:#CBD5E1; font-size:14px; max-width:600px; margin:0 auto 18px;">{{ $block['subtitle'] ?? 'Our nationwide drug testing specialists are available 24/7 to assist with registrations.' }}</p>
                                 <a href="{{ $block['btn_url'] ?? 'tel:18009854339' }}" class="btn btn-primary" style="display:inline-flex; font-size:15px; padding:12px 24px;">
                                     {{ $block['btn_text'] ?? 'Call Toll-Free: (800)-985-4339' }}
                                 </a>
@@ -606,10 +606,10 @@
 
                     <!-- Certified Testing Locations Hotline -->
                     <div class="sidebar-hotline-card">
-                        <div class="sidebar-hotline-sub">Walk-In Drug Testing</div>
+                        <div class="sidebar-hotline-sub">Same-Day Drug Testing</div>
                         <h4 class="sidebar-hotline-title">20,000+ Collection Sites</h4>
                         <p class="sidebar-hotline-desc">
-                            Walk in today at Quest Diagnostics &amp; Labcorp facilities. No doctor order or appointment required.
+                            Test today at Quest Diagnostics &amp; Labcorp facilities. No doctor order or appointment required.
                         </p>
                         <a href="tel:18009854339" class="sidebar-hotline-btn">
                             <svg width="15" height="15" fill="currentColor" viewBox="0 0 20 20" style="margin-right:6px;"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>

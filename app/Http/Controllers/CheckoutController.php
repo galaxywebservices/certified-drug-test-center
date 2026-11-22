@@ -68,7 +68,7 @@ class CheckoutController extends Controller
         }
 
         $pageTitle = "Secure Checkout & Test Registration | Certified Drug Test Center";
-        $metaDescription = "Register online for your drug or alcohol test in 2 minutes. Walk in today at over 20,000 certified collection centers.";
+        $metaDescription = "Register online for your drug or alcohol test in 2 minutes. Test today at over 20,000 certified collection centers.";
         $metaRobots = "noindex, follow";
 
         return view('checkout.index', compact('product', 'allProducts', 'selectedLocation', 'pageTitle', 'metaDescription', 'metaRobots'));

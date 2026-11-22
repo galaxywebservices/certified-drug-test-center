@@ -523,7 +523,7 @@
             <div>
                 <div style="font-size:11px; text-transform:uppercase; color:#64748B; font-weight:800; letter-spacing:0.5px;">Schedule Options</div>
                 <div style="font-size:18px; font-weight:900; color:#0B2545;">{{ !empty($weekendOr24Count) && $weekendOr24Count > 0 ? "{$weekendOr24Count} Extended/Sat Sites" : "Mon–Fri Business Hours" }}</div>
-                <small style="color:#64748B; font-weight:600;">{{ !empty($has24Hrs) ? '1 facility open 24/7' : 'Walk-ins with electronic pass' }}</small>
+                <small style="color:#64748B; font-weight:600;">{{ !empty($has24Hrs) ? '1 facility open 24/7' : 'Same-day testing with electronic pass' }}</small>
             </div>
             <div>
                 <div style="font-size:11px; text-transform:uppercase; color:#64748B; font-weight:800; letter-spacing:0.5px;">Covered ZIP Codes</div>

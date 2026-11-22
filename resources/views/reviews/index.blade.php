@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Verified Patient & Client Reviews | Certified Drug Test Centers')
-@section('meta_description', 'Read 4,850+ verified customer and employer reviews for Certified Drug Test Centers. Rated 4.9/5 stars for same-day walk-in drug testing, DOT compliance, and fast MRO results.')
+@section('meta_description', 'Read 4,850+ verified customer and employer reviews for Certified Drug Test Centers. Rated 4.9/5 stars for same-day drug testing, DOT compliance, and fast MRO results.')
 
 @section('content')
 <div class="reviews-page">
@@ -107,7 +107,7 @@
                     Hair Follicle (90-Day)
                 </a>
                 <a href="{{ route('reviews.index', ['category' => 'walk-in']) }}" class="filter-tab {{ $filter === 'walk-in' ? 'active' : '' }}">
-                    Walk-in Experience
+                    Same-Day Experience
                 </a>
             </div>
 
@@ -153,7 +153,7 @@
                         Ready for Fast, Certified Drug &amp; Alcohol Testing?
                     </h3>
                     <p style="color:#64748B; font-size:15px; margin:0;">
-                        Join over 4,800 satisfied clients. Walk in today at over 7,382 certified collection facilities nationwide with your electronic donor pass.
+                        Join over 4,800 satisfied clients. Test today at over 7,382 certified collection facilities nationwide with your electronic donor pass.
                     </p>
                 </div>
                 <div style="display:flex; gap:12px; flex-wrap:wrap;">

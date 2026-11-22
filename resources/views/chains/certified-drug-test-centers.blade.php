@@ -254,7 +254,7 @@
     <div class="wrap">
       <div class="quick-answer">
         <h2 id="qa-h">{{ $chainSettings['quick_answer_title'] ?? 'Quick answer: how to get a drug or alcohol test near you today' }}</h2>
-        <p>{!! $chainSettings['quick_answer_text'] ?? 'To get a drug or alcohol test near you, order the test online or by phone and within minutes receive your electronic donor pass by email and text, then walk in with a photo ID to the nearest certified collection site. Certified Drug Test Centers schedules same-day urine, hair follicle, saliva, breath alcohol, EtG and DOT drug tests at 20,000+ drug testing centers in all 50 states, with prices from $89.99 and results in 24–48 hours for most negative urine tests.' !!}</p>
+        <p>{!! $chainSettings['quick_answer_text'] ?? 'To get a drug or alcohol test near you, order the test online or by phone and within minutes receive your electronic donor pass by email and text, then proceed with a photo ID to the nearest certified collection site. Certified Drug Test Centers schedules same-day urine, hair follicle, saliva, breath alcohol, EtG and DOT drug tests at 20,000+ drug testing centers in all 50 states, with prices from $89.99 and results in 24–48 hours for most negative urine tests.' !!}</p>
       </div>
       <div class="facts">
         <div class="fact"><strong>{{ $chainSettings['fact_sites'] ?? '20,000+' }}</strong><span>{{ $chainSettings['fact_sites_label'] ?? 'certified collection sites' }}</span></div>
@@ -276,7 +276,7 @@
       <ol class="steps">
         <li><h3>Choose your test &amp; register</h3><p>Select your test online or call (800) 985-4339. Enter the donor's details and ZIP code to pick the closest site. You're registered within minutes.</p></li>
         <li><h3>Get your donor pass instantly</h3><p>Your electronic donor registration pass &#x2014; with the site address, hours and instructions &#x2014; arrives by email and text right away.</p></li>
-        <li><h3>Walk in to the collection site</h3><p>Show your pass and a government-issued photo ID. No appointment needed at most sites, and nothing to pay on site.</p></li>
+        <li><h3>Proceed to the collection site</h3><p>Show your pass and a government-issued photo ID. No appointment needed at most sites, and nothing to pay on site.</p></li>
         <li><h3>Receive confidential results</h3><p>Negative results are typically emailed in 24&#x2013;48 hours. Non-negative screens are lab-confirmed and reviewed by an MRO first.</p></li>
       </ol>
     </div>
@@ -459,7 +459,7 @@
     <div class="wrap">
       <span class="eyebrow">{{ $chainSettings['directory_eyebrow'] ?? 'National directory' }}</span>
       <h2 id="loc-h">{{ $chainSettings['directory_title'] ?? 'Find drug and alcohol testing centers by State' }}</h2>
-      <p class="lead">{!! $chainSettings['directory_lead'] ?? 'Certified Drug Test Centers has collection sites in all 50 states, from major metro areas to rural communities. Choose your state to see drug testing locations by city, including Quest Diagnostics and Labcorp drug test sites, or <a href="'.url('/locations').'">search by ZIP code</a>. Walk-ins are accepted at most sites once you\'ve registered.' !!}</p>
+      <p class="lead">{!! $chainSettings['directory_lead'] ?? 'Certified Drug Test Centers has collection sites in all 50 states, from major metro areas to rural communities. Choose your state to see drug testing locations by city, including Quest Diagnostics and Labcorp drug test sites, or <a href="'.url('/locations').'">search by ZIP code</a>. Same-day testing is available at most sites once you\'ve registered.' !!}</p>
             <ul class="states">
         @foreach($states as $st)
         <li><a href="{{ $st['url'] }}">{{ $st['name'] }}<span>{{ $st['centers'] }}</span></a></li>
@@ -579,7 +579,7 @@
   <section class="final" aria-labelledby="final-h">
     <div class="wrap">
       <h2 id="final-h">Get tested today at a certified center near you</h2>
-      <p>Order within minutes, get your donor pass instantly, and walk in at any of 20,000+ sites nationwide.</p>
+      <p>Order within minutes, get your donor pass instantly, and get tested at any of 20,000+ sites nationwide.</p>
       <div class="cta-row" style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-top:20px;">
         <a class="btn btn-primary" href="{{ url('/checkout') }}" style="background:#C1121F; color:#fff; border-color:#C1121F; padding:12px 26px; font-weight:700;">Schedule My Test</a>
         <a class="btn btn-ghost" href="tel:+18009854339" style="border:2px solid #fff; color:#fff; padding:12px 26px; font-weight:700; text-decoration:none;">📞 Call (800) 985-4339</a>

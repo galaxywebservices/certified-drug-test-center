@@ -22,7 +22,7 @@
         <div class="hero-split-left">
             <div class="hero-tagline-badge" style="background:#F0F5FA; border:1px solid #CBD5E1; color:#0B2545;">
                 <span style="color:#C1121F;">★</span>
-                SAMHSA Certified &bull; Same-Day Walk-Ins Nationwide
+                SAMHSA Certified &bull; Same-Day Testing Nationwide
                 <span style="color:#C1121F;">★</span>
             </div>
 
@@ -31,7 +31,7 @@
             </h1>
 
             <p>
-                {{ $chain['description'] }} Walk in today at over 20,000 certified Quest Diagnostics &amp; Labcorp partner collection facilities across all 50 states. Confidential Medical Review Officer (MRO) verified results delivered in {{ $chain['turnaround'] }}.
+                {{ $chain['description'] }} Test today at over 20,000 certified Quest Diagnostics &amp; Labcorp partner collection facilities across all 50 states. Confidential Medical Review Officer (MRO) verified results delivered in {{ $chain['turnaround'] }}.
             </p>
 
             <ul class="hero-split-checklist">
@@ -79,7 +79,7 @@
                         </span>
                     </div>
                     <h3 class="service-order-title">{{ $chain['name'] }} Pass</h3>
-                    <p class="service-order-subtitle">Same-day walk-in authorization with electronic barcode pass</p>
+                    <p class="service-order-subtitle">Same-day testing authorization with electronic barcode pass</p>
                 </div>
 
                 <div class="service-order-price-row">
@@ -165,7 +165,7 @@
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
                 <div>
-                    <div class="service-trust-title">Same-Day Walk-Ins</div>
+                    <div class="service-trust-title">Same-Day Testing</div>
                     <div class="service-trust-sub">Electronic Donor Pass in 2 Min</div>
                 </div>
             </div>
@@ -188,7 +188,7 @@
     <div class="container">
         <div class="section-header">
             <span class="section-eyebrow">HOW TESTING WORKS</span>
-            <h2 class="section-title">Fast &amp; Simple Same-Day Walk-In Process</h2>
+            <h2 class="section-title">Fast &amp; Simple Same-Day Testing Process</h2>
             <p class="section-desc">Get tested today at a certified partner collection site near you in four easy steps:</p>
         </div>
 
@@ -205,7 +205,7 @@
             </div>
             <div class="process-card-step">
                 <div class="process-step-num">03.</div>
-                <h3>Walk-In Collection</h3>
+                <h3>Same-Day Collection</h3>
                 <p>Show your digital barcode pass on your smartphone. Certified technicians collect your specimen with chain of custody integrity.</p>
             </div>
             <div class="process-card-step">
@@ -230,7 +230,7 @@
 
         <!-- Pre-registration notice banner -->
         <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:10px; padding:14px 20px; margin-bottom:24px; text-align:center; color:#991B1B; font-size:13.5px; font-weight:600;">
-            <span style="color:#16A34A; font-weight:800;">✓ Same-Day Walk-Ins Accepted</span> &bull; <strong style="color:#C1121F;">Pre-Registration Required:</strong> You must purchase online or by phone to generate your electronic barcode donor pass before walking into partner facilities.
+            <span style="color:#16A34A; font-weight:800;">✓ Same-Day Testing Available</span> &bull; <strong style="color:#C1121F;">Pre-Registration Required:</strong> You must purchase online or by phone to generate your electronic barcode donor pass before arriving at partner facilities.
         </div>
 
         <!-- Popular States Quick Bar -->
@@ -366,7 +366,7 @@
                 @if($slug !== $chain['slug'])
                     <article class="product-card">
                         <span class="product-badge">{{ $other['specimen'] }}</span>
-                        <div class="product-cat-tag">Nationwide Walk-In</div>
+                        <div class="product-cat-tag">Nationwide Network</div>
                         <h3 class="product-name">{{ $other['name'] }}</h3>
 
                         <div class="product-price-box">
@@ -408,7 +408,7 @@
         <div class="pseo-faq-grid">
             <div class="pseo-faq-card">
                 <h3>Do I need a doctor's prescription or appointment?</h3>
-                <p>No. When you register online with Certified Drug Test Centers, a physician order and electronic chain of custody form (eCCF) are automatically generated. You can walk in same-day to any verified partner collection facility during normal business hours.</p>
+                <p>No. When you register online with Certified Drug Test Centers, a physician order and electronic chain of custody form (eCCF) are automatically generated. You can test same-day at any verified partner collection facility during normal business hours.</p>
             </div>
             <div class="pseo-faq-card">
                 <h3>How quickly do I receive my electronic donor pass?</h3>

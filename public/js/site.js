@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       <strong style="color:#0B2545; font-size:13.5px;">${loc.name}</strong>
                     </div>
                     <div style="font-size:12px; color:#475569;">${addrDisplay}</div>
-                    <div style="font-size:11px; color:#16a34a; font-weight:700; margin-top:2px;">● Walk-Ins Accepted Today</div>
+                    <div style="font-size:11px; color:#16a34a; font-weight:700; margin-top:2px;">● Same-Day Testing Available</div>
                     <div style="font-size:11px; color:#64748B; margin-top:2px;">🕒 ${loc.hours || 'Mon-Fri 8:00 AM - 5:00 PM'}</div>
                   </div>
                   <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap;">
@@ -798,7 +798,7 @@ function lookupZipModal() {
             <div>
               <div class="global-zip-item-title">Quest Diagnostics & Labcorp Partner Facilities Serving ZIP ${zip}</div>
               <div class="global-zip-item-address">Certified collection network covering all 50 states</div>
-              <div class="global-zip-item-hours">● Walk-in registration available immediately upon online checkout</div>
+              <div class="global-zip-item-hours">● Donor pass issued immediately upon online checkout</div>
             </div>
             <a href="/checkout?zip=${encodeURIComponent(zip)}" class="btn btn-primary btn-sm" style="white-space:nowrap;">
               Schedule Test Online &rarr;

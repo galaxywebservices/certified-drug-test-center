@@ -31,7 +31,7 @@
             </h1>
 
             <p>
-                Certified Drug Test Centers provides fast, confidential same-day drug, alcohol, DOT, and specialized clinical testing. Register online in 2 minutes, receive an immediate electronic donor pass barcode, and walk into any verified Quest Diagnostics or Labcorp partner facility across all 50 states.
+                Certified Drug Test Centers provides fast, confidential same-day drug, alcohol, DOT, and specialized clinical testing. Register online in 2 minutes, receive an immediate electronic donor pass barcode, and test at any verified Quest Diagnostics or Labcorp partner facility across all 50 states.
             </p>
 
             <ul class="hero-split-checklist">
@@ -156,7 +156,7 @@
                     <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                 </div>
                 <div>
-                    <div class="service-trust-title">Same-Day Walk-Ins</div>
+                    <div class="service-trust-title">Same-Day Testing</div>
                     <div class="service-trust-sub">Electronic Donor Pass in 2 Min</div>
                 </div>
             </div>
@@ -196,7 +196,7 @@
             </div>
             <div class="process-card-step">
                 <div class="process-step-num">03.</div>
-                <h3>Walk-In Collection</h3>
+                <h3>Same-Day Collection</h3>
                 <p>Show your pass on your smartphone. The certified collection site handles testing with SAMHSA laboratory analysis.</p>
             </div>
             <div class="process-card-step">
@@ -240,7 +240,7 @@
                 @endphp
                 <article class="product-card" data-category="{{ $catClass }}">
                     <span class="product-badge">{{ $chain['specimen'] }}</span>
-                    <div class="product-cat-tag">Nationwide Walk-In</div>
+                    <div class="product-cat-tag">Nationwide Network</div>
                     <h3 class="product-name">{{ $chain['name'] }}</h3>
 
                     <div class="product-price-box">

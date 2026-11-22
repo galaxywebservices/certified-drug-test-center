@@ -38,7 +38,7 @@
             </h1>
 
             <p>
-                {{ $homeSettings['hero_subtitle'] ?? 'Get your electronic donor pass in 2 minutes. Walk in today at over 20,000 Quest Diagnostics and Labcorp certified collection sites nationwide. No doctor order or appointment necessary.' }}
+                {{ $homeSettings['hero_subtitle'] ?? 'Get your electronic donor pass in 2 minutes. Test today at over 20,000 Quest Diagnostics and Labcorp certified collection sites nationwide. No doctor order or appointment necessary.' }}
             </p>
 
             <ul class="hero-split-checklist">
@@ -321,7 +321,7 @@
             </div>
             <div class="process-card-step">
                 <div class="process-step-num">Step 3</div>
-                <h3>{{ $homeSettings['step3_title'] ?? 'Walk-In Collection' }}</h3>
+                <h3>{{ $homeSettings['step3_title'] ?? 'Same-Day Collection' }}</h3>
                 <p>{{ $homeSettings['step3_desc'] ?? 'Show your pass on your smartphone. The certified collection site handles testing with SAMHSA laboratory analysis.' }}</p>
             </div>
             <div class="process-card-step">
@@ -467,7 +467,7 @@
         </div>
 
         <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:8px; padding:12px 18px; margin-bottom:20px; text-align:center; color:#991B1B; font-size:13.5px; font-weight:600;">
-            <span style="color:#16A34A; font-weight:800;">✓ Walk-Ins Accepted Today</span> &bull; <strong style="color:#C1121F;">Pre-Registration Required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
+            <span style="color:#16A34A; font-weight:800;">✓ Same-Day Testing Available</span> &bull; <strong style="color:#C1121F;">Pre-Registration Required:</strong> You must receive a registration form/donor pass prior to proceeding to the testing center.
         </div>
 
         <div class="state-search-bar">

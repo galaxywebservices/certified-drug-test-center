@@ -295,7 +295,7 @@
                         </div>
                         <div style="text-align:center; padding:14px; background:#F8FAFC; border-radius:8px; border:1px solid #E2E8F0;">
                             <div style="font-size:22px; font-weight:900; color:#0B2545; margin-bottom:4px;">2</div>
-                            <div style="font-size:13px; font-weight:700; color:#0B2545; margin-bottom:4px;">Walk In Today</div>
+                            <div style="font-size:13px; font-weight:700; color:#0B2545; margin-bottom:4px;">Test Today</div>
                             <div style="font-size:11.5px; color:#64748B;">Visit any of 20,000+ Quest or Labcorp partner sites. No appointment needed.</div>
                         </div>
                         <div style="text-align:center; padding:14px; background:#F8FAFC; border-radius:8px; border:1px solid #E2E8F0;">
@@ -329,7 +329,7 @@
                     </li>
                     <li>
                         <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                        Walk-in Same-Day at 20,000+ Centers
+                        Same-Day Testing at 20,000+ Centers
                     </li>
                     <li>
                         <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
