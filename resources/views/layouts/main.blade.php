@@ -338,90 +338,146 @@
                 </svg>
             </button>
             <ul class="nav-menu" id="navMenu">
-                <li class="nav-item has-dropdown">
-                    <a href="{{ url('/category/urine') }}" class="nav-link">
-                        <span>Urine Tests</span>
-                        <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
-                    </a>
-                    <ul class="nav-dropdown">
-                        <li><a href="{{ url('/product/5-panel-nondot') }}" class="nav-dropdown-link">5 Panel NON-DOT ($89.99)</a></li>
-                        <li><a href="{{ url('/product/5-panel-exp-opiates') }}" class="nav-dropdown-link">5 Panel + Exp Opiates ($99.99)</a></li>
-                        <li><a href="{{ url('/product/10-panel') }}" class="nav-dropdown-link">10 Panel Drug Test ($109.99)</a></li>
-                        <li><a href="{{ url('/product/10-panel-exp-opiates') }}" class="nav-dropdown-link">10 Panel + Exp Opiates ($119.99)</a></li>
-                        <li><a href="{{ url('/product/12-panel-comprehensive') }}" class="nav-dropdown-link">12 Panel Comprehensive ($139.99)</a></li>
-                        <li><a href="{{ url('/category/urine') }}" class="nav-dropdown-link nav-dropdown-viewall">View All Urine Tests &rarr;</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item has-dropdown">
-                    <a href="{{ url('/category/dot') }}" class="nav-link">
-                        <span>DOT Tests/Services</span>
-                        <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
-                    </a>
-                    <ul class="nav-dropdown">
-                        <li><a href="{{ url('/product/5-panel-dot') }}" class="nav-dropdown-link">5 Panel DOT Drug Screen ($99.99)</a></li>
-                        <li><a href="{{ url('/product/dot-breath-alcohol') }}" class="nav-dropdown-link">DOT Breath Alcohol Test ($89.99)</a></li>
-                        <li><a href="{{ url('/product/dot-physical') }}" class="nav-dropdown-link">DOT Physical Exam ($159.99)</a></li>
-                        <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}" class="nav-dropdown-link">DOT Random Consortium ($99.99)</a></li>
-                        <li><a href="{{ url('/product/5-panel-return-to-duty') }}" class="nav-dropdown-link">FMCSA Return to Duty (RTD)</a></li>
-                        <li><a href="{{ url('/category/dot') }}" class="nav-dropdown-link nav-dropdown-viewall">View All DOT Services &rarr;</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/category/hair') }}" class="nav-link">
-                        Hair Tests
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/category/alcohol') }}" class="nav-link">
-                        Alcohol/EtG Tests
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/category/oral-fluid-testing') }}" class="nav-link">
-                        Oral Fluid Tests
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/category/occupational-health') }}" class="nav-link">
-                        Occupational (OCC) Tests
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/category/lab-blood') }}" class="nav-link">
-                        Clinical Tests
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/category/dna-testing') }}" class="nav-link">
-                        DNA Tests
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ url('/category/on-site-mobile') }}" class="nav-link">
-                        MOBILE TESTING
-                    </a>
-                </li>
-                <li class="nav-item has-dropdown">
-                    <a href="{{ route('locations.index') }}" class="nav-link">
-                        <span>LOCATIONS</span>
-                        <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
-                    </a>
-                    <ul class="nav-dropdown" style="min-width: 280px; max-height: 420px; overflow-y: auto;">
-                        <li><a href="{{ url('/certified-drug-test-centers') }}" class="nav-dropdown-link" style="color:#C1121F; font-weight:700;">★ Certified Drug Test Centers (All 50 States)</a></li>
-                        <li><a href="{{ route('locations.index') }}" class="nav-dropdown-link" style="font-weight:700; border-bottom:1px solid #E2E8F0;">Browse All Testing Locations &rarr;</a></li>
-                        @if(isset($globalStates))
-                            @foreach($globalStates->take(12) as $navState)
-                            <li><a href="{{ url('/locations/' . $navState->slug) }}" class="nav-dropdown-link">{{ $navState->name }} Drug Testing</a></li>
-                            @endforeach
+                @if(isset($navigationItems) && $navigationItems->count() > 0)
+                    @foreach($navigationItems as $topNav)
+                        @php
+                            $hasChildren = $topNav->activeChildren->count() > 0;
+                            $isLocations = ($topNav->title === 'LOCATIONS' || $topNav->css_class === 'nav-locations-special');
+                            $isEmployer = ($topNav->title === 'EMPLOYER SERVICES' || $topNav->css_class === 'nav-item-employer');
+                        @endphp
+                        @if($isLocations)
+                            <li class="nav-item has-dropdown">
+                                <a href="{{ $topNav->href }}" class="nav-link" target="{{ $topNav->target }}">
+                                    <span>{{ $topNav->title }}</span>
+                                    <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
+                                </a>
+                                <ul class="nav-dropdown" style="min-width: 280px; max-height: 420px; overflow-y: auto;">
+                                    @if($hasChildren)
+                                        @foreach($topNav->activeChildren as $locChild)
+                                            <li><a href="{{ $locChild->href }}" class="nav-dropdown-link {{ $locChild->css_class }}" target="{{ $locChild->target }}" style="{{ $locChild->css_class === 'nav-dropdown-red-highlight' ? 'color:#C1121F; font-weight:700;' : ($locChild->css_class === 'nav-dropdown-bold-divider' ? 'font-weight:700; border-bottom:1px solid #E2E8F0;' : '') }}">{{ $locChild->title }}</a></li>
+                                        @endforeach
+                                    @else
+                                        <li><a href="{{ url('/certified-drug-test-centers') }}" class="nav-dropdown-link" style="color:#C1121F; font-weight:700;">★ Certified Drug Test Centers (All 50 States)</a></li>
+                                        <li><a href="{{ route('locations.index') }}" class="nav-dropdown-link" style="font-weight:700; border-bottom:1px solid #E2E8F0;">Browse All Testing Locations &rarr;</a></li>
+                                    @endif
+                                    @if(isset($globalStates))
+                                        @foreach($globalStates->take(12) as $navState)
+                                        <li><a href="{{ url('/locations/' . $navState->slug) }}" class="nav-dropdown-link">{{ $navState->name }} Drug Testing</a></li>
+                                        @endforeach
+                                    @endif
+                                    <li><a href="{{ route('locations.index') }}" class="nav-dropdown-link nav-dropdown-viewall">View All 50 State Directories &rarr;</a></li>
+                                </ul>
+                            </li>
+                        @elseif($hasChildren)
+                            <li class="nav-item has-dropdown">
+                                <a href="{{ $topNav->href }}" class="nav-link" target="{{ $topNav->target }}">
+                                    <span>{{ $topNav->title }}</span>
+                                    <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
+                                </a>
+                                <ul class="nav-dropdown">
+                                    @foreach($topNav->activeChildren as $subNav)
+                                        <li>
+                                            <a href="{{ $subNav->href }}" class="nav-dropdown-link {{ $subNav->css_class }}" target="{{ $subNav->target }}">
+                                                {{ $subNav->title }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a href="{{ $topNav->href }}" class="nav-link {{ $topNav->css_class }}" target="{{ $topNav->target }}" @if($isEmployer) style="color:#F59E0B; font-weight:700;" @endif>
+                                    {{ $topNav->title }}
+                                </a>
+                            </li>
                         @endif
-                        <li><a href="{{ route('locations.index') }}" class="nav-dropdown-link nav-dropdown-viewall">View All 50 State Directories &rarr;</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('employers.index') }}" class="nav-link" style="color:#F59E0B; font-weight:700;">
-                        EMPLOYER SERVICES
-                    </a>
-                </li>
+                    @endforeach
+                @else
+                    <li class="nav-item has-dropdown">
+                        <a href="{{ url('/category/urine') }}" class="nav-link">
+                            <span>Urine Tests</span>
+                            <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
+                        </a>
+                        <ul class="nav-dropdown">
+                            <li><a href="{{ url('/product/5-panel-nondot') }}" class="nav-dropdown-link">5 Panel NON-DOT ($89.99)</a></li>
+                            <li><a href="{{ url('/product/5-panel-exp-opiates') }}" class="nav-dropdown-link">5 Panel + Exp Opiates ($99.99)</a></li>
+                            <li><a href="{{ url('/product/10-panel') }}" class="nav-dropdown-link">10 Panel Drug Test ($109.99)</a></li>
+                            <li><a href="{{ url('/product/10-panel-exp-opiates') }}" class="nav-dropdown-link">10 Panel + Exp Opiates ($119.99)</a></li>
+                            <li><a href="{{ url('/product/12-panel-comprehensive') }}" class="nav-dropdown-link">12 Panel Comprehensive ($139.99)</a></li>
+                            <li><a href="{{ url('/category/urine') }}" class="nav-dropdown-link nav-dropdown-viewall">View All Urine Tests &rarr;</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="{{ url('/category/dot') }}" class="nav-link">
+                            <span>DOT Tests/Services</span>
+                            <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
+                        </a>
+                        <ul class="nav-dropdown">
+                            <li><a href="{{ url('/product/5-panel-dot') }}" class="nav-dropdown-link">5 Panel DOT Drug Screen ($99.99)</a></li>
+                            <li><a href="{{ url('/product/dot-breath-alcohol') }}" class="nav-dropdown-link">DOT Breath Alcohol Test ($89.99)</a></li>
+                            <li><a href="{{ url('/product/dot-physical') }}" class="nav-dropdown-link">DOT Physical Exam ($159.99)</a></li>
+                            <li><a href="{{ url('/product/1-year-consortium-membership-dot-drug-test') }}" class="nav-dropdown-link">DOT Random Consortium ($99.99)</a></li>
+                            <li><a href="{{ url('/product/5-panel-return-to-duty') }}" class="nav-dropdown-link">FMCSA Return to Duty (RTD)</a></li>
+                            <li><a href="{{ url('/category/dot') }}" class="nav-dropdown-link nav-dropdown-viewall">View All DOT Services &rarr;</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/category/hair') }}" class="nav-link">
+                            Hair Tests
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/category/alcohol') }}" class="nav-link">
+                            Alcohol/EtG Tests
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/category/oral-fluid-testing') }}" class="nav-link">
+                            Oral Fluid Tests
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/category/occupational-health') }}" class="nav-link">
+                            Occupational (OCC) Tests
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/category/lab-blood') }}" class="nav-link">
+                            Clinical Tests
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/category/dna-testing') }}" class="nav-link">
+                            DNA Tests
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ url('/category/on-site-mobile') }}" class="nav-link">
+                            MOBILE TESTING
+                        </a>
+                    </li>
+                    <li class="nav-item has-dropdown">
+                        <a href="{{ route('locations.index') }}" class="nav-link">
+                            <span>LOCATIONS</span>
+                            <svg class="nav-chevron" width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"></path></svg>
+                        </a>
+                        <ul class="nav-dropdown" style="min-width: 280px; max-height: 420px; overflow-y: auto;">
+                            <li><a href="{{ url('/certified-drug-test-centers') }}" class="nav-dropdown-link" style="color:#C1121F; font-weight:700;">★ Certified Drug Test Centers (All 50 States)</a></li>
+                            <li><a href="{{ route('locations.index') }}" class="nav-dropdown-link" style="font-weight:700; border-bottom:1px solid #E2E8F0;">Browse All Testing Locations &rarr;</a></li>
+                            @if(isset($globalStates))
+                                @foreach($globalStates->take(12) as $navState)
+                                <li><a href="{{ url('/locations/' . $navState->slug) }}" class="nav-dropdown-link">{{ $navState->name }} Drug Testing</a></li>
+                                @endforeach
+                            @endif
+                            <li><a href="{{ route('locations.index') }}" class="nav-dropdown-link nav-dropdown-viewall">View All 50 State Directories &rarr;</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('employers.index') }}" class="nav-link" style="color:#F59E0B; font-weight:700;">
+                            EMPLOYER SERVICES
+                        </a>
+                    </li>
+                @endif
                 <li class="mobile-nav-footer">
                     <a href="tel:18009854339" class="mobile-nav-call-btn">
                         <svg width="15" height="15" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 4V3z"></path></svg>

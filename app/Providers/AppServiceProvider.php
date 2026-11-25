@@ -29,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
                     ->get(['id', 'name', 'slug', 'abbr']);
             });
             $view->with('globalStates', $globalStates);
+
+            // Dynamic header toolbar navigation items with cached children
+            $navigationItems = \App\Models\NavigationItem::getTree(true);
+            $view->with('navigationItems', $navigationItems);
         });
     }
 }

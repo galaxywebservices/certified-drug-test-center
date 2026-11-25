@@ -24,7 +24,7 @@ class SitemapArchitectureTest extends TestCase
     }
 
     /**
-     * Issue 1: Flagship hub /certified-drug-test-centers is in sitemap-core.xml and /locations 301-redirects to it.
+     * Issue 1: Flagship hub /certified-drug-test-centers is in sitemap-core.xml and /locations serves 50-state directory.
      */
     public function test_core_sitemap_includes_flagship_hub_and_locations_redirects(): void
     {
@@ -38,10 +38,11 @@ class SitemapArchitectureTest extends TestCase
         $this->assertStringContainsString('/reviews', $content);
         $this->assertStringContainsString('/contact-us', $content);
 
-        // /locations directory root should 301 redirect to flagship hub
+        // /locations directory root renders 50-state directory hub
         $locResponse = $this->get('/locations');
-        $locResponse->assertStatus(301);
-        $locResponse->assertRedirect('/certified-drug-test-centers');
+        $locResponse->assertStatus(200);
+        $locResponse->assertSee('Nationwide Drug Testing Collection Locations');
+        $locResponse->assertSee('Select Your State');
     }
 
     /**

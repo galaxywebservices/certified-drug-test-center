@@ -419,9 +419,36 @@
 
                     <div class="form-group">
                         <label style="display:flex; align-items:center; gap:8px; font-weight:600; cursor:pointer;">
-                            <input type="checkbox" name="show_in_menu" value="1" {{ $page->show_in_menu ? 'checked' : '' }}>
+                            <input type="checkbox" name="show_in_menu" id="toggle_show_in_menu" value="1" {{ ($page->show_in_menu || ($navItem ?? false)) ? 'checked' : '' }} onchange="toggleNavFields(this.checked)">
                             <span>Show in Header Navigation</span>
                         </label>
+                    </div>
+
+                    <div id="navMenuControls" style="{{ ($page->show_in_menu || ($navItem ?? false)) ? '' : 'display:none;' }}">
+                        <div class="form-group">
+                            <label class="form-label" for="menu_parent_id">Parent Navigation Menu</label>
+                            <select name="menu_parent_id" id="menu_parent_id" class="form-control">
+                                <option value="">[ Top-Level Toolbar Item ]</option>
+                                @if(isset($navigationParents))
+                                    @foreach($navigationParents as $navParent)
+                                        <option value="{{ $navParent->id }}" {{ (old('menu_parent_id', $page->menu_parent_id ?? ($navItem->parent_id ?? '')) == $navParent->id) ? 'selected' : '' }}>
+                                            {{ $navParent->title }}
+                                        </option>
+                                    @endforeach
+                                @endif
+                            </select>
+                            <div class="form-hint">Select the dropdown where this page should appear.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="menu_order">Submenu Display Order</label>
+                            <input type="number" name="menu_order" id="menu_order" value="{{ old('menu_order', $page->menu_order ?: ($navItem->order ?? 1)) }}" class="form-control" placeholder="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="menu_name">Navigation Label (Optional)</label>
+                            <input type="text" name="menu_name" id="menu_name" value="{{ old('menu_name', $page->menu_name ?? ($navItem->title ?? '')) }}" class="form-control" placeholder="Defaults to Page Title">
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; padding:12px; margin-top:12px;">
@@ -621,6 +648,11 @@
             if (hero) hero.checked = true;
             if (fullWidth) fullWidth.checked = true;
         }
+    }
+
+    function toggleNavFields(show) {
+        const el = document.getElementById('navMenuControls');
+        if (el) el.style.display = show ? 'block' : 'none';
     }
 </script>
 @endsection

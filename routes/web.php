@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\AdminSettingController;
 use App\Http\Controllers\Admin\AdminOrderController;
 use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\AdminHomepageController;
+use App\Http\Controllers\Admin\AdminNavigationController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Admin\AdminLeadController;
 use App\Http\Controllers\OrderTrackingController;
@@ -231,6 +232,16 @@ Route::prefix('admin')->group(function () {
 
         // CMS Pages & Visual Builder
         Route::resource('pages', AdminPageController::class, ['as' => 'admin']);
+
+        // Navigation Menu Management (Toolbar & Submenu Ordering)
+        Route::get('/navigation', [AdminNavigationController::class, 'index'])->name('admin.navigation.index');
+        Route::post('/navigation', [AdminNavigationController::class, 'store'])->name('admin.navigation.store');
+        Route::put('/navigation/{navigation}', [AdminNavigationController::class, 'update'])->name('admin.navigation.update');
+        Route::delete('/navigation/{navigation}', [AdminNavigationController::class, 'destroy'])->name('admin.navigation.destroy');
+        Route::post('/navigation-reorder', [AdminNavigationController::class, 'reorder'])->name('admin.navigation.reorder');
+        Route::post('/navigation/{navigation}/toggle', [AdminNavigationController::class, 'toggleStatus'])->name('admin.navigation.toggle');
+        Route::post('/navigation/quick-add-page', [AdminNavigationController::class, 'quickAddPage'])->name('admin.navigation.quick-add-page');
+        Route::post('/navigation/reset-default', [AdminNavigationController::class, 'resetDefault'])->name('admin.navigation.reset-default');
 
         // Dedicated HomePage Content Editor
         Route::get('/homepage', [AdminHomepageController::class, 'edit'])->name('admin.homepage.edit');

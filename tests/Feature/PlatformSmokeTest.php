@@ -28,11 +28,13 @@ class PlatformSmokeTest extends TestCase
         $response->assertSee('Urine');
     }
 
-    public function test_pseo_locations_directory_redirects_to_national_hub()
+    public function test_pseo_locations_directory_renders_50_state_hub()
     {
         $response = $this->get('/locations');
-        $response->assertRedirect('/certified-drug-test-centers');
-        $response->assertStatus(301);
+        $response->assertStatus(200);
+        $response->assertSee('Nationwide Drug Testing Collection Locations');
+        $response->assertSee('Select Your State');
+        $response->assertSee('/locations/florida');
     }
 
     public function test_pseo_city_guide_loads_with_locations()

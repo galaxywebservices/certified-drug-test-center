@@ -19,6 +19,8 @@ class Page extends Model
         'blocks_json',
         'is_published',
         'show_in_menu',
+        'parent_menu',
+        'menu_parent_id',
         'menu_name',
         'menu_order',
         'meta_title',
@@ -48,6 +50,16 @@ class Page extends Model
     public function scopePublished($query)
     {
         return $query->where('is_published', true);
+    }
+
+    public function navigationParent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(NavigationItem::class, 'menu_parent_id');
+    }
+
+    public function navigationItem(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(NavigationItem::class, 'page_id');
     }
 
     public function getContentAttribute($value)

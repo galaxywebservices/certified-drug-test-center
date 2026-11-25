@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\NavigationItem;
 use App\Models\Page;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -47,7 +48,8 @@ class AdminPageController extends Controller
     public function create()
     {
         $products = Product::where('is_active', true)->orderBy('name')->get();
-        return view('admin.pages.create', compact('products'));
+        $navigationParents = NavigationItem::topLevel()->orderBy('order')->get();
+        return view('admin.pages.create', compact('products', 'navigationParents'));
     }
 
     public function store(Request $request)
@@ -64,7 +66,9 @@ class AdminPageController extends Controller
             'blocks_json' => 'nullable|string',
             'is_published' => 'boolean',
             'show_in_menu' => 'boolean',
+            'menu_parent_id' => 'nullable|exists:navigation_items,id',
             'menu_name' => 'nullable|string|max:100',
+            'menu_order' => 'nullable|integer|min:0',
             'meta_title' => 'nullable|string',
             'meta_description' => 'nullable|string',
             'canonical_url' => 'nullable|string',
@@ -111,7 +115,9 @@ class AdminPageController extends Controller
             'blocks_json' => $blocks,
             'is_published' => $request->boolean('is_published', true),
             'show_in_menu' => $request->boolean('show_in_menu'),
+            'menu_parent_id' => $request->boolean('show_in_menu') ? ($validated['menu_parent_id'] ?? null) : null,
             'menu_name' => $validated['menu_name'] ?? null,
+            'menu_order' => $validated['menu_order'] ?? 0,
             'meta_title' => $validated['meta_title'] ?? "{$validated['title']} | Certified Drug Test Center",
             'meta_description' => $validated['meta_description'] ?? null,
             'canonical_url' => $validated['canonical_url'] ?? url('/' . $slug),
@@ -130,6 +136,20 @@ class AdminPageController extends Controller
         }
 
         $page = Page::create($pageData);
+
+        // Sync with Navigation Items if flagged to show in header navigation
+        if ($page->show_in_menu) {
+            NavigationItem::updateOrCreate(
+                ['page_id' => $page->id],
+                [
+                    'title' => $page->menu_name ?: $page->title,
+                    'url' => '/' . ltrim($page->slug, '/'),
+                    'parent_id' => $page->menu_parent_id,
+                    'order' => $page->menu_order ?: 1,
+                    'is_active' => $page->is_published,
+                ]
+            );
+        }
 
         // Auto-create PageBuilder entry
         $pbRoute = '/' . ltrim($page->slug, '/');
@@ -206,7 +226,10 @@ class AdminPageController extends Controller
             $pbPageId = $pbTranslation->page_id;
         }
 
-        return view('admin.pages.edit', compact('page', 'products', 'pbPageId'));
+        $navigationParents = NavigationItem::topLevel()->orderBy('order')->get();
+        $navItem = NavigationItem::where('page_id', $page->id)->first();
+
+        return view('admin.pages.edit', compact('page', 'products', 'pbPageId', 'navigationParents', 'navItem'));
     }
 
     public function update(Request $request, Page $page)
@@ -223,7 +246,9 @@ class AdminPageController extends Controller
             'blocks_json' => 'nullable|string',
             'is_published' => 'boolean',
             'show_in_menu' => 'boolean',
+            'menu_parent_id' => 'nullable|exists:navigation_items,id',
             'menu_name' => 'nullable|string|max:100',
+            'menu_order' => 'nullable|integer|min:0',
             'meta_title' => 'nullable|string',
             'meta_description' => 'nullable|string',
             'canonical_url' => 'nullable|string',
@@ -271,7 +296,9 @@ class AdminPageController extends Controller
             'blocks_json' => $blocks,
             'is_published' => $request->boolean('is_published'),
             'show_in_menu' => $request->boolean('show_in_menu'),
+            'menu_parent_id' => $request->boolean('show_in_menu') ? ($validated['menu_parent_id'] ?? null) : null,
             'menu_name' => $validated['menu_name'] ?? null,
+            'menu_order' => $validated['menu_order'] ?? 0,
             'meta_title' => $validated['meta_title'] ?? null,
             'meta_description' => $validated['meta_description'] ?? null,
             'canonical_url' => $validated['canonical_url'] ?? null,
@@ -333,11 +360,28 @@ class AdminPageController extends Controller
             }
         }
 
+        // Sync with Navigation Items
+        if ($page->show_in_menu) {
+            NavigationItem::updateOrCreate(
+                ['page_id' => $page->id],
+                [
+                    'title' => $page->menu_name ?: $page->title,
+                    'url' => '/' . ltrim($page->slug, '/'),
+                    'parent_id' => $page->menu_parent_id,
+                    'order' => $page->menu_order ?: 1,
+                    'is_active' => $page->is_published,
+                ]
+            );
+        } else {
+            NavigationItem::where('page_id', $page->id)->delete();
+        }
+
         return redirect()->route('admin.pages.index')->with('success', 'Page updated successfully.');
     }
 
     public function destroy(Page $page)
     {
+        NavigationItem::where('page_id', $page->id)->delete();
         $page->delete();
         return redirect()->route('admin.pages.index')->with('success', 'Page deleted.');
     }

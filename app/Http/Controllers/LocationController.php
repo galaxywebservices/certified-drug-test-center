@@ -59,7 +59,12 @@ class LocationController extends Controller
             }
         }
 
-        return redirect()->to('/certified-drug-test-centers', 301);
+        $states = State::where('is_active', true)->orderBy('name')->get();
+        $pageTitle = 'Drug Testing Locations by State | Certified Drug Test Centers';
+        $metaDescription = 'Find certified drug and alcohol testing collection facilities across all 50 states. Order online for an immediate electronic donor pass at 20,000+ Quest & Labcorp sites.';
+        $canonicalUrl = url('/locations');
+
+        return view('locations.index', compact('states', 'pageTitle', 'metaDescription', 'canonicalUrl'));
     }
 
     /**
