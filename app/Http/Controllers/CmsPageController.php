@@ -18,6 +18,12 @@ class CmsPageController extends Controller
             ->first();
 
         if (!$page) {
+            $page = Page::whereRaw('LOWER(slug) = ?', [strtolower($cleanSlug)])
+                ->where('is_published', true)
+                ->first();
+        }
+
+        if (!$page) {
             abort(404);
         }
 

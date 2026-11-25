@@ -60,8 +60,7 @@
     <meta name="twitter:description" content="{{ $metaDescription ?? 'Same-day drug & alcohol testing at 20,000+ local certified collection centers nationwide.' }}">
     <meta name="twitter:image" content="{{ asset('images/logo.png') }}">
 
-    <!-- Favicon & Preload Hero Logo Asset -->
-    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <!-- Preload Hero Logo Asset -->
     <link rel="preload" as="image" href="{{ asset('images/logo.png') }}" type="image/png">
 
     <!-- Google Fonts: Montserrat (American authoritative headlines) & Inter (ultra-readable body) -->
@@ -249,9 +248,9 @@
                     $itemData = [
                         '@type' => 'MedicalBusiness',
                         'name' => $loc->name,
-                        'medicalSpecialty' => 'SubstanceAbuseScreening',
+                        'medicalSpecialty' => 'LaboratoryScience',
                         'telephone' => '+1-800-985-4339',
-                        'url' => $canonicalUrl,
+                        'url' => !empty($loc->id) ? route('locations.show', ['id' => $loc->id]) : $canonicalUrl,
                         'address' => [
                             '@type' => 'PostalAddress',
                             'streetAddress' => $loc->address1,
@@ -793,33 +792,35 @@
                 Our certified collection specialists travel to your workplace, construction site, or warehouse. Minimal downtime, 100% compliant.
             </p>
 
-            <form onsubmit="event.preventDefault(); alert('Mobile testing request received! A corporate coordinator will contact you within 15 minutes.'); closeMobileQuoteModal();">
+            <form id="mobileQuoteForm" action="{{ route('contact.mobile-quote') }}" method="POST" onsubmit="submitMobileQuote(event)">
+                @csrf
+                <div id="mobileQuoteStatus" style="display:none; padding:10px 14px; border-radius:6px; font-size:13px; font-weight:600; margin-bottom:14px;"></div>
                 <div class="modal-form-group">
                     <label for="mobCompany">Company Name *</label>
-                    <input type="text" id="mobCompany" required placeholder="ABC Logistics LLC">
+                    <input type="text" id="mobCompany" name="company" required placeholder="ABC Logistics LLC">
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                     <div class="modal-form-group">
                         <label for="mobName">Contact Person *</label>
-                        <input type="text" id="mobName" required placeholder="Jane Smith">
+                        <input type="text" id="mobName" name="name" required placeholder="Jane Smith">
                     </div>
                     <div class="modal-form-group">
                         <label for="mobPhone">Phone Number *</label>
-                        <input type="tel" id="mobPhone" required placeholder="(800)-985-4339">
+                        <input type="tel" id="mobPhone" name="phone" required placeholder="(800)-985-4339">
                     </div>
                 </div>
                 <div class="modal-form-group">
                     <label for="mobEmail">Email Address *</label>
-                    <input type="email" id="mobEmail" required placeholder="safety@abclogistics.com">
+                    <input type="email" id="mobEmail" name="email" required placeholder="safety@abclogistics.com">
                 </div>
                 <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
                     <div class="modal-form-group">
                         <label for="mobLocation">City & State (or ZIP) *</label>
-                        <input type="text" id="mobLocation" required placeholder="Dallas, TX">
+                        <input type="text" id="mobLocation" name="location" required placeholder="Dallas, TX">
                     </div>
                     <div class="modal-form-group">
                         <label for="mobPeople">Estimated Donors to Test *</label>
-                        <select id="mobPeople" required>
+                        <select id="mobPeople" name="donors" required>
                             <option value="1-5">1 - 5 Employees</option>
                             <option value="6-15">6 - 15 Employees</option>
                             <option value="16-50">16 - 50 Employees</option>
@@ -829,11 +830,11 @@
                 </div>
                 <div class="modal-form-group">
                     <label for="mobNotes">Testing Requirements / Date Requested</label>
-                    <textarea id="mobNotes" rows="3" placeholder="Specify if DOT or Non-DOT, preferred date and time..."></textarea>
+                    <textarea id="mobNotes" name="notes" rows="3" placeholder="Specify if DOT or Non-DOT, preferred date and time..."></textarea>
                 </div>
                 <div style="display:flex; justify-content:flex-end; gap:10px;">
                     <button type="button" class="btn btn-outline-navy btn-sm" onclick="closeMobileQuoteModal()">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                    <button type="submit" id="mobileQuoteSubmitBtn" class="btn btn-primary">Submit Request</button>
                 </div>
             </form>
         </div>

@@ -37,4 +37,44 @@ class ContactController extends Controller
 
         return back()->with('success', 'Thank you for reaching out! A Certified Drug Test Centers specialist will review your inquiry and contact you shortly.');
     }
+
+    public function submitMobileQuote(Request $request)
+    {
+        $validated = $request->validate([
+            'company' => 'required|string|max:150',
+            'name' => 'required|string|max:150',
+            'phone' => 'required|string|max:50',
+            'email' => 'required|email|max:150',
+            'location' => 'required|string|max:150',
+            'donors' => 'required|string|max:50',
+            'notes' => 'nullable|string|max:2000',
+        ]);
+
+        $messageLines = [
+            "Mobile On-Site Testing Quote Request",
+            "Location: {$validated['location']}",
+            "Estimated Donors: {$validated['donors']}",
+        ];
+        if (!empty($validated['notes'])) {
+            $messageLines[] = "Requirements / Date: {$validated['notes']}";
+        }
+
+        $lead = Lead::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'company' => $validated['company'],
+            'service_type' => 'mobile-testing',
+            'message' => implode("\n", $messageLines),
+            'status' => 'new',
+            'ip_address' => $request->ip(),
+        ]);
+
+        Log::info("New mobile quote lead submitted: #{$lead->id} from {$lead->name} ({$lead->email}) - {$validated['company']}");
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Mobile testing request received! A corporate coordinator will contact you within 15 minutes.',
+        ]);
+    }
 }

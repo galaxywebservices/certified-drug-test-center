@@ -85,6 +85,13 @@ Route::get('/login', fn() => redirect()->route('admin.login'))->name('login');
 // Contact Us & Corporate Consultation
 Route::get('/contact-us', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact-us', [ContactController::class, 'submit'])->middleware('throttle:15,1')->name('contact.submit');
+Route::post('/mobile-quote', [ContactController::class, 'submitMobileQuote'])->middleware('throttle:15,1')->name('contact.mobile-quote');
+
+// Canonical Lowercase Kebab-Case 301 Redirects for Legacy Mixed-Case Pages
+Route::redirect('/Fingernail-drug-Testing', '/fingernail-drug-testing', 301);
+Route::redirect('/Respirator-Fit-Testing', '/respirator-fit-testing', 301);
+Route::redirect('/Lift-Test', '/lift-test', 301);
+Route::redirect('/Tb-Testing', '/tb-testing', 301);
 
 // Dynamic Categories & Products
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('category.show');

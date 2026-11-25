@@ -604,6 +604,73 @@ function closeMobileQuoteModal() {
   }
 }
 
+async function submitMobileQuote(event) {
+  event.preventDefault();
+  const form = event.target;
+  const statusEl = document.getElementById('mobileQuoteStatus');
+  const submitBtn = document.getElementById('mobileQuoteSubmitBtn');
+
+  if (statusEl) {
+    statusEl.style.display = 'none';
+    statusEl.textContent = '';
+  }
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.dataset.originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Submitting...';
+  }
+
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: new FormData(form),
+    });
+
+    const data = await response.json().catch(() => ({}));
+
+    if (response.ok && data.success) {
+      if (statusEl) {
+        statusEl.style.display = 'block';
+        statusEl.style.background = '#DCFCE7';
+        statusEl.style.color = '#166534';
+        statusEl.style.border = '1px solid #BBF7D0';
+        statusEl.textContent = data.message || 'Request received! A corporate coordinator will contact you shortly.';
+      }
+      form.reset();
+      setTimeout(() => {
+        closeMobileQuoteModal();
+        if (statusEl) statusEl.style.display = 'none';
+      }, 2200);
+    } else {
+      const firstError = data.errors ? Object.values(data.errors).flat()[0] : null;
+      if (statusEl) {
+        statusEl.style.display = 'block';
+        statusEl.style.background = '#FEE2E2';
+        statusEl.style.color = '#991B1B';
+        statusEl.style.border = '1px solid #FECACA';
+        statusEl.textContent = firstError || data.message || 'Please check your entries and try again.';
+      }
+    }
+  } catch (err) {
+    if (statusEl) {
+      statusEl.style.display = 'block';
+      statusEl.style.background = '#FEE2E2';
+      statusEl.style.color = '#991B1B';
+      statusEl.style.border = '1px solid #FECACA';
+      statusEl.textContent = 'Network error. Please call (800)-985-4339 or try again.';
+    }
+  } finally {
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = submitBtn.dataset.originalText || 'Submit Request';
+    }
+  }
+}
+
 function scrollToPanels() {
   const el = document.getElementById('pricing-panels') || document.getElementById('products-section');
   if (el) el.scrollIntoView({ behavior: 'smooth' });

@@ -189,12 +189,12 @@ class NavigationItem extends Model
         ];
 
         // 3. Hair Tests
-        $fingernailPage = Page::where('slug', 'Fingernail-drug-Testing')->first();
+        $fingernailPage = Page::whereRaw('LOWER(slug) = ?', ['fingernail-drug-testing'])->first();
         $hairChildren = [];
         if ($fingernailPage) {
             $hairChildren[] = [
                 'title' => 'Fingernail Drug Testing',
-                'url' => '/' . ltrim($fingernailPage->slug, '/'),
+                'url' => '/' . strtolower(ltrim($fingernailPage->slug, '/')),
                 'page_id' => $fingernailPage->id,
                 'order' => 1,
             ];
@@ -209,17 +209,17 @@ class NavigationItem extends Model
         // 4. Occupational Health Tests
         $occChildren = [];
         $occOrder = 1;
-        $respiratorPage = Page::where('slug', 'Respirator-Fit-Testing')->first();
+        $respiratorPage = Page::whereRaw('LOWER(slug) = ?', ['respirator-fit-testing'])->first();
         if ($respiratorPage) {
-            $occChildren[] = ['title' => 'Respirator Fit Testing', 'url' => '/' . ltrim($respiratorPage->slug, '/'), 'page_id' => $respiratorPage->id, 'order' => $occOrder++];
+            $occChildren[] = ['title' => 'Respirator Fit Testing', 'url' => '/' . strtolower(ltrim($respiratorPage->slug, '/')), 'page_id' => $respiratorPage->id, 'order' => $occOrder++];
         }
-        $liftPage = Page::where('slug', 'Lift-Test')->first();
+        $liftPage = Page::whereRaw('LOWER(slug) = ?', ['lift-test'])->first();
         if ($liftPage) {
-            $occChildren[] = ['title' => 'Lift Tests', 'url' => '/' . ltrim($liftPage->slug, '/'), 'page_id' => $liftPage->id, 'order' => $occOrder++];
+            $occChildren[] = ['title' => 'Lift Tests', 'url' => '/' . strtolower(ltrim($liftPage->slug, '/')), 'page_id' => $liftPage->id, 'order' => $occOrder++];
         }
-        $tbPage = Page::where('slug', 'Tb-Testing')->first();
+        $tbPage = Page::whereRaw('LOWER(slug) = ?', ['tb-testing'])->first();
         if ($tbPage) {
-            $occChildren[] = ['title' => 'TB Testing', 'url' => '/' . ltrim($tbPage->slug, '/'), 'page_id' => $tbPage->id, 'order' => $occOrder++];
+            $occChildren[] = ['title' => 'TB Testing', 'url' => '/' . strtolower(ltrim($tbPage->slug, '/')), 'page_id' => $tbPage->id, 'order' => $occOrder++];
         }
         if (!empty($occChildren)) {
             $occChildren[] = ['title' => 'View All Occupational Tests →', 'url' => '/category/occupational-health', 'css_class' => 'nav-dropdown-viewall', 'order' => $occOrder++];

@@ -634,7 +634,7 @@ class PseoServiceController extends Controller
             'url' => $canonicalUrl,
             'telephone' => '+1-800-985-4339',
             'priceRange' => '$$',
-            'medicalSpecialty' => 'SubstanceAbuseScreening',
+            'medicalSpecialty' => 'LaboratoryScience',
             'address' => [
                 '@type' => 'PostalAddress',
                 'streetAddress' => $location?->address1 ?? 'Accredited Partner Facility',
